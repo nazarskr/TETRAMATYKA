@@ -19,16 +19,6 @@ const routes: Routes = [
       .then(m => m.ProgramModule),
   },
   {
-    path: 'gallery',
-    loadChildren: () => import('./modules/gallery/gallery.module')
-      .then(m => m.GalleryModule),
-  },
-  {
-    path: 'archive',
-    loadChildren: () => import('./modules/archive/archive.module')
-      .then(m => m.ArchiveModule),
-  },
-  {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module')
       .then(m => m.AdminModule),
