@@ -1,0 +1,8 @@
+<div class="language-select-wrapper">
+  <span *ngFor="let locale of locales"
+        (click)="changeLanguage(locale)"
+        [class.active]="selectedLanguage === locale"
+        class="language-selector">
+    {{locale}}
+  </span>
+</div>

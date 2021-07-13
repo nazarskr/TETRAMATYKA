@@ -1,0 +1,82 @@
+<div class="page page-with-backdrop p-25">
+  <h2 class="page-title">{{'ABOUT.ABOUT_FESTIVAL' | translate}}</h2>
+  <div fxLayout="column" fxLayoutAlign="flex-start center">
+    <div class="buttons-wrapper" *userPermission="['ADMIN']">
+      <ng-container *ngIf="editMode; else viewButtons">
+        <button
+          class="green-button"
+          mat-button
+          (click)="saveAboutInfo()">
+          <mat-icon>done</mat-icon>
+          <span>
+          {{'ACTIONS.SAVE' | translate}}
+        </span>
+        </button>
+
+        <button
+          class="red-button"
+          mat-button
+          (click)="cancelEditing()">
+          <mat-icon>close</mat-icon>
+          <span>
+        {{'ACTIONS.CANCEL' | translate}}
+      </span>
+        </button>
+      </ng-container>
+      <ng-template #viewButtons>
+        <button
+          class="orange-button"
+          mat-button
+          (click)="editAboutInfo()">
+          <mat-icon>edit</mat-icon>
+          <span>
+        {{'ACTIONS.EDIT' | translate}}
+      </span>
+        </button>
+      </ng-template>
+    </div>
+    <div *ngIf="editMode; else viewMode">
+      <div class="editor-wrapper">
+        <div class="editor-label">Текст (UA):</div>
+        <quill-editor
+          [modules]="quillConfig"
+          [(ngModel)]="aboutInfo.textUA"
+          [placeholder]="'Напишіть щось про фестиваль...'"
+          #editor></quill-editor>
+      </div>
+      <div class="editor-wrapper">
+        <div class="editor-label">Text (EN):</div>
+        <quill-editor
+          [modules]="quillConfig"
+          [(ngModel)]="aboutInfo.textEN"
+          [placeholder]="'Type about the festival...'"
+          #editor></quill-editor>
+      </div>
+
+      <div class="editor-label">Upload image: </div>
+      <app-drag-n-drop-upload
+        [acceptMimetype]="'image/*'"
+        [multiple]="false"
+        (fileUploaded)="changeImage($event)"
+      ></app-drag-n-drop-upload>
+      <div class="edit-image-container">
+        <button
+          class="clear-button"
+          mat-mini-fab color="warn"
+          matTooltip="Clear image"
+          (click)="openClearImageDialog()"
+          *ngIf="imageUrl">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <img [src]="imageUrl" alt="No image" *ngIf="imageUrl" width="500">
+      </div>
+
+
+    </div>
+    <ng-template #viewMode>
+      <img [src]="imageUrl" alt="No image" *ngIf="imageUrl">
+      <div *ngIf="language === 'ua'" [innerHTML]="aboutInfo.textUA"></div>
+      <div *ngIf="language === 'en'" [innerHTML]="aboutInfo.textEN"></div>
+    </ng-template>
+  </div>
+</div>

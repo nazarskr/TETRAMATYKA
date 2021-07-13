@@ -1,0 +1,14 @@
+<div class="drop-field"
+     fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px"
+     (click)="documentInput.click()"
+     (filesDropped)="dropzoneUpload($event)"
+     dragAndDropField>
+  <mat-icon>cloud_upload</mat-icon>
+  <p class="grey-explanation-text">Drag & Drop or click to upload file</p>
+  <input class="file-upload"
+         type="file"
+         [accept]="acceptMimetype"
+         [multiple]="multiple"
+         (change)="fileInputUpload($event)"
+         #documentInput>
+</div>

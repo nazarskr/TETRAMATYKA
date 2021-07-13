@@ -1,0 +1,15 @@
+@import 'variables';
+
+.archive-manager {
+  width: 400px;
+
+  .archive-manager-title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .buttons-group {
+    margin: 15px 0;
+  }
+}

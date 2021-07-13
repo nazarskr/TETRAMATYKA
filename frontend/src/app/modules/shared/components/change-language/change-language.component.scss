@@ -1,0 +1,15 @@
+@import "variables";
+
+.language-select-wrapper {
+  .language-selector {
+    display: inline-block;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 5px;
+    font-weight: 500;
+
+    &.active {
+      background-color: $color-main-yellow;
+    }
+  }
+}

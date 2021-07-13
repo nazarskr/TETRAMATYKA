@@ -1,0 +1,44 @@
+{
+  "COMMON": {
+    "HELLO_WORLD": "Hello, World!",
+    "NEW": "New",
+    "CHOOSE": "Choose",
+    "BACK": "Back",
+    "YES": "Yes",
+    "NO": "No"
+  },
+  "MENU": {
+    "MAIN": "Home",
+    "ABOUT": "About",
+    "PROGRAM": "Program",
+    "ARCHIVE": "Archive",
+    "GALLERY": "Gallery",
+    "ADMIN": "Admin"
+  },
+  "ACTIONS": {
+    "EDIT": "Edit",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "ADD": "Add"
+  },
+  "TABLE_COLUMNS": {
+    "YEAR": "Year",
+    "CURRENT": "Current",
+    "AVAILABLE": "Available"
+  },
+  "HOME": {
+    "FESTIVAL_AUDIOVISUAL_ART": "Festival of the audiovisual art",
+    "LATEST_NEWS": "Latest news"
+  },
+  "ABOUT": {
+    "ABOUT_FESTIVAL": "About festival"
+  },
+  "ARCHIVE": {
+    "ARCHIVE_MANAGER": "Archive manager"
+  },
+  "PAGE_NOT_FOUND": {
+    "SOMETHING_WRONG": "Something was going wrong",
+    "GO_TO_MAIN": "To main page"
+  }
+}

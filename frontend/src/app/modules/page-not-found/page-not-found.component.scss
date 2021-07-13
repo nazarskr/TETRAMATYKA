@@ -1,0 +1,17 @@
+@import 'variables';
+
+.page-not-found-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 99999;
+
+  .go-to-home {
+    padding: 5px;
+    background-color: $color-main-yellow;
+    cursor: pointer;
+  }
+}

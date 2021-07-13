@@ -1,0 +1,40 @@
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './modules/auth/auth.module';
+import { ArchiveManagerModule } from './modules/archive-manager/archive-manager.module';
+import { ProgramModule } from './modules/program/program.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { AboutModule } from './modules/about/about.module';
+import {MulterModule} from '@nestjs/platform-express';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      cache: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, 'client'),
+    }),
+    MongooseModule.forRoot(
+      `mongodb+srv://nazar:${process.env.DB_PASS}@cluster0.blvwb.mongodb.net/master?retryWrites=true&w=majority`,
+      {
+        connectionName: 'master',
+        useFindAndModify: false,
+      },
+    ),
+    MulterModule.register({
+      dest: './uploads'
+    }),
+    AuthModule,
+    ArchiveManagerModule,
+    ProgramModule,
+    AboutModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}

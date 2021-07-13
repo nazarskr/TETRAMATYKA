@@ -1,0 +1,64 @@
+@import 'variables';
+@import 'mixin';
+
+// TABLE
+.mat-table {
+  width: 100%;
+
+  tr.mat-header-row {
+    height: 25px;
+  }
+
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    min-width: 110px;
+    padding-right: 10px;
+  }
+
+  .mat-icon {
+    color: $color-icon-grey;
+    cursor: pointer;
+
+    &.save-icon-button {
+      color: $color-green;
+    }
+
+    &.cancel-icon-button, &.red-icon-button {
+      color: $color-red;
+    }
+  }
+}
+
+// BUTTON
+.mat-button {
+  &.green-button {
+    @include colorIconButton($color-green, $color-light-green);
+  }
+
+  &.orange-button {
+    @include colorIconButton($color-orange, $color-light-orange);
+  }
+
+  &.red-button {
+    @include colorIconButton($color-red, $color-light-red);
+  }
+}
+
+//TOASTER
+.show-message {
+  background-color: $color-main-grey;
+}
+
+.show-warning-message {
+  background-color: $color-orange;
+}
+
+.show-error-message {
+  background-color: $color-red;
+}
+
+.show-message, .show-warning-message, .show-error-message {
+  color: white;
+  button {
+    color: white;
+  }
+}

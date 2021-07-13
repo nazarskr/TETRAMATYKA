@@ -1,0 +1,44 @@
+{
+  "COMMON": {
+    "HELLO_WORLD": "Привіт, Світе!",
+    "NEW": "Новий",
+    "CHOOSE": "Вибрати",
+    "BACK": "Назад",
+    "YES": "Так",
+    "NO": "Ні"
+  },
+  "MENU": {
+    "MAIN": "Головна",
+    "ABOUT": "Про фестиваль",
+    "PROGRAM": "Програма",
+    "ARCHIVE": "Архів",
+    "GALLERY": "Галерея",
+    "ADMIN": "Адмін"
+  },
+  "ACTIONS": {
+    "EDIT": "Редагувати",
+    "SAVE": "Зберегти",
+    "CANCEL": "Відмінити",
+    "DELETE": "Видалити",
+    "ADD": "Додати"
+  },
+  "TABLE_COLUMNS": {
+    "YEAR": "Рік",
+    "CURRENT": "Поточний",
+    "AVAILABLE": "Доступний"
+  },
+  "HOME": {
+    "FESTIVAL_AUDIOVISUAL_ART": "Фестиваль аудіовізуального мистецтва",
+    "LATEST_NEWS": "Останні новини"
+  },
+  "ABOUT": {
+    "ABOUT_FESTIVAL": "Про фестиваль"
+  },
+  "ARCHIVE": {
+    "ARCHIVE_MANAGER": "Менеджер архівів"
+  },
+  "PAGE_NOT_FOUND": {
+    "SOMETHING_WRONG": "Щось пішло не так",
+    "GO_TO_MAIN": "На головну"
+  }
+}

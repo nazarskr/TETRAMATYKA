@@ -1,0 +1,43 @@
+<header>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="wide-menu">
+      <ng-container *ngFor="let route of mainRoutes">
+        <a class="menu-item"
+           *userPermission="route.permissions"
+           routerLink="{{route.link}}" routerLinkActive="active">
+          {{route.text | translate}}
+        </a>
+      </ng-container>
+    </div>
+    <div class="menu-button" (click)="toggleOpenMenu()">
+      <span
+        class="open-menu"
+        [class.opened]="isMenuOpened">
+      </span>
+    </div>
+
+    <div class="fixed-menu"
+         (click)="toggleOpenMenu()"
+         *ngIf="isMenuOpened">
+      <ng-container *ngFor="let route of mainRoutes">
+        <a class="menu-item"
+           *userPermission="route.permissions"
+           routerLink="{{route.link}}" routerLinkActive="active">
+          {{route.text | translate}}
+        </a>
+      </ng-container>
+    </div>
+
+<!--    TODO remove mock-->
+    <select [(ngModel)]="userRole" (ngModelChange)="changeUserRole()">
+      <option *ngFor="let role of roles" [value]="role">
+        {{role}}
+      </option>
+    </select>
+
+    <div>
+      <app-change-language></app-change-language>
+    </div>
+  </div>
+</header>
+

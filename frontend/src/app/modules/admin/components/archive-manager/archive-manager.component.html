@@ -1,0 +1,117 @@
+<div class="table-wrapper archive-manager">
+  <p class="archive-manager-title">{{"ARCHIVE.ARCHIVE_MANAGER" | translate}}</p>
+
+  <div class="buttons-group"
+    fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="10px">
+    <button
+      class="green-button"
+      mat-button
+      (click)="addArchiveYear()"
+      [disabled]="editMode">
+      <mat-icon>add</mat-icon>
+      <span>
+      {{'ACTIONS.ADD' | translate}}
+    </span>
+    </button>
+
+    <button
+      class="orange-button"
+      mat-button
+      (click)="editArchiveYears()"
+      *ngIf="!editMode; else editModeBlock">
+      <mat-icon>edit</mat-icon>
+      <span>
+        {{'ACTIONS.EDIT' | translate}}
+      </span>
+    </button>
+
+    <ng-template #editModeBlock>
+      <button
+        class="green-button"
+        mat-button
+        (click)="saveArchiveYears()">
+        <mat-icon>done</mat-icon>
+        <span>
+          {{'ACTIONS.SAVE' | translate}}
+        </span>
+      </button>
+
+      <button
+        class="red-button"
+        mat-button
+        (click)="cancelEditing()">
+        <mat-icon>close</mat-icon>
+        <span>
+        {{'ACTIONS.CANCEL' | translate}}
+      </span>
+      </button>
+    </ng-template>
+  </div>
+
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef>{{'TABLE_COLUMNS.YEAR' | translate}}</th>
+      <td mat-cell *matCellDef="let element"
+          fxLayout="row"
+          fxLayoutAlign="start center">
+        <mat-select
+          [(ngModel)]="element.year"
+          placeholder="{{'COMMON.CHOOSE' | translate}}"
+          *ngIf="editMode;
+          else viewYear">
+          <mat-option *ngFor="let year of yearsList" [value]="year">
+            {{year}}
+          </mat-option>
+        </mat-select>
+        <ng-template #viewYear>
+          {{element.year}}
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="available">
+      <th mat-header-cell *matHeaderCellDef>{{'TABLE_COLUMNS.AVAILABLE' | translate}}</th>
+      <td mat-cell *matCellDef="let element"
+          fxLayout="row"
+          fxLayoutAlign="start center">
+        <mat-checkbox
+          [(ngModel)]="element.available"
+          [disabled]="!editMode">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef>{{'TABLE_COLUMNS.CURRENT' | translate}}</th>
+      <td mat-cell *matCellDef="let element" fxLayout="row"
+          fxLayoutAlign="start center">
+        <mat-radio-button
+          name="currentYear"
+          (click)="changeCurrent(element)"
+          checked="{{element.current}}"
+          disabled="{{!editMode}}">
+        </mat-radio-button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef fxFlex="30px"></th>
+      <td mat-cell *matCellDef="let element"
+          fxFlex="30px"
+          fxLayout="row"
+          fxLayoutAlign="center center">
+          <div fxFlex="24px">
+            <app-table-action-button
+              [tooltipText]="'ACTIONS.DELETE' | translate"
+              [icon]="'delete'"
+              [cssClass]="'red-icon-button'"
+              (clickAction)="openDeleteArchiveYearDialog(element)"
+            ></app-table-action-button>
+          </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

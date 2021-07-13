@@ -1,0 +1,11 @@
+<div class="page p-25">
+  <div class="home-upper">
+    <p>{{'HOME.FESTIVAL_AUDIOVISUAL_ART' | translate}}</p>
+    <p>home works!</p>
+    <p *userPermission="['GUEST']">GUEST</p>
+    <p *userPermission="['ADMIN']">ADMIN</p>
+  </div>
+  <app-news></app-news>
+</div>
+
+<router-outlet></router-outlet>

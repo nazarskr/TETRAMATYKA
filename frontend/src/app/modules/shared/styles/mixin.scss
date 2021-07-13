@@ -1,0 +1,11 @@
+@mixin colorIconButton($color, $background-color) {
+  padding: 0 10px;
+  line-height: 30px;
+
+  &:not(.mat-button-disabled) {
+    background-color: $background-color;
+    span, mat-icon {
+      color: $color;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import 'variables';
+
+.drop-field {
+  width: 90%;
+  height: 200px;
+  margin: 20px auto;
+  border: 2px dashed $color-icon-grey;
+  background-color: white;
+  cursor: pointer;
+
+  &.file-over {
+    background-color: $color-light-grey;
+    opacity: 0.5;
+  }
+
+  mat-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    line-height: 30px;
+    color: $color-icon-grey;
+  }
+
+  .file-upload {
+    display: none;
+  }
+}
