@@ -30,6 +30,7 @@ import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.
 import { UserPermissionDirective } from './directives/user-permission.directive';
 import { DragNDropUploadComponent } from './components/drag-n-drop-upload/drag-n-drop-upload.component';
 import { DragAndDropFieldDirective } from './directives/drag-and-drop-field.directive';
+import { FooterComponent } from './components/footer/footer.component';
 
 const materialModules = [
   MatButtonModule,
@@ -55,7 +56,8 @@ const materialModules = [
     SimpleDialogComponent,
     UserPermissionDirective,
     DragNDropUploadComponent,
-    DragAndDropFieldDirective
+    DragAndDropFieldDirective,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +77,8 @@ const materialModules = [
     QuillModule,
     UserPermissionDirective,
     DragNDropUploadComponent,
-    DragAndDropFieldDirective
+    DragAndDropFieldDirective,
+    FooterComponent
   ],
   providers: [
     UnsubscribeOnDestroy
