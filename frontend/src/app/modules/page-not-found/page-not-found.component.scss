@@ -10,8 +10,10 @@
   z-index: 99999;
 
   .go-to-home {
+    margin: 10px;
     padding: 5px;
-    background-color: $color-main-yellow;
+    color: white;
+    background-color: black;
     cursor: pointer;
   }
 }

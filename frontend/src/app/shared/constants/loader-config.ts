@@ -5,6 +5,6 @@ export const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsColor: '#000000',
   pbThickness: 3,
   overlayColor: 'rgba(255, 255, 255, 0.95)',
-  pbColor: '#FCEC66',
+  pbColor: '#000000',
   fgsSize: 200,
 };
