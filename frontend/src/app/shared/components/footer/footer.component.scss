@@ -1,0 +1,12 @@
+@import 'variables';
+
+footer {
+  width: 100vw;
+  background-color: $color-main-grey;
+  // TODO: remove mock
+  height: 100px;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  line-height: 100px;
+}

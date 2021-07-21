@@ -36,7 +36,7 @@
               "./node_modules/quill/dist/quill.snow.css"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/modules/shared/styles"]
+              "includePaths": ["src/app/shared/styles"]
             },
             "scripts": []
           },

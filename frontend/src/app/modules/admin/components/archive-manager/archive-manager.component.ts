@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UnsubscribeOnDestroy } from '../../../shared/directives/unsubscribe-on-destroy';
-import { ArchiveYear } from '../../../shared/interfaces/admin';
-import { ArchiveService } from '../../../shared/services/archive/archive.service';
+import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
+import { ArchiveYear } from '@shared/interfaces/admin';
+import { ArchiveService } from '@shared/services/archive/archive.service';
 import { filter, takeUntil } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
-import { tableColumns } from '../../../shared/constants/table-columns';
+import { tableColumns } from '@shared/constants/table-columns';
 import { MatDialog } from '@angular/material/dialog';
-import { SimpleDialogComponent } from '../../../shared/components/simple-dialog/simple-dialog.component';
-import { DataService } from '../../../shared/services/data/data.service';
+import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
+import { DataService } from '@shared/services/data/data.service';
 
 @Component({
   selector: 'app-archive-manager',

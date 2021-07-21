@@ -5,14 +5,17 @@
     "CHOOSE": "Вибрати",
     "BACK": "Назад",
     "YES": "Так",
-    "NO": "Ні"
+    "NO": "Ні",
+    "NOT_AVAILABLE": "Недоступно"
   },
   "MENU": {
     "MAIN": "Головна",
     "ABOUT": "Про фестиваль",
     "PROGRAM": "Програма",
+    "PROJECTS": "Проєкти",
+    "PARTICIPANTS": "Учасники",
+    "CONTACTS": "Контакти",
     "ARCHIVE": "Архів",
-    "GALLERY": "Галерея",
     "ADMIN": "Адмін"
   },
   "ACTIONS": {

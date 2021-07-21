@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UserInfo } from '../../../modules/shared/interfaces/user';
-import { RoleEnum } from '../../../modules/shared/enums/role';
+import { UserInfo } from '@shared/interfaces/user';
+import { RoleEnum } from '@shared/enums/role';
 
 @Injectable({
   providedIn: 'root'

@@ -5,14 +5,17 @@
     "CHOOSE": "Choose",
     "BACK": "Back",
     "YES": "Yes",
-    "NO": "No"
+    "NO": "No",
+    "NOT_AVAILABLE": "Not available"
   },
   "MENU": {
     "MAIN": "Home",
     "ABOUT": "About",
     "PROGRAM": "Program",
+    "PROJECTS": "Projects",
+    "PARTICIPANTS": "Participants",
+    "CONTACTS": "Contacts",
     "ARCHIVE": "Archive",
-    "GALLERY": "Gallery",
     "ADMIN": "Admin"
   },
   "ACTIONS": {

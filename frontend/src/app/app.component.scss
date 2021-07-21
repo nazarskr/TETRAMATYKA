@@ -1,1 +1,9 @@
+@import 'variables';
 
+.main-with-footer {
+  min-height: calc(100vh - #{$header-height});
+}
+
+main {
+  padding: 25px;
+}

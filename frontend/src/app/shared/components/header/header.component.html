@@ -1,7 +1,8 @@
 <header>
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div class="wide-menu">
-      <ng-container *ngFor="let route of mainRoutes">
+      <div class="home-logo" routerLink="home"></div>
+      <ng-container *ngFor="let route of wideMenuRoutes">
         <a class="menu-item"
            *userPermission="route.permissions"
            routerLink="{{route.link}}" routerLinkActive="active">
@@ -19,7 +20,7 @@
     <div class="fixed-menu"
          (click)="toggleOpenMenu()"
          *ngIf="isMenuOpened">
-      <ng-container *ngFor="let route of mainRoutes">
+      <ng-container *ngFor="let route of fixedMenuRoutes">
         <a class="menu-item"
            *userPermission="route.permissions"
            routerLink="{{route.link}}" routerLinkActive="active">

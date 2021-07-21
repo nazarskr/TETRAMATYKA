@@ -58,18 +58,6 @@ a {
   }
 }
 
-.page {
-  min-height: calc(100vh - #{$header-height});
-}
-
-.page-without-animation {
-  background-color: white;
-}
-
-.page-with-backdrop {
-  background-color: $color-backdrop-white;
-}
-
 .page-title {
   text-align: center;
 }

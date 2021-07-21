@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { mainRoutes } from '../../constants/menu';
-import { UserService } from '../../../../core/services/user/user.service';
+import { UserService } from '@core/services/user/user.service';
 import { RoleEnum } from '../../enums/role';
 
 @Component({
@@ -9,7 +9,8 @@ import { RoleEnum } from '../../enums/role';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public mainRoutes = mainRoutes;
+  public wideMenuRoutes = [...mainRoutes.slice(1)];
+  public fixedMenuRoutes = [...mainRoutes];
   public isMenuOpened = false;
   // TODO remove mock
   public userRole = RoleEnum.GUEST;

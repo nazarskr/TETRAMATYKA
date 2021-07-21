@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ArchiveYear } from '../../../modules/shared/interfaces/admin';
+import { ArchiveYear } from '@shared/interfaces/admin';
 
 @Injectable({
   providedIn: 'root'

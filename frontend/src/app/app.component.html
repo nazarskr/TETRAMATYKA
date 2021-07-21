@@ -1,9 +1,11 @@
 <div ngxUiLoaderBlurred blur="3">
   <app-header></app-header>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
-  <app-footer></app-footer>
+  <div  class="main-with-footer" fxLayout="column" fxLayoutAlign="space-between flex-start">
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+  </div>
 </div>
 
 <ngx-ui-loader></ngx-ui-loader>
