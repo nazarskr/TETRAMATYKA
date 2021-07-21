@@ -17,14 +17,16 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     trigger('yearsList', [
       state('show', style({
         opacity: 1,
-        height: '100%'
+        maxHeight: '1000px'
       })),
       state('hide', style({
         opacity: 0,
-        height: 0
+        maxHeight: 0
       })),
-      transition('show <=> hide',
-        animate(800))
+      transition('hide => show',
+        animate(800)),
+      transition('show => hide',
+        animate(200)),
     ]),
   ]
 })
