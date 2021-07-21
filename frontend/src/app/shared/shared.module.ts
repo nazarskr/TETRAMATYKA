@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
 
 // components
 import { HeaderComponent } from './components/header/header.component';
@@ -43,7 +44,8 @@ const materialModules = [
   MatCheckboxModule,
   MatRadioModule,
   MatDividerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatMenuModule
 ];
 
 

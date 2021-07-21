@@ -7,14 +7,14 @@ import { ArchiveYear } from '@shared/interfaces/admin';
 })
 export class AppInitService {
   public currentYearUri = '/api/archive-manager/current';
-  public currentYear: number;
+  public currentYear: ArchiveYear;
 
   constructor(private http: HttpClient) { }
 
   getCurrentYear(): void {
     this.http.get(this.currentYearUri)
       .subscribe((res: ArchiveYear) => {
-        this.currentYear = res.year;
+        this.currentYear = res;
       });
   }
 }

@@ -43,6 +43,10 @@ header {
   position: relative;
   cursor: pointer;
 
+  &.years {
+    color: $color-main-grey;
+  }
+
   &::before {
     content: '';
     position: absolute;
