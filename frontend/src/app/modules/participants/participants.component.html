@@ -1,1 +1,23 @@
-<div class="participants-list"></div>
+<div class="page p-25">
+  <div>
+    <button
+      routerLink="new"
+      class="green-button"
+      mat-button>
+      <mat-icon>add</mat-icon>
+      <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+    </button>
+  </div>
+
+  <div class="participants-list" fxLayout="row wrap" fxLayoutAlign="center center">
+    <ng-container *ngFor="let participant of participants">
+      <div
+        [routerLink]="participant._id"
+        class="participant-item">
+        {{participant.fullName}}
+      </div>
+    </ng-container>
+  </div>
+</div>

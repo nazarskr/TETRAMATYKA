@@ -23,7 +23,8 @@
     "SAVE": "Save",
     "CANCEL": "Cancel",
     "DELETE": "Delete",
-    "ADD": "Add"
+    "ADD": "Add",
+    "BACK": "Back"
   },
   "TABLE_COLUMNS": {
     "YEAR": "Year",
