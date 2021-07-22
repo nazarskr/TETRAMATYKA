@@ -1,17 +1,15 @@
+import { MultiLanguage } from '@shared/interfaces/common';
+
 export interface ProgramItem {
-  titleUA: string;
-  titleEN: string;
-  locationUA: string;
-  locationEN: string;
-  contentUA: string;
-  contentEN: string;
+  title: MultiLanguage;
+  location: MultiLanguage;
+  content: MultiLanguage;
   eventDate: Date;
   eventType: EventType;
   imageUrl: string;
 }
 
 export interface EventType {
-  nameUA: string;
-  nameEN: string;
+  name: MultiLanguage;
   color: string;
 }

@@ -1,8 +1,8 @@
+import { MultiLanguage } from '@shared/interfaces/common';
+
 export interface NewsItem {
-  titleUA: string;
-  titleEN: string;
-  textUA: string;
-  textEN: string;
+  title: MultiLanguage;
+  text: MultiLanguage;
   date: Date;
   imageUrl: string;
 }

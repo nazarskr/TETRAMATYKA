@@ -40,7 +40,7 @@
         <div class="editor-label">Текст (UA):</div>
         <quill-editor
           [modules]="quillConfig"
-          [(ngModel)]="aboutInfo.textUA"
+          [(ngModel)]="aboutInfo.text.ua"
           [placeholder]="'Напишіть щось про фестиваль...'"
           #editor></quill-editor>
       </div>
@@ -48,7 +48,7 @@
         <div class="editor-label">Text (EN):</div>
         <quill-editor
           [modules]="quillConfig"
-          [(ngModel)]="aboutInfo.textEN"
+          [(ngModel)]="aboutInfo.text.en"
           [placeholder]="'Type about the festival...'"
           #editor></quill-editor>
       </div>
@@ -75,8 +75,7 @@
     </div>
     <ng-template #viewMode>
       <img [src]="imageUrl" alt="No image" *ngIf="imageUrl">
-      <div *ngIf="language === 'ua'" [innerHTML]="aboutInfo.textUA"></div>
-      <div *ngIf="language === 'en'" [innerHTML]="aboutInfo.textEN"></div>
+      <div [innerHTML]="aboutInfo.text[lang]"></div>
     </ng-template>
   </div>
 </div>

@@ -1,15 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {AboutInfo} from '@shared/interfaces/about';
-import {AboutService} from './services/about/about.service';
-import {UnsubscribeOnDestroy} from '@shared/directives/unsubscribe-on-destroy';
-import {filter, takeUntil} from 'rxjs/operators';
-import {ToasterService} from '@shared/services/toaster/toaster.service';
-import {simpleQuillConfig} from '@shared/constants/quill-config';
-import {QuillEditorComponent} from 'ngx-quill';
-import {TranslateService} from '@ngx-translate/core';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
-import {MatDialog} from '@angular/material/dialog';
-import {SimpleDialogComponent} from '@shared/components/simple-dialog/simple-dialog.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AboutInfo } from '@shared/interfaces/about';
+import { AboutService } from './services/about/about.service';
+import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
+import { filter, takeUntil } from 'rxjs/operators';
+import { ToasterService } from '@shared/services/toaster/toaster.service';
+import { simpleQuillConfig } from '@shared/constants/quill-config';
+import { QuillEditorComponent } from 'ngx-quill';
+import { TranslateService } from '@ngx-translate/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
 
 @Component({
   selector: 'app-about',
@@ -20,14 +20,19 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   @ViewChild(QuillEditorComponent, { static: true }) editor: QuillEditorComponent;
   public aboutInfo: AboutInfo = {
     imageUrl: '',
-    textUA: '',
-    textEN: ''
+    text: {
+      en: '',
+      ua: ''
+    }
   };
   public multipartFile: File;
   public editMode = false;
   public quillConfig = simpleQuillConfig;
-  public language: string = this._translateService.currentLang;
   public imageUrl: SafeUrl;
+
+  get lang(): string {
+    return this._translateService.currentLang;
+  }
 
   constructor(
     readonly _aboutService: AboutService,
