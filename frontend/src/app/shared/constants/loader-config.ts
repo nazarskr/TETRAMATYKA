@@ -8,3 +8,7 @@ export const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   pbColor: '#000000',
   fgsSize: 200,
 };
+
+export const loaderExclude = [
+  '/api/archive-manager/current',
+]
