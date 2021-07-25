@@ -8,6 +8,7 @@ import { tableColumns } from '@shared/constants/table-columns';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
 import { DataService } from '@shared/services/data/data.service';
+import { ToasterService } from '@shared/services/toaster/toaster.service';
 
 @Component({
   selector: 'app-archive-manager',
@@ -23,9 +24,10 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
   public yearsList: number[] = [];
 
   constructor(
-    readonly _archiveService: ArchiveService,
-    readonly _dialog: MatDialog,
-    readonly _dataService: DataService
+    private _archiveService: ArchiveService,
+    private _dialog: MatDialog,
+    private _dataService: DataService,
+    private _toaster: ToasterService
   ) {
     super();
   }
@@ -74,13 +76,15 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
   saveArchiveYears(): void {
     const formInvalid = this.checkIfInvalid();
     if (formInvalid) {
-      alert('Please, select year');
+      this._toaster.showWarningMessage('Select year');
       return;
     }
     this._archiveService.updateArchiveYears(this.archiveYears)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
+        this._toaster.showMessage('Archive years updated successfully');
         this.getAllArchiveYears();
+        this.emitArchiveYearsUpdate();
       });
   }
 
@@ -99,12 +103,25 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
     dialogRef.afterClosed()
       .pipe(filter(result => !!result))
       .subscribe(() => {
-        this.getAllArchiveYears();
+        this.deleteArchiveYear(element._id);
     });
+  }
+
+  deleteArchiveYear(id: string): void {
+    this._archiveService.deleteArchiveYear(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this._toaster.showMessage('Archive year deleted successfully');
+        this.getAllArchiveYears();
+        this.emitArchiveYearsUpdate();
+      });
   }
 
   getYearsList(): void {
     this.yearsList = this._dataService.getYearsList();
   }
 
+  emitArchiveYearsUpdate(): void {
+    this._archiveService.archiveYearsUpdated$.next();
+  }
 }

@@ -56,6 +56,7 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
 
   ngOnInit(): void {
     this.getAllArchiveYears();
+    this.detectArchiveYearsChange();
   }
 
   toggleOpenMenu(): void {
@@ -84,6 +85,14 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
   toggleArchiveNarrowMenu(event: MouseEvent): void {
     event.stopPropagation();
     this.showYearsListNarrow = !this.showYearsListNarrow;
+  }
+
+  detectArchiveYearsChange(): void {
+    this._archiveService.archiveYearsUpdated$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getAllArchiveYears();
+      })
   }
 
 }

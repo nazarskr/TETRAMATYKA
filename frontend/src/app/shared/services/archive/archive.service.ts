@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ArchiveYear } from '../../interfaces/admin';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { ArchiveYear } from '../../interfaces/admin';
 })
 export class ArchiveService {
   public archiveManagerUri = '/api/archive-manager';
+  public archiveYearsUpdated$: Subject<void> = new Subject();
 
   constructor(private http: HttpClient) { }
 
