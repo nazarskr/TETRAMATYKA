@@ -89,7 +89,12 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
   }
 
   openDeleteArchiveYearDialog(element: ArchiveYear): void {
-    const dialogRef = this._dialog.open(SimpleDialogComponent);
+    const dialogRef = this._dialog.open(SimpleDialogComponent, {
+      data: {
+        title: 'Delete archive year',
+        message: `Are you sure you want to delete archive year ${element.year}?`
+      }
+    });
 
     dialogRef.afterClosed()
       .pipe(filter(result => !!result))

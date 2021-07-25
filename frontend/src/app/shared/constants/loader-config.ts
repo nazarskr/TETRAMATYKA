@@ -11,4 +11,6 @@ export const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 
 export const loaderExclude = [
   '/api/archive-manager/current',
+  '/assets/*',
+  '/sockjs-node/info'
 ]

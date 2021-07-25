@@ -36,7 +36,7 @@
       </ng-template>
     </div>
     <div *ngIf="editMode; else viewMode">
-      <div class="editor-wrapper">
+      <div class="quill-editor-wrapper">
         <div class="editor-label">Текст (UA):</div>
         <quill-editor
           [modules]="quillConfig"
@@ -44,7 +44,7 @@
           [placeholder]="'Напишіть щось про фестиваль...'"
           #editor></quill-editor>
       </div>
-      <div class="editor-wrapper">
+      <div class="quill-editor-wrapper">
         <div class="editor-label">Text (EN):</div>
         <quill-editor
           [modules]="quillConfig"

@@ -65,3 +65,30 @@ a {
 .page-title {
   text-align: center;
 }
+
+.buttons-wrapper {
+  button {
+    margin-right: 10px;
+  }
+}
+
+.quill-editor-wrapper {
+  min-width: 570px;
+  max-width: 570px;
+  padding-bottom: 40px;
+}
+
+.editor-label {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.edit-image-container {
+  position: relative;
+
+  .clear-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

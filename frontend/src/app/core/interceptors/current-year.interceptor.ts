@@ -12,7 +12,7 @@ export class CurrentYearInterceptor implements HttpInterceptor {
     if (currentYear) {
       request = request.clone({
         setParams: {
-          currentYear: `${currentYear.year}`
+          currentYear: `${currentYear._id}`
         }
       });
     }

@@ -27,7 +27,7 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   };
   public multipartFile: File;
   public editMode = false;
-  public quillConfig = simpleQuillConfig;
+  public quillConfig = {...simpleQuillConfig};
   public imageUrl: SafeUrl;
 
   get lang(): string {
