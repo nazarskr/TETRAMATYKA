@@ -9,6 +9,5 @@ export interface Participant {
   _id?: string;
   fullName: MultiLanguage;
   bio: MultiLanguage;
-  imageUrl?: string;
-  videoUrl?: string;
+  imageUrl: string;
 }

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ParticipantsService } from '../../services/participants/participants.service';
-import {filter, takeUntil} from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Participant } from '@shared/interfaces/participants';
-import {ToasterService} from '@shared/services/toaster/toaster.service';
-import {SimpleDialogComponent} from '@shared/components/simple-dialog/simple-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
-import {simpleQuillConfig} from '@shared/constants/quill-config';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { ToasterService } from '@shared/services/toaster/toaster.service';
+import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { simpleQuillConfig } from '@shared/constants/quill-config';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-participant-details',
@@ -66,7 +66,8 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
       bio: {
         en: '',
         ua: ''
-      }
+      },
+      imageUrl: ''
     }
   }
 
