@@ -4,4 +4,5 @@ export interface AboutInfo {
   _id?: string;
   text: MultiLanguage;
   imageUrl: string;
+  image?: File;
 }

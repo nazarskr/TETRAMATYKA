@@ -21,6 +21,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 // components
 import { HeaderComponent } from './components/header/header.component';
@@ -45,7 +47,9 @@ const materialModules = [
   MatRadioModule,
   MatDividerModule,
   MatSnackBarModule,
-  MatMenuModule
+  MatMenuModule,
+  MatFormFieldModule,
+  MatInputModule
 ];
 
 

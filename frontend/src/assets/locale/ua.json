@@ -6,7 +6,8 @@
     "BACK": "Назад",
     "YES": "Так",
     "NO": "Ні",
-    "NOT_AVAILABLE": "Недоступно"
+    "NOT_AVAILABLE": "Недоступно",
+    "WILL_BE_AVAILABLE_SOON": "Буде доступно незабаром"
   },
   "MENU": {
     "MAIN": "Головна",
@@ -37,6 +38,9 @@
   },
   "ABOUT": {
     "ABOUT_FESTIVAL": "Про фестиваль"
+  },
+  "PARTICIPANTS": {
+    "PARTICIPANTS": "Учасники фестивалю"
   },
   "ARCHIVE": {
     "ARCHIVE_MANAGER": "Менеджер архівів"

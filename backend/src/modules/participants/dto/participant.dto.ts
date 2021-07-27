@@ -1,7 +1,7 @@
-import { MultiLanguage } from '../../../../../frontend/src/app/shared/interfaces/common';
+import { IMultiLanguage } from '../../../common/interfaces/multi-language';
 
 export class ParticipantDto {
-    fullName: MultiLanguage;
-    bio: MultiLanguage;
+    fullName: IMultiLanguage;
+    bio: IMultiLanguage;
     imageUrl: string;
 }

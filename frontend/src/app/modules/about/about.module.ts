@@ -4,7 +4,7 @@ import { SharedModule } from '@shared/shared.module';
 
 import { AboutRoutingModule } from './about-routing.module';
 import { AboutComponent } from './about.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -15,7 +15,8 @@ import { TranslateModule } from '@ngx-translate/core';
     AboutRoutingModule,
     SharedModule,
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule
   ]
 })
 export class AboutModule { }

@@ -62,3 +62,24 @@
     color: white;
   }
 }
+
+// menu
+.mat-menu-content {
+  padding: 0 !important;
+
+  .mat-menu-item {
+    height: 35px;
+    line-height: 35px;
+    color: white;
+    background-color: black;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+// form field
+.mat-form-field {
+  margin-bottom: 10px;
+}

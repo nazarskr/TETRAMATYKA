@@ -1,5 +1,6 @@
+import { IMultiLanguage } from '../../../common/interfaces/multi-language';
+
 export class AboutInfoDto {
-    textEN: string;
-    textUA: string;
+    text: IMultiLanguage;
     imageUrl: string;
 }

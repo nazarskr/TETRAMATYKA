@@ -59,11 +59,12 @@ a {
 }
 
 .page {
-  width: 100%;
+  width: calc(100vw - 50px);
 }
 
 .page-title {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .buttons-wrapper {
@@ -76,6 +77,11 @@ a {
   min-width: 570px;
   max-width: 570px;
   padding-bottom: 40px;
+
+  .mat-error {
+    font-size: 75%;
+    margin-top: 5px;
+  }
 }
 
 .editor-label {
@@ -91,4 +97,12 @@ a {
     top: 0;
     right: 0;
   }
+}
+
+.will-be-soon-message {
+  width: fit-content;
+  padding: 2px 7px;
+  color: white;
+  background-color: black;
+  margin: auto;
 }

@@ -1,5 +1,5 @@
-import { MultiLanguage } from '../../../common/classes/multi-language';
+import { IMultiLanguage } from '../../../common/interfaces/multi-language';
 
 export class ParticipantShortDto {
-    fullName: MultiLanguage
+    fullName: IMultiLanguage
 }

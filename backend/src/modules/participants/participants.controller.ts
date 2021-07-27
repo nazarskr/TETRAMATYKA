@@ -1,12 +1,12 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors} from '@nestjs/common';
-import {ParticipantsService} from './participants.service';
-import {Participant} from './schemas/participant.schema';
-import {ParticipantDto} from './dto/participant.dto';
-import {FilesInterceptor} from '@nestjs/platform-express';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { ParticipantsService } from './participants.service';
+import { Participant } from './schemas/participant.schema';
+import { ParticipantDto } from './dto/participant.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('participants')
 export class ParticipantsController {
-    constructor(private participantsService: ParticipantsService) {
+    constructor(private readonly participantsService: ParticipantsService) {
     }
 
     @Get()

@@ -1,15 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { MultiLanguage } from '../../../common/schemas/multi-language.schema';
 
 export type AboutInfoDocument = AboutInfo & Document;
 
 @Schema()
 export class AboutInfo {
-    @Prop({ required: true })
-    textUA: string;
-
-    @Prop({ required: true })
-    textEN: string;
+    @Prop({ required: true, type: MultiLanguage })
+    text: MultiLanguage;
 
     @Prop()
     imageUrl: string;

@@ -15,13 +15,13 @@ export class AboutService {
     return this.http.get<AboutInfo[]>(this.aboutUri);
   }
 
-  addAboutInfo(data: FormData): Observable<FormData> {
-    return this.http.post<FormData>(this.aboutUri, data);
+  addAboutInfo(body: AboutInfo): Observable<FormData> {
+    return this.http.post<FormData>(this.aboutUri, body);
   }
 
-  updateAboutInfo(id: string, data: FormData): Observable<ArrayBuffer> {
+  updateAboutInfo(id: string, body: AboutInfo): Observable<ArrayBuffer> {
     const params: any = {id};
-    return this.http.put(this.aboutUri, data, params);
+    return this.http.put(this.aboutUri, body, params);
   }
 
   deleteAboutInfo(id: string): Observable<ArrayBuffer> {

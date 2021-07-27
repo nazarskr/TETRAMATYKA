@@ -4,6 +4,7 @@ import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy'
 import { Router } from '@angular/router';
 import { ParticipantsService } from './services/participants/participants.service';
 import { TranslateService } from '@ngx-translate/core';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-participants',
@@ -30,35 +31,10 @@ export class ParticipantsComponent extends UnsubscribeOnDestroy implements OnIni
   }
 
   getAllParticipants(): void {
-    this.participants = [
-      {
-        _id: 'fkgjfkg',
-        fullName: {en: 'Nazar Skrypnyk', ua: 'Назар Скрипник'}
-      },
-      {
-        _id: 'fkgjfkg',
-        fullName: {en: 'Nazar Skrypnyk', ua: 'Назар Скрипник'}
-      },
-      {
-        _id: 'fkgjfkg',
-        fullName: {en: 'Nazar Skrypnyk', ua: 'Назар Скрипник'}
-      },
-      {
-        _id: 'fkgjfkg',
-        fullName: {en: 'Nazar Skrypnyk', ua: 'Назар Скрипник'}
-      },
-      {
-        _id: 'fkgjfkg',
-        fullName: {en: 'Nazar Skrypnyk', ua: 'Назар Скрипник'}
-      },
-      {
-        _id: 'fkgjfkg',
-        fullName: {en: 'Nazar Skrypnyk', ua: 'Назар Скрипник'}
-      }
-    ];
-  }
-
-  addParticipant(): void {
-    this._router.navigate(['/new']);
+    this._participantsService.getAllParticipants()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: ParticipantShort[]) => {
+        this.participants = res;
+      })
   }
 }

@@ -9,7 +9,7 @@ import { ProgramModule } from './modules/program/program.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AboutModule } from './modules/about/about.module';
-import {MulterModule} from '@nestjs/platform-express';
+import { MulterModule } from '@nestjs/platform-express';
 import { ParticipantsModule } from './modules/participants/participants.module';
 
 @Module({

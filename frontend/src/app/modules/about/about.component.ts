@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-about',
@@ -18,13 +19,8 @@ import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-d
 })
 export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   @ViewChild(QuillEditorComponent, { static: true }) editor: QuillEditorComponent;
-  public aboutInfo: AboutInfo = {
-    imageUrl: '',
-    text: {
-      en: '',
-      ua: ''
-    }
-  };
+  public aboutForm: FormGroup;
+  public aboutInfo: AboutInfo;
   public multipartFile: File;
   public editMode = false;
   public quillConfig = {...simpleQuillConfig};
@@ -35,17 +31,33 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   constructor(
-    readonly _aboutService: AboutService,
-    readonly _toaster: ToasterService,
-    readonly _translateService: TranslateService,
-    readonly _sanitizer: DomSanitizer,
-    readonly _dialog: MatDialog
+    private _aboutService: AboutService,
+    private _toaster: ToasterService,
+    private _translateService: TranslateService,
+    private _sanitizer: DomSanitizer,
+    private _dialog: MatDialog,
+    private _formBuilder: FormBuilder
   ) {
     super();
+    this.initForm();
   }
 
   ngOnInit(): void {
     this.getAboutInfo();
+  }
+
+  initForm(): void {
+    this.aboutForm = this._formBuilder.group({
+      text_UA: ['', Validators.required],
+      text_EN: ['', Validators.required],
+    })
+  }
+
+  formPatchValue(): void {
+    this.aboutForm.patchValue({
+      text_UA: this.aboutInfo.text.ua,
+      text_EN: this.aboutInfo.text.en,
+    })
   }
 
   getAboutInfo(): void {
@@ -55,6 +67,7 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
         if (res.length > 0) {
           this.aboutInfo = res[0];
           this.imageUrl = this.aboutInfo.imageUrl || '';
+          this.formPatchValue();
         }
         this.editMode = false;
       });
@@ -69,17 +82,33 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   saveAboutInfo(): void {
-    const formData = new FormData();
-    formData.append('body', JSON.stringify(this.aboutInfo));
-    if (this.multipartFile) {
-      formData.append('image', this.multipartFile);
+    if (this.aboutForm.invalid) {
+      this._toaster.showErrorMessage('Fill all required fields')
+      return;
     }
-    this.aboutInfo && this.aboutInfo._id ? this.updateAboutInfo(this.aboutInfo._id, formData)
-      : this.addAboutInfo(formData);
+
+    if (!this.imageUrl && !this.multipartFile) {
+      this._toaster.showErrorMessage('Image is required')
+      return;
+    }
+
+    const formValue = this.aboutForm.value;
+    const body: AboutInfo = {
+      text: {
+        ua: formValue.text_UA,
+        en: formValue.text_EN
+      },
+      imageUrl: this.aboutInfo ? this.aboutInfo.imageUrl : ''
+    }
+    if (this.multipartFile) {
+      body.image = this.multipartFile;
+    }
+    this.aboutInfo ? this.updateAboutInfo(this.aboutInfo._id, body)
+      : this.addAboutInfo(body);
   }
 
-  addAboutInfo(data: FormData): void {
-    this._aboutService.addAboutInfo(data)
+  addAboutInfo(body: AboutInfo): void {
+    this._aboutService.addAboutInfo(body)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('About info added successfully');
@@ -87,8 +116,8 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
       });
   }
 
-  updateAboutInfo(id: string, data: FormData): void {
-    this._aboutService.updateAboutInfo(id, data)
+  updateAboutInfo(id: string, body: AboutInfo): void {
+    this._aboutService.updateAboutInfo(id, body)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('About info updated successfully');

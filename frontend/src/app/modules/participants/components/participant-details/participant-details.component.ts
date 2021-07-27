@@ -9,6 +9,8 @@ import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-d
 import { MatDialog } from '@angular/material/dialog';
 import { simpleQuillConfig } from '@shared/constants/quill-config';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-participant-details',
@@ -20,9 +22,14 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
   public editMode = false;
   public participantId: string;
   public participant: Participant;
+  public participantForm: FormGroup;
   public quillConfig = {...simpleQuillConfig};
   public imageUrl: SafeUrl;
   public multipartFile: File;
+
+  get lang(): string {
+    return this._translateService.currentLang;
+  }
 
   constructor(
     private _router: Router,
@@ -30,13 +37,15 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
     private _participantsService: ParticipantsService,
     private _toaster: ToasterService,
     private _dialog: MatDialog,
-    readonly _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private _formBuilder: FormBuilder,
+    private _translateService: TranslateService
   ) {
     super();
+    this.initForm();
   }
 
   ngOnInit(): void {
-    this.initParticipant();
     this._activatedRoute.paramMap
       .pipe(takeUntil(this.destroy$))
       .subscribe((params: ParamMap) => {
@@ -45,30 +54,37 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
           this.getParticipantById();
         } else {
           this.addNew = true;
+          this.editMode = true;
         }
       });
+  }
+
+  initForm(): void {
+    this.participantForm = this._formBuilder.group({
+      fullName_UA: ['', Validators.required],
+      fullName_EN: ['', Validators.required],
+      bio_UA: ['', Validators.required],
+      bio_EN: ['', Validators.required]
+    })
+  }
+
+  formPatchValue(): void {
+    this.participantForm.patchValue({
+      fullName_UA: this.participant.fullName.ua,
+      fullName_EN: this.participant.fullName.en,
+      bio_UA: this.participant.bio.ua,
+      bio_EN: this.participant.bio.en
+    })
   }
 
   getParticipantById(): void {
     this._participantsService.getParticipantById(this.participantId)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: Participant) => {
-
+        this.participant = res;
+        this.imageUrl = res.imageUrl;
+        this.formPatchValue();
       });
-  }
-
-  initParticipant(): void {
-    this.participant = {
-      fullName: {
-        en: '',
-        ua: ''
-      },
-      bio: {
-        en: '',
-        ua: ''
-      },
-      imageUrl: ''
-    }
   }
 
   goToParticipantsList(): void {
@@ -80,8 +96,34 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
   }
 
   saveParticipant(): void {
-    // validate
+    if (this.participantForm.invalid) {
+      this._toaster.showErrorMessage('Fill all required fields')
+      return;
+    }
+
+    if (!this.imageUrl && !this.multipartFile) {
+      this._toaster.showErrorMessage('Image is required')
+      return;
+    }
+
+    const formValue = this.participantForm.value;
+    const body: Participant = {
+      fullName: {
+        en: formValue.fullName_EN,
+        ua: formValue.fullName_UA
+      },
+      bio: {
+        en: formValue.bio_EN,
+        ua: formValue.bio_UA
+      },
+      imageUrl: this.participant ? this.participant.imageUrl : ''
+    }
+
     const formData = new FormData();
+    formData.append('participantDto', JSON.stringify(body));
+    if (this.multipartFile) {
+      formData.append('image', this.multipartFile);
+    }
     this.participantId ? this.updateParticipant(formData) : this.createParticipant(formData);
   }
 
@@ -90,6 +132,8 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Participant created successfully');
+        // const id = res._id or res;
+        // this.openCreatedParticipant(id);
       });
   }
 
@@ -98,12 +142,21 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Participant updated successfully');
+        // this.getParticipantById();
       });
   }
 
+  openCreatedParticipant(id: string): void {
+    this._router.navigate([`participant/${id}`]);
+  }
+
   cancelEditing(): void {
-    this.editMode = false;
-    this.getParticipantById();
+    if (this.addNew) {
+      this.goToParticipantsList();
+    } else {
+      this.editMode = false;
+      this.getParticipantById();
+    }
   }
 
   openDeleteParticipantDialog(): void {

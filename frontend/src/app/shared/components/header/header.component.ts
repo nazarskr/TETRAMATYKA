@@ -37,7 +37,7 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
   public isMenuOpened = false;
   public showYearsListNarrow = false;
   // TODO remove mock
-  public userRole = RoleEnum.GUEST;
+  public userRole = RoleEnum.ADMIN;
   get roles(): string[] {
     return Object.keys(RoleEnum);
   }

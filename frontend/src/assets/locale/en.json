@@ -6,7 +6,8 @@
     "BACK": "Back",
     "YES": "Yes",
     "NO": "No",
-    "NOT_AVAILABLE": "Not available"
+    "NOT_AVAILABLE": "Not available",
+    "WILL_BE_AVAILABLE_SOON": "Will be available soon"
   },
   "MENU": {
     "MAIN": "Home",
@@ -37,6 +38,9 @@
   },
   "ABOUT": {
     "ABOUT_FESTIVAL": "About festival"
+  },
+  "PARTICIPANTS": {
+    "PARTICIPANTS": "Participants"
   },
   "ARCHIVE": {
     "ARCHIVE_MANAGER": "Archive manager"
