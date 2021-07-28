@@ -9,8 +9,8 @@ export class ParticipantsService {
     constructor(@InjectModel(Participant.name) private participantModel: Model<ParticipantDocument>) {
     }
 
-    async getAllParticipants(): Promise<Participant[]> {
-        return this.participantModel.find({}, {bio: 0, imageUrl: 0});
+    async getAllParticipants(year: number): Promise<Participant[]> {
+        return this.participantModel.find({archiveYear: year}, {bio: 0, imageUrl: 0});
     }
 
     async getParticipantById(id: string): Promise<Participant> {

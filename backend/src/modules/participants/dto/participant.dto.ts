@@ -4,4 +4,5 @@ export class ParticipantDto {
     fullName: IMultiLanguage;
     bio: IMultiLanguage;
     imageUrl: string;
+    archiveYear: number;
 }

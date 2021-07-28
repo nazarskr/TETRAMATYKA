@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UseInterceptors} from '@nestjs/common';
 import { ParticipantsService } from './participants.service';
 import { Participant } from './schemas/participant.schema';
 import { ParticipantDto } from './dto/participant.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { ICommonQuery } from '../../common/interfaces/common-query';
 
 @Controller('participants')
 export class ParticipantsController {
@@ -10,8 +11,8 @@ export class ParticipantsController {
     }
 
     @Get()
-    getAllParticipants(): Promise<Participant[]> {
-        return this.participantsService.getAllParticipants();
+    getAllParticipants(@Query() query: ICommonQuery): Promise<Participant[]> {
+        return this.participantsService.getAllParticipants(+query.year);
     }
 
     @Get(':id')
@@ -21,15 +22,24 @@ export class ParticipantsController {
 
     @Post()
     @UseInterceptors(FilesInterceptor('image'))
-    createParticipant(@UploadedFile() image, @Body() participant: ParticipantDto): Promise<Participant> {
-        console.log('post', image);
+    createParticipant(
+        @Query() query: ICommonQuery,
+        @UploadedFile() image: Express.Multer.File,
+        @Body() body: any
+    ): Promise<Participant> {
+        const participant: ParticipantDto = JSON.parse(body.participant);
+        participant.archiveYear = +query.year;
         return this.participantsService.createParticipant(participant);
     }
 
     @Put()
     @UseInterceptors(FilesInterceptor('image'))
-    updateParticipant(@UploadedFile() image, @Param('id') id: string, @Body() participant: ParticipantDto): Promise<Participant> {
-        console.log('put', image);
+    updateParticipant(
+        @Param('id') id: string,
+        @UploadedFile() image: Express.Multer.File,
+        @Body() body: any
+    ): Promise<Participant> {
+        const participant: ParticipantDto = JSON.parse(body.participant);
         return this.participantsService.updateParticipant(id, participant);
     }
 

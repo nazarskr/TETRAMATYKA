@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { AboutInfo, AboutInfoDocument} from './schemas/about-info.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import {Model, Schema} from 'mongoose';
 import { AboutInfoDto } from './dto/about-info.dto';
+import * as mongoose from 'mongoose';
 
 @Injectable()
 export class AboutService {
     constructor(@InjectModel(AboutInfo.name) private aboutInfoModel: Model<AboutInfoDocument>) {
     }
 
-    async getAboutInfo(): Promise<AboutInfo[]> {
-        return this.aboutInfoModel.find();
+    async getAboutInfo(currentYear: number): Promise<AboutInfo[]> {
+        return this.aboutInfoModel.find({archiveYear: currentYear});
     }
 
     async addAboutInfo(aboutInfoDto: AboutInfoDto): Promise<AboutInfo> {

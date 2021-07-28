@@ -15,6 +15,9 @@ export class Participant {
 
     @Prop()
     imageUrl: string;
+
+    @Prop({required: true})
+    archiveYear: number;
 }
 
 export const ParticipantSchema = SchemaFactory.createForClass(Participant);

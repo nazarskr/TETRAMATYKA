@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, ObjectId } from 'mongoose';
 import { MultiLanguage } from '../../../common/schemas/multi-language.schema';
+import { ArchiveYear } from '../../archive-manager/schemas/archive-year.schema';
 
 export type AboutInfoDocument = AboutInfo & Document;
 
@@ -11,6 +12,9 @@ export class AboutInfo {
 
     @Prop()
     imageUrl: string;
+
+    @Prop({required: true})
+    archiveYear: number;
 }
 
 export const AboutInfoSchema = SchemaFactory.createForClass(AboutInfo);

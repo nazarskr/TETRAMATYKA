@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AboutInfo} from '@shared/interfaces/about';
 import {Observable} from 'rxjs';
 
@@ -15,13 +15,12 @@ export class AboutService {
     return this.http.get<AboutInfo[]>(this.aboutUri);
   }
 
-  addAboutInfo(body: AboutInfo): Observable<FormData> {
-    return this.http.post<FormData>(this.aboutUri, body);
+  addAboutInfo(data: FormData) {
+    return this.http.post(this.aboutUri, data);
   }
 
-  updateAboutInfo(id: string, body: AboutInfo): Observable<ArrayBuffer> {
-    const params: any = {id};
-    return this.http.put(this.aboutUri, body, params);
+  updateAboutInfo(id: string, data: FormData) {
+    return this.http.put(`${this.aboutUri}/${id}`, data);
   }
 
   deleteAboutInfo(id: string): Observable<ArrayBuffer> {

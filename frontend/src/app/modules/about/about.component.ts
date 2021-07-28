@@ -100,15 +100,17 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
       },
       imageUrl: this.aboutInfo ? this.aboutInfo.imageUrl : ''
     }
+    const formData = new FormData();
+    formData.append('aboutInfo', JSON.stringify(body))
     if (this.multipartFile) {
-      body.image = this.multipartFile;
+      formData.append('image', this.multipartFile);
     }
-    this.aboutInfo ? this.updateAboutInfo(this.aboutInfo._id, body)
-      : this.addAboutInfo(body);
+    this.aboutInfo ? this.updateAboutInfo(this.aboutInfo._id, formData)
+      : this.addAboutInfo(formData);
   }
 
-  addAboutInfo(body: AboutInfo): void {
-    this._aboutService.addAboutInfo(body)
+  addAboutInfo(data: FormData): void {
+    this._aboutService.addAboutInfo(data)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('About info added successfully');
@@ -116,8 +118,8 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
       });
   }
 
-  updateAboutInfo(id: string, body: AboutInfo): void {
-    this._aboutService.updateAboutInfo(id, body)
+  updateAboutInfo(id: string, data: FormData): void {
+    this._aboutService.updateAboutInfo(id, data)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('About info updated successfully');

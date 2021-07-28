@@ -49,7 +49,7 @@
             [placeholder]="'Напишіть щось про фестиваль...'">
           </quill-editor>
           <mat-hint class="mat-error" *ngIf="aboutForm.controls['text_UA'].hasError('required') &&
-                    aboutForm.controls['text_UA'].touched || form.submitted">
+                    (aboutForm.controls['text_UA'].touched || form.submitted)">
             Це поле обов'язкове
           </mat-hint>
         </div>
@@ -61,7 +61,7 @@
             [placeholder]="'Type about the festival...'">
           </quill-editor>
           <mat-hint class="mat-error" *ngIf="aboutForm.controls['text_EN'].hasError('required') &&
-                    aboutForm.controls['text_UA'].touched || form.submitted">
+                    (aboutForm.controls['text_UA'].touched || form.submitted)">
             This field is required
           </mat-hint>
         </div>
