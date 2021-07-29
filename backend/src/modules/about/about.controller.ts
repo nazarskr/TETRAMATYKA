@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, U
 import { AboutService } from './about.service';
 import { AboutInfo } from './schemas/about-info.schema';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { multerOptions } from '../../common/config/multer.config';
 import { ICommonQuery } from '../../common/interfaces/common-query';
 import { AboutInfoDto } from './dto/about-info.dto';
 
@@ -17,7 +16,7 @@ export class AboutController {
     }
 
     @Post()
-    @UseInterceptors(FilesInterceptor('image', null, {...multerOptions}))
+    @UseInterceptors(FilesInterceptor('image'))
     async addAboutInfo(
         @Query() query: ICommonQuery,
         @UploadedFile() image: Express.Multer.File,
@@ -29,7 +28,7 @@ export class AboutController {
     }
 
     @Put(':id')
-    @UseInterceptors(FilesInterceptor('image', null, {...multerOptions}))
+    @UseInterceptors(FilesInterceptor('image'))
     async updateAboutInfo(
         @Param('id') id: string,
         @Query() query: ICommonQuery,
