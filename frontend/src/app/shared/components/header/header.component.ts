@@ -8,6 +8,7 @@ import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy'
 import { ArchiveService } from '@shared/services/archive/archive.service';
 import { AppInitService } from '@core/services/app-init/app-init.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -41,15 +42,16 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
   get roles(): string[] {
     return Object.keys(RoleEnum);
   }
-
   get currentYear(): number {
-    return this._appInitService.currentYear.year;
+    return this._appInitService.currentYear && this._appInitService.currentYear.year;
   }
+  // TODO remove mock
 
   constructor(
     private _userService: UserService,
     private _archiveService: ArchiveService,
-    private _appInitService: AppInitService
+    private _appInitService: AppInitService,
+    private _router: Router
   ) {
     super();
   }
@@ -80,6 +82,7 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
   changeArchiveYear(archiveYear: ArchiveYear): void {
     this._appInitService.currentYear = archiveYear;
     this.getAllArchiveYears();
+    this._router.navigate(['/home']);
   }
 
   toggleArchiveNarrowMenu(event: MouseEvent): void {
