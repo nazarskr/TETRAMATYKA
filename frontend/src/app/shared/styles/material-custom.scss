@@ -43,6 +43,26 @@
   }
 }
 
+// action buttons
+.mat-icon {
+  &.action-button {
+    color: $color-icon-grey;
+    cursor: pointer;
+
+    &.green {
+      color: $color-green;
+    }
+
+    &.red {
+      color: $color-red;
+    }
+
+    &.orange {
+      color: $color-orange;
+    }
+  }
+}
+
 //TOASTER
 .show-message {
   background-color: black;
@@ -82,4 +102,8 @@
 // form field
 .mat-form-field {
   margin-bottom: 10px;
+
+  &.wide-form-field {
+    min-width: 400px;
+  }
 }

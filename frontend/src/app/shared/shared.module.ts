@@ -23,6 +23,7 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // components
 import { HeaderComponent } from './components/header/header.component';
@@ -49,7 +50,8 @@ const materialModules = [
   MatSnackBarModule,
   MatMenuModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  DragDropModule
 ];
 
 

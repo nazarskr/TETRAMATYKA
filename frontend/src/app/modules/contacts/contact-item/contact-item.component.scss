@@ -1,0 +1,22 @@
+@import 'variables';
+
+.contact-item {
+  min-width: 400px;
+  margin: auto;
+  padding: 20px 0;
+  position: relative;
+
+  p {
+    margin: 5px 0;
+  }
+
+  .contact-title {
+    font-weight: 500;
+  }
+
+  .action-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

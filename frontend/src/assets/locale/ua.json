@@ -25,7 +25,8 @@
     "CANCEL": "Відмінити",
     "DELETE": "Видалити",
     "ADD": "Додати",
-    "BACK": "Назад"
+    "BACK": "Назад",
+    "VIEW": "Перегляд"
   },
   "TABLE_COLUMNS": {
     "YEAR": "Рік",
@@ -41,6 +42,9 @@
   },
   "PARTICIPANTS": {
     "PARTICIPANTS": "Учасники фестивалю"
+  },
+  "CONTACTS": {
+    "CONTACTS": "Контакти"
   },
   "ARCHIVE": {
     "ARCHIVE_MANAGER": "Менеджер архівів"

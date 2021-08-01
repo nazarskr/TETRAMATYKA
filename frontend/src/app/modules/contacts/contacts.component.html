@@ -1,1 +1,27 @@
-<p>contacts works!</p>
+<div class="page">
+  <button
+    *userPermission="['ADMIN']"
+    class="green-button"
+    mat-button
+    (click)="addContact()"
+    [disabled]="isAddNew">
+    <mat-icon>add</mat-icon>
+    <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+  </button>
+  <h2 class="page-title">{{'CONTACTS.CONTACTS' | translate}}</h2>
+  <p class="grey-text" *userPermission="['ADMIN']">Drag contact item to change an order</p>
+  <div class="draggable-list p-25" (cdkDropListDropped)="dropListItem($event)" cdkDropList>
+    <div class="draggable-item"
+         cdkDrag [cdkDragDisabled]="!isAdmin"
+         *ngFor="let contact of contactsList">
+      <div class="drop-custom-placeholder" *cdkDragPlaceholder></div>
+      <app-contact-item
+        [contact]="contact"
+        (cancelCreate)="cancelCreate()"
+        (contactsListUpdated)="getAllContacts()"
+      ></app-contact-item>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="contact-item">
+  <form #form="ngForm"
+        [formGroup]="contactForm"
+        (ngSubmit)="saveContact()">
+    <ng-container *ngIf="contact.editable; else contactView">
+      <div class="editor-label m-0">Обов'язки та ім'я (UA):</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <input matInput
+               formControlName="title_UA"
+               autocomplete="chrome-off"
+               placeholder="Директор - [ім'я]">
+        <mat-error *ngIf="contactForm.controls['title_UA'].hasError('required') &&
+                      (contactForm.controls['title_UA'].touched || form.submitted)">
+          Це поле обов'язкове
+        </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Duties and full name (EN):</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <input matInput
+               formControlName="title_EN"
+               autocomplete="chrome-off"
+               placeholder="Director - [full name]">
+        <mat-error *ngIf="contactForm.controls['title_EN'].hasError('required') &&
+                      (contactForm.controls['title_EN'].touched || form.submitted)">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Email:</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <input matInput
+               formControlName="email"
+               autocomplete="chrome-off"
+               placeholder="Email">
+        <mat-error *ngIf="contactForm.controls['email'].hasError('required') &&
+                      (contactForm.controls['email'].touched || form.submitted)">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Phone number:</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <input matInput
+               formControlName="phone"
+               autocomplete="chrome-off"
+               placeholder="+380">
+      </mat-form-field>
+    </ng-container>
+    <ng-template #contactView>
+      <p class="contact-title">
+        {{contact.title[lang]}}
+      </p>
+      <p class="contact-email">
+        {{contact.email}}
+      </p>
+      <p class="contact-phone" *ngIf="contact.phone">
+        {{contact.phone}}
+      </p>
+    </ng-template>
+
+    <div class="action-buttons" fxLayout="row" *userPermission="['ADMIN']">
+      <ng-container *ngIf="this.contact.editable; else viewActions">
+        <mat-icon class="action-button green"
+                  (click)="submitForm()">done</mat-icon>
+        <mat-icon class="action-button red"
+                  (click)="cancelEditing()">close</mat-icon>
+      </ng-container>
+      <ng-template #viewActions>
+        <mat-icon class="action-button orange"
+                  (click)="editContact()">edit</mat-icon>
+        <mat-icon class="action-button red"
+                  (click)="openDeleteContactDialog()">delete</mat-icon>
+      </ng-template>
+    </div>
+  </form>
+</div>

@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ProgramRoutingModule } from './program-routing.module';
 import { ProgramComponent } from './program.component';
 import { SharedModule } from '@shared/shared.module';
-import { ProgramDetailsComponent } from './program-details/program-details.component';
+import { ProgramItemComponent } from './program-item/program-item.component';
 
 
 @NgModule({
-  declarations: [ProgramComponent, ProgramDetailsComponent],
+  declarations: [ProgramComponent, ProgramItemComponent],
   imports: [
     CommonModule,
     SharedModule,

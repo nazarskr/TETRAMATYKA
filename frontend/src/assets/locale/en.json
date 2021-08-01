@@ -25,7 +25,8 @@
     "CANCEL": "Cancel",
     "DELETE": "Delete",
     "ADD": "Add",
-    "BACK": "Back"
+    "BACK": "Back",
+    "VIEW": "View"
   },
   "TABLE_COLUMNS": {
     "YEAR": "Year",
@@ -41,6 +42,9 @@
   },
   "PARTICIPANTS": {
     "PARTICIPANTS": "Participants"
+  },
+  "CONTACTS": {
+    "CONTACTS": "Contacts"
   },
   "ARCHIVE": {
     "ARCHIVE_MANAGER": "Archive manager"
