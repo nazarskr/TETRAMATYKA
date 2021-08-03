@@ -1,16 +1,32 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ProgramService } from './program.service';
 import { ProgramDto } from './dto/program.dto';
-import { Program } from './schemas/program.schema';
+import { ProgramItem } from './schemas/program.schema';
+import { ICommonQuery } from '../../common/interfaces/common-query';
 
 @Controller('program')
 export class ProgramController {
     constructor(private readonly programService: ProgramService) {
     }
 
+    @Get()
+    getAllProgramItems(@Query() query: ICommonQuery): Promise<ProgramItem[]> {
+        return this.programService.getAllProgramItems(+query.year);
+    }
+
     @Post()
-    @HttpCode(HttpStatus.CREATED)
-    createProgramEvent(@Body() programDto: ProgramDto): Promise<Program> {
-        return this.programService.addProgramEvent(programDto);
+    addProgramItem(@Query() query: ICommonQuery, @Body() programDto: ProgramDto): Promise<ProgramItem> {
+        programDto.archiveYear = +query.year;
+        return this.programService.addProgramItem(programDto);
+    }
+
+    @Put(':id')
+    updateProgramItem(@Param('id') id: string, @Body() programDto: ProgramDto): Promise<ProgramItem> {
+        return this.programService.updateProgramItem(id, programDto);
+    }
+
+    @Delete(':id')
+    removeProgramItem(@Param('id') id: string): Promise<ProgramItem> {
+        return this.programService.removeProgramItem(id);
     }
 }

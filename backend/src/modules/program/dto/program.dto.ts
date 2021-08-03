@@ -1,3 +1,8 @@
+import { IMultiLanguage } from '../../../common/interfaces/multi-language';
+
 export class ProgramDto {
-    readonly title: string;
+    title: IMultiLanguage;
+    info: IMultiLanguage;
+    eventFullDate: Date;
+    archiveYear: number;
 }
