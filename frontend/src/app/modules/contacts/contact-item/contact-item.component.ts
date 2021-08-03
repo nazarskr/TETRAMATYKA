@@ -7,7 +7,7 @@ import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-d
 import { filter, takeUntil } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
-import { ContactsService } from '../services/contacts/contacts.service';
+import { ContactsService } from '../services/contacts.service';
 
 @Component({
   selector: 'app-contact-item',
@@ -78,7 +78,6 @@ export class ContactItemComponent extends UnsubscribeOnDestroy implements OnInit
     }
 
     const formValue = this.contactForm.value;
-
     const body: Contact = {
       title: {
         ua: formValue.title_UA,
@@ -88,6 +87,7 @@ export class ContactItemComponent extends UnsubscribeOnDestroy implements OnInit
       phone: formValue.phone,
       positionIndex: this.contact.positionIndex
     }
+
     this.contact._id ? this.updateContact(body) : this.createContact(body);
   }
 

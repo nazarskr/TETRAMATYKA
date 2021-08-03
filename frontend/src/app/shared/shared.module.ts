@@ -36,6 +36,9 @@ import { DragNDropUploadComponent } from './components/drag-n-drop-upload/drag-n
 import { DragAndDropFieldDirective } from './directives/drag-and-drop-field.directive';
 import { FooterComponent } from './components/footer/footer.component';
 
+// pipes
+import { LocalDatePipe } from './pipes/local-date.pipe';
+
 const materialModules = [
   MatButtonModule,
   MatSelectModule,
@@ -65,7 +68,8 @@ const materialModules = [
     UserPermissionDirective,
     DragNDropUploadComponent,
     DragAndDropFieldDirective,
-    FooterComponent
+    FooterComponent,
+    LocalDatePipe
   ],
   imports: [
     CommonModule,
@@ -86,7 +90,8 @@ const materialModules = [
     UserPermissionDirective,
     DragNDropUploadComponent,
     DragAndDropFieldDirective,
-    FooterComponent
+    FooterComponent,
+    LocalDatePipe
   ],
   providers: [
     UnsubscribeOnDestroy

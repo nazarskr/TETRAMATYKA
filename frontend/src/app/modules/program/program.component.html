@@ -1,1 +1,24 @@
-<p>program works!</p>
+<div class="page">
+  <button
+    *userPermission="['ADMIN']"
+    class="green-button"
+    mat-button
+    (click)="addProgramItem()"
+    [disabled]="isAddNew">
+    <mat-icon>add</mat-icon>
+    <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+  </button>
+
+  <h2 class="page-title">{{'MENU.PROGRAM' | translate}}</h2>
+  <div class="program-list">
+    <ng-container *ngFor="let programItem of programList">
+      <app-program-item
+        [programItem]="programItem"
+        (cancelCreate)="cancelCreate()"
+        (programListUpdated)="getAllProgramItems()">
+      </app-program-item>
+    </ng-container>
+  </div>
+</div>

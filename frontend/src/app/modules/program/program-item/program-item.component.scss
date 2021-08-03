@@ -1,0 +1,37 @@
+@import 'variables';
+
+.program-item {
+  padding: 10px 0;
+  position: relative;
+}
+
+.action-buttons {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.program-date {
+  padding: 5px;
+  margin-bottom: 5px;
+  width: fit-content;
+  text-transform: uppercase;
+  background-color: black;
+  color: white;
+}
+
+.program-day {
+  margin-right: 5px;
+}
+
+.program-weekday {
+  color: $color-main-grey;
+}
+
+.program-header {
+  font-weight: 500;
+}
+
+.program-time {
+  color: $color-red;
+}

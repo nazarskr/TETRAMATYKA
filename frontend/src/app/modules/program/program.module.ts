@@ -5,6 +5,8 @@ import { ProgramRoutingModule } from './program-routing.module';
 import { ProgramComponent } from './program.component';
 import { SharedModule } from '@shared/shared.module';
 import { ProgramItemComponent } from './program-item/program-item.component';
+import { TranslateModule } from "@ngx-translate/core";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -12,6 +14,8 @@ import { ProgramItemComponent } from './program-item/program-item.component';
   imports: [
     CommonModule,
     SharedModule,
+    TranslateModule,
+    ReactiveFormsModule,
     ProgramRoutingModule
   ]
 })

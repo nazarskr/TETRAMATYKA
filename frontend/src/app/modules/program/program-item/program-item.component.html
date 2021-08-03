@@ -1,1 +1,90 @@
-<p>program-item works!</p>
+<div class="program-item">
+  <form #form="ngForm"
+        [formGroup]="programItemForm"
+        (ngSubmit)="saveProgramItem()">
+    <ng-container *ngIf="programItem.editable; else programItemView">
+      <div class="editor-label m-0">Час і дата події:</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <input matInput
+               formControlName="eventFullDate"
+               autocomplete="chrome-off"
+               type="datetime-local"
+               placeholder="dd/mm/yyyy hh:mm">
+        <mat-error *ngIf="programItemForm.controls['eventFullDate'].hasError('required') &&
+                      (programItemForm.controls['eventFullDate'].touched || form.submitted)">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Назва події (UA):</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <input matInput
+               formControlName="title_UA"
+               autocomplete="chrome-off"
+               placeholder="Назва події">
+        <mat-error *ngIf="programItemForm.controls['title_UA'].hasError('required') &&
+                      (programItemForm.controls['title_UA'].touched || form.submitted)">
+          Це поле обов'язкове
+        </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Event's title (EN):</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <input matInput
+               formControlName="title_EN"
+               autocomplete="chrome-off"
+               placeholder="Назва події">
+        <mat-error *ngIf="programItemForm.controls['title_EN'].hasError('required') &&
+                      (programItemForm.controls['title_EN'].touched || form.submitted)">
+          Це поле обов'язкове
+        </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Опис події (UA):</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <textarea matInput
+               formControlName="info_UA"
+               autocomplete="chrome-off"
+               placeholder="Опис події">
+        </textarea>
+        <mat-error *ngIf="programItemForm.controls['info_UA'].hasError('required') &&
+                      (programItemForm.controls['info_UA'].touched || form.submitted)">
+          Це поле обов'язкове
+        </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Event's description (EN):</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <textarea matInput
+               formControlName="info_EN"
+               autocomplete="chrome-off"
+               placeholder="Event's description">
+        </textarea>
+        <mat-error *ngIf="programItemForm.controls['info_EN'].hasError('required') &&
+                      (programItemForm.controls['info_EN'].touched || form.submitted)">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+    <ng-template #programItemView><div class="program-date" *ngIf="programItem.showDay">
+      <span class="program-day">{{programItem.eventFullDate | localDate : 'd MMMM,'}}</span>
+      <span class="program-weekday">{{programItem.eventFullDate | localDate : 'EEEE'}}</span>
+    </div>
+      <div class="program-header">
+        <span class="program-time">{{programItem.eventFullDate | date : 'H:mm '}}</span>
+        <span class="program-title">{{programItem.title[lang]}}</span>
+      </div>
+      <div class="program-body">{{programItem.info[lang]}}</div>
+    </ng-template>
+    <div class="program-actions">
+      <ng-container *ngIf="this.programItem.editable; else viewActions">
+        <mat-icon class="action-button green"
+                  (click)="submitForm()">done</mat-icon>
+        <mat-icon class="action-button red"
+                  (click)="cancelEditing()">close</mat-icon>
+      </ng-container>
+      <ng-template #viewActions>
+        <mat-icon class="action-button orange"
+                  (click)="editProgramItem()">edit</mat-icon>
+        <mat-icon class="action-button red"
+                  (click)="openDeleteProgramItemDialog()">delete</mat-icon>
+      </ng-template>
+    </div>
+  </form>
+</div>

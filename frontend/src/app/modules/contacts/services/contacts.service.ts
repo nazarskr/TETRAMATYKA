@@ -8,9 +8,7 @@ import { Contact } from '@shared/interfaces/contact';
 export class ContactsService {
   public contactsUri = '/api/contacts';
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) { }
 
   getAllContacts() {
     return this.http.get(this.contactsUri);
