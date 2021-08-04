@@ -6,7 +6,7 @@ import { Contact } from '@shared/interfaces/contact';
   providedIn: 'root'
 })
 export class ContactsService {
-  public contactsUri = '/api/contacts';
+  public contactsUri = '/api/contact';
 
   constructor(private http: HttpClient) { }
 
