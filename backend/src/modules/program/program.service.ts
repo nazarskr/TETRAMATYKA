@@ -1,25 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ProgramItem, ProgramDocument } from './schemas/program.schema';
-import { ProgramDto } from './dto/program.dto';
+import { ProgramItem, ProgramItemDocument } from './schemas/program.schema';
+import { ProgramItemDto } from './dto/program.dto';
 
 @Injectable()
 export class ProgramService {
-    constructor(@InjectModel(ProgramItem.name) private programModel: Model<ProgramDocument>) {
+    constructor(@InjectModel(ProgramItem.name) private programModel: Model<ProgramItemDocument>) {
     }
 
     async getAllProgramItems(currentYear: number): Promise<ProgramItem[]> {
         return this.programModel.find({archiveYear: currentYear});
     }
 
-    async addProgramItem(programDto: ProgramDto): Promise<ProgramItem> {
-        const newProgramEvent = new this.programModel(programDto);
-        return newProgramEvent.save();
+    async addProgramItem(programItemDto: ProgramItemDto): Promise<ProgramItem> {
+        const newProgramItem = new this.programModel(programItemDto);
+        return newProgramItem.save();
     }
 
-    async updateProgramItem(id: string, programDto: ProgramDto): Promise<ProgramItem> {
-        return this.programModel.findByIdAndUpdate(id, programDto, {new: false});
+    async updateProgramItem(id: string, programItemDto: ProgramItemDto): Promise<ProgramItem> {
+        return this.programModel.findByIdAndUpdate(id, programItemDto, {new: false});
     }
 
     async removeProgramItem(id: string): Promise<ProgramItem> {

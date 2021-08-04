@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ProgramService } from './program.service';
-import { ProgramDto } from './dto/program.dto';
+import { ProgramItemDto } from './dto/program.dto';
 import { ProgramItem } from './schemas/program.schema';
 import { ICommonQuery } from '../../common/interfaces/common-query';
 
@@ -15,14 +15,14 @@ export class ProgramController {
     }
 
     @Post()
-    addProgramItem(@Query() query: ICommonQuery, @Body() programDto: ProgramDto): Promise<ProgramItem> {
-        programDto.archiveYear = +query.year;
-        return this.programService.addProgramItem(programDto);
+    addProgramItem(@Query() query: ICommonQuery, @Body() programItemDto: ProgramItemDto): Promise<ProgramItem> {
+        programItemDto.archiveYear = +query.year;
+        return this.programService.addProgramItem(programItemDto);
     }
 
     @Put(':id')
-    updateProgramItem(@Param('id') id: string, @Body() programDto: ProgramDto): Promise<ProgramItem> {
-        return this.programService.updateProgramItem(id, programDto);
+    updateProgramItem(@Param('id') id: string, @Body() programItemDto: ProgramItemDto): Promise<ProgramItem> {
+        return this.programService.updateProgramItem(id, programItemDto);
     }
 
     @Delete(':id')

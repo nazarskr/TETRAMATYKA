@@ -11,6 +11,7 @@ import { join } from 'path';
 import { AboutModule } from './modules/about/about.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { ParticipantsModule } from './modules/participants/participants.module';
+import { ContactModule } from './modules/contact/contact.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { ParticipantsModule } from './modules/participants/participants.module';
     ProgramModule,
     AboutModule,
     ParticipantsModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService],

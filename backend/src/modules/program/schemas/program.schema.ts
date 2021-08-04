@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import {MultiLanguage} from '../../../common/schemas/multi-language.schema';
+import { MultiLanguage } from '../../../common/schemas/multi-language.schema';
 
-export type ProgramDocument = ProgramItem & Document;
+export type ProgramItemDocument = ProgramItem & Document;
 
 @Schema()
 export class ProgramItem {
@@ -19,4 +19,4 @@ export class ProgramItem {
     archiveYear: number;
 }
 
-export const ProgramSchema = SchemaFactory.createForClass(ProgramItem);
+export const ProgramItemSchema = SchemaFactory.createForClass(ProgramItem);
