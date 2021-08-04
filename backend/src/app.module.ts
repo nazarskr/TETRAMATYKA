@@ -22,7 +22,7 @@ import { ContactModule } from './modules/contact/contact.module';
       rootPath: join(__dirname, 'client'),
     }),
     MongooseModule.forRoot(
-      `mongodb+srv://nazar:${process.env.DB_PASS}@cluster0.blvwb.mongodb.net/master?retryWrites=true&w=majority`,
+        `mongodb+srv://TETRAMATYKA:${process.env.DB_PASS}@tetramatyka.eq8cq.mongodb.net/master?retryWrites=true&w=majority`,
       {
         connectionName: 'master',
         useFindAndModify: false,
