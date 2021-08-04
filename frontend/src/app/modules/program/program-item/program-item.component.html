@@ -72,7 +72,7 @@
       </div>
       <div class="program-body">{{programItem.info[lang]}}</div>
     </ng-template>
-    <div class="program-actions">
+    <div class="program-actions" *userPermission="['ADMIN']">
       <ng-container *ngIf="this.programItem.editable; else viewActions">
         <mat-icon class="action-button green"
                   (click)="submitForm()">done</mat-icon>

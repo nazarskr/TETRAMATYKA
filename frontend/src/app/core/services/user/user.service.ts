@@ -8,13 +8,12 @@ import { RoleEnum } from '@shared/enums/role';
 })
 
 export class UserService {
-  // TODO need GUEST by default
   public userInfo: UserInfo = {
     email: '',
     fullName: '',
-    role: RoleEnum.ADMIN
+    role: RoleEnum.GUEST
   };
-  public currentUserRole: BehaviorSubject<string> = new BehaviorSubject('ADMIN');
+  public currentUserRole: BehaviorSubject<string> = new BehaviorSubject('GUEST');
 
   constructor() { }
 }
