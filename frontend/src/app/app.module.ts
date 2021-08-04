@@ -43,7 +43,7 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderHttpModule.forRoot({
       exclude: [...loaderExclude],
-      minTime: 500,
+      minTime: 100,
       showForeground: true
     }),
     AppRoutingModule,

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import {InjectModel} from '@nestjs/mongoose';
-import {ContactItem, ContactItemDocument} from './schemas/contact.schema';
-import {Model} from 'mongoose';
-import {ContactItemDto} from './dto/contact.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { ContactItem, ContactItemDocument } from './schemas/contact.schema';
+import { Model } from 'mongoose';
+import { ContactItemDto } from './dto/contact.dto';
 
 @Injectable()
 export class ContactService {
@@ -10,7 +10,7 @@ export class ContactService {
     }
 
     async getAllContactItems(): Promise<ContactItem[]> {
-        return this.contactModel.find();
+        return this.contactModel.find().sort('positionIndex');
     }
 
     async addContactItem(contactItemDto: ContactItemDto): Promise<ContactItem> {

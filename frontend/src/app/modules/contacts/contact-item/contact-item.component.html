@@ -48,9 +48,10 @@
       <p class="contact-title">
         {{contact.title[lang]}}
       </p>
-      <p class="contact-email">
+      <a href="{{'mailto:' + contact.email}}"
+        class="contact-email">
         {{contact.email}}
-      </p>
+      </a>
       <p class="contact-phone" *ngIf="contact.phone">
         {{contact.phone}}
       </p>

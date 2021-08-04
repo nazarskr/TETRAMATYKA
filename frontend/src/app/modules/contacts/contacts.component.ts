@@ -59,8 +59,8 @@ export class ContactsComponent extends UnsubscribeOnDestroy implements OnInit {
   updatePositionIndexes(body: Contact[]): void {
     this._contactsService.updatePositionIndexes(body)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Contact[]) => {
-        this.contactsList = res;
+      .subscribe(() => {
+        this.getAllContacts();
         this._toaster.showMessage('Contacts updated successfully');
       })
   }
@@ -80,7 +80,11 @@ export class ContactsComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   definePositionIndex(): number {
-    return this.contactsList[this.contactsList.length -1].positionIndex + 1;
+    if (this.contactsList.length === 0) {
+      return 0;
+    } else {
+      return this.contactsList[this.contactsList.length -1].positionIndex + 1;
+    }
   }
 
   cancelCreate(): void {

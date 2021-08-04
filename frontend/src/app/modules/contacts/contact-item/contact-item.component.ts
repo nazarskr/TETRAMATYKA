@@ -94,8 +94,8 @@ export class ContactItemComponent extends UnsubscribeOnDestroy implements OnInit
   createContact(body: Contact): void {
     this._contactsService.createContact(body)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Contact) => {
-        this.contact = res;
+      .subscribe(() => {
+        this.contactsListUpdated.emit();
         this._toaster.showMessage('Contact created successfully');
       });
   }
@@ -103,8 +103,8 @@ export class ContactItemComponent extends UnsubscribeOnDestroy implements OnInit
   updateContact(body: Contact): void {
     this._contactsService.updateContact(this.contact._id, body)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Contact) => {
-        this.contact = res;
+      .subscribe(() => {
+        this.contactsListUpdated.emit();
         this._toaster.showMessage('Contact updated successfully');
       });
   }

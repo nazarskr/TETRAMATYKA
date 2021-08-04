@@ -3,7 +3,6 @@
 .contact-item {
   min-width: 400px;
   margin: auto;
-  padding: 20px 0;
   position: relative;
 
   p {
@@ -12,6 +11,11 @@
 
   .contact-title {
     font-weight: 500;
+  }
+
+  .contact-email {
+    color: $color-main-grey;
+    text-decoration: underline;
   }
 
   .action-buttons {
