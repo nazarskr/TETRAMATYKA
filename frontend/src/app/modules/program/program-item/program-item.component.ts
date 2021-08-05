@@ -41,7 +41,7 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
 
   initForm(): void {
     this.programItemForm = this._formBuilder.group({
-      eventFullDate: [this.convertDateToLocale(this.programItem.eventFullDate), Validators.required],
+      eventFullDate: [this.programItem.eventFullDate, Validators.required],
       title_UA: [this.programItem.title.ua, Validators.required],
       title_EN: [this.programItem.title.en, Validators.required],
       info_UA: [this.programItem.info.ua, Validators.required],
@@ -89,7 +89,7 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
         ua: formValue.info_UA,
         en: formValue.info_EN
       },
-      eventFullDate: new Date(formValue.eventFullDate).toISOString()
+      eventFullDate: new Date(formValue.eventFullDate)
     }
 
     this.programItem._id ? this.updateProgramItem(body) : this.createProgramItem(body);
@@ -100,6 +100,7 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Program item created successfully');
+        this.programListUpdated.emit();
       });
   }
 
@@ -108,6 +109,7 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Program item updated successfully');
+        this.programListUpdated.emit();
       });
   }
 
@@ -131,6 +133,7 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Program item deleted successfully');
+        this.programListUpdated.emit();
       });
   }
 }

@@ -4,7 +4,7 @@ export interface ProgramItem {
   _id?: string;
   title: MultiLanguage;
   info: MultiLanguage;
-  eventFullDate: string;
+  eventFullDate: Date;
   editable?: boolean;
   showDay?: boolean;
 }

@@ -62,7 +62,7 @@
         </mat-error>
       </mat-form-field>
     </ng-container>
-    <ng-template #programItemView><div class="program-date" *ngIf="programItem.showDay">
+    <ng-template #programItemView><div class="program-date">
       <span class="program-day">{{programItem.eventFullDate | localDate : 'd MMMM,'}}</span>
       <span class="program-weekday">{{programItem.eventFullDate | localDate : 'EEEE'}}</span>
     </div>

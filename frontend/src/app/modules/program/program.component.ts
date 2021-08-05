@@ -25,38 +25,7 @@ export class ProgramComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mockProgram();
-  }
-
-  mockProgram(): void {
-    this.programList = [
-      {
-        _id: 'aaaaaaa',
-        title: {
-          ua: 'Виставка',
-          en: 'Exhibition'
-        },
-        info: {
-          ua: 'Ай Вейвей',
-          en: 'Ai Weiwei'
-        },
-        eventFullDate: new Date().toISOString(),
-        showDay: true
-      },
-      {
-        _id: 'bbbbbbb',
-        title: {
-          ua: 'Виставка 2',
-          en: 'Exhibition 2'
-        },
-        info: {
-          ua: 'Демієн Гьорст',
-          en: 'Damien Hirst'
-        },
-        eventFullDate: new Date().toISOString(),
-        showDay: false
-      }
-    ];
+    this.getAllProgramItems();
   }
 
   getAllProgramItems(): void {

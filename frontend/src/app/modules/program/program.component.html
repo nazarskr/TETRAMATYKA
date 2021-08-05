@@ -21,4 +21,9 @@
       </app-program-item>
     </ng-container>
   </div>
+
+  <div *ngIf="programList.length === 0"
+       class="will-be-soon-message">
+    {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
+  </div>
 </div>
