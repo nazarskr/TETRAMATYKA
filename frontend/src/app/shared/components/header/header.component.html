@@ -8,20 +8,20 @@
         {{route.text | translate}}
       </a>
     </ng-container>
-    <p class="menu-item"
-       [matMenuTriggerFor]="archiveList"
-       *userPermission="['ALL']">{{'MENU.ARCHIVE' | translate}}</p>
-    <mat-menu
-      [overlapTrigger]="false"
-      #archiveList="matMenu">
-      <ng-container *ngFor="let archiveYear of archiveYears">
-        <button
-          (click)="changeArchiveYear(archiveYear)"
-          mat-menu-item>
-          {{archiveYear.year}}
-        </button>
-      </ng-container>
-    </mat-menu>
+<!--    <p class="menu-item"-->
+<!--       [matMenuTriggerFor]="archiveList"-->
+<!--       *userPermission="['ALL']">{{'MENU.ARCHIVE' | translate}}</p>-->
+<!--    <mat-menu-->
+<!--      [overlapTrigger]="false"-->
+<!--      #archiveList="matMenu">-->
+<!--      <ng-container *ngFor="let archiveYear of archiveYears">-->
+<!--        <button-->
+<!--          (click)="changeArchiveYear(archiveYear)"-->
+<!--          mat-menu-item>-->
+<!--          {{archiveYear.year}}-->
+<!--        </button>-->
+<!--      </ng-container>-->
+<!--    </mat-menu>-->
   </div>
   <div class="menu-button" (click)="toggleOpenMenu()">
       <span
@@ -40,17 +40,17 @@
         {{route.text | translate}}
       </a>
     </ng-container>
-    <p class="menu-item"
-       (click)="toggleArchiveNarrowMenu($event)"
-       *userPermission="['ALL']">{{'MENU.ARCHIVE' | translate}}</p>
-    <div [@yearsList]="showYearsListNarrow? 'show' : 'hide'">
-      <ng-container *ngFor="let archiveYear of archiveYears">
-        <p class="menu-item years"
-           (click)="changeArchiveYear(archiveYear)">
-          {{archiveYear.year}}
-        </p>
-      </ng-container>
-    </div>
+<!--    <p class="menu-item"-->
+<!--       (click)="toggleArchiveNarrowMenu($event)"-->
+<!--       *userPermission="['ALL']">{{'MENU.ARCHIVE' | translate}}</p>-->
+<!--    <div [@yearsList]="showYearsListNarrow? 'show' : 'hide'">-->
+<!--      <ng-container *ngFor="let archiveYear of archiveYears">-->
+<!--        <p class="menu-item years"-->
+<!--           (click)="changeArchiveYear(archiveYear)">-->
+<!--          {{archiveYear.year}}-->
+<!--        </p>-->
+<!--      </ng-container>-->
+<!--    </div>-->
   </div>
 
   <!--    TODO remove mock-->
