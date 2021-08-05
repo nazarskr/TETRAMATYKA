@@ -62,15 +62,16 @@
         </mat-error>
       </mat-form-field>
     </ng-container>
-    <ng-template #programItemView><div class="program-date">
-      <span class="program-day">{{programItem.eventFullDate | localDate : 'd MMMM,'}}</span>
-      <span class="program-weekday">{{programItem.eventFullDate | localDate : 'EEEE'}}</span>
-    </div>
-      <div class="program-header">
+    <ng-template #programItemView>
+      <div class="program-date f-18">
+        <span class="program-day">{{programItem.eventFullDate | localDate : 'd MMMM,'}}</span>
+        <span class="program-weekday">{{programItem.eventFullDate | localDate : 'EEEE'}}</span>
+      </div>
+      <div class="program-header f-18">
         <span class="program-time">{{programItem.eventFullDate | date : 'H:mm '}}</span>
         <span class="program-title">{{programItem.title[lang]}}</span>
       </div>
-      <div class="program-body">{{programItem.info[lang]}}</div>
+      <div class="program-body f-18">{{programItem.info[lang]}}</div>
     </ng-template>
     <div class="program-actions" *userPermission="['ADMIN']">
       <ng-container *ngIf="this.programItem.editable; else viewActions">
