@@ -95,9 +95,11 @@
             src="../../../assets/images/tetramatyka_wide.jpg"
             alt="No image"
             class="about-view-image">
-          <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
-          <div [innerHTML]="aboutInfo.text[lang]"
-            class="about-view-text f-18">
+          <div class="view-text-container">
+            <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
+            <div [innerHTML]="aboutInfo.text[lang]"
+                 class="about-view-text f-18">
+            </div>
           </div>
         </ng-container>
 

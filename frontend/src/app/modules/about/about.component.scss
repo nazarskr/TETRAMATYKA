@@ -1,12 +1,22 @@
 @import 'variables';
 
 .about-view-image {
+  position: sticky;
+  top: $header-height;
   margin-bottom: 20px;
   width: 100vw;
+  z-index: -1;
+}
+
+.view-text-container {
+  width: 100vw;
+  padding-top: 25px;
+  background: white;
 }
 
 .about-view-text {
   width: 70vw;
+  margin: 0 auto;
   padding-bottom: 25px;
   text-align: center;
   line-height: 25px;
