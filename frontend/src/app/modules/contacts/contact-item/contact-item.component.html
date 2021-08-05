@@ -45,14 +45,14 @@
       </mat-form-field>
     </ng-container>
     <ng-template #contactView>
-      <p class="contact-title">
+      <p class="contact-title text-center">
         {{contact.title[lang]}}
       </p>
       <a href="{{'mailto:' + contact.email}}"
-        class="contact-email">
+        class="contact-email text-center">
         {{contact.email}}
       </a>
-      <p class="contact-phone" *ngIf="contact.phone">
+      <p class="contact-phone text-center" *ngIf="contact.phone">
         {{contact.phone}}
       </p>
     </ng-template>
