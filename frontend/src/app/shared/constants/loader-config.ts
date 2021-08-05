@@ -6,7 +6,7 @@ export const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   pbThickness: 3,
   overlayColor: 'rgba(255, 255, 255, 0.95)',
   pbColor: '#000000',
-  fgsSize: 200,
+  fgsSize: 200
 };
 
 export const loaderExclude = [

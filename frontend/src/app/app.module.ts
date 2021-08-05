@@ -10,8 +10,8 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '@shared/shared.module';
-import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
-import { loaderExclude, ngxUiLoaderConfig } from '@shared/constants/loader-config';
+import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+import { ngxUiLoaderConfig } from '@shared/constants/loader-config';
 import { AppInitService } from '@core/services/app-init/app-init.service';
 import { CurrentYearInterceptor } from '@core/interceptors/current-year.interceptor';
 import { AdminGuard } from '@core/guards/admin.guard';
@@ -41,11 +41,12 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
       useDefaultLang: false,
     }),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    NgxUiLoaderHttpModule.forRoot({
-      exclude: [...loaderExclude],
-      minTime: 100,
-      showForeground: true
-    }),
+    NgxUiLoaderRouterModule,
+    // NgxUiLoaderHttpModule.forRoot({
+    //   exclude: [...loaderExclude],
+    //   minTime: 100,
+    //   showForeground: true
+    // }),
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule
