@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-about',

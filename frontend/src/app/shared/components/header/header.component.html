@@ -1,71 +1,69 @@
-<header>
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="wide-menu">
-      <div class="home-logo" routerLink="home"></div>
-      <ng-container *ngFor="let route of wideMenuRoutes">
-        <a class="menu-item"
-           *userPermission="route.permissions"
-           routerLink="{{route.link}}" routerLinkActive="active">
-          {{route.text | translate}}
-        </a>
+<header fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="wide-menu">
+    <div class="home-logo" routerLink="home"></div>
+    <ng-container *ngFor="let route of wideMenuRoutes">
+      <a class="menu-item"
+         *userPermission="route.permissions"
+         routerLink="{{route.link}}" routerLinkActive="active">
+        {{route.text | translate}}
+      </a>
+    </ng-container>
+    <p class="menu-item"
+       [matMenuTriggerFor]="archiveList"
+       *userPermission="['ALL']">{{'MENU.ARCHIVE' | translate}}</p>
+    <mat-menu
+      [overlapTrigger]="false"
+      #archiveList="matMenu">
+      <ng-container *ngFor="let archiveYear of archiveYears">
+        <button
+          (click)="changeArchiveYear(archiveYear)"
+          mat-menu-item>
+          {{archiveYear.year}}
+        </button>
       </ng-container>
-      <p class="menu-item"
-         [matMenuTriggerFor]="archiveList"
-         *userPermission="['ALL']">{{'MENU.ARCHIVE' | translate}}</p>
-      <mat-menu
-        [overlapTrigger]="false"
-        #archiveList="matMenu">
-        <ng-container *ngFor="let archiveYear of archiveYears">
-          <button
-            (click)="changeArchiveYear(archiveYear)"
-            mat-menu-item>
-            {{archiveYear.year}}
-          </button>
-        </ng-container>
-      </mat-menu>
-    </div>
-    <div class="menu-button" (click)="toggleOpenMenu()">
+    </mat-menu>
+  </div>
+  <div class="menu-button" (click)="toggleOpenMenu()">
       <span
         class="open-menu"
         [class.opened]="isMenuOpened">
       </span>
-    </div>
+  </div>
 
-    <div class="fixed-menu"
-         (click)="toggleOpenMenu()"
-         *ngIf="isMenuOpened">
-      <ng-container *ngFor="let route of fixedMenuRoutes">
-        <a class="menu-item"
-           *userPermission="route.permissions"
-           routerLink="{{route.link}}" routerLinkActive="active">
-          {{route.text | translate}}
-        </a>
+  <div class="fixed-menu"
+       (click)="toggleOpenMenu()"
+       *ngIf="isMenuOpened">
+    <ng-container *ngFor="let route of fixedMenuRoutes">
+      <a class="menu-item"
+         *userPermission="route.permissions"
+         routerLink="{{route.link}}" routerLinkActive="active">
+        {{route.text | translate}}
+      </a>
+    </ng-container>
+    <p class="menu-item"
+       (click)="toggleArchiveNarrowMenu($event)"
+       *userPermission="['ALL']">{{'MENU.ARCHIVE' | translate}}</p>
+    <div [@yearsList]="showYearsListNarrow? 'show' : 'hide'">
+      <ng-container *ngFor="let archiveYear of archiveYears">
+        <p class="menu-item years"
+           (click)="changeArchiveYear(archiveYear)">
+          {{archiveYear.year}}
+        </p>
       </ng-container>
-      <p class="menu-item"
-         (click)="toggleArchiveNarrowMenu($event)"
-         *userPermission="['ALL']">{{'MENU.ARCHIVE' | translate}}</p>
-      <div [@yearsList]="showYearsListNarrow? 'show' : 'hide'">
-        <ng-container *ngFor="let archiveYear of archiveYears">
-          <p class="menu-item years"
-            (click)="changeArchiveYear(archiveYear)">
-            {{archiveYear.year}}
-          </p>
-        </ng-container>
-      </div>
     </div>
+  </div>
 
-<!--    TODO remove mock-->
-    <select [(ngModel)]="userRole" (ngModelChange)="changeUserRole()">
-      <option *ngFor="let role of roles" [value]="role">
-        {{role}}
-      </option>
-    </select>
-    <span>{{currentYear}}</span>
-    <!--    TODO remove mock-->
+  <!--    TODO remove mock-->
+      <select [(ngModel)]="userRole" (ngModelChange)="changeUserRole()">
+        <option *ngFor="let role of roles" [value]="role">
+          {{role}}
+        </option>
+      </select>
+      <span>{{currentYear}}</span>
+      <!--    TODO remove mock-->
 
-    <div>
-      <app-change-language></app-change-language>
-    </div>
+  <div>
+    <app-change-language></app-change-language>
   </div>
 </header>
 

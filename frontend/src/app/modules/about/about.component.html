@@ -38,9 +38,9 @@
         </button>
       </ng-template>
     </div>
-    <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
     <div fxLayout="column" fxLayoutAlign="flex-start center">
       <div *ngIf="editMode; else viewMode">
+        <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
         <div class="quill-editor-wrapper">
           <div class="editor-label">Текст (UA):</div>
           <quill-editor
@@ -91,11 +91,19 @@
       </div>
       <ng-template #viewMode>
         <ng-container *ngIf="aboutInfo; else willBeSoon">
-          <img *ngIf="imageUrl" [src]="imageUrl" alt="No image" width="500">
-          <div [innerHTML]="aboutInfo.text[lang]"></div>
+          <img
+            src="../../../assets/images/tetramatyka_wide.jpg"
+            alt="No image"
+            class="about-view-image">
+          <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
+          <div
+            [innerHTML]="aboutInfo.text[lang]"
+            class="about-view-text">
+          </div>
         </ng-container>
 
         <ng-template #willBeSoon>
+          <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
           <div class="will-be-soon-message">
             {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
           </div>

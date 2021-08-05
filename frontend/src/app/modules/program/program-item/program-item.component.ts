@@ -53,7 +53,6 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
     if (!dateIsoString) {
       return null;
     }
-    console.log(new Date(dateIsoString).toLocaleString());
     return new Date(dateIsoString).toLocaleString();
   }
 

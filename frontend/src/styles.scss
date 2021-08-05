@@ -59,15 +59,19 @@ a {
 }
 
 .page {
-  width: calc(100vw - 50px);
+  width: 100vw;
 }
 
 .page-title {
-  text-align: center;
-  margin-bottom: 10px;
+  width: fit-content;
+  padding: 10px 15px;
+  margin: 0 auto 10px;
+  background-color: black;
+  color: white;
 }
 
 .buttons-wrapper {
+  margin: 25px;
   button {
     margin-right: 10px;
   }
