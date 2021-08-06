@@ -15,9 +15,16 @@
 }
 
 .about-view-text {
-  width: 70vw;
+  width: 65vw;
   margin: 0 auto;
   padding-bottom: 25px;
-  text-align: center;
+  text-align: justify;
   line-height: 25px;
+}
+
+@media (max-width: 1023px) {
+  .about-view-text {
+    width: 75vw;
+    text-align: center;
+  }
 }

@@ -3,5 +3,14 @@
 .home-poster {
   width: 100vw;
   height: calc(100vh - #{$header-height});
-  background: $color-main-green;
+  background-image: url('../../../assets/images/fon.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.one {
+  fill: red;
+  &:hover {
+    transform: scale(2);
+  }
 }

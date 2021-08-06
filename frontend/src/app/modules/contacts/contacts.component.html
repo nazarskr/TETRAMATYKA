@@ -1,4 +1,4 @@
-<div class="page p-25">
+<div class="page contacts-page">
   <button
     *userPermission="['ADMIN']"
     class="green-button"
@@ -8,7 +8,7 @@
     <mat-icon>add</mat-icon>
     <span>
         {{'ACTIONS.ADD' | translate}}
-      </span>
+    </span>
   </button>
   <h2 class="page-title">{{'MENU.CONTACTS' | translate}}</h2>
   <p class="grey-text" *userPermission="['ADMIN']">Drag contact item to change an order</p>
