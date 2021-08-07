@@ -8,11 +8,11 @@ footer {
 
 .images-container {
   .partner-image {
-    width: 150px;
-    height: 100px;
+    width: 100px;
+    height: 70px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    filter: grayscale(100%);
+    filter: brightness(0) invert(.15);
   }
 }
