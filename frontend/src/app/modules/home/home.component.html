@@ -1,6 +1,12 @@
-<div
-  class="home-poster"
-  fxLayout="column"
-  fxLayoutAlign="center center"
-  [innerHTML]="bigLogo"></div>
-<div id="paths"></div>
+<div class="home-container" >
+  <div
+    class="home-poster"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    [innerHTML]="bigLogo">
+  </div>
+  <div class="supported-by">
+    <p class="supported-by-text">{{'COMMON.SUPPORTED_BY' | translate}}</p>
+    <span class="ucf-logo"></span>
+  </div>
+</div>

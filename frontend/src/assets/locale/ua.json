@@ -7,7 +7,8 @@
     "YES": "Так",
     "NO": "Ні",
     "NOT_AVAILABLE": "Недоступно",
-    "WILL_BE_AVAILABLE_SOON": "Буде доступно незабаром"
+    "WILL_BE_AVAILABLE_SOON": "Буде доступно незабаром",
+    "SUPPORTED_BY": "За підтримки:"
   },
   "MENU": {
     "MAIN": "Головна",
