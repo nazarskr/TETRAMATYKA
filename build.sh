@@ -14,6 +14,5 @@ echo "App running..."
 cd ../backend
 sudo killall node
 npm run start:prod
-disown
 
 
