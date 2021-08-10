@@ -96,7 +96,9 @@
             alt="No image"
             class="about-view-image">
           <div class="view-text-container">
-            <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
+            <div class="page-title-wrapper">
+              <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
+            </div>
             <div [innerHTML]="aboutInfo.text[lang]"
                  class="about-view-text f-18">
             </div>
