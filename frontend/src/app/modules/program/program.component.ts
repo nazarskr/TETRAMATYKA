@@ -32,7 +32,7 @@ export class ProgramComponent extends UnsubscribeOnDestroy implements OnInit {
     this._programService.getAllProgramItems()
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: ProgramItem[]) => {
-        this.programList = res;
+        this.programList = res.sort((a, b) => new Date(a.eventFullDate).getTime() - new Date(b.eventFullDate).getTime());
       })
   }
 
