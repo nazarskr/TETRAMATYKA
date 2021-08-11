@@ -23,9 +23,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.bubblesList = this.logoContainer.nativeElement.querySelectorAll('.st0');
-    console.log(this.bubblesList);
     this.bubblesList.forEach((item) => {
-      item.addEventListener('')
+      item.addEventListener('mouseover', () => {
+        if (!item.classList.contains('animated')) {
+          item.classList.add('animated')
+        }
+      });
+      item.addEventListener('animationend', () => {
+        if (item.classList.contains('animated')) {
+          item.classList.remove('animated');
+        }
+      });
     })
   }
 

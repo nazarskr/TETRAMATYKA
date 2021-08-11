@@ -41,39 +41,21 @@
 }
 
 ::ng-deep {
-  .logo-letter {
-    //&:hover {
-    //  .st0 {
-    //    opacity: .8;
-    //  }
-    //}
-  }
-
   .st0 {
-    &:hover {
+    &.animated {
       fill: white;
-      animation: 3s linear 0s bubble_animation;
+      animation: 1s linear 0s bubble_animation;
     }
   }
 }
 @keyframes bubble_animation {
   0% {
-    fill: red;
+    transform: translate(-3px, -3px);
+    transition: all .5s;
   }
-  20% {
-    fill: green;
-  }
-  40% {
-    fill: white;
-  }
-  60% {
-    fill: grey;
-  }
-  80% {
-    fill: black;
-  }
-  100% {
-    fill: #2C9B75;
+  50% {
+    transform: translate(0, 0);
+    transition: all .5s;
   }
 }
 
