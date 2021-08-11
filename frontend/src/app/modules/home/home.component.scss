@@ -39,3 +39,41 @@
     filter: invert(1);
   }
 }
+
+::ng-deep {
+  .logo-letter {
+    //&:hover {
+    //  .st0 {
+    //    opacity: .8;
+    //  }
+    //}
+  }
+
+  .st0 {
+    &:hover {
+      fill: white;
+      animation: 3s linear 0s bubble_animation;
+    }
+  }
+}
+@keyframes bubble_animation {
+  0% {
+    fill: red;
+  }
+  20% {
+    fill: green;
+  }
+  40% {
+    fill: white;
+  }
+  60% {
+    fill: grey;
+  }
+  80% {
+    fill: black;
+  }
+  100% {
+    fill: #2C9B75;
+  }
+}
+
