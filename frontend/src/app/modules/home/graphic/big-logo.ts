@@ -1,5 +1,5 @@
 export const bigLogo = `
-<svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" id="tetramatyka-big-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 \t viewBox="0 0 828 315" style="enable-background:new 0 0 828 315;" xml:space="preserve">
 <g class="logo-letter">
 <path class="st0" d="M76,45.4c0,1.8-0.6,3.3-1.9,4.6c-1.3,1.2-2.8,1.9-4.7,1.9c-1.8,0-3.3-0.6-4.6-1.9
