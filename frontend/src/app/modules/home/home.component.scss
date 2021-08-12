@@ -53,21 +53,20 @@
 
 ::ng-deep {
   .st0 {
+    fill: #2C9B75;
+    transition: transform 2s;
+
     &.animated {
-      fill: white;
-      animation: 1s linear 0s bubble_animation;
+      animation: 2s linear 0s bubble_animation;
+      transition: all 2s;
     }
   }
 }
 
 @keyframes bubble_animation {
   0% {
-    transform: translate(-3px, -3px);
-    transition: all .5s;
-  }
-  50% {
-    transform: translate(0, 0);
-    transition: all .5s;
+    fill: white;
+    transition: all 2s;
   }
 }
 

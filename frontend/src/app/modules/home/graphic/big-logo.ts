@@ -1,10 +1,6 @@
 export const bigLogo = `
 <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 \t viewBox="0 0 828 315" style="enable-background:new 0 0 828 315;" xml:space="preserve">
-<style type="text/css">
-\t.logo-letter{transition: all .3s}
-\t.st0{fill:#2C9B75;transition: all .3s}
-</style>
 <g class="logo-letter">
 <path class="st0" d="M76,45.4c0,1.8-0.6,3.3-1.9,4.6c-1.3,1.2-2.8,1.9-4.7,1.9c-1.8,0-3.3-0.6-4.6-1.9
 \tc-1.2-1.2-1.9-2.8-1.9-4.6c0-1.8,0.6-3.3,1.9-4.6c1.2-1.2,2.8-1.9,4.6-1.9c1.8,0,3.4,0.6,4.7,1.9C75.4,42,76,43.6,76,45.4z
