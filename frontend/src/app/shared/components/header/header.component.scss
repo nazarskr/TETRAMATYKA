@@ -1,7 +1,7 @@
 @import "variables";
 header {
   width: 100vw;
-  padding: 15px 25px;
+  padding: 7px 25px;
   height: $header-height;
   background-color: white;
   position: sticky;
@@ -78,6 +78,24 @@ header {
     &::before {
       width: 100%;
     }
+  }
+}
+
+.border-line {
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 20px;
+}
+
+.social-network-link {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin-right: 5px;
+
+  img {
+    width: 28px;
+    height: 28px;
   }
 }
 
