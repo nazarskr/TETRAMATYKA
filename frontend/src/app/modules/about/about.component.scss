@@ -1,11 +1,15 @@
 @import 'variables';
 
-.about-view-image {
+.about-view-image, .about-view-image-mobile {
   position: sticky;
   top: $header-height;
   margin-bottom: 20px;
   width: 100vw;
   z-index: -1;
+}
+
+.about-view-image-mobile {
+  display: none;
 }
 
 .view-text-container {
@@ -26,5 +30,15 @@
   .about-view-text {
     width: 75vw;
     text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .about-view-image {
+    display: none;
+  }
+
+  .about-view-image-mobile {
+    display: block;
   }
 }

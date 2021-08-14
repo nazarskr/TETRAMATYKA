@@ -1,7 +1,7 @@
 @import "variables";
 header {
   width: 100vw;
-  padding: 7px 25px;
+  padding: 7px 15px 7px 25px;
   height: $header-height;
   background-color: white;
   position: sticky;
@@ -169,3 +169,10 @@ header {
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  header {
+    padding: 7px 10px;
+  }
+}
+
