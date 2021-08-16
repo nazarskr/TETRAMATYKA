@@ -3,7 +3,7 @@ import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy"
 import { ProgramItem } from "@shared/interfaces/program";
 import { ProgramService } from "./services/program.service";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
-import {takeUntil} from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: 'app-program',
@@ -32,7 +32,8 @@ export class ProgramComponent extends UnsubscribeOnDestroy implements OnInit {
     this._programService.getAllProgramItems()
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: ProgramItem[]) => {
-        this.programList = res.sort((a, b) => new Date(a.eventFullDate).getTime() - new Date(b.eventFullDate).getTime());
+        this.programList = res
+          .sort((a, b) => new Date(a.eventStartDate).getTime() - new Date(b.eventStartDate).getTime());
       })
   }
 
@@ -46,7 +47,8 @@ export class ProgramComponent extends UnsubscribeOnDestroy implements OnInit {
         ua: '',
         en: ''
       },
-      eventFullDate: null,
+      eventStartDate: null,
+      eventEndDate: null,
       editable: true
     })
   }

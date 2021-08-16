@@ -3,17 +3,25 @@
         [formGroup]="programItemForm"
         (ngSubmit)="saveProgramItem()">
     <ng-container *ngIf="programItem.editable; else programItemView">
-      <div class="editor-label m-0">Час і дата події:</div>
+      <div class="editor-label m-0">Час і дата початку події:</div>
       <mat-form-field floatLabel="never" class="wide-form-field">
         <input matInput
-               formControlName="eventFullDate"
+               formControlName="eventStartDate"
                autocomplete="chrome-off"
                type="datetime-local"
                placeholder="dd/mm/yyyy hh:mm">
-        <mat-error *ngIf="programItemForm.controls['eventFullDate'].hasError('required') &&
-                      (programItemForm.controls['eventFullDate'].touched || form.submitted)">
+        <mat-error *ngIf="programItemForm.controls['eventStartDate'].hasError('required') &&
+                      (programItemForm.controls['eventStartDate'].touched || form.submitted)">
           This field is required
         </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Час і дата закінчення події (якщо є):</div>
+      <mat-form-field floatLabel="never" class="wide-form-field">
+        <input matInput
+               formControlName="eventEndDate"
+               autocomplete="chrome-off"
+               type="datetime-local"
+               placeholder="dd/mm/yyyy hh:mm">
       </mat-form-field>
       <div class="editor-label m-0">Назва події (UA):</div>
       <mat-form-field floatLabel="never" class="wide-form-field">
@@ -37,41 +45,47 @@
           Це поле обов'язкове
         </mat-error>
       </mat-form-field>
-      <div class="editor-label m-0">Опис події (UA):</div>
-      <mat-form-field floatLabel="never" class="wide-form-field">
-        <textarea matInput
-               formControlName="info_UA"
-               autocomplete="chrome-off"
-               placeholder="Опис події">
-        </textarea>
-        <mat-error *ngIf="programItemForm.controls['info_UA'].hasError('required') &&
+      <div class="quill-editor-wrapper">
+        <div class="editor-label m-0">Опис події (UA):</div>
+        <quill-editor
+          formControlName="info_UA"
+          [modules]="quillConfig"
+          [placeholder]="'Опис події'">
+        </quill-editor>
+        <mat-hint class="mat-error" *ngIf="programItemForm.controls['info_UA'].hasError('required') &&
                       (programItemForm.controls['info_UA'].touched || form.submitted)">
           Це поле обов'язкове
-        </mat-error>
-      </mat-form-field>
-      <div class="editor-label m-0">Event's description (EN):</div>
-      <mat-form-field floatLabel="never" class="wide-form-field">
-        <textarea matInput
-               formControlName="info_EN"
-               autocomplete="chrome-off"
-               placeholder="Event's description">
-        </textarea>
-        <mat-error *ngIf="programItemForm.controls['info_EN'].hasError('required') &&
-                      (programItemForm.controls['info_EN'].touched || form.submitted)">
-          This field is required
-        </mat-error>
-      </mat-form-field>
+        </mat-hint>
+      </div>
+      <div class="quill-editor-wrapper">
+        <div class="editor-label m-0">Event's description (EN):</div>
+        <quill-editor
+          formControlName="info_EN"
+          [modules]="quillConfig"
+          [placeholder]="'Event\'s description'">
+        </quill-editor>
+      </div>
     </ng-container>
     <ng-template #programItemView>
       <div class="program-date f-18">
-        <span class="program-day">{{programItem.eventFullDate | localDate : 'd MMMM,'}}</span>
-        <span class="program-weekday">{{programItem.eventFullDate | localDate : 'EEEE'}}</span>
+        <span class="program-day">
+          {{(programItem.eventStartDate | localDate : startDatePattern())}}
+          <ng-container *ngIf="programItem.eventEndDate">
+            {{programItem.eventEndDate | localDate : '- d MMMM,'}}
+          </ng-container>
+        </span>
+        <span class="program-weekday">
+          {{programItem.eventStartDate | localDate : 'EEEE'}}
+          <ng-container *ngIf="programItem.eventEndDate">
+            {{programItem.eventEndDate | localDate : '- EEEE'}}
+          </ng-container>
+        </span>
       </div>
       <div class="program-header f-18">
-        <span class="program-time">{{programItem.eventFullDate | date : 'H:mm '}}</span>
+        <span class="program-time">{{programItem.eventStartDate | date : 'H:mm '}}</span>
         <span class="program-title">{{programItem.title[lang]}}</span>
       </div>
-      <div class="program-body f-18">{{programItem.info[lang]}}</div>
+      <div class="program-body f-18" [innerHTML]="programItem.info[lang]"></div>
     </ng-template>
     <div class="program-actions" *userPermission="['ADMIN']">
       <ng-container *ngIf="this.programItem.editable; else viewActions">

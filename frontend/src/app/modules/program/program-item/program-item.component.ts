@@ -8,6 +8,7 @@ import { filter, takeUntil } from "rxjs/operators";
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from "@angular/forms";
 import { SimpleDialogComponent } from "@shared/components/simple-dialog/simple-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
+import {simpleQuillConfig} from "@shared/constants/quill-config";
 
 @Component({
   selector: 'app-program-item',
@@ -20,6 +21,7 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
   @Output() cancelCreate: EventEmitter<void> = new EventEmitter();
   @Output() programListUpdated: EventEmitter<void> = new EventEmitter();
   public programItemForm: FormGroup;
+  public quillConfig = {...simpleQuillConfig};
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -41,7 +43,8 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
 
   initForm(): void {
     this.programItemForm = this._formBuilder.group({
-      eventFullDate: [this.programItem.eventFullDate, Validators.required],
+      eventStartDate: [this.programItem.eventStartDate, Validators.required],
+      eventEndDate: [this.programItem.eventEndDate],
       title_UA: [this.programItem.title.ua, Validators.required],
       title_EN: [this.programItem.title.en, Validators.required],
       info_UA: [this.programItem.info.ua, Validators.required],
@@ -89,7 +92,8 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
         ua: formValue.info_UA,
         en: formValue.info_EN
       },
-      eventFullDate: new Date(formValue.eventFullDate)
+      eventStartDate: new Date(formValue.eventStartDate),
+      eventEndDate: formValue.eventEndDate ?  new Date(formValue.eventEndDate) : null
     }
 
     this.programItem._id ? this.updateProgramItem(body) : this.createProgramItem(body);
@@ -135,5 +139,14 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
         this._toaster.showMessage('Program item deleted successfully');
         this.programListUpdated.emit();
       });
+  }
+
+  startDatePattern(): string {
+    const {eventStartDate, eventEndDate} = this.programItem;
+    if (eventEndDate) {
+      return new Date(eventStartDate).getMonth() === new Date(eventEndDate).getMonth() ? 'd' : 'd MMMM';
+    } else {
+      return 'd MMMM,';
+    }
   }
 }

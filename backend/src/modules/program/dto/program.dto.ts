@@ -3,6 +3,7 @@ import { IMultiLanguage } from '../../../common/interfaces/multi-language';
 export class ProgramItemDto {
     title: IMultiLanguage;
     info: IMultiLanguage;
-    eventFullDate: Date;
+    eventStartDate: Date;
+    eventEndDate?: Date;
     archiveYear: number;
 }

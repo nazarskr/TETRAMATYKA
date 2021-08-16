@@ -13,7 +13,10 @@ export class ProgramItem {
     info: MultiLanguage;
 
     @Prop({ required: true })
-    eventFullDate: Date;
+    eventStartDate: Date;
+
+    @Prop()
+    eventEndDate: Date;
 
     @Prop({required: true})
     archiveYear: number;
