@@ -10,7 +10,7 @@ export class ArchiveManagerService {
     }
 
     async getAllArchiveYears(): Promise<ArchiveYear[]> {
-        return this.archiveYearModel.find();
+        return this.archiveYearModel.find().sort({year: -1});
     }
 
     async getArchiveYearById(id: string): Promise<ArchiveYear> {

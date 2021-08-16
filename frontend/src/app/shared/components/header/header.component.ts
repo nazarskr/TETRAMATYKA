@@ -80,9 +80,25 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   changeArchiveYear(archiveYear: ArchiveYear): void {
-    this._appInitService.currentYear = archiveYear;
-    this.getAllArchiveYears();
-    this._router.navigate(['/home']);
+    if (archiveYear.year < 2019) {
+      switch (archiveYear.year) {
+        case 2013:
+          window.open('https://tetramatyka.nurt.org.ua/archive/Tetramatyka2013.html', '_blank');
+          break;
+        case 2015:
+          window.open('https://tetramatyka.nurt.org.ua/archive/Tetramatyka2015.html', '_blank');
+          break;
+        case 2017:
+          window.open('https://tetramatyka.nurt.org.ua', '_blank');
+          break;
+        default:
+          break;
+      }
+    } else {
+      this._appInitService.currentYear = archiveYear;
+      this.getAllArchiveYears();
+      this._router.navigate(['/home']);
+    }
   }
 
   toggleArchiveNarrowMenu(event: MouseEvent): void {
