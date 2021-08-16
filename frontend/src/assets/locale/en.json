@@ -8,7 +8,8 @@
     "NO": "No",
     "NOT_AVAILABLE": "Not available",
     "WILL_BE_AVAILABLE_SOON": "Will be available soon",
-    "SUPPORTED_BY": "Supported by "
+    "SUPPORTED_BY": "Supported by ",
+    "POSSIBLE_CHANGES": "There might be changes in the program"
   },
   "MENU": {
     "MAIN": "Home",
