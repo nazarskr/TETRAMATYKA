@@ -24,12 +24,20 @@
   padding-bottom: 25px;
   text-align: justify;
   line-height: 25px;
+
+  ::ng-deep {
+    ol {
+      padding-left: 20px;
+      li {
+        font-size: 14px;
+      }
+    }
+  }
 }
 
 @media (max-width: 1023px) {
   .about-view-text {
     width: 75vw;
-    text-align: center;
   }
 }
 
