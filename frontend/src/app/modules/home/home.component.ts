@@ -31,13 +31,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   addInteraction(): void {
     const logoContainers = [this.logoContainer, this.mobileLogoContainer];
-    logoContainers.forEach((logoContainer: ElementRef) => {
+    logoContainers.forEach((logoContainer: ElementRef, index: number) => {
+      const animationHeight = index === 0 ? 1300 : 2000;
       this.bubblesList = logoContainer.nativeElement.querySelectorAll('.st0');
       this.bubblesList.forEach((item) => {
         item.addEventListener('mouseover', () => {
           if (!item.classList.contains('animated')) {
             item.addEventListener("mousemove", () => {
-              item.style.transform = `translateY(-1300px)`;
+              item.style.transform = `translateY(-${animationHeight}px)`;
             });
             item.classList.add('animated');
           }
