@@ -39,6 +39,12 @@
     "FESTIVAL_AUDIOVISUAL_ART": "Фестиваль аудіовізуального мистецтва",
     "LATEST_NEWS": "Останні новини"
   },
+  "PROJECTS": {
+    "CATEGORY": {
+      "EDUCATION": "Освіта",
+      "NO_CATEGORY": "Без категорії"
+    }
+  },
   "ARCHIVE": {
     "ARCHIVE_MANAGER": "Менеджер архівів"
   },

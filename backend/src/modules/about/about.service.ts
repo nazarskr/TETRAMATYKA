@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { AboutInfo, AboutInfoDocument} from './schemas/about-info.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import {Model, Schema} from 'mongoose';
+import { Model } from 'mongoose';
 import { AboutInfoDto } from './dto/about-info.dto';
-import * as mongoose from 'mongoose';
 
 @Injectable()
 export class AboutService {

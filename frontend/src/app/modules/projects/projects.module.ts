@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { ProjectsComponent } from './projects.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 
 @NgModule({
-  declarations: [ProjectsComponent],
+  declarations: [ProjectsComponent, ProjectDetailsComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -39,6 +39,12 @@
     "FESTIVAL_AUDIOVISUAL_ART": "Festival of the audiovisual art",
     "LATEST_NEWS": "Latest news"
   },
+  "PROJECTS": {
+    "CATEGORY": {
+      "EDUCATION": "Education",
+      "NO_CATEGORY": "No category"
+    }
+  },
   "ARCHIVE": {
     "ARCHIVE_MANAGER": "Archive manager"
   },
