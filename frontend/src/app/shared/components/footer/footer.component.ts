@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   public footerLogos = [
-    'NURT_logo.png', 'ucf_logo.png', 'logo_lmr.png',
+    'NURT_logo.png', 'ucf_logo.png', 'logo_lmr.png', 'lviv_logo.png',
     'CUH_Logo_ukr.png', 'logotype_LEM.png', 'sensoteka-lviv-logo.png',
-    'palace_of_culture.png', 'EESEM_logo.png', 'amp_logo.png',
+    'EESEM_logo.png', 'amp_logo.png',
     'audio_art.png', 'Lviv_misto_literatury.png', 'logo_zemla.png',
     'muzyka_centrum.png', 'krakow_logo.png', 'logo_iam.png',
   ];
