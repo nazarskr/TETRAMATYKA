@@ -39,7 +39,7 @@ export class AboutController {
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }
 
-    @Delete()
+    @Delete(':id')
     removeAboutInfo(@Param('id') id: string): Promise<AboutInfo> {
         return this.aboutService.removeAboutInfo(id);
     }

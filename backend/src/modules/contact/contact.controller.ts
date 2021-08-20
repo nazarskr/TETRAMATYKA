@@ -28,8 +28,8 @@ export class ContactController {
         return this.contactService.updatePositionIndexes(contactItemDtos);
     }
 
-    @Delete()
-    removeContactItem(id: string): Promise<ContactItem> {
+    @Delete(':id')
+    removeContactItem(@Param('id') id: string): Promise<ContactItem> {
         return this.contactService.removeContactItem(id);
     }
 }

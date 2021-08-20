@@ -43,7 +43,7 @@ export class ParticipantsController {
         return this.participantsService.updateParticipant(id, participant);
     }
 
-    @Delete()
+    @Delete(':id')
     deleteParticipant(@Param('id') id: string): Promise<Participant> {
         return this.participantsService.deleteParticipant(id);
     }
