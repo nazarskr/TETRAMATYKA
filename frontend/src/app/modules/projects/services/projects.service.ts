@@ -19,7 +19,7 @@ export class ProjectsService {
     return this.http.get<Project>(`${this.projectsUri}/${id}`);
   }
 
-  addProject(data: FormData): Observable<Project> {
+  createProject(data: FormData): Observable<Project> {
     return this.http.post<Project>(this.projectsUri, data);
   }
 

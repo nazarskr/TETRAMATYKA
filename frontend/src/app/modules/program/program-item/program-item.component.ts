@@ -8,7 +8,6 @@ import { filter, takeUntil } from "rxjs/operators";
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from "@angular/forms";
 import { SimpleDialogComponent } from "@shared/components/simple-dialog/simple-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
-import {simpleQuillConfig} from "@shared/constants/quill-config";
 
 @Component({
   selector: 'app-program-item',
@@ -21,7 +20,6 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
   @Output() cancelCreate: EventEmitter<void> = new EventEmitter();
   @Output() programListUpdated: EventEmitter<void> = new EventEmitter();
   public programItemForm: FormGroup;
-  public quillConfig = {...simpleQuillConfig};
 
   get lang(): string {
     return this._translateService.currentLang;

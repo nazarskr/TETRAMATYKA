@@ -10,21 +10,32 @@
       (click)="goToParticipantsList()">
       <mat-icon>arrow_back</mat-icon>
       <span>
-    {{'ACTIONS.BACK' | translate}}
-  </span>
+        {{'ACTIONS.BACK' | translate}}
+      </span>
     </button>
 
     <div fxLayout="row" *userPermission="['ADMIN']">
-      <button
-        class="orange-button"
-        mat-button
-        (click)="editParticipant()"
-        *ngIf="!editMode; else editModeBlock">
-        <mat-icon>edit</mat-icon>
-        <span>
-        {{'ACTIONS.EDIT' | translate}}
-      </span>
-      </button>
+      <ng-container *ngIf="!editMode; else editModeBlock">
+        <button
+          class="orange-button"
+          mat-button
+          (click)="editParticipant()">
+          <mat-icon>edit</mat-icon>
+          <span>
+            {{'ACTIONS.EDIT' | translate}}
+          </span>
+        </button>
+
+        <button
+          class="red-button"
+          mat-button
+          (click)="openDeleteParticipantDialog()">
+          <mat-icon>delete</mat-icon>
+          <span>
+            {{'ACTIONS.DELETE' | translate}}
+          </span>
+        </button>
+      </ng-container>
 
       <ng-template #editModeBlock>
         <button
@@ -33,8 +44,8 @@
           mat-button>
           <mat-icon>done</mat-icon>
           <span>
-          {{'ACTIONS.SAVE' | translate}}
-        </span>
+            {{'ACTIONS.SAVE' | translate}}
+          </span>
         </button>
 
         <button
@@ -43,8 +54,8 @@
           (click)="cancelEditing()">
           <mat-icon>close</mat-icon>
           <span>
-        {{'ACTIONS.CANCEL' | translate}}
-      </span>
+            {{'ACTIONS.CANCEL' | translate}}
+          </span>
         </button>
       </ng-template>
     </div>
@@ -66,7 +77,6 @@
       <div class="quill-editor-wrapper">
         <div class="editor-label">Текст (UA):</div>
         <quill-editor
-          [modules]="quillConfig"
           formControlName="bio_UA"
           [placeholder]="'Біо учасника фестивалю'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="participantForm.controls['bio_UA'].hasError('required') &&
@@ -88,7 +98,6 @@
       <div class="quill-editor-wrapper">
         <div class="editor-label">Text (EN):</div>
         <quill-editor
-          [modules]="quillConfig"
           formControlName="bio_EN"
           [placeholder]="'The participant\'s bio'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="participantForm.controls['bio_EN'].hasError('required') &&

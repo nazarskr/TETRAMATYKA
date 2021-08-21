@@ -7,10 +7,10 @@ import { Participant } from '@shared/interfaces/participants';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
 import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { simpleQuillConfig } from '@shared/constants/quill-config';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { modalConfig } from "@shared/constants/modal-config";
 
 @Component({
   selector: 'app-participant-details',
@@ -18,12 +18,10 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./participant-details.component.scss']
 })
 export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements OnInit {
-  public addNew = false;
   public editMode = false;
   public participantId: string;
   public participant: Participant;
   public participantForm: FormGroup;
-  public quillConfig = {...simpleQuillConfig};
   public imageUrl: SafeUrl;
   public multipartFile: File;
 
@@ -53,7 +51,6 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
         if (this.participantId) {
           this.getParticipantById();
         } else {
-          this.addNew = true;
           this.editMode = true;
         }
       });
@@ -130,10 +127,9 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
   createParticipant(formData: FormData): void {
     this._participantsService.createParticipant(formData)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
+      .subscribe((res: Participant) => {
         this._toaster.showMessage('Participant created successfully');
-        // const id = res._id or res;
-        // this.openCreatedParticipant(id);
+        this.openCreatedParticipant(res._id);
       });
   }
 
@@ -142,16 +138,16 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Participant updated successfully');
-        // this.getParticipantById();
+        this.getParticipantById();
       });
   }
 
   openCreatedParticipant(id: string): void {
-    this._router.navigate([`participant/${id}`]);
+    this._router.navigate([`participants/${id}`]);
   }
 
   cancelEditing(): void {
-    if (this.addNew) {
+    if (this.participantId) {
       this.goToParticipantsList();
     } else {
       this.editMode = false;
@@ -188,14 +184,7 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
   }
 
   openClearImageDialog(): void {
-    const dialogRef = this._dialog.open(SimpleDialogComponent, {
-      width: '300px',
-      data: {
-        title: 'Clear image',
-        message: 'Do you want to clear image?'
-      }
-    });
-
+    const dialogRef = this._dialog.open(SimpleDialogComponent, modalConfig.clearImage);
     dialogRef.afterClosed()
       .pipe(
         takeUntil(this.destroy$),

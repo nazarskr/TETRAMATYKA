@@ -1,16 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AboutInfo } from '@shared/interfaces/about';
 import { AboutService } from './services/about/about.service';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { filter, takeUntil } from 'rxjs/operators';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
-import { simpleQuillConfig } from '@shared/constants/quill-config';
-import { QuillEditorComponent } from 'ngx-quill';
 import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { modalConfig } from "@shared/constants/modal-config";
 
 @Component({
   selector: 'app-about',
@@ -18,12 +17,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
-  @ViewChild(QuillEditorComponent, { static: true }) editor: QuillEditorComponent;
   public aboutForm: FormGroup;
   public aboutInfo: AboutInfo;
   public multipartFile: File;
   public editMode = false;
-  public quillConfig = {...simpleQuillConfig};
   public imageUrl: SafeUrl;
 
   get lang(): string {
@@ -133,14 +130,7 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   openClearImageDialog(): void {
-    const dialogRef = this._dialog.open(SimpleDialogComponent, {
-      width: '300px',
-      data: {
-        title: 'Clear image',
-        message: 'Do you want to clear image?'
-      }
-    });
-
+    const dialogRef = this._dialog.open(SimpleDialogComponent, modalConfig.clearImage);
     dialogRef.afterClosed()
       .pipe(
         takeUntil(this.destroy$),

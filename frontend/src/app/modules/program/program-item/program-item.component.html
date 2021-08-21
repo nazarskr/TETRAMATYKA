@@ -49,7 +49,6 @@
         <div class="editor-label m-0">Опис події (UA):</div>
         <quill-editor
           formControlName="info_UA"
-          [modules]="quillConfig"
           [placeholder]="'Опис події'">
         </quill-editor>
         <mat-hint class="mat-error" *ngIf="programItemForm.controls['info_UA'].hasError('required') &&
@@ -61,7 +60,6 @@
         <div class="editor-label m-0">Event's description (EN):</div>
         <quill-editor
           formControlName="info_EN"
-          [modules]="quillConfig"
           [placeholder]="'Event\'s description'">
         </quill-editor>
       </div>

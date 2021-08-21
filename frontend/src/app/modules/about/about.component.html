@@ -45,7 +45,6 @@
           <div class="editor-label">Текст (UA):</div>
           <quill-editor
             formControlName="text_UA"
-            [modules]="quillConfig"
             [placeholder]="'Напишіть щось про фестиваль...'">
           </quill-editor>
           <mat-hint class="mat-error" *ngIf="aboutForm.controls['text_UA'].hasError('required') &&
@@ -57,7 +56,6 @@
           <div class="editor-label">Text (EN):</div>
           <quill-editor
             formControlName="text_EN"
-            [modules]="quillConfig"
             [placeholder]="'Type about the festival...'">
           </quill-editor>
           <mat-hint class="mat-error" *ngIf="aboutForm.controls['text_EN'].hasError('required') &&

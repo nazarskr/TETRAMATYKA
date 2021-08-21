@@ -19,7 +19,7 @@ export class NewsService {
     return this.http.get<NewsItem>(`${this.newsUri}/${id}`);
   }
 
-  addNewsItem(data: FormData): Observable<NewsItem> {
+  createNewsItem(data: FormData): Observable<NewsItem> {
     return this.http.post<NewsItem>(this.newsUri, data);
   }
 

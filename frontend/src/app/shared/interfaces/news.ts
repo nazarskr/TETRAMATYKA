@@ -4,6 +4,7 @@ export interface NewsItem {
   _id: string;
   title: MultiLanguage;
   description: MultiLanguage;
-  date: Date;
+  createdAt: Date;
   imageUrl: string;
+  editable?: boolean;
 }

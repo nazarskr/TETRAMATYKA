@@ -6,7 +6,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { QuillModule } from 'ngx-quill';
+import { QuillModule } from "ngx-quill";
+import { simpleQuillConfig } from "@shared/constants/quill-config";
 
 // material
 import { MatButtonModule } from '@angular/material/button';
@@ -72,21 +73,23 @@ const materialModules = [
     LocalDatePipe
   ],
   imports: [
+    ...materialModules,
     CommonModule,
     TranslateModule,
     HttpClientModule,
     FormsModule,
     RouterModule,
-    QuillModule.forRoot(),
-    ...materialModules,
+    QuillModule.forRoot({
+      modules: {...simpleQuillConfig}
+    })
   ],
   exports: [
     ...materialModules,
+    QuillModule,
     HeaderComponent,
     ChangeLanguageComponent,
     TableActionButtonComponent,
     SimpleDialogComponent,
-    QuillModule,
     UserPermissionDirective,
     DragNDropUploadComponent,
     DragAndDropFieldDirective,

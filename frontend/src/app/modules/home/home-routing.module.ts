@@ -5,6 +5,7 @@ import { NewsDetailsComponent } from './components/news-details/news-details.com
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'news/create', component: NewsDetailsComponent},
   {path: 'news/:id', component: NewsDetailsComponent}
 ];
 
