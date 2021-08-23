@@ -7,6 +7,7 @@
     <button
       class="back-button"
       mat-button
+      type="button"
       (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
       <span>
@@ -18,6 +19,7 @@
       <ng-container *ngIf="!editMode; else editModeBlock">
         <button
           class="orange-button"
+          type="button"
           mat-button
           (click)="editProject()">
           <mat-icon>edit</mat-icon>
@@ -28,6 +30,7 @@
 
         <button
           class="red-button"
+          type="button"
           mat-button
           (click)="openDeleteProjectDialog()">
           <mat-icon>delete</mat-icon>
@@ -39,8 +42,8 @@
 
       <ng-template #editModeBlock>
         <button
-          type="submit"
           class="green-button"
+          type="submit"
           mat-button>
           <mat-icon>done</mat-icon>
           <span>
@@ -50,6 +53,7 @@
 
         <button
           class="red-button"
+          type="button"
           mat-button
           (click)="cancelEditing()">
           <mat-icon>close</mat-icon>
