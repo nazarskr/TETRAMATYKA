@@ -5,13 +5,11 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { ICommonQuery } from '../../common/interfaces/common-query';
 import { AboutInfoDto } from './dto/about-info.dto';
 import * as multerGoogleStorage from 'multer-google-storage';
-import storagePackage from '@google-cloud/storage';
-import {createMulterOptions, storageOptionsForDelete} from "../../common/config/multer.config";
-import {storageUtil} from '../../common/utils/storage.util';
+import { createMulterOptions } from "../../common/config/multer.config";
+import { storageUtil } from '../../common/utils/storage.util';
 
 @Controller('about')
 export class AboutController {
-    public folderName = 'https://storage.googleapis.com/tetramatyka/about';
 
     constructor (private readonly aboutService: AboutService) {
     }
