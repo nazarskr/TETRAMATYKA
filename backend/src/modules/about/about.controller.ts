@@ -47,11 +47,9 @@ export class AboutController {
         @Req() req
     ): Promise<AboutInfo> {
         const aboutInfo: AboutInfoDto = JSON.parse(body.aboutInfo);
-        if (req.files.length) {
-            const previousUrl = aboutInfo.imageUrl;
-            await storageUtil.removeFile('about', previousUrl);
-            aboutInfo.imageUrl = req.files[0].path;
-        }
+        const previousUrl = aboutInfo.imageUrl;
+        await storageUtil.removeFile('about', previousUrl);
+        aboutInfo.imageUrl = req.files[0].path;
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }
 
