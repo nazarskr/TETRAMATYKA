@@ -118,7 +118,7 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
     }
 
     const formData = new FormData();
-    formData.append('participantDto', JSON.stringify(body));
+    formData.append('participant', JSON.stringify(body));
     if (this.multipartFile) {
       formData.append('image', this.multipartFile);
     }

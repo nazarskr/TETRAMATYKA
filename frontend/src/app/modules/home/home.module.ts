@@ -13,13 +13,18 @@ import { NewsDetailsComponent } from './components/news-details/news-details.com
 
 
 @NgModule({
-  declarations: [HomeComponent, NewsComponent, NewsItemComponent, NewsDetailsComponent],
-    imports: [
-        CommonModule,
-        SharedModule,
-        HomeRoutingModule,
-        TranslateModule,
-        ReactiveFormsModule
-    ],
+  declarations: [
+    HomeComponent,
+    NewsComponent,
+    NewsItemComponent,
+    NewsDetailsComponent
+  ],
+  imports: [
+      CommonModule,
+      SharedModule,
+      HomeRoutingModule,
+      TranslateModule,
+      ReactiveFormsModule
+  ],
 })
 export class HomeModule { }

@@ -11,6 +11,7 @@ import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { TranslateService } from "@ngx-translate/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-project-details',
@@ -37,7 +38,8 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
     private _translateService: TranslateService,
     private _sanitizer: DomSanitizer,
     private _dialog: MatDialog,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _location: Location
   ) {
     super();
     this.initForm();
@@ -85,8 +87,8 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
       });
   }
 
-  goToProjectsList(): void {
-    this._router.navigate(['/projects'])
+  goBack(): void {
+    this._location.back();
   }
 
   editProject(): void {
@@ -118,7 +120,7 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
     }
 
     const formData = new FormData();
-    formData.append('projectDto', JSON.stringify(body));
+    formData.append('project', JSON.stringify(body));
     if (this.multipartFile) {
       formData.append('image', this.multipartFile);
     }
@@ -149,7 +151,7 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
 
   cancelEditing(): void {
     if (this.projectId) {
-      this.goToProjectsList();
+      this.goBack();
     } else {
       this.editMode = false;
       this.getProjectById();
@@ -175,7 +177,7 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
     this._projectsService.deleteProject(this.projectId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.goToProjectsList();
+        this.goBack();
       })
   }
 

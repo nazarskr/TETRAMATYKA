@@ -28,12 +28,12 @@ export class ProjectsController {
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(createMulterOptions('projects'))
     }))
-    createNewsItem(
+    createProject(
         @Query() query: ICommonQuery,
         @Body() body: any,
         @Req() req: IMulterRequest
     ): Promise<Project> {
-        const project: ProjectDto = JSON.parse(body);
+        const project: ProjectDto = JSON.parse(body.project);
         project.archiveYear = +query.year;
         project.imageUrl = req.files[0].path;
         return this.projectsService.createProject(project);
@@ -43,13 +43,13 @@ export class ProjectsController {
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(createMulterOptions('projects'))
     }))
-    async updateNewsItem(
+    async updateProject(
         @Param('id') id: string,
         @Query() query: ICommonQuery,
         @Body() body: any,
         @Req() req: IMulterRequest
     ): Promise<Project> {
-        const project: ProjectDto = JSON.parse(body);
+        const project: ProjectDto = JSON.parse(body.project);
         if (req.files.length) {
             const previousUrl = project.imageUrl;
             const folderName = `${query.year}/projects`;

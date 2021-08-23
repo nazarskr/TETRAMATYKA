@@ -1,4 +1,43 @@
-<div class="news-container page-with-backdrop">
+<div class="news-container">
   <h2 class="text-center">{{'HOME.LATEST_NEWS' | translate}}</h2>
-  <app-news-item></app-news-item>
+  <div class="page p-25">
+    <div class="buttons-wrapper"
+         *userPermission="['ADMIN']">
+      <button
+        routerLink="news/create"
+        class="green-button"
+        mat-button>
+        <mat-icon>add</mat-icon>
+        <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+      </button>
+    </div>
+
+    <div class="news-list" fxLayout="row wrap" fxLayoutAlign="center center">
+      <ng-container *ngFor="let newsItem of news">
+        <app-news-item
+          [item]="newsItem"
+          [type]="'news'"
+        ></app-news-item>
+      </ng-container>
+    </div>
+
+    <div *ngIf="news.length === 0"
+         class="will-be-soon-message">
+      {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
+    </div>
+  </div>
+
+  <h2 class="text-center">{{'MENU.PROJECTS' | translate}}</h2>
+  <div class="page p-25">
+    <div class="news-list" fxLayout="row wrap" fxLayoutAlign="center center">
+      <ng-container *ngFor="let project of projects">
+        <app-news-item
+          [item]="project"
+          [type]="'project'"
+        ></app-news-item>
+      </ng-container>
+    </div>
+  </div>
 </div>

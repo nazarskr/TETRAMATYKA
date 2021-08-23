@@ -5,9 +5,9 @@
   (ngSubmit)="saveProject()">
   <div fxLayout="row" fxLayoutGap="30px" class="buttons-wrapper">
     <button
-      class="orange-button"
+      class="back-button"
       mat-button
-      (click)="goToProjectsList()">
+      (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
       <span>
         {{'ACTIONS.BACK' | translate}}
@@ -99,7 +99,7 @@
         <div class="editor-label">Project's description (EN):</div>
         <quill-editor
           formControlName="description_EN"
-          [placeholder]="'The participant\'s bio'"></quill-editor>
+          [placeholder]="'The project\'s description'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="projectForm.controls['description_EN'].hasError('required') &&
                     projectForm.controls['description_UA'].touched || form.submitted">
           This field is required
@@ -111,7 +111,9 @@
         <div class="edit-image-container">
           <button
             class="clear-button"
-            mat-mini-fab color="warn"
+            type="button"
+            mat-mini-fab
+            color="warn"
             matTooltip="Clear image"
             (click)="openClearImageDialog()"
             *ngIf="imageUrl">

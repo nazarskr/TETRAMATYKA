@@ -41,6 +41,11 @@
   &.red-button {
     @include colorIconButton($color-red, $color-light-red);
   }
+
+  &.back-button {
+    border-radius: 0;
+    @include colorIconButton($color-white, $color-black);
+  }
 }
 
 // action buttons

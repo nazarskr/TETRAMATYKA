@@ -33,7 +33,7 @@ export class NewsController {
         @Body() body: any,
         @Req() req: IMulterRequest
     ): Promise<NewsItem> {
-       const newsItem: NewsItemDto = JSON.parse(body);
+       const newsItem: NewsItemDto = JSON.parse(body.newsItem);
        newsItem.archiveYear = +query.year;
        newsItem.imageUrl = req.files[0].path;
        return this.newsService.createNewsItem(newsItem);
@@ -49,7 +49,7 @@ export class NewsController {
         @Body() body: any,
         @Req() req: IMulterRequest
     ): Promise<NewsItem> {
-        const newsItem: NewsItemDto = JSON.parse(body);
+        const newsItem: NewsItemDto = JSON.parse(body.newsItem);
         if (req.files.length) {
             const previousUrl = newsItem.imageUrl;
             const folderName = `${query.year}/news`;

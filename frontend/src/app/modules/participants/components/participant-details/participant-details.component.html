@@ -5,7 +5,7 @@
   (ngSubmit)="saveParticipant()">
   <div fxLayout="row" fxLayoutGap="30px" class="buttons-wrapper">
     <button
-      class="orange-button"
+      class="back-button"
       mat-button
       (click)="goToParticipantsList()">
       <mat-icon>arrow_back</mat-icon>
@@ -111,7 +111,9 @@
         <div class="edit-image-container">
           <button
             class="clear-button"
-            mat-mini-fab color="warn"
+            mat-mini-fab
+            type="button"
+            color="warn"
             matTooltip="Clear image"
             (click)="openClearImageDialog()"
             *ngIf="imageUrl">

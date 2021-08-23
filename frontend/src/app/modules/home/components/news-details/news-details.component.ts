@@ -118,7 +118,7 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
     }
 
     const formData = new FormData();
-    formData.append('projectDto', JSON.stringify(body));
+    formData.append('newsItem', JSON.stringify(body));
     if (this.multipartFile) {
       formData.append('image', this.multipartFile);
     }
