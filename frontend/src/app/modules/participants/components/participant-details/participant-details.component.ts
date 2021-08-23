@@ -80,6 +80,7 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
       .subscribe((res: Participant) => {
         this.participant = res;
         this.imageUrl = res.imageUrl;
+        this.multipartFile = null;
         this.formPatchValue();
       });
   }

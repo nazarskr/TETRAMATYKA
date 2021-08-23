@@ -11,9 +11,7 @@
     </span>
   </button>
 
-<!--  <div class="page-title-wrapper">-->
-    <h2 class="page-title">{{'MENU.CONTACTS' | translate}}</h2>
-<!--  </div>-->
+  s<h2 class="page-title">{{'MENU.CONTACTS' | translate}}</h2>
 
   <p class="grey-text" *userPermission="['ADMIN']">Drag contact item to change an order</p>
   <div class="draggable-list p-25" (cdkDropListDropped)="dropListItem($event)" cdkDropList>

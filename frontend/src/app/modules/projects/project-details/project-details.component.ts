@@ -80,6 +80,7 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
       .subscribe((res: Project) => {
         this.project = res;
         this.imageUrl = res.imageUrl;
+        this.multipartFile = null;
         this.formPatchValue();
       });
   }

@@ -1,11 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UseInterceptors} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseInterceptors, Req} from '@nestjs/common';
 import { AboutService } from './about.service';
 import { AboutInfo } from './schemas/about-info.schema';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ICommonQuery } from '../../common/interfaces/common-query';
 import { AboutInfoDto } from './dto/about-info.dto';
-import MulterGoogleStorage from 'multer-google-storage';
-import { createMulterOptions } from "../../common/config/multer.config";
+import * as multerGoogleStorage from 'multer-google-storage';
+import storagePackage from '@google-cloud/storage';
+import {createMulterOptions, storageOptionsForDelete} from "../../common/config/multer.config";
+import {storageUtil} from '../../common/utils/storage.util';
 
 @Controller('about')
 export class AboutController {
@@ -21,31 +23,35 @@ export class AboutController {
 
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
-        storage: new MulterGoogleStorage(createMulterOptions('about'))
+        storage: multerGoogleStorage.storageEngine(createMulterOptions('about'))
     }))
     async addAboutInfo(
         @Query() query: ICommonQuery,
-        @UploadedFile() image: Express.Multer.File,
-        @Body() body: any
+        @Body() body: any,
+        @Req() req
     ): Promise<AboutInfo> {
-        console.log(image);
         const aboutInfo: AboutInfoDto = JSON.parse(body.aboutInfo);
         aboutInfo.archiveYear = +query.year;
+        aboutInfo.imageUrl = req.files[0].path;
         return this.aboutService.addAboutInfo(aboutInfo);
     }
 
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
-        storage: new MulterGoogleStorage(createMulterOptions('about'))
+        storage: multerGoogleStorage.storageEngine(createMulterOptions('about'))
     }))
     async updateAboutInfo(
         @Param('id') id: string,
         @Query() query: ICommonQuery,
-        @UploadedFile() image: Express.Multer.File,
-        @Body() body: any
+        @Body() body: any,
+        @Req() req
     ): Promise<AboutInfo> {
-        console.log(image);
         const aboutInfo: AboutInfoDto = JSON.parse(body.aboutInfo);
+        if (req.files.length) {
+            const previousUrl = aboutInfo.imageUrl;
+            await storageUtil.removeFile('about', previousUrl);
+            aboutInfo.imageUrl = req.files[0].path;
+        }
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }
 

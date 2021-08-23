@@ -10,4 +10,8 @@ export const createMulterOptions = (folderName: string) => {
         },
         uniformBucketLevelAccess: false
     }
+};
+
+export const storageOptionsForDelete = {
+    keyFilename: path.join(__dirname, '../../../google-credentials.json')
 }
