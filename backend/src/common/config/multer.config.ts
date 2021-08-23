@@ -6,7 +6,8 @@ export const createMulterOptions = (folderName: string) => {
         bucket: 'tetramatyka',
         keyFilename: path.join(__dirname, '../../../google-credentials.json'),
         filename: (req, file, cb) => {
-            cb(null, `${folderName}/${Date.now()}-${file.originalname}`);
+            const archiveYear = req.query.year;
+            cb(null, `${archiveYear}/${folderName}/${Date.now()}-${file.originalname}`);
         },
         uniformBucketLevelAccess: false
     }

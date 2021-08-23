@@ -1,8 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseInterceptors} from '@nestjs/common';
 import { NewsService } from "./news.service";
 import { NewsItem } from './schemas/news-item.schema';
 import { ICommonQuery } from '../../common/interfaces/common-query';
 import { NewsItemDto } from './dto/news-item.dto';
+import {FilesInterceptor} from "@nestjs/platform-express";
+import * as multerGoogleStorage from "multer-google-storage";
+import {createMulterOptions} from "../../common/config/multer.config";
+import {IMulterRequest} from "../../common/interfaces/multer-custom";
+import {storageUtil} from "../../common/utils/storage.util";
 
 @Controller('news')
 export class NewsController {
@@ -20,14 +25,37 @@ export class NewsController {
     }
 
     @Post()
-    createNewsItem(@Body() body: any): Promise<NewsItem> {
+    @UseInterceptors(FilesInterceptor('image', null, {
+        storage: multerGoogleStorage.storageEngine(createMulterOptions('news'))
+    }))
+    createNewsItem(
+        @Query() query: ICommonQuery,
+        @Body() body: any,
+        @Req() req: IMulterRequest
+    ): Promise<NewsItem> {
        const newsItem: NewsItemDto = JSON.parse(body);
+       newsItem.archiveYear = +query.year;
+       newsItem.imageUrl = req.files[0].path;
        return this.newsService.createNewsItem(newsItem);
     }
 
     @Put(':id')
-    updateNewsItem(@Param('id') id: string, @Body() body: any): Promise<NewsItem> {
+    @UseInterceptors(FilesInterceptor('image', null, {
+        storage: multerGoogleStorage.storageEngine(createMulterOptions('news'))
+    }))
+    async updateNewsItem(
+        @Param('id') id: string,
+        @Query() query: ICommonQuery,
+        @Body() body: any,
+        @Req() req: IMulterRequest
+    ): Promise<NewsItem> {
         const newsItem: NewsItemDto = JSON.parse(body);
+        if (req.files.length) {
+            const previousUrl = newsItem.imageUrl;
+            const folderName = `${query.year}/news`;
+            await storageUtil.removeFile(folderName, previousUrl);
+            newsItem.imageUrl = req.files[0].path;
+        }
         return this.newsService.updateNewsItem(id, newsItem);
     }
 

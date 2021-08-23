@@ -3,6 +3,7 @@ import { AboutService } from './about.service';
 import { AboutInfo } from './schemas/about-info.schema';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ICommonQuery } from '../../common/interfaces/common-query';
+import { IMulterRequest } from '../../common/interfaces/multer-custom';
 import { AboutInfoDto } from './dto/about-info.dto';
 import * as multerGoogleStorage from 'multer-google-storage';
 import { createMulterOptions } from "../../common/config/multer.config";
@@ -23,10 +24,10 @@ export class AboutController {
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(createMulterOptions('about'))
     }))
-    async addAboutInfo(
+    addAboutInfo(
         @Query() query: ICommonQuery,
         @Body() body: any,
-        @Req() req
+        @Req() req: IMulterRequest
     ): Promise<AboutInfo> {
         const aboutInfo: AboutInfoDto = JSON.parse(body.aboutInfo);
         aboutInfo.archiveYear = +query.year;
@@ -42,12 +43,15 @@ export class AboutController {
         @Param('id') id: string,
         @Query() query: ICommonQuery,
         @Body() body: any,
-        @Req() req
+        @Req() req: IMulterRequest
     ): Promise<AboutInfo> {
         const aboutInfo: AboutInfoDto = JSON.parse(body.aboutInfo);
-        const previousUrl = aboutInfo.imageUrl;
-        await storageUtil.removeFile('about', previousUrl);
-        aboutInfo.imageUrl = req.files[0].path;
+        if (req.files.length) {
+            const previousUrl = aboutInfo.imageUrl;
+            const folderName = `${query.year}/about`;
+            await storageUtil.removeFile(folderName, previousUrl);
+            aboutInfo.imageUrl = req.files[0].path;
+        }
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }
 
