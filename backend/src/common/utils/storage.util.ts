@@ -5,7 +5,7 @@ export const storageUtil = {
     removeFile: async (folderName, fileUrl) => {
         const shortUrlIndex = fileUrl.indexOf(`/${folderName}`);
         const shortUrl = fileUrl.slice(shortUrlIndex);
-        const storage = new Storage({...storageOptionsForDelete});
+        const storage = new Storage(storageOptionsForDelete);
         await storage.bucket('tetramatyka').file(shortUrl).delete();
     }
 }
