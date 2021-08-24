@@ -13,11 +13,11 @@
   </div>
 
   <h2 class="page-title">{{'MENU.PROJECTS' | translate}}</h2>
-  <div class="participants-list" fxLayout="row wrap" fxLayoutAlign="center center">
+  <div class="title-items-list" fxLayout="row wrap" fxLayoutAlign="center center">
     <ng-container *ngFor="let project of projects">
       <div
         [routerLink]="project._id"
-        class="participant-item">
+        class="title-item">
         {{project.title[lang]}}
       </div>
     </ng-container>

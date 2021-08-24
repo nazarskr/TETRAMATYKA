@@ -136,11 +136,16 @@
       </ng-template>
     </ng-container>
     <ng-template #viewMode>
-      <ng-container *ngIf="project">
-        <img *ngIf="imageUrl" [src]="imageUrl" alt="No image" width="500">
-        <h3>{{project.title[lang]}}</h3>
-        <div [innerHTML]="project.description[lang]"></div>
-      </ng-container>
+      <div
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        *ngIf="project"
+        class="item-details-container">
+        <h3 class="item-details-title">{{project.title[lang]}}</h3>
+        <img *ngIf="imageUrl" [src]="imageUrl" alt="item image" class="item-details-image">
+        <div class="item-details-description"
+          [innerHTML]="project.description[lang]"></div>
+      </div>
     </ng-template>
   </div>
 </form>
