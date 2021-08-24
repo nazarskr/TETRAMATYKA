@@ -81,6 +81,7 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
         this.newsItem = res;
         this.imageUrl = res.imageUrl;
         this.multipartFile = null;
+        this.editMode = false;
         this.formPatchValue();
       });
   }
@@ -151,7 +152,6 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
     if (this.newsItemId) {
       this.goToHome();
     } else {
-      this.editMode = false;
       this.getNewsItemById();
     }
   }

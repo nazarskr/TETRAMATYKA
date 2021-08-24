@@ -7,6 +7,8 @@ import { FilesInterceptor } from "@nestjs/platform-express";
 import * as multerGoogleStorage from "multer-google-storage";
 import { IMulterRequest } from "../../common/interfaces/multer-custom";
 import { storageUtil } from "../../common/utils/storage.util";
+import {MultipleImageUrlsInterceptor} from '../../common/interceptors/multiple-image-urls.interceptor';
+import {ImageUrlInterceptor} from '../../common/interceptors/image-url.interceptor';
 
 @Controller('news')
 export class NewsController {
@@ -14,11 +16,13 @@ export class NewsController {
     }
 
     @Get()
+    @UseInterceptors(new MultipleImageUrlsInterceptor())
     getAllNews(@Query() query: ICommonQuery): Promise<NewsItem[]> {
         return this.newsService.getAllNews(+query.year);
     }
 
     @Get(':id')
+    @UseInterceptors(new ImageUrlInterceptor())
     getNewsItemById(@Param('id') id: string): Promise<NewsItem> {
         return this.newsService.getNewsItemById(id);
     }
@@ -50,10 +54,11 @@ export class NewsController {
     ): Promise<NewsItem> {
         const newsItem: NewsItemDto = JSON.parse(body.newsItem);
         if (req.files.length) {
-            const previousUrl = newsItem.imageUrl;
-            const folderName = `${query.year}/news`;
-            await storageUtil.removeFile(folderName, previousUrl);
-            newsItem.imageUrl = req.files[0].path;
+            await this.newsService.getNewsItemImageUrl(id)
+                .then(async (res) => {
+                    await storageUtil.removeFile(res.imageUrl);
+                    newsItem.imageUrl = req.files[0].path;
+                })
         }
         return this.newsService.updateNewsItem(id, newsItem);
     }

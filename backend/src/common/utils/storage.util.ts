@@ -5,6 +5,8 @@ const storageOptionsShort = {
     keyFilename: path.join(__dirname, '../../../google-credentials.json')
 }
 
+const authorizedStorageUrl = 'https://storage.cloud.google.com/tetramatyka';
+
 export const storageUtil = {
     createMulterOptions: (folderName: string) => {
         return {
@@ -19,22 +21,19 @@ export const storageUtil = {
         }
     },
 
-    removeFile: async (folderName: string, fileUrl: string) => {
-        const shortUrlIndex = fileUrl.indexOf(`/${folderName}`);
-        const shortUrl = fileUrl.slice(shortUrlIndex);
+    removeFile: async (fileUrl: string) => {
+        const shortUrl = fileUrl.slice(authorizedStorageUrl.length - 1);
         const storage = new Storage(storageOptionsShort);
         await storage.bucket('tetramatyka').file(shortUrl).delete();
     },
 
-    generateV4ReadSignedUrl: async (folderName: string, fileUrl: string) => {
-        const shortUrlIndex = fileUrl.indexOf(`/${folderName}`);
-        const shortUrl = fileUrl.slice(shortUrlIndex);
+    generateV4ReadSignedUrl: async (fileUrl: string) => {
+        const shortUrl = fileUrl.slice(authorizedStorageUrl.length - 1);
         const options = {
             version: 'v4',
             action: 'read',
             expires: Date.now() + 3 * 60 * 1000,
         };
-
         const storage = new Storage(storageOptionsShort);
         const [url] = await storage
             .bucket('tetramatyka')

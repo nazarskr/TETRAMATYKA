@@ -7,6 +7,8 @@ import { FilesInterceptor } from "@nestjs/platform-express";
 import * as multerGoogleStorage from "multer-google-storage";
 import { IMulterRequest } from "../../common/interfaces/multer-custom";
 import { storageUtil } from "../../common/utils/storage.util";
+import { ImageUrlInterceptor } from '../../common/interceptors/image-url.interceptor';
+import { MultipleImageUrlsInterceptor } from '../../common/interceptors/multiple-image-urls.interceptor';
 
 @Controller('projects')
 export class ProjectsController {
@@ -14,6 +16,7 @@ export class ProjectsController {
     }
 
     @Get()
+    @UseInterceptors(new MultipleImageUrlsInterceptor())
     getAllProjects(@Query() query: ICommonQuery): Promise<Project[]> {
         return this.projectsService.getAllProjects(+query.year);
     }
@@ -24,6 +27,7 @@ export class ProjectsController {
     }
 
     @Get(':id')
+    @UseInterceptors(new ImageUrlInterceptor())
     getProjectById(@Param('id') id: string): Promise<Project> {
         return this.projectsService.getProjectById(id);
     }
@@ -55,10 +59,11 @@ export class ProjectsController {
     ): Promise<Project> {
         const project: ProjectDto = JSON.parse(body.project);
         if (req.files.length) {
-            const previousUrl = project.imageUrl;
-            const folderName = `${query.year}/projects`;
-            await storageUtil.removeFile(folderName, previousUrl);
-            project.imageUrl = req.files[0].path;
+            this.projectsService.getProjectImageUrl(id)
+                .then(async (res) => {
+                    await storageUtil.removeFile(res.imageUrl);
+                    project.imageUrl = req.files[0].path;
+                })
         }
         return this.projectsService.updateProject(id, project);
     }

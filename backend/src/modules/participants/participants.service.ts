@@ -33,4 +33,8 @@ export class ParticipantsService {
     async deleteParticipant(id: string): Promise<Participant> {
         return this.participantModel.findByIdAndRemove(id);
     }
+
+    async getParticipantImageUrl(id: string): Promise<Participant> {
+        return this.participantModel.findById(id).select('imageUrl');
+    }
 }

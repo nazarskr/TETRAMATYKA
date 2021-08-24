@@ -18,6 +18,8 @@ import { ICommonQuery } from '../../common/interfaces/common-query';
 import { IMulterRequest } from '../../common/interfaces/multer-custom';
 import * as multerGoogleStorage from "multer-google-storage";
 import { storageUtil } from "../../common/utils/storage.util";
+import { ImageUrlInterceptor } from '../../common/interceptors/image-url.interceptor';
+import { MultipleImageUrlsInterceptor } from '../../common/interceptors/multiple-image-urls.interceptor';
 
 @Controller('participants')
 export class ParticipantsController {
@@ -25,6 +27,7 @@ export class ParticipantsController {
     }
 
     @Get()
+    @UseInterceptors(new MultipleImageUrlsInterceptor())
     getAllParticipants(@Query() query: ICommonQuery): Promise<Participant[]> {
         return this.participantsService.getAllParticipants(+query.year);
     }
@@ -35,6 +38,7 @@ export class ParticipantsController {
     }
 
     @Get(':id')
+    @UseInterceptors(new ImageUrlInterceptor())
     getParticipantById(@Param('id') id: string): Promise<Participant> {
         return this.participantsService.getParticipantById(id);
     }
@@ -66,10 +70,11 @@ export class ParticipantsController {
     ): Promise<Participant> {
         const participant: ParticipantDto = JSON.parse(body.participant);
         if (req.files.length) {
-            const previousUrl = participant.imageUrl;
-            const folderName = `${query.year}/participants`;
-            await storageUtil.removeFile(folderName, previousUrl);
-            participant.imageUrl = req.files[0].path;
+            await this.participantsService.getParticipantImageUrl(id)
+                .then(async (res) => {
+                    await storageUtil.removeFile(res.imageUrl);
+                    participant.imageUrl = req.files[0].path;
+                });
         }
         return this.participantsService.updateParticipant(id, participant);
     }

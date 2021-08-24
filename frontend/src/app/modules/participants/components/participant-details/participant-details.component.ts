@@ -81,6 +81,7 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
         this.participant = res;
         this.imageUrl = res.imageUrl;
         this.multipartFile = null;
+        this.editMode = false;
         this.formPatchValue();
       });
   }
@@ -151,7 +152,6 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
     if (this.participantId) {
       this.goToParticipantsList();
     } else {
-      this.editMode = false;
       this.getParticipantById();
     }
   }

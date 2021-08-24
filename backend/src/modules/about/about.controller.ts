@@ -46,10 +46,11 @@ export class AboutController {
     ): Promise<AboutInfo> {
         const aboutInfo: AboutInfoDto = JSON.parse(body.aboutInfo);
         if (req.files.length) {
-            const previousUrl = aboutInfo.imageUrl;
-            const folderName = `${query.year}/about`;
-            await storageUtil.removeFile(folderName, previousUrl);
-            aboutInfo.imageUrl = req.files[0].path;
+            await this.aboutService.getAboutImageUrl(id)
+                .then(async (res) => {
+                    await storageUtil.removeFile(res.imageUrl);
+                    aboutInfo.imageUrl = req.files[0].path;
+                });
         }
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }

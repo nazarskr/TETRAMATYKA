@@ -25,4 +25,8 @@ export class AboutService {
     async removeAboutInfo(id: string): Promise<AboutInfo> {
         return this.aboutInfoModel.findByIdAndRemove(id);
     }
+
+    async getAboutImageUrl(id: string): Promise<AboutInfo> {
+        return this.aboutInfoModel.findById(id).select('imageUrl');
+    }
 }

@@ -29,4 +29,8 @@ export class NewsService {
     async removeNewsItem(id: string): Promise<NewsItem> {
         return this.newsItemModel.findByIdAndRemove(id);
     }
+
+    async getNewsItemImageUrl(id: string): Promise<NewsItem> {
+        return this.newsItemModel.findById(id).select('imageUrl');
+    }
 }

@@ -33,4 +33,8 @@ export class ProjectsService {
     async removeProject(id: string): Promise<Project> {
         return this.projectModel.findByIdAndRemove(id);
     }
+
+    async getProjectImageUrl(id: string): Promise<Project> {
+        return this.projectModel.findById(id).select('imageUrl');
+    }
 }

@@ -83,6 +83,7 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
         this.project = res;
         this.imageUrl = res.imageUrl;
         this.multipartFile = null;
+        this.editMode = false;
         this.formPatchValue();
       });
   }
@@ -153,7 +154,6 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
     if (this.projectId) {
       this.goBack();
     } else {
-      this.editMode = false;
       this.getProjectById();
     }
   }
