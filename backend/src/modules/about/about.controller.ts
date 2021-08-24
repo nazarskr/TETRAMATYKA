@@ -6,7 +6,6 @@ import { ICommonQuery } from '../../common/interfaces/common-query';
 import { IMulterRequest } from '../../common/interfaces/multer-custom';
 import { AboutInfoDto } from './dto/about-info.dto';
 import * as multerGoogleStorage from 'multer-google-storage';
-import { createMulterOptions } from "../../common/config/multer.config";
 import { storageUtil } from '../../common/utils/storage.util';
 
 @Controller('about')
@@ -22,7 +21,7 @@ export class AboutController {
 
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
-        storage: multerGoogleStorage.storageEngine(createMulterOptions('about'))
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('about'))
     }))
     addAboutInfo(
         @Query() query: ICommonQuery,
@@ -37,7 +36,7 @@ export class AboutController {
 
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
-        storage: multerGoogleStorage.storageEngine(createMulterOptions('about'))
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('about'))
     }))
     async updateAboutInfo(
         @Param('id') id: string,

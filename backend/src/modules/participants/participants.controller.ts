@@ -17,8 +17,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { ICommonQuery } from '../../common/interfaces/common-query';
 import { IMulterRequest } from '../../common/interfaces/multer-custom';
 import * as multerGoogleStorage from "multer-google-storage";
-import { createMulterOptions } from "../../common/config/multer.config";
-import {storageUtil} from "../../common/utils/storage.util";
+import { storageUtil } from "../../common/utils/storage.util";
 
 @Controller('participants')
 export class ParticipantsController {
@@ -30,6 +29,11 @@ export class ParticipantsController {
         return this.participantsService.getAllParticipants(+query.year);
     }
 
+    @Get('/short')
+    getAllParticipantsShort(@Query() query: ICommonQuery): Promise<Participant[]> {
+        return this.participantsService.getAllParticipantsShort(+query.year);
+    }
+
     @Get(':id')
     getParticipantById(@Param('id') id: string): Promise<Participant> {
         return this.participantsService.getParticipantById(id);
@@ -37,7 +41,7 @@ export class ParticipantsController {
 
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
-        storage: multerGoogleStorage.storageEngine(createMulterOptions('participants'))
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
     }))
     createParticipant(
         @Query() query: ICommonQuery,
@@ -51,7 +55,9 @@ export class ParticipantsController {
     }
 
     @Put()
-    @UseInterceptors(FilesInterceptor('image'))
+    @UseInterceptors(FilesInterceptor('image', null, {
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
+    }))
     async updateParticipant(
         @Param('id') id: string,
         @Query() query: ICommonQuery,

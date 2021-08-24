@@ -25,11 +25,11 @@ export class ProjectsComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProjects();
+    this.getAllProjectsShort();
   }
 
-  getAllProjects(): void {
-    this._projectsService.getAllProjects()
+  getAllProjectsShort(): void {
+    this._projectsService.getAllProjectsShort()
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: Project[]) => {
         this.projects = res;

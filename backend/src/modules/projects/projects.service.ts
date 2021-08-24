@@ -13,6 +13,10 @@ export class ProjectsService {
         return this.projectModel.find({archiveYear: currentYear});
     }
 
+    async getAllProjectsShort(currentYear: number): Promise<Project[]> {
+        return this.projectModel.find({archiveYear: currentYear}, {description: 0, imageUrl: 0});
+    }
+
     async getProjectById(id: string): Promise<Project> {
         return this.projectModel.findById(id);
     }

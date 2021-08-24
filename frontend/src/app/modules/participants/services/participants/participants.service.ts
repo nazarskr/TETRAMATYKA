@@ -15,6 +15,10 @@ export class ParticipantsService {
     return this.http.get<ParticipantShort[]>(this.participantsUri);
   }
 
+  getAllParticipantsShort(): Observable<ParticipantShort[]> {
+    return this.http.get<ParticipantShort[]>(`${this.participantsUri}/short`);
+  }
+
   getParticipantById(id: string): Observable<Participant> {
     return this.http.get<Participant>(`${this.participantsUri}/${id}`);
   }

@@ -25,11 +25,11 @@ export class ParticipantsComponent extends UnsubscribeOnDestroy implements OnIni
   }
 
   ngOnInit(): void {
-    this.getAllParticipants();
+    this.getAllParticipantsShort();
   }
 
-  getAllParticipants(): void {
-    this._participantsService.getAllParticipants()
+  getAllParticipantsShort(): void {
+    this._participantsService.getAllParticipantsShort()
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: ParticipantShort[]) => {
         this.participants = res;

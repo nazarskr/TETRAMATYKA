@@ -1,13 +1,12 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseInterceptors} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseInterceptors } from '@nestjs/common';
 import { NewsService } from "./news.service";
 import { NewsItem } from './schemas/news-item.schema';
 import { ICommonQuery } from '../../common/interfaces/common-query';
 import { NewsItemDto } from './dto/news-item.dto';
-import {FilesInterceptor} from "@nestjs/platform-express";
+import { FilesInterceptor } from "@nestjs/platform-express";
 import * as multerGoogleStorage from "multer-google-storage";
-import {createMulterOptions} from "../../common/config/multer.config";
-import {IMulterRequest} from "../../common/interfaces/multer-custom";
-import {storageUtil} from "../../common/utils/storage.util";
+import { IMulterRequest } from "../../common/interfaces/multer-custom";
+import { storageUtil } from "../../common/utils/storage.util";
 
 @Controller('news')
 export class NewsController {
@@ -26,7 +25,7 @@ export class NewsController {
 
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
-        storage: multerGoogleStorage.storageEngine(createMulterOptions('news'))
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('news'))
     }))
     createNewsItem(
         @Query() query: ICommonQuery,
@@ -41,7 +40,7 @@ export class NewsController {
 
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
-        storage: multerGoogleStorage.storageEngine(createMulterOptions('news'))
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('news'))
     }))
     async updateNewsItem(
         @Param('id') id: string,

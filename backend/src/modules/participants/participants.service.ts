@@ -10,6 +10,10 @@ export class ParticipantsService {
     }
 
     async getAllParticipants(year: number): Promise<Participant[]> {
+        return this.participantModel.find({archiveYear: year});
+    }
+
+    async getAllParticipantsShort(year: number): Promise<Participant[]> {
         return this.participantModel.find({archiveYear: year}, {bio: 0, imageUrl: 0});
     }
 

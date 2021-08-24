@@ -15,6 +15,10 @@ export class ProjectsService {
     return this.http.get<Project[]>(this.projectsUri);
   }
 
+  getAllProjectsShort(): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.projectsUri}/short`);
+  }
+
   getProjectById(id: string): Observable<Project> {
     return this.http.get<Project>(`${this.projectsUri}/${id}`);
   }
