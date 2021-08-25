@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from '@shared/services/data/data.service';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
+import { maxFileSize } from "@shared/constants/max-file-size";
 
 @Component({
   selector: 'app-drag-n-drop-upload',
@@ -10,6 +11,7 @@ import { ToasterService } from '@shared/services/toaster/toaster.service';
 export class DragNDropUploadComponent implements OnInit {
   @Input() acceptMimetype = '*';
   @Input() multiple = false;
+  @Input() maxFileSize: number = maxFileSize.image;
   @Output() fileUploaded: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -22,21 +24,7 @@ export class DragNDropUploadComponent implements OnInit {
 
   fileInputUpload(event): void {
     const files = event.target.files;
-    const areFilesValid = this.validateFiles(files);
-    if (!areFilesValid) {
-      return;
-    }
-    if (!this.multiple) {
-      const reader = new FileReader();
-      reader.onload =  (e) => {
-        const url = e.target.result as string;
-        this.fileUploaded.emit({
-          file: files[0],
-          url
-        });
-      };
-      reader.readAsDataURL(files[0]);
-    }
+    this.dropzoneUpload(files);
   }
 
   dropzoneUpload(files: File[]): void {
@@ -65,7 +53,7 @@ export class DragNDropUploadComponent implements OnInit {
     }
 
     for (const file of files) {
-      if (this._dataService.fileSizeValidation(file.size, 10485760)) {
+      if (this._dataService.fileSizeValidation(file.size, this.maxFileSize)) {
         areFilesValid = false;
         break;
       }
