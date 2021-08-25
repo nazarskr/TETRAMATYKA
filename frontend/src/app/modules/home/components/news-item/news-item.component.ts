@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NewsItem } from '@shared/interfaces/news';
-import { Project } from '@shared/interfaces/projects';
+import { NewsItemShort } from '@shared/interfaces/news';
+import { ProjectShort } from '@shared/interfaces/projects';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./news-item.component.scss']
 })
 export class NewsItemComponent implements OnInit {
-  @Input() item: NewsItem | Project;
+  @Input() item: NewsItemShort | ProjectShort;
   @Input() type: string;
 
   get lang(): string {
