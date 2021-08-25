@@ -6,5 +6,10 @@ export interface Project {
   description: MultiLanguage;
   imageUrl: string;
   videoUrl?: string;
-  editable?: boolean;
+}
+
+export interface ProjectShort {
+  _id?: string;
+  title: MultiLanguage;
+  imageUrl?: string;
 }

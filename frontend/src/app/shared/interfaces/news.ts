@@ -1,10 +1,16 @@
 import { MultiLanguage } from '@shared/interfaces/common';
 
 export interface NewsItem {
-  _id: string;
+  _id?: string;
   title: MultiLanguage;
   description: MultiLanguage;
   createdAt: Date;
   imageUrl: string;
-  editable?: boolean;
+}
+
+export interface NewsItemShort {
+  _id: string;
+  title: MultiLanguage;
+  createdAt: Date;
+  imageUrl: string;
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Project } from '@shared/interfaces/projects';
+import { Project, ProjectShort } from '@shared/interfaces/projects';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class ProjectsService {
     return this.http.get<Project[]>(this.projectsUri);
   }
 
-  getAllProjectsShort(): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.projectsUri}/short`);
+  getAllProjectsShort(): Observable<ProjectShort[]> {
+    return this.http.get<ProjectShort[]>(`${this.projectsUri}/short`);
   }
 
   getProjectById(id: string): Observable<Project> {

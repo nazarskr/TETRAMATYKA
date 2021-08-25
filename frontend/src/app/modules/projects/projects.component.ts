@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from "@shared/interfaces/projects";
+import { ProjectShort } from "@shared/interfaces/projects";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { ProjectsService } from "./services/projects.service";
 import { takeUntil } from "rxjs/operators";
@@ -11,7 +11,7 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent extends UnsubscribeOnDestroy implements OnInit {
-  public projects: Project[] = [];
+  public projects: ProjectShort[] = [];
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -31,8 +31,21 @@ export class ProjectsComponent extends UnsubscribeOnDestroy implements OnInit {
   getAllProjectsShort(): void {
     this._projectsService.getAllProjectsShort()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Project[]) => {
-        this.projects = res;
+      .subscribe((res: ProjectShort[]) => {
+        // TODO: remove mock
+        //this.projects = res;
+        this.projects = [
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8'},
+        ]
       })
   }
 

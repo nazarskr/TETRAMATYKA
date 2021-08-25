@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NewsItem } from '@shared/interfaces/news';
+import { NewsItem, NewsItemShort } from '@shared/interfaces/news';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllNewsItems(): Observable<NewsItem[]> {
-    return this.http.get<NewsItem[]>(this.newsUri);
+  getAllNewsItems(): Observable<NewsItemShort[]> {
+    return this.http.get<NewsItemShort[]>(this.newsUri);
   }
 
   getNewsItemById(id: string): Observable<NewsItem> {

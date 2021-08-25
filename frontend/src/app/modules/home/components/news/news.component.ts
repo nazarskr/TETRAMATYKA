@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsItem } from '@shared/interfaces/news';
-import { Project } from '@shared/interfaces/projects';
+import { NewsItemShort } from '@shared/interfaces/news';
+import { ProjectShort } from '@shared/interfaces/projects';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { NewsService } from '../../services/news.service';
 import { ProjectsService } from '../../../projects/services/projects.service';
-import {forkJoin} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-news',
@@ -13,8 +13,8 @@ import {takeUntil} from 'rxjs/operators';
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent extends UnsubscribeOnDestroy implements OnInit {
-  public news: NewsItem[] = [];
-  public projects: Project[] = [];
+  public news: NewsItemShort[] = [];
+  public projects: ProjectShort[] = [];
 
   constructor(
     private _newsService: NewsService,
@@ -32,9 +32,27 @@ export class NewsComponent extends UnsubscribeOnDestroy implements OnInit {
       this._newsService.getAllNewsItems(),
       this._projectsService.getAllProjects()
     ]).pipe(takeUntil(this.destroy$))
-      .subscribe((res: [NewsItem[], Project[]]) => {
-        this.news = res[0];
-        this.projects = res[1];
+      .subscribe((res: [NewsItemShort[], ProjectShort[]]) => {
+        // TODO remove mock
+        // this.news = res[0];
+        // this.projects = res[1];
+        this.news = [
+          {title: {ua: 'Тестовa новина', en: 'Testtest news'}, _id: '6123b11ab57f9822c89e2edc',  imageUrl: '../../../assets/images/poster-tetramatyka.jpg', createdAt: new Date()},
+          {title: {ua: 'Тестовa новина', en: 'Testtest news'}, _id: '6123b11ab57f9822c89e2edc',  imageUrl: '../../../assets/images/poster-tetramatyka.jpg', createdAt: new Date()},
+          {title: {ua: 'Тестовa новина', en: 'Testtest news'}, _id: '6123b11ab57f9822c89e2edc',  imageUrl: '../../../assets/images/poster-tetramatyka.jpg', createdAt: new Date()},
+        ];
+        this.projects = [
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+        ]
       })
   }
 
