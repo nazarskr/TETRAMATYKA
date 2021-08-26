@@ -175,6 +175,7 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
     this._participantsService.deleteParticipant(this.participantId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
+        this._toaster.showMessage('Participant deleted successfully');
         this.goToParticipantsList();
       })
   }

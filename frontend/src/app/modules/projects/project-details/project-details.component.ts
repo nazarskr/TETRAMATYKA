@@ -161,8 +161,8 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
   openDeleteProjectDialog(): void {
     const dialogRef = this._dialog.open(SimpleDialogComponent, {
       data: {
-        title: 'Delete participant',
-        message: 'Are you sure you want to delete this participant?'
+        title: 'Delete project',
+        message: 'Are you sure you want to delete this project?'
       }
     });
 
@@ -177,6 +177,7 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
     this._projectsService.deleteProject(this.projectId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
+        this._toaster.showMessage('Project deleted successfully');
         this.goBack();
       })
   }

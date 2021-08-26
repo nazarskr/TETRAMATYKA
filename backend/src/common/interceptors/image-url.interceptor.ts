@@ -9,8 +9,10 @@ export class ImageUrlInterceptor<T> implements NestInterceptor<T> {
         return next.handle()
             .pipe(
                 mergeMap(async (data) => {
-                    const imageUrl = data.imageUrl;
-                    data.imageUrl = await storageUtil.generateV4ReadSignedUrl(imageUrl);
+                    if (data && data.imageUrl) {
+                        const imageUrl = data.imageUrl;
+                        data.imageUrl = await storageUtil.generateV4ReadSignedUrl(imageUrl);
+                    }
                     return data;
                 })
             );

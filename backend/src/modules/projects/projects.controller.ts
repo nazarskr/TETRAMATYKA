@@ -64,12 +64,16 @@ export class ProjectsController {
                     await storageUtil.removeFile(res.imageUrl);
                     project.imageUrl = req.files[0].path;
                 })
+        } else {
+            delete project.imageUrl;
         }
         return this.projectsService.updateProject(id, project);
     }
 
     @Delete(':id')
-    removeNewsItem(@Param('id') id: string): Promise<Project> {
+    async deleteProject(@Param('id') id: string): Promise<Project> {
+        const projectForDelete = await this.projectsService.getProjectImageUrl(id);
+        await storageUtil.removeFile(projectForDelete.imageUrl);
         return this.projectsService.removeProject(id);
     }
 }

@@ -32,7 +32,7 @@ export const storageUtil = {
         const options = {
             version: 'v4',
             action: 'read',
-            expires: Date.now() + 3 * 60 * 1000,
+            expires: Date.now() + 60 * 1000, // 1 min
         };
         const storage = new Storage(storageOptionsShort);
         const [url] = await storage

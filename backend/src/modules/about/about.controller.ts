@@ -51,12 +51,16 @@ export class AboutController {
                     await storageUtil.removeFile(res.imageUrl);
                     aboutInfo.imageUrl = req.files[0].path;
                 });
+        } else {
+            delete aboutInfo.imageUrl;
         }
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }
 
     @Delete(':id')
-    removeAboutInfo(@Param('id') id: string): Promise<AboutInfo> {
+    async deleteAboutInfo(@Param('id') id: string): Promise<AboutInfo> {
+        const aboutInfoForDelete = await this.aboutService.getAboutImageUrl(id);
+        await storageUtil.removeFile(aboutInfoForDelete.imageUrl);
         return this.aboutService.removeAboutInfo(id);
     }
 }

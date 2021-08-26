@@ -59,12 +59,16 @@ export class NewsController {
                     await storageUtil.removeFile(res.imageUrl);
                     newsItem.imageUrl = req.files[0].path;
                 })
+        } else {
+            delete newsItem.imageUrl;
         }
         return this.newsService.updateNewsItem(id, newsItem);
     }
 
     @Delete(':id')
-    removeNewsItem(@Param('id') id: string): Promise<NewsItem> {
+    async deleteNewsItem(@Param('id') id: string): Promise<NewsItem> {
+        const newsItemForDelete = await this.newsService.getNewsItemImageUrl(id);
+        await storageUtil.removeFile(newsItemForDelete.imageUrl);
         return this.newsService.removeNewsItem(id);
     }
 }

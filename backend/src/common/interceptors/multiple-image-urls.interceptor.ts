@@ -10,8 +10,10 @@ export class MultipleImageUrlsInterceptor implements NestInterceptor {
             .pipe(
                 mergeMap(async (data) => {
                     await Promise.all(data.map(async(item) => {
-                        const imageUrl = item.imageUrl;
-                        item.imageUrl = await storageUtil.generateV4ReadSignedUrl(imageUrl);
+                        if (item && item.imageUrl) {
+                            const imageUrl = item.imageUrl;
+                            item.imageUrl = await storageUtil.generateV4ReadSignedUrl(imageUrl);
+                        }
                         return item;
                     }));
 

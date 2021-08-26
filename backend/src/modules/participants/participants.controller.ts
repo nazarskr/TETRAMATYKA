@@ -58,7 +58,7 @@ export class ParticipantsController {
         return this.participantsService.createParticipant(participant);
     }
 
-    @Put()
+    @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
     }))
@@ -75,12 +75,16 @@ export class ParticipantsController {
                     await storageUtil.removeFile(res.imageUrl);
                     participant.imageUrl = req.files[0].path;
                 });
+        } else {
+            delete participant.imageUrl;
         }
         return this.participantsService.updateParticipant(id, participant);
     }
 
     @Delete(':id')
-    deleteParticipant(@Param('id') id: string): Promise<Participant> {
+    async deleteParticipant(@Param('id') id: string): Promise<Participant> {
+        const participantForDelete = await this.participantsService.getParticipantImageUrl(id);
+        await storageUtil.removeFile(participantForDelete.imageUrl);
         return this.participantsService.deleteParticipant(id);
     }
 }

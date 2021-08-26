@@ -13,10 +13,9 @@
   </div>
 
   <h2 class="page-title">{{'MENU.PARTICIPANTS' | translate}}</h2>
-  <div class="title-items-list" fxLayout="row wrap" fxLayoutAlign="center center">
+  <div class="title-items-list">
     <ng-container *ngFor="let participant of participants">
-      <div
-        [routerLink]="participant._id"
+      <div [routerLink]="participant._id"
         class="title-item">
         {{participant.fullName[lang]}}
       </div>

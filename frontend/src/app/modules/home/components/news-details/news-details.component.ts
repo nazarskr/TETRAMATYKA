@@ -159,8 +159,8 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
   openDeleteNewsItemDialog(): void {
     const dialogRef = this._dialog.open(SimpleDialogComponent, {
       data: {
-        title: 'Delete participant',
-        message: 'Are you sure you want to delete this participant?'
+        title: 'Delete news item',
+        message: 'Are you sure you want to delete this news item?'
       }
     });
 
@@ -175,6 +175,7 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
     this._newsService.deleteNewsItem(this.newsItemId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
+        this._toaster.showMessage('News item deleted successfully');
         this.goToHome();
       })
   }
