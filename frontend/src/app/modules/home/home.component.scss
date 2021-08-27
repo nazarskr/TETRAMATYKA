@@ -7,6 +7,8 @@
   background-repeat: no-repeat;
   display: grid;
   grid-template-rows: 1fr 110px;
+  position: sticky;
+  top: $header-height;
 }
 
 .home-poster-mobile {

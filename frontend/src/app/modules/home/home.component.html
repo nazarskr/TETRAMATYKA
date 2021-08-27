@@ -1,4 +1,6 @@
-<div class="home-container">
+<div class="home-container"
+     [style.filter]="'brightness(' + posterOpacity + ')'"
+     (window:scroll)="onScrollChange()">
   <div
     class="home-poster"
     fxLayout="column"
@@ -18,6 +20,6 @@
     <span class="ucf-logo"></span>
   </div>
 </div>
-<div class="news-and-projects">
+<mat-card class="news-and-projects">
   <app-news></app-news>
-</div>
+</mat-card>

@@ -92,10 +92,14 @@
       <ng-template #viewMode>
         <ng-container *ngIf="aboutInfo; else willBeSoon">
           <img
+            [style.filter]="'brightness(' + posterOpacity + ')'"
+            (window:scroll)="onScrollChange()"
             src="../../../assets/images/poster-tetramatyka.jpg"
             alt="No image"
             class="about-view-image">
           <img
+            [style.filter]="'brightness(' + posterOpacity + ')'"
+            (window:scroll)="onScrollChange()"
             src="../../../assets/images/poster-tetramatyka-mobile.jpg"
             alt="No image"
             class="about-view-image-mobile">

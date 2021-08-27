@@ -22,6 +22,7 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   public multipartFile: File;
   public editMode = false;
   public imageUrl: SafeUrl;
+  public posterOpacity = 1;
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -144,6 +145,10 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   clearImage(): void {
     this.multipartFile = null;
     this.imageUrl = null;
+  }
+
+  onScrollChange() {
+    this.posterOpacity = (document.body.clientHeight - window.pageYOffset) / document.body.clientHeight;
   }
 
 }
