@@ -1,15 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Participant} from '@shared/interfaces/participants';
-import {Project} from '@shared/interfaces/projects';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {Observable, TimeInterval} from 'rxjs';
 
 @Component({
   selector: 'app-titled-items-list',
   templateUrl: './titled-items-list.component.html',
   styleUrls: ['./titled-items-list.component.scss']
 })
-export class TitledItemsListComponent implements OnInit {
+export class TitledItemsListComponent implements OnInit, OnDestroy {
   @Input() items = [];
   @Input() titleProp: string;
   transformedItems = [];
@@ -85,7 +82,7 @@ export class TitledItemsListComponent implements OnInit {
       setTimeout(() => {
         notEmptyItems[randomIndex].trembling = false;
       }, randomTimeout + animationLength);
-    }, 1000);
+    }, 1500);
   }
 
   onResize(): void {

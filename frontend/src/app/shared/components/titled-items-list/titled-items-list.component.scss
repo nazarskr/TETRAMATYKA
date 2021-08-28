@@ -47,10 +47,12 @@
 @keyframes trembling {
   0% {
     color: $color-black;
+    padding: 5px 1px;
     background-color: $color-main-grey;
   }
   50% {
     color: $color-white;
+    padding: 5px;
     background-color: $color-black;
   }
 }
