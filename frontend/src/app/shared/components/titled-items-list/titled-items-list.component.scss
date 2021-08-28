@@ -1,0 +1,15 @@
+.titled-items-list {
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0 auto;
+
+  .titled-item {
+    margin: 10px;
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+  }
+}

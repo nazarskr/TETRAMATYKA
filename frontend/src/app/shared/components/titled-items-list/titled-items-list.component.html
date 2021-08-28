@@ -1,7 +1,7 @@
-<div class="title-items-list">
+<div class="titled-items-list">
   <ng-container *ngFor="let item of items">
     <div [routerLink]="item._id"
-         class="title-item">
+         class="titled-item">
       {{item[titleProp][lang]}}
     </div>
   </ng-container>

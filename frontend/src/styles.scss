@@ -124,20 +124,3 @@ a {
 .grey-text {
   color: $color-main-grey;
 }
-
-// title item (projects, participants)
-.title-items-list {
-  max-width: 1000px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 0 auto;
-
-  .title-item {
-    margin: 10px;
-    padding: 5px 10px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    text-align: center;
-  }
-}
