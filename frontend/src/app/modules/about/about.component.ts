@@ -22,7 +22,7 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   public multipartFile: File;
   public editMode = false;
   public imageUrl: SafeUrl;
-  public posterOpacity = 1;
+  public posterScale = 1;
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -148,7 +148,7 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   onScrollChange() {
-    this.posterOpacity = (document.body.clientHeight - window.pageYOffset) / document.body.clientHeight;
+    this.posterScale = 2 - (document.body.clientHeight - window.pageYOffset) / document.body.clientHeight;
   }
 
 }

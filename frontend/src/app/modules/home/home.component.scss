@@ -1,14 +1,13 @@
 @import 'variables';
 
 .home-container {
+  width: 100vw;
   height: calc(100vh - #{$header-height});
   background-image: url('../../../assets/images/fon.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   display: grid;
   grid-template-rows: 1fr 110px;
-  position: sticky;
-  top: $header-height;
 }
 
 .home-poster-mobile {
@@ -43,6 +42,8 @@
 }
 
 .news-and-projects {
+  padding: 25px 0;
+  width: 100vw;
   background-color: white;
 }
 

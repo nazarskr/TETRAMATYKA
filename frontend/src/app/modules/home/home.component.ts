@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public bigLogo: SafeHtml;
   public verticalLogo: SafeHtml;
   public bubblesList = [];
-  public posterOpacity = 1;
+  public posterScale = 1;
 
   constructor(
     private _sanitizer: DomSanitizer
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   onScrollChange() {
-    this.posterOpacity = (document.body.clientHeight - window.pageYOffset) / document.body.clientHeight;
+    this.posterScale = 2 - (document.body.clientHeight - window.pageYOffset) / document.body.clientHeight;
   }
 
 }

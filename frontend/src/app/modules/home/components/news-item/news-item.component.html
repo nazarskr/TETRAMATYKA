@@ -1,4 +1,8 @@
-<mat-card class="news-item" *ngIf="item" (click)="openItem()">
-  <img class="item-image" src="{{item.imageUrl}}" alt="tetramatyka img">
+<div class="news-item" *ngIf="item" (click)="openItem()">
+  <div class="item-image-wrapper">
+    <div class="item-image"
+         [style.background-image]="'url(' + item.imageUrl + ')'">
+    </div>
+  </div>
   <h4 class="item-title">{{item.title[lang]}}</h4>
-</mat-card>
+</div>

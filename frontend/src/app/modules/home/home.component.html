@@ -1,5 +1,5 @@
 <div class="home-container"
-     [style.filter]="'brightness(' + posterOpacity + ')'"
+     [ngStyle]="{'transform': 'scaleY(' + posterScale + ')'}"
      (window:scroll)="onScrollChange()">
   <div
     class="home-poster"

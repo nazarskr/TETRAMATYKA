@@ -2,15 +2,53 @@
 
 .news-item {
   width: 300px;
-  padding: 10px;
+  min-height: 250px;
+  padding: 15px 20px;
   margin: 10px;
   background: $color-white;
+  border: 1px dashed $color-medium-grey;
+  cursor: pointer;
+
+  .item-image-wrapper {
+    width: 260px;
+    height: 200px;
+    overflow: hidden;
+  }
 
   .item-image {
-    width: 280px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 260px;
+    height: 200px;
     margin: 10px 0 15px;
+    filter: grayscale(1);
+    transition: all .5s;
   }
+
   .item-title {
+    font-weight: 500;
+    margin-top: 5px;
+    padding: 5px;
+    height: 100%;
     text-align: center;
+    color: $color-black;
+    background-color: $color-white;
+    transition: all .3s;
+  }
+
+  &:hover {
+    .item-image {
+      filter: grayscale(0);
+      transform: scale(1.2);
+      transition: transform .5s, filter .8s;
+    }
+
+    .item-title {
+      font-weight: 400;
+      color: $color-white;
+      background-color: $color-black;
+      transition: all .5s;
+    }
   }
 }
