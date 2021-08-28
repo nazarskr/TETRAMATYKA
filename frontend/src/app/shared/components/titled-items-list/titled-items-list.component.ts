@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Participant} from '@shared/interfaces/participants';
 import {Project} from '@shared/interfaces/projects';
 import {TranslateService} from '@ngx-translate/core';
+import {Observable, TimeInterval} from 'rxjs';
 
 @Component({
   selector: 'app-titled-items-list',
@@ -9,9 +10,11 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./titled-items-list.component.scss']
 })
 export class TitledItemsListComponent implements OnInit {
-  @Input() items: any[] = [];
+  @Input() items = [];
   @Input() titleProp: string;
-  transformedItems: any[] = [];
+  transformedItems = [];
+  movingInterval = null;
+  tremblingInterval = null;
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -22,6 +25,7 @@ export class TitledItemsListComponent implements OnInit {
   ngOnInit(): void {
     this.fillListByEmptyItems();
     this.dynamicallyUpdateItems();
+    this.setTremblingAnimation();
   }
 
   fillListByEmptyItems(): void {
@@ -48,7 +52,7 @@ export class TitledItemsListComponent implements OnInit {
   }
 
   dynamicallyUpdateItems(): void {
-    setInterval(() => {
+    this.movingInterval = setInterval(() => {
       this.transformedItems = this.transformedItems.map(item => {
         if (item) {
           item.transform = this.getTranslateValue();
@@ -67,8 +71,30 @@ export class TitledItemsListComponent implements OnInit {
     return `translate(${translateX}px, ${translateY}px)`;
   }
 
+  setTremblingAnimation(): void {
+    this.tremblingInterval = setInterval(() => {
+      const notEmptyItems = this.transformedItems.filter(item => item);
+      const randomIndex = Math.floor(Math.random() * notEmptyItems.length);
+      const randomTimeout = Math.floor(Math.random() * 1000 + 500); // min: 500, max: 1500
+      const animationLength = 300;
+
+      setTimeout(() => {
+        notEmptyItems[randomIndex].trembling = true;
+      }, randomTimeout);
+
+      setTimeout(() => {
+        notEmptyItems[randomIndex].trembling = false;
+      }, randomTimeout + animationLength);
+    }, 1000);
+  }
+
   onResize(): void {
     this.fillListByEmptyItems();
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.tremblingInterval);
+    clearInterval(this.movingInterval);
   }
 
 }

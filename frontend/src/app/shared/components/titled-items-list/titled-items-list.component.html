@@ -6,6 +6,7 @@
       <ng-container *ngIf="item">
         <div [routerLink]="item._id"
              [style.transform]="item.transform"
+             [class.trembling]="item.trembling"
              class="titled-item">
           {{item[titleProp][lang]}}
         </div>
