@@ -5,7 +5,7 @@
   margin: auto;
 
   .item-details-title {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     padding: 5px 10px;
     width: fit-content;
     text-align: center;
@@ -13,8 +13,14 @@
     background: $color-black;
   }
 
+  .item-details-date {
+    color: $color-main-grey;
+    padding: 2px;
+  }
+
   .item-details-image {
-    width: 70vw;
+    margin-top: 15px;
+    width: 68vw;
   }
 
   .item-details-description {
@@ -26,7 +32,7 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 500px) {
   .item-details-container {
 
     .item-details-image {

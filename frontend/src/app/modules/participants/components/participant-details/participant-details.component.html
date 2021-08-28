@@ -1,5 +1,5 @@
 <form
-  class="p-25"
+  class="p-25 page"
   #form="ngForm"
   [formGroup]="participantForm"
   (ngSubmit)="saveParticipant()">
@@ -127,7 +127,7 @@
         </div>
       </ng-container>
       <ng-template #uploadField>
-        <div class="editor-label">Upload image: </div>
+        <div class="editor-label">Upload image (landscape format will be better): </div>
         <app-drag-n-drop-upload
           [acceptMimetype]="'image/*'"
           [multiple]="false"
@@ -140,7 +140,8 @@
         <app-item-details-view
           [item]="participant"
           [imageUrl]="imageUrl"
-          [titleProp]="'fullName'">
+          [titleProp]="'fullName'"
+          [descriptionProp]="'bio'">
         </app-item-details-view>
       </ng-container>
     </ng-template>
