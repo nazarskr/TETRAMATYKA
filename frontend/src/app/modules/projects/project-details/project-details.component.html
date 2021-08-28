@@ -1,5 +1,5 @@
 <form
-  class="p-25"
+  class="p-25 page"
   #form="ngForm"
   [formGroup]="projectForm"
   (ngSubmit)="saveProject()">
@@ -136,16 +136,9 @@
       </ng-template>
     </ng-container>
     <ng-template #viewMode>
-      <div
-        fxLayout="column"
-        fxLayoutAlign="center center"
-        *ngIf="project"
-        class="item-details-container">
-        <h3 class="item-details-title">{{project.title[lang]}}</h3>
-        <img *ngIf="imageUrl" [src]="imageUrl" alt="item image" class="item-details-image">
-        <div class="item-details-description"
-          [innerHTML]="project.description[lang]"></div>
-      </div>
+      <ng-container *ngIf="project">
+        <app-item-details-view [item]="project" [imageUrl]="imageUrl"></app-item-details-view>
+      </ng-container>
     </ng-template>
   </div>
 </form>

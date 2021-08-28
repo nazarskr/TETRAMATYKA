@@ -135,11 +135,13 @@
         ></app-drag-n-drop-upload>
       </ng-template>
     </ng-container>
+
     <ng-template #viewMode>
       <ng-container *ngIf="newsItem">
-        <img *ngIf="imageUrl" [src]="imageUrl" alt="No image" width="500">
-        <h3>{{newsItem.title[lang]}}</h3>
-        <div [innerHTML]="newsItem.description[lang]"></div>
+        <app-item-details-view
+          [item]="newsItem"
+          [imageUrl]="imageUrl">
+        </app-item-details-view>
       </ng-container>
     </ng-template>
   </div>

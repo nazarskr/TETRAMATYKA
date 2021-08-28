@@ -137,9 +137,11 @@
     </ng-container>
     <ng-template #viewMode>
       <ng-container *ngIf="participant">
-        <img *ngIf="imageUrl" [src]="imageUrl" alt="No image" width="500">
-        <h3>{{participant.fullName[lang]}}</h3>
-        <div [innerHTML]="participant.bio[lang]"></div>
+        <app-item-details-view
+          [item]="participant"
+          [imageUrl]="imageUrl"
+          [titleProp]="'fullName'">
+        </app-item-details-view>
       </ng-container>
     </ng-template>
   </div>

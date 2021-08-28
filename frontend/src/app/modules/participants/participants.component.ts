@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ParticipantShort } from '@shared/interfaces/participants';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { ParticipantsService } from './services/participants/participants.service';
-import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -13,14 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ParticipantsComponent extends UnsubscribeOnDestroy implements OnInit {
   public participants: ParticipantShort[] = [];
 
-  get lang(): string {
-    return this._translateService.currentLang;
-  }
-
-  constructor(
-    private _participantsService: ParticipantsService,
-    private _translateService: TranslateService
-  ) {
+  constructor(private _participantsService: ParticipantsService) {
     super();
   }
 

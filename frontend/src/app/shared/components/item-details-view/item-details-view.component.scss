@@ -1,0 +1,24 @@
+@import "variables";
+
+.item-details-container {
+  width: 100%;
+  margin: auto;
+
+  .item-details-title {
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    width: fit-content;
+    text-align: center;
+    color: $color-white;
+    background: $color-black;
+  }
+
+  .item-details-image {
+    width: 70vw;
+  }
+
+  .item-details-description {
+    width: 60vw;
+    text-align: justify;
+  }
+}

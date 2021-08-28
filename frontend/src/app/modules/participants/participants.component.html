@@ -13,17 +13,15 @@
   </div>
 
   <h2 class="page-title">{{'MENU.PARTICIPANTS' | translate}}</h2>
-  <div class="title-items-list">
-    <ng-container *ngFor="let participant of participants">
-      <div [routerLink]="participant._id"
-        class="title-item">
-        {{participant.fullName[lang]}}
-      </div>
-    </ng-container>
-  </div>
-
-  <div *ngIf="participants.length === 0"
-       class="will-be-soon-message">
-    {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
-  </div>
+  <ng-container *ngIf="participants.length; else willBeSoon">
+    <app-titled-items-list
+      [items]="participants"
+      [titleProp]="'fullName'">
+    </app-titled-items-list>
+  </ng-container>
+  <ng-template #willBeSoon>
+    <div class="will-be-soon-message">
+      {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
+    </div>
+  </ng-template>
 </div>

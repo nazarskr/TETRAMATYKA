@@ -103,6 +103,7 @@ a {
 }
 
 .edit-image-container {
+  max-width: 600px;
   position: relative;
 
   .clear-button {
@@ -138,23 +139,5 @@ a {
     color: white;
     cursor: pointer;
     text-align: center;
-  }
-}
-
-// item details (project, participant, news)
-.item-details-container {
-  width: 100%;
-
-  .item-details-title {
-    margin-bottom: 15px;
-    padding: 5px 10px;
-    width: fit-content;
-    text-align: center;
-    color: $color-white;
-    background: $color-black;
-  }
-
-  .item-details-image {
-    width: calc(100vw - 50px);
   }
 }

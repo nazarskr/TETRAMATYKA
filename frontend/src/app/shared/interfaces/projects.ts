@@ -5,7 +5,7 @@ export interface Project {
   title: MultiLanguage;
   description: MultiLanguage;
   imageUrl: string;
-  videoUrl?: string;
+  createdAt?: Date;
 }
 
 export interface ProjectShort {

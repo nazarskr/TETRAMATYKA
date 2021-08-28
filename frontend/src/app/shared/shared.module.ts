@@ -27,6 +27,9 @@ import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 
+// pipes
+import { LocalDatePipe } from './pipes/local-date.pipe';
+
 // components
 import { HeaderComponent } from './components/header/header.component';
 import { ChangeLanguageComponent } from './components/change-language/change-language.component';
@@ -37,9 +40,8 @@ import { UserPermissionDirective } from './directives/user-permission.directive'
 import { DragNDropUploadComponent } from './components/drag-n-drop-upload/drag-n-drop-upload.component';
 import { DragAndDropFieldDirective } from './directives/drag-and-drop-field.directive';
 import { FooterComponent } from './components/footer/footer.component';
-
-// pipes
-import { LocalDatePipe } from './pipes/local-date.pipe';
+import { ItemDetailsViewComponent } from './components/item-details-view/item-details-view.component';
+import { TitledItemsListComponent } from './components/titled-items-list/titled-items-list.component';
 
 const materialModules = [
   MatButtonModule,
@@ -72,7 +74,9 @@ const materialModules = [
     DragNDropUploadComponent,
     DragAndDropFieldDirective,
     FooterComponent,
-    LocalDatePipe
+    LocalDatePipe,
+    ItemDetailsViewComponent,
+    TitledItemsListComponent
   ],
   imports: [
     ...materialModules,
@@ -96,7 +100,9 @@ const materialModules = [
     DragNDropUploadComponent,
     DragAndDropFieldDirective,
     FooterComponent,
-    LocalDatePipe
+    LocalDatePipe,
+    ItemDetailsViewComponent,
+    TitledItemsListComponent
   ],
   providers: [
     UnsubscribeOnDestroy

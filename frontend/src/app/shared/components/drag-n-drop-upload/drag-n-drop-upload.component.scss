@@ -1,7 +1,7 @@
 @import 'variables';
 
 .drop-field {
-  width: 90%;
+  max-width: 600px;
   height: 200px;
   margin: 20px auto;
   border: 2px dashed $color-icon-grey;

@@ -13,18 +13,15 @@
   </div>
 
   <h2 class="page-title">{{'MENU.PROJECTS' | translate}}</h2>
-  <div class="title-items-list">
-    <ng-container *ngFor="let project of projects">
-      <div
-        [routerLink]="project._id"
-        class="title-item">
-        {{project.title[lang]}}
-      </div>
-    </ng-container>
-  </div>
-
-  <div *ngIf="projects.length === 0"
-       class="will-be-soon-message">
-    {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
-  </div>
+  <ng-container *ngIf="projects.length; else willBeSoon">
+    <app-titled-items-list
+      [items]="projects"
+      [titleProp]="'title'">
+    </app-titled-items-list>
+  </ng-container>
+  <ng-template #willBeSoon>
+    <div class="will-be-soon-message">
+      {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
+    </div>
+  </ng-template>
 </div>

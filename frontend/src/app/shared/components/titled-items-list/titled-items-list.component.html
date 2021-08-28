@@ -1,0 +1,8 @@
+<div class="title-items-list">
+  <ng-container *ngFor="let item of items">
+    <div [routerLink]="item._id"
+         class="title-item">
+      {{item[titleProp][lang]}}
+    </div>
+  </ng-container>
+</div>

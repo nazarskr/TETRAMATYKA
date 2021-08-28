@@ -10,4 +10,5 @@ export interface Participant {
   fullName: MultiLanguage;
   bio: MultiLanguage;
   imageUrl: string;
+  createdAt?: Date;
 }
