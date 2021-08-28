@@ -1,15 +1,54 @@
+@import 'variables';
+
+.titled-items-list-wrapper {
+  width: calc(100vw - 50px);
+  height: 100%;
+}
+
 .titled-items-list {
   max-width: 1000px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .titled-item-wrapper {
+    width: 230px;
+    padding: 30px 10px;
+
+    &.empty {
+      width: 100px;
+    }
+  }
 
   .titled-item {
-    margin: 10px;
-    padding: 5px 10px;
+    padding: 5px;
     background-color: black;
+    border: 1px solid $color-white;
     color: white;
     cursor: pointer;
     text-align: center;
+    transition: filter .5s, transform 2s ease-in-out;
+
+    &:hover {
+      filter: invert(1);
+      transition: filter .5s;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .titled-items-list {
+    justify-content: center;
+
+    .titled-item-wrapper {
+      width: 200px;
+      padding: 5px;
+
+      .titled-item {
+        font-size: 12px;
+      }
+    }
   }
 }

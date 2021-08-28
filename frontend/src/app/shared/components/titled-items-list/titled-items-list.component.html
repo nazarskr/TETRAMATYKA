@@ -1,8 +1,15 @@
-<div class="titled-items-list">
-  <ng-container *ngFor="let item of items">
-    <div [routerLink]="item._id"
-         class="titled-item">
-      {{item[titleProp][lang]}}
+<div class="titled-items-list-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <div class="titled-items-list" (window:resize)="onResize()">
+    <div class="titled-item-wrapper"
+         [class.empty]="!item"
+         *ngFor="let item of transformedItems">
+      <ng-container *ngIf="item">
+        <div [routerLink]="item._id"
+             [style.transform]="item.transform"
+             class="titled-item">
+          {{item[titleProp][lang]}}
+        </div>
+      </ng-container>
     </div>
-  </ng-container>
+  </div>
 </div>
