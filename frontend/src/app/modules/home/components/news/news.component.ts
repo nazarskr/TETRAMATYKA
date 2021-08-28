@@ -37,15 +37,15 @@ export class NewsComponent extends UnsubscribeOnDestroy implements OnInit {
         // this.news = res[0];
         // this.projects = res[1];
         this.news = [
-          {title: {ua: 'Тестовa новина Тестовa новина Тестовa новина', en: 'Testtest news'}, _id: '6123b11ab57f9822c89e2edc',  imageUrl: '../../../assets/images/barabash.jpeg', createdAt: new Date()},
+          {title: {ua: 'Solaris. Цикл перформансів до 100-річчя Станіслава Лема', en: 'Testtest news'}, _id: '6123b11ab57f9822c89e2edc',  imageUrl: '../../../assets/images/barabash.jpeg', createdAt: new Date()},
           {title: {ua: 'Тестовa новина', en: 'Testtest news'}, _id: '6123b11ab57f9822c89e2edc',  imageUrl: '../../../assets/images/poster-tetramatyka.jpg', createdAt: new Date()},
           {title: {ua: 'Тестовa новина', en: 'Testtest news'}, _id: '6123b11ab57f9822c89e2edc',  imageUrl: '../../../assets/images/barabash.jpeg', createdAt: new Date()},
         ];
         this.projects = [
-          {title: {ua: 'Тестовийтест тест проект лвиапдлмдлсцтл лцуоталот лотцуалотот иулквптолткуо лвиапдлмдлсцтл лцуоталот лотцуалотот иулквптолткуо', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/barabash.jpeg'},
-          {title: {ua: 'Тестовийтест тест проект Тестовийтест тест проект лвиапдлмдлсцтл лцуоталот', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/barabash.jpeg'},
+          {title: {ua: 'Solaris. Цикл перформансів до 100-річчя Станіслава Лема', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/barabash.jpeg'},
+          {title: {ua: 'Solaris. Цикл перформансів до 100-річчя Станіслава Лема', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/barabash.jpeg'},
           {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/barabash.jpeg'},
-          {title: {ua: 'Тестовийтест тест проект Тестовa новина Тестовa новина', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
+          {title: {ua: 'Solaris. Цикл перформансів до 100-річчя Станіслава Лема. Solaris. Цикл перформансів до 100-річчя Станіслава Лема', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/poster-tetramatyka.jpg'},
           {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/sensoteka-lviv-logo.png'},
           {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/barabash.jpeg'},
           {title: {ua: 'Тестовийтест тест проект', en: 'Testtest test project'}, _id: '6123af2db57f9822c89e2ec8', imageUrl: '../../../assets/images/sensoteka-lviv-logo.png'},
