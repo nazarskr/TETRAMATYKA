@@ -7,7 +7,7 @@
     {{item.createdAt | date : 'dd/MM/yyyy HH:mm'}}
   </p>
   <img *ngIf="imageUrl" [src]="imageUrl" alt="item image" class="item-details-image">
-  <mat-card class="item-details-description"
-            [innerHTML]="item[descriptionProp][lang]">
-  </mat-card>
+  <div class="item-details-description"
+       [innerHTML]="item[descriptionProp][lang]">
+  </div>
 </div>
