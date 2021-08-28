@@ -8,6 +8,7 @@ import { filter, takeUntil } from "rxjs/operators";
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from "@angular/forms";
 import { SimpleDialogComponent } from "@shared/components/simple-dialog/simple-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-program-item',
@@ -41,24 +42,37 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
 
   initForm(): void {
     this.programItemForm = this._formBuilder.group({
-      eventStartDate: [this.programItem.eventStartDate, Validators.required],
-      eventEndDate: [this.programItem.eventEndDate],
-      title_UA: [this.programItem.title.ua, Validators.required],
-      title_EN: [this.programItem.title.en, Validators.required],
-      info_UA: [this.programItem.info.ua, Validators.required],
-      info_EN: [this.programItem.info.en, Validators.required]
+      eventStartDate: [null, Validators.required],
+      eventEndDate: [null],
+      title_UA: ['', Validators.required],
+      title_EN: ['', Validators.required],
+      info_UA: ['', Validators.required],
+      info_EN: ['', Validators.required]
     });
   }
 
-  convertDateToLocale(dateIsoString: string): string {
-    if (!dateIsoString) {
+  formPatchValue(): void {
+    this.programItemForm.patchValue({
+      eventStartDate: this.programItem.eventStartDate ? this.convertDateToLocale(this.programItem.eventStartDate) : null,
+      eventEndDate: this.programItem.eventEndDate ? this.convertDateToLocale(this.programItem.eventEndDate) : null,
+      title_UA: this.programItem.title.ua,
+      title_EN: this.programItem.title.en,
+      info_UA: this.programItem.info.ua,
+      info_EN: this.programItem.info.en,
+    })
+  }
+
+  convertDateToLocale(date: Date): string {
+    if (!date) {
       return null;
     }
-    return new Date(dateIsoString).toLocaleString();
+    const localDate = moment(date).format('YYYY-MM-DDTHH:mm');
+    return localDate;
   }
 
   editProgramItem(): void {
     this.programItem.editable = true;
+    this.formPatchValue();
   }
 
   cancelEditing(): void {

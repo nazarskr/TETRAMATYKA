@@ -38,6 +38,7 @@ export class NewsController {
     ): Promise<NewsItem> {
        const newsItem: NewsItemDto = JSON.parse(body.newsItem);
        newsItem.archiveYear = +query.year;
+       newsItem.createdAt = new Date();
        newsItem.imageUrl = req.files[0].path;
        return this.newsService.createNewsItem(newsItem);
     }
