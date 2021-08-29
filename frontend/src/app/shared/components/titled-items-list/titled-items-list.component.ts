@@ -11,7 +11,6 @@ export class TitledItemsListComponent implements OnInit, OnDestroy {
   @Input() titleProp: string;
   transformedItems = [];
   movingInterval = null;
-  tremblingInterval = null;
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -22,7 +21,6 @@ export class TitledItemsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fillListByEmptyItems();
     this.dynamicallyUpdateItems();
-    this.setTremblingAnimation();
   }
 
   fillListByEmptyItems(): void {
@@ -68,29 +66,11 @@ export class TitledItemsListComponent implements OnInit, OnDestroy {
     return `translate(${translateX}px, ${translateY}px)`;
   }
 
-  setTremblingAnimation(): void {
-    this.tremblingInterval = setInterval(() => {
-      const notEmptyItems = this.transformedItems.filter(item => item);
-      const randomIndex = Math.floor(Math.random() * notEmptyItems.length);
-      const randomTimeout = Math.floor(Math.random() * 1000 + 500); // min: 500, max: 1500
-      const animationLength = 300;
-
-      setTimeout(() => {
-        notEmptyItems[randomIndex].trembling = true;
-      }, randomTimeout);
-
-      setTimeout(() => {
-        notEmptyItems[randomIndex].trembling = false;
-      }, randomTimeout + animationLength);
-    }, 1500);
-  }
-
   onResize(): void {
     this.fillListByEmptyItems();
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.tremblingInterval);
     clearInterval(this.movingInterval);
   }
 

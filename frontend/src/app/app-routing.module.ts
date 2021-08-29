@@ -18,10 +18,16 @@ const routes: Routes = [
     loadChildren: () => import('./modules/program/program.module')
       .then(m => m.ProgramModule),
   },
+  // temporary frozen
+  // {
+  //   path: 'projects',
+  //   loadChildren: () => import('./modules/projects/projects.module')
+  //     .then(m => m.ProjectsModule),
+  // },
   {
-    path: 'projects',
-    loadChildren: () => import('./modules/projects/projects.module')
-      .then(m => m.ProjectsModule),
+    path: 'works',
+    loadChildren: () => import('./modules/works/works.module')
+      .then(m => m.WorksModule),
   },
   {
     path: 'participants',

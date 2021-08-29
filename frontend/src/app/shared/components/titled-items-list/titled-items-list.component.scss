@@ -36,24 +36,6 @@
       filter: invert(1);
       transition: filter .5s;
     }
-
-    &.trembling {
-      animation: .1s linear 0s trembling;
-      animation-iteration-count: 3;
-    }
-  }
-}
-
-@keyframes trembling {
-  0% {
-    color: $color-black;
-    padding: 5px 1px;
-    background-color: $color-main-grey;
-  }
-  50% {
-    color: $color-white;
-    padding: 5px;
-    background-color: $color-black;
   }
 }
 

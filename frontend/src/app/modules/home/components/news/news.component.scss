@@ -3,4 +3,9 @@
 .news-container {
   width: 100%;
   min-height: 500px;
+
+  .news-list {
+    max-width: 1000px;
+    margin: auto;
+  }
 }
