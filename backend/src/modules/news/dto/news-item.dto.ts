@@ -4,6 +4,6 @@ export class NewsItemDto {
     title: IMultiLanguage;
     description: IMultiLanguage;
     imageUrl: string;
-    createdAt: Date;
+    eventDate: Date;
     archiveYear: number;
 }

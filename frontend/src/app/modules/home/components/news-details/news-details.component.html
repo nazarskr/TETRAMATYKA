@@ -67,6 +67,18 @@
 
   <div class="mt-25">
     <ng-container *ngIf="editMode; else viewMode">
+      <div class="editor-label m-0">Час і дата початку події:</div>
+      <mat-form-field floatLabel="never">
+        <input matInput
+               formControlName="eventDate"
+               autocomplete="chrome-off"
+               type="datetime-local"
+               placeholder="dd/mm/yyyy hh:mm">
+        <mat-error *ngIf="newsItemForm.controls['eventDate'].hasError('required') &&
+                      (newsItemForm.controls['eventDate'].touched || form.submitted)">
+          This field is required
+        </mat-error>
+      </mat-form-field>
       <div class="editor-label m-0">Заголовок (UA):</div>
       <mat-form-field floatLabel="never">
         <input matInput

@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, FormGroupDirective, Validators } from "@angular
 import { SimpleDialogComponent } from "@shared/components/simple-dialog/simple-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import * as moment from 'moment';
+import {DataService} from '@shared/services/data/data.service';
 
 @Component({
   selector: 'app-program-item',
@@ -31,7 +32,8 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
     private _toaster: ToasterService,
     private _translateService: TranslateService,
     private _formBuilder: FormBuilder,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _dataService: DataService
   ) {
     super();
   }
@@ -53,21 +55,13 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
 
   formPatchValue(): void {
     this.programItemForm.patchValue({
-      eventStartDate: this.programItem.eventStartDate ? this.convertDateToLocale(this.programItem.eventStartDate) : null,
-      eventEndDate: this.programItem.eventEndDate ? this.convertDateToLocale(this.programItem.eventEndDate) : null,
+      eventStartDate: this.programItem.eventStartDate ? this._dataService.convertDateToLocale(this.programItem.eventStartDate) : null,
+      eventEndDate: this.programItem.eventEndDate ? this._dataService.convertDateToLocale(this.programItem.eventEndDate) : null,
       title_UA: this.programItem.title.ua,
       title_EN: this.programItem.title.en,
       info_UA: this.programItem.info.ua,
       info_EN: this.programItem.info.en,
     })
-  }
-
-  convertDateToLocale(date: Date): string {
-    if (!date) {
-      return null;
-    }
-    const localDate = moment(date).format('YYYY-MM-DDTHH:mm');
-    return localDate;
   }
 
   editProgramItem(): void {

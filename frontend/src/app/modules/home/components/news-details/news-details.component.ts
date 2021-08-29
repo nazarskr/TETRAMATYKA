@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Project } from "@shared/interfaces/projects";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { TranslateService } from "@ngx-translate/core";
@@ -11,6 +10,8 @@ import { SimpleDialogComponent } from "@shared/components/simple-dialog/simple-d
 import { modalConfig } from "@shared/constants/modal-config";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { NewsService } from "../../services/news.service";
+import { DataService } from '@shared/services/data/data.service';
+import { NewsItem } from '@shared/interfaces/news';
 
 @Component({
   selector: 'app-news-details',
@@ -21,7 +22,7 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
   public editMode = false;
   public newsItemId: string;
   public newsItemForm: FormGroup;
-  public newsItem: Project;
+  public newsItem: NewsItem;
   public multipartFile: File;
   public imageUrl: SafeUrl;
 
@@ -37,7 +38,8 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
     private _translateService: TranslateService,
     private _sanitizer: DomSanitizer,
     private _dialog: MatDialog,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _dataService: DataService
   ) {
     super();
     this.initForm();
@@ -58,6 +60,7 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
 
   initForm(): void {
     this.newsItemForm = this._formBuilder.group({
+      eventDate: [null, Validators.required],
       title_UA: ['', Validators.required],
       title_EN: ['', Validators.required],
       description_UA: ['', Validators.required],
@@ -67,6 +70,7 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
 
   formPatchValue(): void {
     this.newsItemForm.patchValue({
+      eventDate: this.newsItem.eventDate ? this._dataService.convertDateToLocale(this.newsItem.eventDate) : null,
       title_UA: this.newsItem.title.ua,
       title_EN: this.newsItem.title.en,
       description_UA: this.newsItem.description.ua,
@@ -77,7 +81,7 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
   getNewsItemById(): void {
     this._newsService.getNewsItemById(this.newsItemId)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Project) => {
+      .subscribe((res: NewsItem) => {
         this.newsItem = res;
         this.imageUrl = res.imageUrl;
         this.multipartFile = null;
@@ -106,7 +110,8 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
     }
 
     const formValue = this.newsItemForm.value;
-    const body: Project = {
+    const body: NewsItem = {
+      eventDate: formValue.eventDate,
       title: {
         en: formValue.title_EN,
         ua: formValue.title_UA
@@ -129,7 +134,7 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
   createNewsItem(formData: FormData): void {
     this._newsService.createNewsItem(formData)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Project) => {
+      .subscribe((res: NewsItem) => {
         this._toaster.showMessage('Project created successfully');
         this.openCreatedNewsItem(res._id);
       });

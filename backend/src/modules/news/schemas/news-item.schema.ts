@@ -16,7 +16,7 @@ export class NewsItem {
     imageUrl: string;
 
     @Prop()
-    createdAt: Date;
+    eventDate: Date;
 
     @Prop({required: true})
     archiveYear: number;
