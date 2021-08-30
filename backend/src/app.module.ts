@@ -13,6 +13,7 @@ import { ParticipantsModule } from './modules/participants/participants.module';
 import { ContactModule } from './modules/contact/contact.module';
 import { ProjectsModule } from './modules/projects/projects.module';
 import { NewsModule } from './modules/news/news.module';
+import { WorksModule } from './modules/works/works.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { NewsModule } from './modules/news/news.module';
     ContactModule,
     ProjectsModule,
     NewsModule,
+    WorksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
