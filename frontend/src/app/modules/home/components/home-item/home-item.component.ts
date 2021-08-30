@@ -5,11 +5,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-news-item',
-  templateUrl: './news-item.component.html',
-  styleUrls: ['./news-item.component.scss']
+  selector: 'app-home-item',
+  templateUrl: './home-item.component.html',
+  styleUrls: ['./home-item.component.scss']
 })
-export class NewsItemComponent implements OnInit {
+export class HomeItemComponent implements OnInit {
   @Input() item: NewsItemShort | ProjectShort;
   @Input() type: string;
 
@@ -23,11 +23,5 @@ export class NewsItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  }
-
-  openItem(): void {
-    const link = this.type === 'project' ? `projects/${this.item._id}`
-      : `home/news/${this.item._id}`;
-    this._router.navigate([link]);
   }
 }

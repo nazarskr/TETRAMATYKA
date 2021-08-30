@@ -1,5 +1,6 @@
 <div class="news-container">
   <div>
+    <h2 class="page-title">{{'HOME.LATEST_NEWS' | translate}}</h2>
     <div class="buttons-wrapper"
          *userPermission="['ADMIN']">
       <button
@@ -12,14 +13,12 @@
       </span>
       </button>
     </div>
-
-    <h2 class="page-title">{{'HOME.LATEST_NEWS' | translate}}</h2>
     <div class="news-list" fxLayout="row wrap" fxLayoutAlign="center center">
       <ng-container *ngFor="let newsItem of news">
-        <app-news-item
+        <app-home-item
           [item]="newsItem"
           [type]="'news'"
-        ></app-news-item>
+        ></app-home-item>
       </ng-container>
     </div>
 
@@ -30,13 +29,25 @@
   </div>
 
   <h2 class="page-title mt-15">{{'MENU.PROJECTS' | translate}}</h2>
+  <div class="buttons-wrapper"
+       *userPermission="['ADMIN']">
+    <button
+      routerLink="project/create"
+      class="green-button"
+      mat-button>
+      <mat-icon>add</mat-icon>
+      <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+    </button>
+  </div>
   <div class="page">
     <div class="news-list" fxLayout="row wrap" fxLayoutAlign="center center">
       <ng-container *ngFor="let project of projects">
-        <app-news-item
+        <app-home-item
           [item]="project"
           [type]="'project'"
-        ></app-news-item>
+        ></app-home-item>
       </ng-container>
     </div>
   </div>

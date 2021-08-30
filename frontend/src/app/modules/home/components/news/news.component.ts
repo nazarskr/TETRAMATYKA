@@ -3,9 +3,10 @@ import { NewsItemShort } from '@shared/interfaces/news';
 import { ProjectShort } from '@shared/interfaces/projects';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { NewsService } from '../../services/news.service';
-import { ProjectsService } from '../../../projects/services/projects.service';
+import { ProjectsService } from '../../services/projects.service';
 import { forkJoin } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news',
@@ -18,7 +19,8 @@ export class NewsComponent extends UnsubscribeOnDestroy implements OnInit {
 
   constructor(
     private _newsService: NewsService,
-    private _projectsService: ProjectsService
+    private _projectsService: ProjectsService,
+    private _router: Router
   ) {
     super();
   }

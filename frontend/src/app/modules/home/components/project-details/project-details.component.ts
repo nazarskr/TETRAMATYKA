@@ -6,12 +6,12 @@ import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy"
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Project } from "@shared/interfaces/projects";
-import { ProjectsService } from "../services/projects.service";
+import { ProjectsService } from "../../services/projects.service";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { TranslateService } from "@ngx-translate/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-project-details',

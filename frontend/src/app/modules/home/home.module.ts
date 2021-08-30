@@ -8,16 +8,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { NewsComponent } from './components/news/news.component';
-import { NewsItemComponent } from './components/news-item/news-item.component';
+import { HomeItemComponent } from './components/home-item/home-item.component';
 import { NewsDetailsComponent } from './components/news-details/news-details.component';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     NewsComponent,
-    NewsItemComponent,
-    NewsDetailsComponent
+    HomeItemComponent,
+    NewsDetailsComponent,
+    ProjectDetailsComponent
   ],
   imports: [
       CommonModule,
