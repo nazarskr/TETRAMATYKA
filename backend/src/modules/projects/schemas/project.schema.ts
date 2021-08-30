@@ -15,9 +15,6 @@ export class Project {
     @Prop()
     imageUrl: string;
 
-    @Prop()
-    videoUrl: string;
-
     @Prop({required: true})
     archiveYear: number;
 }
