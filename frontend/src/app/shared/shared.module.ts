@@ -42,6 +42,8 @@ import { DragAndDropFieldDirective } from './directives/drag-and-drop-field.dire
 import { FooterComponent } from './components/footer/footer.component';
 import { ItemDetailsViewComponent } from './components/item-details-view/item-details-view.component';
 import { TitledItemsListComponent } from './components/titled-items-list/titled-items-list.component';
+import { ItemDetailsPrimaryComponent } from './components/item-details-primary/item-details-primary.component';
+import { ItemDetailsSecondaryComponent } from './components/item-details-secondary/item-details-secondary.component';
 
 const materialModules = [
   MatButtonModule,
@@ -76,7 +78,9 @@ const materialModules = [
     FooterComponent,
     LocalDatePipe,
     ItemDetailsViewComponent,
-    TitledItemsListComponent
+    TitledItemsListComponent,
+    ItemDetailsPrimaryComponent,
+    ItemDetailsSecondaryComponent
   ],
   imports: [
     ...materialModules,
@@ -102,7 +106,9 @@ const materialModules = [
     FooterComponent,
     LocalDatePipe,
     ItemDetailsViewComponent,
-    TitledItemsListComponent
+    TitledItemsListComponent,
+    ItemDetailsPrimaryComponent,
+    ItemDetailsSecondaryComponent
   ],
   providers: [
     UnsubscribeOnDestroy

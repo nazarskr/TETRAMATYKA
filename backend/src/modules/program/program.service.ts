@@ -10,7 +10,8 @@ export class ProgramService {
     }
 
     async getAllProgramItems(currentYear: number): Promise<ProgramItem[]> {
-        return this.programModel.find({archiveYear: currentYear});
+        return this.programModel.find({archiveYear: currentYear})
+            .sort({'eventStartDate': 1});
     }
 
     async addProgramItem(programItemDto: ProgramItemDto): Promise<ProgramItem> {

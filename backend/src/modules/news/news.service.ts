@@ -10,7 +10,9 @@ export class NewsService {
     }
 
     async getAllNews(currentYear: number): Promise<NewsItem[]> {
-        return this.newsItemModel.find({archiveYear: currentYear});
+        return this.newsItemModel.find({archiveYear: currentYear})
+            .sort({'eventDate': -1})
+            .limit(3);
     }
 
     async getNewsItemById(id: string): Promise<NewsItem> {

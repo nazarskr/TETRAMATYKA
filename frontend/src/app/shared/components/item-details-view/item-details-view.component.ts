@@ -11,7 +11,7 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./item-details-view.component.scss']
 })
 export class ItemDetailsViewComponent implements OnInit {
-  @Input() item: Project | NewsItem | Participant;
+  @Input() item: any;
   @Input() imageUrl: SafeUrl;
   @Input() titleProp: string = 'title';
   @Input() descriptionProp: string = 'description';
