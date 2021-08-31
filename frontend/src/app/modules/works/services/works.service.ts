@@ -10,11 +10,11 @@ export class WorksService {
   public worksUri = '/api/works'
   constructor(private http: HttpClient) { }
 
-  getAllWorksItems(): Observable<WorksItem[]> {
+  getAllWorks(): Observable<WorksItem[]> {
     return this.http.get<WorksItem[]>(this.worksUri);
   }
 
-  getAllWorksItemsShort(): Observable<WorksItemShort[]> {
+  getAllWorksShort(): Observable<WorksItemShort[]> {
     return this.http.get<WorksItemShort[]>(`${this.worksUri}/short`);
   }
 

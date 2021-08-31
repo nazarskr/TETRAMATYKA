@@ -1,1 +1,27 @@
-<p>works works!</p>
+<div class="page p-25">
+  <div class="buttons-wrapper"
+       *userPermission="['ADMIN']">
+    <button
+      routerLink="create"
+      class="green-button"
+      mat-button>
+      <mat-icon>add</mat-icon>
+      <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+    </button>
+  </div>
+
+  <h2 class="page-title">{{'MENU.WORKS' | translate}}</h2>
+  <ng-container *ngIf="works.length; else willBeSoon">
+    <app-titled-items-list
+      [items]="works"
+      [titleProp]="'title'">
+    </app-titled-items-list>
+  </ng-container>
+  <ng-template #willBeSoon>
+    <div class="will-be-soon-message">
+      {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
+    </div>
+  </ng-template>
+</div>
