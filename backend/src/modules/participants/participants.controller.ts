@@ -37,6 +37,11 @@ export class ParticipantsController {
         return this.participantsService.getAllParticipantsShort(+query.year);
     }
 
+    @Get('/works-item')
+    getParticipantsForWorksItem(@Query() query: ICommonQuery): Promise<Participant[]> {
+        return this.participantsService.getParticipantsForWorksItem(query.childrenIds);
+    }
+
     @Get(':id')
     @UseInterceptors(new ImageUrlInterceptor())
     getParticipantById(@Param('id') id: string): Promise<Participant> {

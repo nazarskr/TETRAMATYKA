@@ -17,6 +17,10 @@ export class ParticipantsService {
         return this.participantModel.find({archiveYear: year}, {bio: 0, imageUrl: 0});
     }
 
+    async getParticipantsForWorksItem(participantIds: string[]): Promise<Participant[]> {
+        return this.participantModel.find({_id: {$in: participantIds}});
+    }
+
     async getParticipantById(id: string): Promise<Participant> {
         return this.participantModel.findById(id);
     }

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import {InjectModel} from '@nestjs/mongoose';
-import {WorksItem, WorksItemDocument} from './schemas/work.schema';
-import {Model} from 'mongoose';
-import {WorksItemDto} from './dto/works-item.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { WorksItem, WorksItemDocument } from './schemas/work.schema';
+import { Model } from 'mongoose';
+import { WorksItemDto } from './dto/works-item.dto';
 
 @Injectable()
 export class WorksService {
@@ -15,6 +15,10 @@ export class WorksService {
 
     async getAllWorksShort(year: number): Promise<WorksItem[]> {
         return this.worksModel.find({archiveYear: year}, {description: 0, imageUrl: 0});
+    }
+
+    async getWorksForParticipant(worksIds: string[]): Promise<WorksItem[]> {
+        return this.worksModel.find({_id: {$in: worksIds}});
     }
 
     async getWorksItemById(id: string): Promise<WorksItem> {

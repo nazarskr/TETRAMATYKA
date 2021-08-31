@@ -44,6 +44,7 @@ import { ItemDetailsViewComponent } from './components/item-details-view/item-de
 import { TitledItemsListComponent } from './components/titled-items-list/titled-items-list.component';
 import { ItemDetailsPrimaryComponent } from './components/item-details-primary/item-details-primary.component';
 import { ItemDetailsSecondaryComponent } from './components/item-details-secondary/item-details-secondary.component';
+import { ComplexItemDetailsViewComponent } from './components/complex-item-details-view/complex-item-details-view.component';
 
 const materialModules = [
   MatButtonModule,
@@ -80,7 +81,8 @@ const materialModules = [
     ItemDetailsViewComponent,
     TitledItemsListComponent,
     ItemDetailsPrimaryComponent,
-    ItemDetailsSecondaryComponent
+    ItemDetailsSecondaryComponent,
+    ComplexItemDetailsViewComponent
   ],
   imports: [
     ...materialModules,
@@ -108,7 +110,8 @@ const materialModules = [
     ItemDetailsViewComponent,
     TitledItemsListComponent,
     ItemDetailsPrimaryComponent,
-    ItemDetailsSecondaryComponent
+    ItemDetailsSecondaryComponent,
+    ComplexItemDetailsViewComponent
   ],
   providers: [
     UnsubscribeOnDestroy

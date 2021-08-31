@@ -18,6 +18,14 @@ export class WorksService {
     return this.http.get<WorksItemShort[]>(`${this.worksUri}/short`);
   }
 
+  getWorksForParticipant(childrenIds: string[]): Observable<WorksItem[]> {
+    const params: any = {
+      childrenIds
+    };
+
+    return this.http.get<WorksItem[]>(`${this.worksUri}/participant`, {params});
+  }
+
   getWorksItemsById(id: string): Observable<WorksItem> {
     return this.http.get<WorksItem>(`${this.worksUri}/${id}`);
   }
