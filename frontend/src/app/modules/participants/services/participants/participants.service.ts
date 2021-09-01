@@ -23,7 +23,7 @@ export class ParticipantsService {
     const params: any = {
       childrenIds
     }
-    return this.http.get<Participant[]>(this.participantsUri, {params});
+    return this.http.get<Participant[]>(`${this.participantsUri}/works-item`, {params});
   }
 
   getParticipantById(id: string): Observable<Participant> {
