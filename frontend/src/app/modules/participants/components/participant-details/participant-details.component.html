@@ -14,12 +14,13 @@
                               [titleProp]="'fullName'"
                               [descriptionProp]="'bio'">
     </app-item-details-primary>
-  </ng-container>
-  <ng-container *ngFor="let worksItem of works">
-    <app-item-details-secondary
-      [item]="worksItem"
-      [titleProp]="'title'"
-      [descriptionProp]="'description'">
-    </app-item-details-secondary>
+
+    <ng-container *ngFor="let worksItem of works">
+      <app-item-details-secondary
+        [item]="worksItem"
+        [titleProp]="'title'"
+        [descriptionProp]="'description'">
+      </app-item-details-secondary>
+    </ng-container>
   </ng-container>
 </div>

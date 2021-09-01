@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { AddEditParticipantComponent } from './components/add-edit-participant/add-edit-participant.component';
 import { AddEditWorksItemComponent } from './components/add-edit-works-item/add-edit-works-item.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { AddEditWorksItemComponent } from './components/add-edit-works-item/add-
   imports: [
     CommonModule,
     TranslateModule,
+    ReactiveFormsModule,
     WorksRoutingModule,
     SharedModule
   ]

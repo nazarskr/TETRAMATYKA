@@ -6,7 +6,6 @@ import { WorksDetailsComponent } from './components/works-details/works-details.
 
 const routes: Routes = [
   {path: '', component: WorksComponent},
-  {path: 'create', component: WorksDetailsComponent, canActivate: [AdminGuard]},
   {path: ':id', component: WorksDetailsComponent},
 ];
 

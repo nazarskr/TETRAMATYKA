@@ -2,8 +2,8 @@
   <div class="buttons-wrapper"
        *userPermission="['ADMIN']">
     <button
-      routerLink="create"
       class="green-button"
+      (click)="addWorksItem()"
       mat-button>
       <mat-icon>add</mat-icon>
       <span>

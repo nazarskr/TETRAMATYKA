@@ -1,12 +1,41 @@
-<ng-container *ngIf="editMode; else viewMode"></ng-container>
+<div class="page" *ngIf="worksItem">
+  <button
+    class="back-button"
+    type="button"
+    mat-button
+    (click)="goToWorksList()">
+    <mat-icon>arrow_back</mat-icon>
+    <span>
+      {{'ACTIONS.BACK' | translate}}
+    </span>
+  </button>
+  <div fxLayout="row" fxLayoutGap="30px" class="buttons-wrapper" *userPermission="['ADMIN']">
+    <button
+      class="orange-button"
+      type="button"
+      mat-button
+      (click)="editWorksItem()">
+        <mat-icon>edit</mat-icon>
+        <span>
+          {{'ACTIONS.EDIT' | translate}}
+        </span>
+    </button>
 
-<ng-template #viewMode>
-  <ng-container *ngIf="worksItem">
-    <app-item-details-primary [item]="worksItem"
-                              [titleProp]="'fullName'"
-                              [descriptionProp]="'bio'">
-    </app-item-details-primary>
-  </ng-container>
+    <button
+      class="red-button"
+      type="button"
+      mat-button
+      (click)="openDeleteWorksItemDialog()">
+        <mat-icon>delete</mat-icon>
+        <span>
+          {{'ACTIONS.DELETE' | translate}}
+        </span>
+    </button>
+  </div>
+  <app-item-details-primary [item]="worksItem"
+                            [titleProp]="'fullName'"
+                            [descriptionProp]="'bio'">
+  </app-item-details-primary>
   <ng-container *ngFor="let participant of participants">
     <app-item-details-secondary
       [item]="participant"
@@ -14,4 +43,4 @@
       [descriptionProp]="'description'">
     </app-item-details-secondary>
   </ng-container>
-</ng-template>
+</div>

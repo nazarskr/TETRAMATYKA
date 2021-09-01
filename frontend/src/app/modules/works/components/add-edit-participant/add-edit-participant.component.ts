@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Participant } from '@shared/interfaces/participants';
@@ -9,8 +9,9 @@ import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ParticipantsService } from '../../../participants/services/participants/participants.service';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
-import { MatDialog } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
+import {DialogData} from '@shared/interfaces/dialog';
 
 @Component({
   selector: 'app-add-edit-participant',
@@ -18,14 +19,13 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./add-edit-participant.component.scss']
 })
 export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements OnInit {
-  public editMode = false;
-  public participantId: string;
   public participant: Participant;
   public participantForm: FormGroup;
   public imageUrl: SafeUrl;
   public multipartFile: File;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _participantsService: ParticipantsService,
@@ -47,7 +47,12 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
       fullName_EN: ['', Validators.required],
       bio_UA: ['', Validators.required],
       bio_EN: ['', Validators.required]
-    })
+    });
+
+    if (this.data.participant) {
+      this.participant = this.data.participant;
+      this.formPatchValue();
+    }
   }
 
   formPatchValue(): void {
@@ -57,22 +62,6 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
       bio_UA: this.participant.bio.ua,
       bio_EN: this.participant.bio.en
     })
-  }
-
-  getParticipantById(): void {
-    this._participantsService.getParticipantById(this.participantId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Participant) => {
-        this.participant = res;
-        this.imageUrl = res.imageUrl;
-        this.multipartFile = null;
-        this.editMode = false;
-        this.formPatchValue();
-      });
-  }
-
-  editParticipant(): void {
-    this.editMode = true;
   }
 
   saveParticipant(): void {
@@ -104,7 +93,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
     if (this.multipartFile) {
       formData.append('image', this.multipartFile);
     }
-    this.participantId ? this.updateParticipant(formData) : this.createParticipant(formData);
+    this.participant._id ? this.updateParticipant(formData) : this.createParticipant(formData);
   }
 
   createParticipant(formData: FormData): void {
@@ -117,11 +106,11 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
   }
 
   updateParticipant(formData: FormData): void {
-    this._participantsService.updateParticipant(this.participantId, formData)
+    this._participantsService.updateParticipant(this.participant._id, formData)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Participant updated successfully');
-        this.getParticipantById();
+        // close
       });
   }
 
@@ -130,7 +119,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
   }
 
   cancelEditing(): void {
-    this.getParticipantById();
+    // close
   }
 
   openDeleteParticipantDialog(): void {
@@ -149,7 +138,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
   }
 
   deleteParticipant(): void {
-    this._participantsService.deleteParticipant(this.participantId)
+    this._participantsService.deleteParticipant(this.participant._id)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Participant deleted successfully');

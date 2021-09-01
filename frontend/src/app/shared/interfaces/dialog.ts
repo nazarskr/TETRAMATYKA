@@ -1,4 +1,9 @@
+import { Participant } from '@shared/interfaces/participants';
+import { WorksItem } from '@shared/interfaces/works';
+
 export interface DialogData {
   title: string;
-  message: string;
+  message?: string;
+  participant?: Participant;
+  worksItem?: WorksItem;
 }

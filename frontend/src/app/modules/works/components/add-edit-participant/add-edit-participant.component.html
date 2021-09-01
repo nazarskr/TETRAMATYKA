@@ -1,61 +1,12 @@
-<form
-  class="p-25 page"
-  #form="ngForm"
-  [formGroup]="participantForm"
-  (ngSubmit)="saveParticipant()">
-  <div fxLayout="row" fxLayoutGap="30px" class="buttons-wrapper">
-    <div fxLayout="row" *userPermission="['ADMIN']">
-      <ng-container *ngIf="!editMode; else editModeBlock">
-        <button
-          class="orange-button"
-          type="button"
-          mat-button
-          (click)="editParticipant()">
-          <mat-icon>edit</mat-icon>
-          <span>
-            {{'ACTIONS.EDIT' | translate}}
-          </span>
-        </button>
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+  <form
+    class="p-25 page"
+    #form="ngForm"
+    [formGroup]="participantForm"
+    (ngSubmit)="saveParticipant()">
 
-        <button
-          class="red-button"
-          type="button"
-          mat-button
-          (click)="openDeleteParticipantDialog()">
-          <mat-icon>delete</mat-icon>
-          <span>
-            {{'ACTIONS.DELETE' | translate}}
-          </span>
-        </button>
-      </ng-container>
-
-      <ng-template #editModeBlock>
-        <button
-          class="green-button"
-          type="submit"
-          mat-button>
-          <mat-icon>done</mat-icon>
-          <span>
-            {{'ACTIONS.SAVE' | translate}}
-          </span>
-        </button>
-
-        <button
-          class="red-button"
-          type="button"
-          mat-button
-          (click)="cancelEditing()">
-          <mat-icon>close</mat-icon>
-          <span>
-            {{'ACTIONS.CANCEL' | translate}}
-          </span>
-        </button>
-      </ng-template>
-    </div>
-  </div>
-
-  <div class="mt-25">
-    <ng-container *ngIf="editMode; else viewMode">
+    <div class="mt-25">
       <div class="editor-label m-0">Ім'я учасника (UA):</div>
       <mat-form-field floatLabel="never">
         <input matInput
@@ -63,7 +14,7 @@
                autocomplete="chrome-off"
                placeholder="Напишіть ім'я">
         <mat-error *ngIf="participantForm.controls['fullName_UA'].hasError('required') &&
-                    participantForm.controls['fullName_UA'].touched || form.submitted">
+                  participantForm.controls['fullName_UA'].touched || form.submitted">
           Це поле обов'язкове
         </mat-error>
       </mat-form-field>
@@ -73,7 +24,7 @@
           formControlName="bio_UA"
           [placeholder]="'Біо учасника фестивалю'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="participantForm.controls['bio_UA'].hasError('required') &&
-                    participantForm.controls['bio_UA'].touched || form.submitted">
+                  participantForm.controls['bio_UA'].touched || form.submitted">
           Це поле обов'язкове
         </mat-hint>
       </div>
@@ -84,7 +35,7 @@
                autocomplete="chrome-off"
                placeholder="Type a name">
         <mat-error *ngIf="participantForm.controls['fullName_EN'].hasError('required') &&
-                    participantForm.controls['fullName_EN'].touched || form.submitted">
+                  participantForm.controls['fullName_EN'].touched || form.submitted">
           This field is required
         </mat-error>
       </mat-form-field>
@@ -94,7 +45,7 @@
           formControlName="bio_EN"
           [placeholder]="'The participant\'s bio'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="participantForm.controls['bio_EN'].hasError('required') &&
-                    participantForm.controls['bio_UA'].touched || form.submitted">
+                  participantForm.controls['bio_UA'].touched || form.submitted">
           This field is required
         </mat-hint>
       </div>
@@ -123,6 +74,32 @@
           (fileUploaded)="changeImage($event)"
         ></app-drag-n-drop-upload>
       </ng-template>
-    </ng-container>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <div class="actions-row"
+       fxLayout="row" fxLayoutAlign="flex-end center">
+    <button
+      class="red-button"
+      type="button"
+      mat-button
+      mat-dialog-close
+      (click)="cancelEditing()">
+      <mat-icon>close</mat-icon>
+      <span>
+          {{'ACTIONS.CANCEL' | translate}}
+        </span>
+    </button>
+
+    <button
+      class="green-button"
+      type="submit"
+      mat-button>
+        <mat-icon>done</mat-icon>
+        <span>
+          {{'ACTIONS.SAVE' | translate}}
+        </span>
+    </button>
   </div>
-</form>
+</div>
