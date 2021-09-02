@@ -31,26 +31,25 @@ export class WorksComponent extends UnsubscribeOnDestroy implements OnInit {
     this._worksService.getAllWorksShort()
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: WorksItemShort[]) => {
-        // TODO: remove mock
-        //this.works = res;
-        this.works = [
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-          {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        ];
+        this.works = res;
+        // this.works = [
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
+        // ];
       })
   }
 
@@ -63,8 +62,8 @@ export class WorksComponent extends UnsubscribeOnDestroy implements OnInit {
 
     dialogRef.afterClosed()
       .pipe(filter(res => !!res))
-      .subscribe((res: string) => {
-        this._router.navigate([`/works/${res}`])
+      .subscribe((res: boolean) => {
+        this.getAllWorksShort();
       });
   }
 

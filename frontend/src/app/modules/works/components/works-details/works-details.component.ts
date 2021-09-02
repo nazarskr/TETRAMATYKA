@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { Participant } from '@shared/interfaces/participants';
 import { WorksItem } from '@shared/interfaces/works';
@@ -10,6 +10,7 @@ import {ParticipantsService} from '../../../participants/services/participants/p
 import {ToasterService} from '@shared/services/toaster/toaster.service';
 import {AddEditWorksItemComponent} from '../add-edit-works-item/add-edit-works-item.component';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {AddEditParticipantComponent} from '../add-edit-participant/add-edit-participant.component';
 
 @Component({
   selector: 'app-works-details',
@@ -46,7 +47,7 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: WorksItem) => {
         this.worksItem = res;
-
+        this.getParticipantForWorksItem();
       });
   }
 
@@ -60,12 +61,33 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
     }
   }
 
-  editWorksItem(): void {
-    const dialogRef = this._dialog.open(AddEditWorksItemComponent, {
+  addParticipant(): void {
+    const dialogRef = this._dialog.open(AddEditParticipantComponent, {
       data: {
-        title: 'Edit works item',
-        worksItem: this.worksItem
+        title: 'Add participant'
       }
+    });
+
+    dialogRef.afterClosed()
+      .pipe(filter(result => !!result))
+      .subscribe(() => {
+        this.getWorksItemById();
+      });
+  }
+
+  editWorksItem(): void {
+    const title = 'Edit works item';
+    this.openEditItemDialog(title, this.worksItem, AddEditWorksItemComponent);
+  }
+
+  editParticipant(participant: Participant): void {
+    const title = 'Edit participant';
+    this.openEditItemDialog(title, participant, AddEditParticipantComponent);
+  }
+
+  openEditItemDialog(title: string, item: WorksItem | Participant, component: any): void {
+    const dialogRef = this._dialog.open(component, {
+      data: {title, item}
     });
 
     dialogRef.afterClosed()
@@ -95,6 +117,29 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Works item deleted successfully');
+      })
+  }
+
+  openDeleteParticipantDialog(): void {
+    const dialogRef = this._dialog.open(SimpleDialogComponent, {
+      data: {
+        title: 'Delete participant',
+        message: 'Are you sure you want to delete this works item?'
+      }
+    });
+
+    dialogRef.afterClosed()
+      .pipe(filter(result => !!result))
+      .subscribe(() => {
+        this.deleteParticipant();
+      });
+  }
+
+  deleteParticipant(): void {
+    this._participantService.deleteParticipant(this.worksItem._id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this._toaster.showMessage('Participant deleted successfully');
       })
   }
 

@@ -4,6 +4,5 @@ import { WorksItem } from '@shared/interfaces/works';
 export interface DialogData {
   title: string;
   message?: string;
-  participant?: Participant;
-  worksItem?: WorksItem;
+  item?: any;
 }

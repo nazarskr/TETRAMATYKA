@@ -9,7 +9,7 @@ import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ParticipantsService } from '../../../participants/services/participants/participants.service';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import {DialogData} from '@shared/interfaces/dialog';
 
@@ -25,6 +25,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
   public multipartFile: File;
 
   constructor(
+    public dialogRef: MatDialogRef<AddEditParticipantComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
@@ -39,6 +40,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
   }
 
   ngOnInit(): void {
+    this.initForm();
   }
 
   initForm(): void {
@@ -49,8 +51,8 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
       bio_EN: ['', Validators.required]
     });
 
-    if (this.data.participant) {
-      this.participant = this.data.participant;
+    if (this.data.item) {
+      this.participant = this.data.item;
       this.formPatchValue();
     }
   }
@@ -85,7 +87,8 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
         en: formValue.bio_EN,
         ua: formValue.bio_UA
       },
-      imageUrl: this.participant ? this.participant.imageUrl : ''
+      imageUrl: this.participant ? this.participant.imageUrl : '',
+      works: this.participant ? this.participant.works : null
     }
 
     const formData = new FormData();
@@ -93,7 +96,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
     if (this.multipartFile) {
       formData.append('image', this.multipartFile);
     }
-    this.participant._id ? this.updateParticipant(formData) : this.createParticipant(formData);
+    this.participant ? this.updateParticipant(formData) : this.createParticipant(formData);
   }
 
   createParticipant(formData: FormData): void {
@@ -116,10 +119,6 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
 
   openCreatedParticipant(id: string): void {
     this._router.navigate([`participants/${id}`]);
-  }
-
-  cancelEditing(): void {
-    // close
   }
 
   openDeleteParticipantDialog(): void {
@@ -166,4 +165,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
     this.imageUrl = null;
   }
 
+  closeDialog(res: boolean) {
+    this.dialogRef.close();
+  }
 }

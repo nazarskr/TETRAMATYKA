@@ -9,8 +9,8 @@ export type ParticipantDocument = Participant & Document;
 
 @Schema()
 export class Participant {
-    @Prop({type: Types.ObjectId})
-    _id: Types.ObjectId;
+    // @Prop({type: Types.ObjectId})
+    // _id: Types.ObjectId;
 
     @Prop({ required: true , type: MultiLanguage})
     fullName: MultiLanguage;

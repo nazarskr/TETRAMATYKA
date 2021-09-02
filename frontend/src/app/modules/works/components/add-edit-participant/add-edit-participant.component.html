@@ -1,8 +1,9 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
+<h2 mat-dialog-title class="border-bottom-grey">{{data.title}}</h2>
 <div mat-dialog-content>
   <form
     class="p-25 page"
     #form="ngForm"
+    id="participant-form"
     [formGroup]="participantForm"
     (ngSubmit)="saveParticipant()">
 
@@ -77,15 +78,14 @@
     </div>
   </form>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="border-top-grey">
   <div class="actions-row"
        fxLayout="row" fxLayoutAlign="flex-end center">
     <button
       class="red-button"
       type="button"
       mat-button
-      mat-dialog-close
-      (click)="cancelEditing()">
+      mat-dialog-close>
       <mat-icon>close</mat-icon>
       <span>
           {{'ACTIONS.CANCEL' | translate}}
@@ -95,6 +95,7 @@
     <button
       class="green-button"
       type="submit"
+      form="participant-form"
       mat-button>
         <mat-icon>done</mat-icon>
         <span>

@@ -8,11 +8,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { AddEditParticipantComponent } from './components/add-edit-participant/add-edit-participant.component';
 import { AddEditWorksItemComponent } from './components/add-edit-works-item/add-edit-works-item.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ExistingParticipantModalComponent } from './components/existing-participant-modal/existing-participant-modal.component';
 
 
 @NgModule({
-  declarations: [WorksComponent, WorksDetailsComponent, AddEditParticipantComponent, AddEditWorksItemComponent],
+  declarations: [
+    WorksComponent,
+    WorksDetailsComponent,
+    AddEditParticipantComponent,
+    AddEditWorksItemComponent,
+    ExistingParticipantModalComponent
+  ],
   imports: [
     CommonModule,
     TranslateModule,

@@ -54,7 +54,7 @@ export class WorksController {
 
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
-        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('works'))
     }))
     async updateWorksItem(
         @Param('id') id: string,

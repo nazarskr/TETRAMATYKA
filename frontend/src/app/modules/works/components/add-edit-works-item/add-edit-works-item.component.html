@@ -1,8 +1,9 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
+<h2 mat-dialog-title class="border-bottom-grey">{{data.title}}</h2>
 <div mat-dialog-content>
   <form
     class="p-25 page"
     #form="ngForm"
+    id="works-form"
     [formGroup]="worksItemForm"
     (ngSubmit)="saveWorksItem()">
 
@@ -77,7 +78,7 @@
     </div>
   </form>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="border-top-grey">
   <div class="actions-row"
        fxLayout="row" fxLayoutAlign="flex-end center">
     <button
@@ -93,6 +94,7 @@
     <button
       class="green-button"
       type="submit"
+      form="works-form"
       mat-button>
         <mat-icon>done</mat-icon>
         <span>

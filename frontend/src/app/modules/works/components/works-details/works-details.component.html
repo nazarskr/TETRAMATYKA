@@ -1,46 +1,89 @@
-<div class="page" *ngIf="worksItem">
-  <button
-    class="back-button"
-    type="button"
-    mat-button
-    (click)="goToWorksList()">
-    <mat-icon>arrow_back</mat-icon>
-    <span>
-      {{'ACTIONS.BACK' | translate}}
-    </span>
-  </button>
-  <div fxLayout="row" fxLayoutGap="30px" class="buttons-wrapper" *userPermission="['ADMIN']">
+<div class="page p-25" *ngIf="worksItem">
+  <div fxLayout="row" fxLayoutGap="10px">
     <button
-      class="orange-button"
+      class="back-button"
       type="button"
       mat-button
-      (click)="editWorksItem()">
+      (click)="goToWorksList()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>
+      {{'ACTIONS.BACK' | translate}}
+    </span>
+    </button>
+    <div fxLayout="row" class="buttons-wrapper"
+         *userPermission="['ADMIN']">
+      <button
+        class="orange-button"
+        type="button"
+        mat-button
+        (click)="editWorksItem()">
         <mat-icon>edit</mat-icon>
         <span>
           {{'ACTIONS.EDIT' | translate}}
         </span>
-    </button>
+      </button>
 
-    <button
-      class="red-button"
-      type="button"
-      mat-button
-      (click)="openDeleteWorksItemDialog()">
+      <button
+        class="red-button"
+        type="button"
+        mat-button
+        (click)="openDeleteWorksItemDialog()">
         <mat-icon>delete</mat-icon>
         <span>
           {{'ACTIONS.DELETE' | translate}}
         </span>
-    </button>
+      </button>
+    </div>
   </div>
   <app-item-details-primary [item]="worksItem"
-                            [titleProp]="'fullName'"
-                            [descriptionProp]="'bio'">
+                            [titleProp]="'title'"
+                            [descriptionProp]="'description'">
   </app-item-details-primary>
-  <ng-container *ngFor="let participant of participants">
-    <app-item-details-secondary
-      [item]="participant"
-      [titleProp]="'title'"
-      [descriptionProp]="'description'">
-    </app-item-details-secondary>
+  <h4>{{'MENU.PARTICIPANTS' | translate}}</h4>
+  <div class="buttons-wrapper"
+       *userPermission="['ADMIN']">
+    <button
+      class="green-button"
+      (click)="addParticipant()"
+      mat-button>
+      <mat-icon>add</mat-icon>
+      <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+    </button>
+  </div>
+
+  <ng-container *ngIf="participants.length">
+    <ng-container *ngFor="let participant of participants">
+      <div fxLayout="row" class="buttons-wrapper"
+           *userPermission="['ADMIN']">
+        <button
+          class="orange-button"
+          type="button"
+          mat-button
+          (click)="editParticipant(participant)">
+          <mat-icon>edit</mat-icon>
+          <span>
+          {{'ACTIONS.EDIT' | translate}}
+        </span>
+        </button>
+
+        <button
+          class="red-button"
+          type="button"
+          mat-button
+          (click)="openDeleteParticipantDialog()">
+          <mat-icon>delete</mat-icon>
+          <span>
+          {{'ACTIONS.DELETE' | translate}}
+        </span>
+        </button>
+      </div>
+      <app-item-details-secondary
+        [item]="participant"
+        [titleProp]="'fullName'"
+        [descriptionProp]="'bio'">
+      </app-item-details-secondary>
+    </ng-container>
   </ng-container>
 </div>

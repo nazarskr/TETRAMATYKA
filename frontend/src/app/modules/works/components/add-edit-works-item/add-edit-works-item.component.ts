@@ -4,7 +4,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ParticipantsService} from '../../../participants/services/participants/participants.service';
 import {ToasterService} from '@shared/services/toaster/toaster.service';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
 import {filter, takeUntil} from 'rxjs/operators';
 import {SimpleDialogComponent} from '@shared/components/simple-dialog/simple-dialog.component';
@@ -26,6 +26,7 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
   public multipartFile: File;
 
   constructor(
+    public dialogRef: MatDialogRef<AddEditWorksItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
@@ -52,8 +53,9 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
       description_EN: ['', Validators.required]
     });
 
-    if (this.data.worksItem) {
-      this.worksItem = this.data.worksItem;
+    if (this.data.item) {
+      this.worksItem = this.data.item;
+      this.imageUrl = this.worksItem.imageUrl;
       this.formPatchValue();
     }
   }
@@ -89,7 +91,7 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
         ua: formValue.description_UA
       },
       imageUrl: this.worksItem ? this.worksItem.imageUrl : '',
-      participants: this.worksItem.participants
+      participants: this.worksItem ? this.worksItem.participants : null
     }
 
     const formData = new FormData();
@@ -97,7 +99,7 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
     if (this.multipartFile) {
       formData.append('image', this.multipartFile);
     }
-    this.worksItem._id ? this.updateWorksItem(formData) : this.createWorksItem(formData);
+    this.worksItem ? this.updateWorksItem(formData) : this.createWorksItem(formData);
   }
 
   createWorksItem(formData: FormData): void {
@@ -105,7 +107,7 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: WorksItem) => {
         this._toaster.showMessage('Works item created successfully');
-        // close this.openCreatedWorksItem(res._id);
+        this.closeModal(true);
       });
   }
 
@@ -114,12 +116,8 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Works item updated successfully');
-        // close true
+        this.closeModal(true);
       });
-  }
-
-  cancelEditing(): void {
-    // close
   }
 
   changeImage(data: any): void {
@@ -141,5 +139,9 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
   clearImage(): void {
     this.multipartFile = null;
     this.imageUrl = null;
+  }
+
+  closeModal(res: boolean) {
+    this.dialogRef.close(res);
   }
 }
