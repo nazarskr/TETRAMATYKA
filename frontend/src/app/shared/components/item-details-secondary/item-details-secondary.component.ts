@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-item-details-secondary',
@@ -10,7 +11,13 @@ export class ItemDetailsSecondaryComponent implements OnInit {
   @Input() titleProp: string;
   @Input() descriptionProp: string;
 
-  constructor() { }
+  get lang(): string {
+    return this._translateService.currentLang;
+  }
+
+  constructor(
+    private _translateService: TranslateService
+  ) { }
 
   ngOnInit(): void {
   }

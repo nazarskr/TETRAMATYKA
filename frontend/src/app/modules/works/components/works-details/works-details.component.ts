@@ -1,16 +1,17 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { Participant } from '@shared/interfaces/participants';
 import { WorksItem } from '@shared/interfaces/works';
-import {SimpleDialogComponent} from '@shared/components/simple-dialog/simple-dialog.component';
-import {filter, takeUntil} from 'rxjs/operators';
-import {MatDialog} from '@angular/material/dialog';
-import {WorksService} from '../../services/works.service';
-import {ParticipantsService} from '../../../participants/services/participants/participants.service';
-import {ToasterService} from '@shared/services/toaster/toaster.service';
-import {AddEditWorksItemComponent} from '../add-edit-works-item/add-edit-works-item.component';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {AddEditParticipantComponent} from '../add-edit-participant/add-edit-participant.component';
+import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
+import {filter, take, takeUntil} from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { WorksService } from '../../services/works.service';
+import { ParticipantsService } from '../../../participants/services/participants/participants.service';
+import { ToasterService } from '@shared/services/toaster/toaster.service';
+import { AddEditWorksItemComponent } from '../add-edit-works-item/add-edit-works-item.component';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { AddEditParticipantComponent } from '../add-edit-participant/add-edit-participant.component';
+import { ExistingParticipantModalComponent } from "../existing-participant-modal/existing-participant-modal.component";
 
 @Component({
   selector: 'app-works-details',
@@ -69,9 +70,33 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
     });
 
     dialogRef.afterClosed()
-      .pipe(filter(result => !!result))
+      .pipe(
+        filter(result => !!result),
+        takeUntil(this.destroy$)
+      )
       .subscribe(() => {
         this.getWorksItemById();
+      });
+  }
+
+  openSelectParticipantDialog(): void {
+    const dialogRef = this._dialog.open(ExistingParticipantModalComponent, {
+      data: {
+        title: 'Select participant'
+      }
+    });
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter(result => !!result),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((participantId: string) => {
+        console.log(participantId);
+        this.worksItem.participants.push(participantId);
+        const formData = new FormData();
+        formData.append('worksItem', JSON.stringify(this.worksItem));
+        this.updateParticipantsList(formData);
       });
   }
 
@@ -91,8 +116,20 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
     });
 
     dialogRef.afterClosed()
-      .pipe(filter(result => !!result))
+      .pipe(
+        filter(result => !!result),
+        takeUntil(this.destroy$)
+      )
       .subscribe(() => {
+        this.getWorksItemById();
+      });
+  }
+
+  updateParticipantsList(formData: FormData): void {
+    this._worksService.updateWorksItem(this.worksItem._id, formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this._toaster.showMessage('Participants list updated successfully');
         this.getWorksItemById();
       });
   }
@@ -106,7 +143,10 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
     });
 
     dialogRef.afterClosed()
-      .pipe(filter(result => !!result))
+      .pipe(
+        filter(result => !!result),
+        takeUntil(this.destroy$)
+      )
       .subscribe(() => {
         this.deleteWorksItem();
       });
@@ -129,7 +169,10 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
     });
 
     dialogRef.afterClosed()
-      .pipe(filter(result => !!result))
+      .pipe(
+        filter(result => !!result),
+        takeUntil(this.destroy$)
+      )
       .subscribe(() => {
         this.deleteParticipant();
       });

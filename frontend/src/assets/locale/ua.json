@@ -9,7 +9,9 @@
     "NOT_AVAILABLE": "Недоступно",
     "WILL_BE_AVAILABLE_SOON": "Буде доступно незабаром",
     "SUPPORTED_BY": "За підтримки",
-    "POSSIBLE_CHANGES": "У програмі можливі зміни"
+    "POSSIBLE_CHANGES": "У програмі можливі зміни",
+    "ADD_NEW": "Додати нового",
+    "SELECT_EXISTING": "Вибрати існуючого"
   },
   "MENU": {
     "MAIN": "Головна",

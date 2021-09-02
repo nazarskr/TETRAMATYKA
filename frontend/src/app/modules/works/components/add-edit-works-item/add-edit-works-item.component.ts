@@ -95,7 +95,7 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
     }
 
     const formData = new FormData();
-    formData.append('participant', JSON.stringify(body));
+    formData.append('worksItem', JSON.stringify(body));
     if (this.multipartFile) {
       formData.append('image', this.multipartFile);
     }

@@ -43,14 +43,22 @@
   <div class="buttons-wrapper"
        *userPermission="['ADMIN']">
     <button
+      [matMenuTriggerFor]="menu"
       class="green-button"
-      (click)="addParticipant()"
       mat-button>
       <mat-icon>add</mat-icon>
       <span>
         {{'ACTIONS.ADD' | translate}}
       </span>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="addParticipant()">
+        {{'COMMON.ADD_NEW' | translate}}
+      </button>
+      <button mat-menu-item (click)="openSelectParticipantDialog()">
+        {{'COMMON.SELECT_EXISTING' | translate}}
+      </button>
+    </mat-menu>
   </div>
 
   <ng-container *ngIf="participants.length">

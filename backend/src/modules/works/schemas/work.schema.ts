@@ -18,7 +18,7 @@ export class WorksItem {
     description: MultiLanguage;
 
     @Prop({type: [Types.ObjectId], ref: 'Participant'})
-    participant: IParticipant[];
+    participants: IParticipant[];
 
     @Prop()
     imageUrl: string;
