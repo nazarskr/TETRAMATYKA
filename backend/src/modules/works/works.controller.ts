@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, Req, UseInterceptors} from '@nestjs/common';
 import {WorksService} from './works.service';
 import {MultipleImageUrlsInterceptor} from '../../common/interceptors/multiple-image-urls.interceptor';
 import {ICommonQuery} from '../../common/interfaces/common-query';
@@ -9,6 +9,7 @@ import * as multerGoogleStorage from 'multer-google-storage';
 import {storageUtil} from '../../common/utils/storage.util';
 import {IMulterRequest} from '../../common/interfaces/multer-custom';
 import {WorksItemDto} from './dto/works-item.dto';
+import {WorksItemParticipantsDto} from './dto/works-Item-participants.dto';
 
 @Controller('works')
 export class WorksController {
@@ -27,6 +28,7 @@ export class WorksController {
     }
 
     @Get('/participant')
+    @UseInterceptors(new MultipleImageUrlsInterceptor())
     getWorksForParticipant(@Query() query: ICommonQuery): Promise<WorksItem[]> {
         return this.worksService.getWorksForParticipant(query.childrenIds);
     }
@@ -74,6 +76,15 @@ export class WorksController {
         }
         return this.worksService.updateWorksItem(id, worksItem);
     }
+
+    @Patch(':id')
+    async updateWorksItemParticipants(
+        @Param('id') id: string,
+        @Body() worksItemParticipants: WorksItemParticipantsDto
+    ): Promise<WorksItem> {
+        return this.worksService.updateWorksItemParticipants(id, worksItemParticipants);
+    }
+
 
     @Delete(':id')
     async deleteWorksItem(@Param('id') id: string): Promise<WorksItem> {

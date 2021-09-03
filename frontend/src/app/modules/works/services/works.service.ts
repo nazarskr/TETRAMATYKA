@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { WorksItem, WorksItemShort } from '@shared/interfaces/works';
+import { WorksItem, WorksItemParticipants, WorksItemShort } from '@shared/interfaces/works';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,10 @@ export class WorksService {
 
   updateWorksItem(id: string, data: FormData): Observable<WorksItem> {
     return this.http.put<WorksItem>(`${this.worksUri}/${id}`, data);
+  }
+
+  updateWorksItemParticipants(id: string, body: WorksItemParticipants): Observable<WorksItem> {
+    return this.http.patch<WorksItem>(`${this.worksUri}/${id}`, body);
   }
 
   deleteWorksItem(id: string): Observable<WorksItem> {

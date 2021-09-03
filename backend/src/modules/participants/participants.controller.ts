@@ -38,6 +38,7 @@ export class ParticipantsController {
     }
 
     @Get('/works-item')
+    @UseInterceptors(new MultipleImageUrlsInterceptor())
     getParticipantsForWorksItem(@Query() query: ICommonQuery): Promise<Participant[]> {
         return this.participantsService.getParticipantsForWorksItem(query.childrenIds);
     }

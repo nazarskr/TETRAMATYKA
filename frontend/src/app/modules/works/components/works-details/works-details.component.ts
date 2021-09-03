@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { Participant } from '@shared/interfaces/participants';
-import { WorksItem } from '@shared/interfaces/works';
+import {WorksItem, WorksItemParticipants} from '@shared/interfaces/works';
 import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
 import {filter, take, takeUntil} from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { AddEditWorksItemComponent } from '../add-edit-works-item/add-edit-works
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AddEditParticipantComponent } from '../add-edit-participant/add-edit-participant.component';
 import { ExistingParticipantModalComponent } from "../existing-participant-modal/existing-participant-modal.component";
+import {WorksItemParticipantsDto} from '../../../../../../../backend/dist/modules/works/dto/works-Item-participants.dto';
 
 @Component({
   selector: 'app-works-details',
@@ -93,10 +94,9 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
       )
       .subscribe((participantId: string) => {
         console.log(participantId);
-        this.worksItem.participants.push(participantId);
-        const formData = new FormData();
-        formData.append('worksItem', JSON.stringify(this.worksItem));
-        this.updateParticipantsList(formData);
+        const participants = [...this.worksItem.participants];
+        participants.push(participantId);
+        this.updateParticipantsList({participants});
       });
   }
 
@@ -125,8 +125,8 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
       });
   }
 
-  updateParticipantsList(formData: FormData): void {
-    this._worksService.updateWorksItem(this.worksItem._id, formData)
+  updateParticipantsList(worksItemParticipants: WorksItemParticipants): void {
+    this._worksService.updateWorksItemParticipants(this.worksItem._id, worksItemParticipants)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Participants list updated successfully');

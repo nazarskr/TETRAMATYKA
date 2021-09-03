@@ -12,3 +12,7 @@ export interface WorksItemShort {
   _id: string;
   title: MultiLanguage;
 }
+
+export interface WorksItemParticipants {
+  participants: string[];
+}
