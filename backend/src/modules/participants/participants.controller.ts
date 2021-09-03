@@ -20,6 +20,8 @@ import * as multerGoogleStorage from "multer-google-storage";
 import { storageUtil } from "../../common/utils/storage.util";
 import { ImageUrlInterceptor } from '../../common/interceptors/image-url.interceptor';
 import { MultipleImageUrlsInterceptor } from '../../common/interceptors/multiple-image-urls.interceptor';
+import {WorksItemDocument} from '../works/schemas/work.schema';
+import {UpdateWriteOpResult} from 'mongoose';
 
 @Controller('participants')
 export class ParticipantsController {
@@ -57,7 +59,7 @@ export class ParticipantsController {
         @Query() query: ICommonQuery,
         @Body() body: any,
         @Req() req: IMulterRequest
-    ): Promise<Participant> {
+    ): Promise<WorksItemDocument> {
         const participant: ParticipantDto = JSON.parse(body.participant);
         participant.archiveYear = +query.year;
         participant.imageUrl = req.files[0].path;
@@ -88,7 +90,7 @@ export class ParticipantsController {
     }
 
     @Delete(':id')
-    async deleteParticipant(@Param('id') id: string): Promise<Participant> {
+    async deleteParticipant(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const participantForDelete = await this.participantsService.getParticipantImageUrl(id);
         await storageUtil.removeFile(participantForDelete.imageUrl);
         return this.participantsService.deleteParticipant(id);

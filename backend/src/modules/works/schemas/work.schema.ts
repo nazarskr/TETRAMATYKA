@@ -8,9 +8,6 @@ export type WorksItemDocument = WorksItem & Document;
 
 @Schema()
 export class WorksItem {
-    // @Prop({type: Types.ObjectId})
-    // _id: Types.ObjectId;
-
     @Prop({ required: true, type: MultiLanguage })
     title: MultiLanguage;
 

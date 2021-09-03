@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
-import { Participant } from '@shared/interfaces/participants';
+import {Participant, ParticipantShort} from '@shared/interfaces/participants';
 import {WorksItem, WorksItemParticipants} from '@shared/interfaces/works';
 import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
 import {filter, take, takeUntil} from 'rxjs/operators';
@@ -24,6 +24,7 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
   public worksItemId: string;
   public worksItem: WorksItem;
   public participants: Participant[] = [];
+  public participantsShort: ParticipantShort[] = [];
 
   constructor(
     private _router: Router,
@@ -31,7 +32,7 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
     private _toaster: ToasterService,
     private _activatedRoute: ActivatedRoute,
     private _worksService: WorksService,
-    private _participantService: ParticipantsService
+    private _participantsService: ParticipantsService
   ) {
     super();
   }
@@ -51,12 +52,13 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
       .subscribe((res: WorksItem) => {
         this.worksItem = res;
         this.getParticipantForWorksItem();
+        this.getParticipantsShort();
       });
   }
 
   getParticipantForWorksItem(): void {
     if (this.worksItem.participants && this.worksItem.participants.length > 0) {
-      this._participantService.getParticipantsForWorksItem(this.worksItem.participants)
+      this._participantsService.getParticipantsForWorksItem(this.worksItem.participants)
         .pipe(takeUntil(this.destroy$))
         .subscribe((res: Participant[]) => {
           this.participants = res;
@@ -67,7 +69,8 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
   addParticipant(): void {
     const dialogRef = this._dialog.open(AddEditParticipantComponent, {
       data: {
-        title: 'Add participant'
+        title: 'Add participant',
+        parentId: this.worksItem._id
       }
     });
 
@@ -81,10 +84,32 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
       });
   }
 
+  getParticipantsShort(): void {
+    this._participantsService.getAllParticipantsShort()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: ParticipantShort[]) => {
+        this.participantsShort = res.filter(item => {
+          const participantExists = this.worksItem.participants.find(participant => {
+            return participant === item._id;
+          });
+          return !participantExists;
+        });
+      });
+  }
+
+  selectParticipantFromList(): void {
+    if (this.participantsShort.length) {
+      this.openSelectParticipantDialog();
+    } else {
+      this._toaster.showWarningMessage('You have no participants to add');
+    }
+  }
+
   openSelectParticipantDialog(): void {
     const dialogRef = this._dialog.open(ExistingParticipantModalComponent, {
       data: {
-        title: 'Select participant'
+        title: 'Select participant',
+        participants: this.participantsShort
       }
     });
 
@@ -107,14 +132,11 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
 
   editParticipant(participant: Participant): void {
     const title = 'Edit participant';
-    this.openEditItemDialog(title, participant, AddEditParticipantComponent, this.worksItem._id);
+    this.openEditItemDialog(title, participant, AddEditParticipantComponent);
   }
 
-  openEditItemDialog(title: string, item: WorksItem | Participant, component: any, parentId?: string): void {
+  openEditItemDialog(title: string, item: WorksItem | Participant, component: any): void {
     const data: DialogData = {title, item};
-    if (parentId) {
-      data.parentId = parentId;
-    }
     const dialogRef = this._dialog.open(component, {data});
 
     dialogRef.afterClosed()
@@ -184,10 +206,11 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
   }
 
   deleteParticipant(id: string): void {
-    this._participantService.deleteParticipant(id)
+    this._participantsService.deleteParticipant(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Participant deleted successfully');
+        this.getWorksItemById();
       })
   }
 

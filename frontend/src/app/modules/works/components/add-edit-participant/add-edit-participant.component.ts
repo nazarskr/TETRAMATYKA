@@ -53,6 +53,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
 
     if (this.data.item) {
       this.participant = this.data.item;
+      this.imageUrl = this.data.item.imageUrl;
       this.formPatchValue();
     }
   }

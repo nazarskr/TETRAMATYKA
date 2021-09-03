@@ -10,6 +10,7 @@ import {storageUtil} from '../../common/utils/storage.util';
 import {IMulterRequest} from '../../common/interfaces/multer-custom';
 import {WorksItemDto} from './dto/works-item.dto';
 import {WorksItemParticipantsDto} from './dto/works-Item-participants.dto';
+import {ParticipantDocument} from '../participants/schemas/participant.schema';
 
 @Controller('works')
 export class WorksController {
@@ -82,7 +83,7 @@ export class WorksController {
         @Param('id') id: string,
         @Param('participantId') participantId: string,
         @Body() worksItemParticipants: WorksItemParticipantsDto
-    ): Promise<void | WorksItem> {
+    ): Promise<ParticipantDocument> {
         return this.worksService.updateWorksItemParticipants(id, participantId, worksItemParticipants);
     }
 

@@ -1,6 +1,6 @@
 <h2 mat-dialog-title class="border-bottom-grey">{{data.title}}</h2>
 <div mat-dialog-content>
-  <mat-form-field class="w-100">
+  <mat-form-field class="w-100" *ngIf="participants.length">
     <mat-label>{{'COMMON.SELECT_EXISTING' | translate}}</mat-label>
     <mat-select [(ngModel)]="selectedParticipant">
       <mat-option *ngFor="let participant of participants"

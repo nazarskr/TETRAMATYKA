@@ -39,9 +39,11 @@
                             [titleProp]="'title'"
                             [descriptionProp]="'description'">
   </app-item-details-primary>
-  <h4>{{'MENU.PARTICIPANTS' | translate}}</h4>
-  <div class="buttons-wrapper"
+  <mat-divider class="mv-10"></mat-divider>
+  <div class="buttons-wrapper mb-15"
+       fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px"
        *userPermission="['ADMIN']">
+    <h4>{{'MENU.PARTICIPANTS' | translate}}</h4>
     <button
       [matMenuTriggerFor]="menu"
       class="green-button"
@@ -55,7 +57,7 @@
       <button mat-menu-item (click)="addParticipant()">
         {{'COMMON.ADD_NEW' | translate}}
       </button>
-      <button mat-menu-item (click)="openSelectParticipantDialog()">
+      <button mat-menu-item (click)="selectParticipantFromList()">
         {{'COMMON.SELECT_EXISTING' | translate}}
       </button>
     </mat-menu>
@@ -63,7 +65,7 @@
 
   <ng-container *ngIf="participants.length">
     <ng-container *ngFor="let participant of participants">
-      <div fxLayout="row" class="buttons-wrapper"
+      <div fxLayout="row" class="buttons-wrapper mb-15"
            *userPermission="['ADMIN']">
         <button
           class="orange-button"

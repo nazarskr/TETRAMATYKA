@@ -11,8 +11,7 @@ export class WorksService {
     constructor(
         @InjectModel(WorksItem.name) private worksModel: Model<WorksItemDocument>,
         @InjectModel(Participant.name) private participantModel: Model<ParticipantDocument>
-    )
-    {}
+    ) {}
 
     async getAllWorks(year: number): Promise<WorksItem[]> {
         return this.worksModel.find({archiveYear: year});
@@ -39,15 +38,13 @@ export class WorksService {
         return this.worksModel.findByIdAndUpdate(id, worksItemDto);
     }
 
-    updateWorksItemParticipants(
+    async updateWorksItemParticipants(
         id: string,
         participantId: string,
         worksItemParticipantsDto: WorksItemParticipantsDto
-    ): Promise<void | WorksItem> {
-        return this.worksModel.findByIdAndUpdate(id, worksItemParticipantsDto)
-            .then(async () => {
-                await this.participantModel.findByIdAndUpdate(participantId, { $push: { works: id } });
-            });
+    ): Promise<ParticipantDocument> {
+        await this.worksModel.findByIdAndUpdate(id, worksItemParticipantsDto);
+        return this.participantModel.findByIdAndUpdate(participantId, { $push: { works: id } });
     }
 
     async deleteWorksItem(id: string): Promise<WorksItem> {
