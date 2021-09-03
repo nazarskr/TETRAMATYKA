@@ -1,3 +1,7 @@
-<h3>{{item[titleProp][lang]}}</h3>
-<p [innerHTML]="item[descriptionProp][lang]"></p>
-<img src="{{item.imageUrl}}" alt="" width="300">
+<div class="secondary-item-container">
+  <h3>{{item[titleProp][lang]}}</h3>
+  <div class="image-with-description">
+    <img src="{{item.imageUrl}}" alt="" class="item-image">
+    <p [innerHTML]="item[descriptionProp][lang]" class="item-description"></p>
+  </div>
+</div>

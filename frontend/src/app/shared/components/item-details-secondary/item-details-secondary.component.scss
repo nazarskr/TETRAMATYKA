@@ -1,0 +1,18 @@
+.secondary-item-container {
+  max-width: 700px;
+
+  .image-with-description {
+    margin-top: 15px;
+  }
+
+  .item-image {
+    width: 300px;
+    height: auto;
+    float: left;
+    margin: 0 10px 5px 0;
+  }
+
+  .item-description {
+    text-align: justify;
+  }
+}

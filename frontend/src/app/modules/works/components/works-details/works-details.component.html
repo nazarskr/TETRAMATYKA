@@ -39,32 +39,34 @@
                             [titleProp]="'title'"
                             [descriptionProp]="'description'">
   </app-item-details-primary>
-  <mat-divider class="mv-10"></mat-divider>
-  <div class="buttons-wrapper mb-15"
-       fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px"
-       *userPermission="['ADMIN']">
-    <h4>{{'MENU.PARTICIPANTS' | translate}}</h4>
-    <button
-      [matMenuTriggerFor]="menu"
-      class="green-button"
-      mat-button>
-      <mat-icon>add</mat-icon>
-      <span>
+  <ng-container *userPermission="['ADMIN']">
+    <mat-divider class="mv-10"></mat-divider>
+    <div class="buttons-wrapper mb-15"
+         fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+      <h4>{{'MENU.PARTICIPANTS' | translate}}</h4>
+      <button
+        [matMenuTriggerFor]="menu"
+        class="green-button"
+        mat-button>
+        <mat-icon>add</mat-icon>
+        <span>
         {{'ACTIONS.ADD' | translate}}
       </span>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="addParticipant()">
-        {{'COMMON.ADD_NEW' | translate}}
       </button>
-      <button mat-menu-item (click)="selectParticipantFromList()">
-        {{'COMMON.SELECT_EXISTING' | translate}}
-      </button>
-    </mat-menu>
-  </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="addParticipant()">
+          {{'COMMON.ADD_NEW' | translate}}
+        </button>
+        <button mat-menu-item (click)="selectParticipantFromList()">
+          {{'COMMON.SELECT_EXISTING' | translate}}
+        </button>
+      </mat-menu>
+    </div>
+  </ng-container>
 
   <ng-container *ngIf="participants.length">
     <ng-container *ngFor="let participant of participants">
+      <mat-divider class="mv-10"></mat-divider>
       <div fxLayout="row" class="buttons-wrapper mb-15"
            *userPermission="['ADMIN']">
         <button
