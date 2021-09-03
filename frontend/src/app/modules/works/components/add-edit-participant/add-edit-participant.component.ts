@@ -88,7 +88,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
         ua: formValue.bio_UA
       },
       imageUrl: this.participant ? this.participant.imageUrl : '',
-      works: this.participant ? this.participant.works : null
+      works: this.participant ? this.participant.works : [this.data.parentId]
     }
 
     const formData = new FormData();
@@ -104,7 +104,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: Participant) => {
         this._toaster.showMessage('Participant created successfully');
-        this.openCreatedParticipant(res._id);
+        this.closeModal(true);
       });
   }
 
@@ -113,35 +113,8 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Participant updated successfully');
-        // close
+        this.closeModal(true);
       });
-  }
-
-  openCreatedParticipant(id: string): void {
-    this._router.navigate([`participants/${id}`]);
-  }
-
-  openDeleteParticipantDialog(): void {
-    const dialogRef = this._dialog.open(SimpleDialogComponent, {
-      data: {
-        title: 'Delete participant',
-        message: 'Are you sure you want to delete this participant?'
-      }
-    });
-
-    dialogRef.afterClosed()
-      .pipe(filter(result => !!result))
-      .subscribe(() => {
-        this.deleteParticipant();
-      });
-  }
-
-  deleteParticipant(): void {
-    this._participantsService.deleteParticipant(this.participant._id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this._toaster.showMessage('Participant deleted successfully');
-      })
   }
 
   changeImage(data: any): void {
@@ -165,7 +138,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
     this.imageUrl = null;
   }
 
-  closeDialog(res: boolean) {
+  closeModal(res: boolean) {
     this.dialogRef.close();
   }
 }

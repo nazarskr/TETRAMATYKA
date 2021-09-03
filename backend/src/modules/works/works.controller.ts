@@ -48,7 +48,7 @@ export class WorksController {
         @Body() body: any,
         @Req() req: IMulterRequest
     ): Promise<WorksItem> {
-        const worksItem: WorksItemDto = JSON.parse(body.participant);
+        const worksItem: WorksItemDto = JSON.parse(body.worksItem);
         worksItem.archiveYear = +query.year;
         worksItem.imageUrl = req.files[0].path;
         return this.worksService.createWorksItem(worksItem);
@@ -64,7 +64,7 @@ export class WorksController {
         @Body() body: any,
         @Req() req: IMulterRequest
     ): Promise<WorksItem> {
-        const worksItem: WorksItemDto = JSON.parse(body.participant);
+        const worksItem: WorksItemDto = JSON.parse(body.worksItem);
         if (req.files.length) {
             await this.worksService.getWorksItemImageUrl(id)
                 .then(async (res) => {
@@ -77,12 +77,13 @@ export class WorksController {
         return this.worksService.updateWorksItem(id, worksItem);
     }
 
-    @Patch(':id')
+    @Patch(':id/:participantId')
     async updateWorksItemParticipants(
         @Param('id') id: string,
+        @Param('participantId') participantId: string,
         @Body() worksItemParticipants: WorksItemParticipantsDto
-    ): Promise<WorksItem> {
-        return this.worksService.updateWorksItemParticipants(id, worksItemParticipants);
+    ): Promise<void | WorksItem> {
+        return this.worksService.updateWorksItemParticipants(id, participantId, worksItemParticipants);
     }
 
 

@@ -38,8 +38,8 @@ export class WorksService {
     return this.http.put<WorksItem>(`${this.worksUri}/${id}`, data);
   }
 
-  updateWorksItemParticipants(id: string, body: WorksItemParticipants): Observable<WorksItem> {
-    return this.http.patch<WorksItem>(`${this.worksUri}/${id}`, body);
+  updateWorksItemParticipants(id: string, participantId: string, body: WorksItemParticipants): Observable<WorksItem> {
+    return this.http.patch<WorksItem>(`${this.worksUri}/${id}/${participantId}`, body);
   }
 
   deleteWorksItem(id: string): Observable<WorksItem> {

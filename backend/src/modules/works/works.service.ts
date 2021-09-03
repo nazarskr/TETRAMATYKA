@@ -3,12 +3,16 @@ import { InjectModel } from '@nestjs/mongoose';
 import { WorksItem, WorksItemDocument } from './schemas/work.schema';
 import { Model } from 'mongoose';
 import { WorksItemDto } from './dto/works-item.dto';
-import {WorksItemParticipantsDto} from './dto/works-Item-participants.dto';
+import { WorksItemParticipantsDto } from './dto/works-Item-participants.dto';
+import { Participant, ParticipantDocument } from '../participants/schemas/participant.schema';
 
 @Injectable()
 export class WorksService {
-    constructor(@InjectModel(WorksItem.name) private worksModel: Model<WorksItemDocument>){
-    }
+    constructor(
+        @InjectModel(WorksItem.name) private worksModel: Model<WorksItemDocument>,
+        @InjectModel(Participant.name) private participantModel: Model<ParticipantDocument>
+    )
+    {}
 
     async getAllWorks(year: number): Promise<WorksItem[]> {
         return this.worksModel.find({archiveYear: year});
@@ -35,8 +39,15 @@ export class WorksService {
         return this.worksModel.findByIdAndUpdate(id, worksItemDto);
     }
 
-    async updateWorksItemParticipants(id: string, worksItemParticipantsDto: WorksItemParticipantsDto): Promise<WorksItem> {
-        return this.worksModel.findByIdAndUpdate(id, worksItemParticipantsDto);
+    updateWorksItemParticipants(
+        id: string,
+        participantId: string,
+        worksItemParticipantsDto: WorksItemParticipantsDto
+    ): Promise<void | WorksItem> {
+        return this.worksModel.findByIdAndUpdate(id, worksItemParticipantsDto)
+            .then(async () => {
+                await this.participantModel.findByIdAndUpdate(participantId, { $push: { works: id } });
+            });
     }
 
     async deleteWorksItem(id: string): Promise<WorksItem> {

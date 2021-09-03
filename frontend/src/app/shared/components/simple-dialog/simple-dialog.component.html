@@ -1,9 +1,16 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
-<div mat-dialog-content>{{data.message}}</div>
+<div mat-dialog-content>
+  <div>{{data.message}}</div>
+  <mat-checkbox
+    *ngIf="data.checkboxText"
+    [(ngModel)]="checkboxValue">
+    {{data.checkboxText}}
+  </mat-checkbox>
+</div>
 <div mat-dialog-actions>
   <div class="actions-row"
     fxLayout="row" fxLayoutAlign="flex-end center">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true">Yes</button>
+    <button mat-button (click)="confirmDialog()">Yes</button>
   </div>
 </div>
