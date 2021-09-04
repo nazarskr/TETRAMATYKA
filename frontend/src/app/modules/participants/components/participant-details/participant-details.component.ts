@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Participant } from '@shared/interfaces/participants';
 import { WorksService } from '../../../works/services/works.service';
 import { WorksItem } from '@shared/interfaces/works';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-participant-details',
@@ -15,6 +16,7 @@ import { WorksItem } from '@shared/interfaces/works';
 export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements OnInit {
   public participantId: string;
   public participant: Participant;
+  public imageUrl: SafeUrl;
   public works: WorksItem[] = [];
 
   constructor(
@@ -40,6 +42,16 @@ export class ParticipantDetailsComponent extends UnsubscribeOnDestroy implements
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: Participant) => {
         this.participant = res;
+        this.imageUrl = res.imageUrl;
+        this.getWorksForParticipant();
+      });
+  }
+
+  getWorksForParticipant(): void {
+    this._worksService.getWorksForParticipant(this.participant.works)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: WorksItem[]) => {
+        this.works = res;
       });
   }
 

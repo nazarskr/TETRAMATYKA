@@ -35,10 +35,11 @@
       </button>
     </div>
   </div>
-  <app-item-details-primary [item]="worksItem"
-                            [titleProp]="'title'"
-                            [descriptionProp]="'description'">
-  </app-item-details-primary>
+  <app-item-details-view [item]="worksItem"
+                         [imageUrl]="imageUrl"
+                         [titleProp]="'title'"
+                         [descriptionProp]="'description'">
+  </app-item-details-view>
   <ng-container *userPermission="['ADMIN']">
     <mat-divider class="mv-10"></mat-divider>
     <div class="buttons-wrapper mb-15"
@@ -66,7 +67,6 @@
 
   <ng-container *ngIf="participants.length">
     <ng-container *ngFor="let participant of participants">
-      <mat-divider class="mv-10"></mat-divider>
       <div fxLayout="row" class="buttons-wrapper mb-15"
            *userPermission="['ADMIN']">
         <button

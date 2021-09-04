@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page p-25">
   <button
     class="back-button"
     type="button"
@@ -10,10 +10,11 @@
     </span>
   </button>
   <ng-container *ngIf="participant">
-    <app-item-details-primary [item]="participant"
-                              [titleProp]="'fullName'"
-                              [descriptionProp]="'bio'">
-    </app-item-details-primary>
+    <app-item-details-view [item]="participant"
+                           [imageUrl]="imageUrl"
+                           [titleProp]="'fullName'"
+                           [descriptionProp]="'bio'">
+    </app-item-details-view>
 
     <ng-container *ngFor="let worksItem of works">
       <app-item-details-secondary

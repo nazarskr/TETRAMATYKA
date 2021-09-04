@@ -1,7 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NewsItem} from '@shared/interfaces/news';
-import {Project} from '@shared/interfaces/projects';
-import {Participant} from '@shared/interfaces/participants';
 import {SafeUrl} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
 

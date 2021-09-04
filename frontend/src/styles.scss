@@ -41,6 +41,7 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  // font-weight: 350;
 }
 
 * {
@@ -122,4 +123,12 @@ a {
 
 .grey-text {
   color: $color-main-grey;
+}
+
+.item-title {
+  width: fit-content;
+  margin: auto;
+  padding: 5px 10px;
+  background-color: black;
+  color: white;
 }

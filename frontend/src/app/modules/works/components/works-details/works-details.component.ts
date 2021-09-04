@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
-import {Participant, ParticipantShort} from '@shared/interfaces/participants';
-import {WorksItem, WorksItemParticipants} from '@shared/interfaces/works';
+import { Participant, ParticipantShort } from '@shared/interfaces/participants';
+import { WorksItem, WorksItemParticipants } from '@shared/interfaces/works';
 import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
-import {filter, take, takeUntil} from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { WorksService } from '../../services/works.service';
 import { ParticipantsService } from '../../../participants/services/participants/participants.service';
@@ -12,8 +12,8 @@ import { AddEditWorksItemComponent } from '../add-edit-works-item/add-edit-works
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AddEditParticipantComponent } from '../add-edit-participant/add-edit-participant.component';
 import { ExistingParticipantModalComponent } from "../existing-participant-modal/existing-participant-modal.component";
-import {WorksItemParticipantsDto} from '../../../../../../../backend/dist/modules/works/dto/works-Item-participants.dto';
-import {DialogData} from '@shared/interfaces/dialog';
+import { DialogData } from '@shared/interfaces/dialog';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-works-details',
@@ -23,6 +23,7 @@ import {DialogData} from '@shared/interfaces/dialog';
 export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnInit {
   public worksItemId: string;
   public worksItem: WorksItem;
+  public imageUrl: SafeUrl;
   public participants: Participant[] = [];
   public participantsShort: ParticipantShort[] = [];
 
@@ -51,6 +52,7 @@ export class WorksDetailsComponent extends UnsubscribeOnDestroy implements OnIni
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: WorksItem) => {
         this.worksItem = res;
+        this.imageUrl = res.imageUrl;
         this.getParticipantForWorksItem();
         this.getParticipantsShort();
       });

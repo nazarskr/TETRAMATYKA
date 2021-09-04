@@ -1,18 +1,38 @@
+@import "variables";
+
 .secondary-item-container {
-  max-width: 700px;
+  width: 68vw;
+  margin: auto;
 
   .image-with-description {
-    margin-top: 15px;
+    margin-top: 10px;
   }
 
   .item-image {
     width: 300px;
     height: auto;
     float: left;
-    margin: 0 10px 5px 0;
+    margin: 3px 10px 5px 0;
   }
 
   .item-description {
     text-align: justify;
+  }
+}
+
+@media (max-width: 768px) {
+  .secondary-item-container {
+    width: 80vw;
+
+    .item-image {
+      width: 80vw;
+      float: none;
+    }
+
+    .item-description {
+      border-top: 1px solid $color-main-grey;
+      padding: 10px;
+      margin: auto;
+    }
   }
 }
