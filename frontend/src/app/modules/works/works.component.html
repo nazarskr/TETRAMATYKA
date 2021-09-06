@@ -1,4 +1,4 @@
-<div class="page p-25">
+<div class="page">
   <div class="buttons-wrapper"
        *userPermission="['ADMIN']">
     <button
@@ -12,7 +12,7 @@
     </button>
   </div>
 
-  <h2 class="page-title">{{'MENU.WORKS' | translate}}</h2>
+  <h2 class="page-title mt-25">{{'MENU.WORKS' | translate}}</h2>
   <ng-container *ngIf="works.length; else willBeSoon">
     <app-titled-items-list
       [items]="works"
