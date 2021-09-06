@@ -1,16 +1,21 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import Shuffle from 'shufflejs';
 
 @Component({
   selector: 'app-titled-items-list',
   templateUrl: './titled-items-list.component.html',
   styleUrls: ['./titled-items-list.component.scss']
 })
-export class TitledItemsListComponent implements OnInit, OnDestroy {
+export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('shuffleContainer', {static: false}) shuffleContainer: ElementRef;
+  @ViewChild('shuffleSizer') private shuffleSizer: ElementRef;
   @Input() items = [];
   @Input() titleProp: string;
-  transformedItems = [];
-  movingInterval = null;
+  public transformedItems = [];
+  public movingInterval = null;
+
+  private shuffleInstance: Shuffle;
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -20,7 +25,10 @@ export class TitledItemsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fillListByEmptyItems();
-    this.dynamicallyUpdateItems();
+  }
+
+  ngAfterViewInit() {
+    this.addShuffleInstance();
   }
 
   fillListByEmptyItems(): void {
@@ -36,31 +44,42 @@ export class TitledItemsListComponent implements OnInit, OnDestroy {
         return item;
       });
       blockIndexes.forEach((randomIndex: number) => {
-        this.transformedItems.splice(randomIndex + 1, 0, null);
+       this.transformedItems.splice(randomIndex + 1, 0, null);
       });
+
     } else {
       this.transformedItems = this.items.map(item => {
-        item.translate = 0;
+        item.transform = 0;
         return item;
       });
     }
   }
 
-  dynamicallyUpdateItems(): void {
-    this.movingInterval = setInterval(() => {
-      this.transformedItems = this.transformedItems.map(item => {
-        if (item) {
-          item.transform = this.getTranslateValue();
-        }
+  addShuffleInstance(): void {
+    this.shuffleInstance = new Shuffle(this.shuffleContainer.nativeElement, {
+      itemSelector: '.titled-item-wrapper',
+      sizer: this.shuffleSizer.nativeElement,
+      isCentered: true,
+      speed: 3000
+    });
 
-        return item;
+    this.dynamicallyUpdateItems();
+  }
+
+  dynamicallyUpdateItems(): void {
+    this.shuffleInstance.sort({
+      randomize: true
+    });
+    this.movingInterval = setInterval(() => {
+      this.shuffleInstance.sort({
+        randomize: true
       });
     }, 6000);
   }
 
   getTranslateValue(): string {
-    const randomX = Math.ceil(Math.random() * 100);
-    const randomY = Math.ceil(Math.random() * 50);
+    const randomX = Math.ceil(Math.random() * 10);
+    const randomY = Math.ceil(Math.random() * 30);
     const translateX = Math.random() < 0.5 ? -randomX : randomX;
     const translateY = Math.random() < 0.5 ? -randomY : randomY;
     return `translate(${translateX}px, ${translateY}px)`;
@@ -68,6 +87,14 @@ export class TitledItemsListComponent implements OnInit, OnDestroy {
 
   onResize(): void {
     this.fillListByEmptyItems();
+  }
+
+  onMouseEnter(): void {
+    clearInterval(this.movingInterval);
+  }
+
+  onMouseLeave(): void {
+    this.dynamicallyUpdateItems();
   }
 
   ngOnDestroy(): void {

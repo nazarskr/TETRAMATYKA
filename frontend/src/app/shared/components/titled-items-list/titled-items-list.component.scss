@@ -6,19 +6,21 @@
 }
 
 .titled-items-list {
+  width: 100%;
   max-width: 1000px;
   padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+
+  .sizer-element {
+    width: 230px;
+  }
 
   .titled-item-wrapper {
     width: 230px;
     padding: 30px 10px;
 
     &.empty {
-      width: 100px;
+      width: 60px;
+      height: 40px;
     }
   }
 

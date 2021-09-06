@@ -1,15 +1,23 @@
 <div class="titled-items-list-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <div class="titled-items-list" (window:resize)="onResize()">
+  <div class="titled-items-list"
+       (window:resize)="onResize()"
+       #shuffleContainer>
     <div class="titled-item-wrapper"
          [class.empty]="!item"
          *ngFor="let item of transformedItems">
-      <ng-container *ngIf="item">
+      <ng-container *ngIf="item; else emptyItem">
         <div [routerLink]="item._id"
+             (mouseenter)="onMouseEnter()"
+             (mouseleave)="onMouseLeave()"
              [style.transform]="item.transform"
              class="titled-item">
           {{item[titleProp][lang]}}
         </div>
       </ng-container>
+      <ng-template #emptyItem>
+        <div></div>
+      </ng-template>
     </div>
+    <div #shuffleSizer class="sizer-element"></div>
   </div>
 </div>
