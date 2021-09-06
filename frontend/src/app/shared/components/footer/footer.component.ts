@@ -12,6 +12,7 @@ export class FooterComponent implements OnInit {
     'EESEM_logo.png', 'amp_logo.png',
     'audio_art.png', 'Lviv_misto_literatury.png', 'logo_zemla.png',
     'muzyka_centrum.png', 'krakow_logo.png', 'logo_iam.png',
+    'oead.png', 'IFU_UA.png'
   ];
 
   constructor() { }
