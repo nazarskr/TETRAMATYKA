@@ -26,6 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 // pipes
 import { LocalDatePipe } from './pipes/local-date.pipe';
@@ -60,7 +61,8 @@ const materialModules = [
   MatFormFieldModule,
   MatInputModule,
   DragDropModule,
-  MatCardModule
+  MatCardModule,
+  OverlayModule
 ];
 
 

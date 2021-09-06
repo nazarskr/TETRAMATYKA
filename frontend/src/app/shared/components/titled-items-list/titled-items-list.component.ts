@@ -61,7 +61,7 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
       itemSelector: '.titled-item-wrapper',
       sizer: this.shuffleSizer.nativeElement,
       isCentered: true,
-      speed: 3000
+      speed: 3500
     });
 
     this.dynamicallyUpdateItems();
@@ -72,7 +72,7 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
       this.shuffleInstance.sort({
         randomize: true
       });
-    }, 5000);
+    }, 6000);
   }
 
   getTranslateValue(): string {
@@ -87,14 +87,14 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
     this.fillListByEmptyItems();
   }
 
-  onMouseEnter(): void {
-    this.blackBackground = true;
+  onMouseEnter(item): void {
     clearInterval(this.movingInterval);
+    item.hovered = true;
   }
 
-  onMouseLeave(): void {
-    this.blackBackground = false;
+  onMouseLeave(item): void {
     this.dynamicallyUpdateItems();
+    item.hovered = false;
   }
 
   ngOnDestroy(): void {

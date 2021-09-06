@@ -14,6 +14,8 @@ import { ContactModule } from './modules/contact/contact.module';
 import { ProjectsModule } from './modules/projects/projects.module';
 import { NewsModule } from './modules/news/news.module';
 import { WorksModule } from './modules/works/works.module';
+import { APP_INTERCEPTOR } from "@nestjs/core";
+import { TokenInterceptor } from "./common/interceptors/token.interceptor";
 
 @Module({
   imports: [
@@ -41,6 +43,12 @@ import { WorksModule } from './modules/works/works.module';
     WorksModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TokenInterceptor,
+    }
+  ],
 })
 export class AppModule {}

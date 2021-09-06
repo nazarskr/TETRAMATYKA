@@ -16,6 +16,7 @@ import { AppInitService } from '@core/services/app-init/app-init.service';
 import { CurrentYearInterceptor } from '@core/interceptors/current-year.interceptor';
 import { AdminGuard } from '@core/guards/admin.guard';
 import { ArchiveYear } from "@shared/interfaces/admin";
+import {TokenInterceptor} from "@core/interceptors/token.interceptor";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -61,6 +62,11 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CurrentYearInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
       multi: true
     },
     AdminGuard

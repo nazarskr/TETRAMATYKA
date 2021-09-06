@@ -1,6 +1,5 @@
 <div
   class="titled-items-list-wrapper"
-  [class.black-background]="blackBackground"
   fxLayout="row"
   fxLayoutAlign="center center">
   <div class="titled-items-list"
@@ -11,8 +10,8 @@
          *ngFor="let item of transformedItems">
       <ng-container *ngIf="item; else emptyItem">
         <div [routerLink]="item._id"
-             (mouseenter)="onMouseEnter()"
-             (mouseleave)="onMouseLeave()"
+             (mouseenter)="onMouseEnter(item)"
+             (mouseleave)="onMouseLeave(item)"
              [style.transform]="item.transform"
              class="titled-item">
           {{item[titleProp][lang]}}
