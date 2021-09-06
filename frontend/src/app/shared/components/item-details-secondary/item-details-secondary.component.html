@@ -1,5 +1,5 @@
 <div class="secondary-item-container">
-  <mat-divider class="mv-10"></mat-divider>
+  <mat-divider class="mv-10" *userPermission="['GUEST']"></mat-divider>
   <h3 class="item-title">{{item[titleProp][lang]}}</h3>
   <div class="image-with-description">
     <img src="{{item.imageUrl}}" alt="" class="item-image">

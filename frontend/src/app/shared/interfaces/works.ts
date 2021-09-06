@@ -4,7 +4,7 @@ export interface WorksItem {
   _id?: string;
   title: MultiLanguage;
   description: MultiLanguage;
-  participants: string[];
+  participants?: string[];
   imageUrl?: string;
 }
 

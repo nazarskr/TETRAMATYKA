@@ -21,7 +21,8 @@
 
   .item-details-image {
     margin-top: 15px;
-    width: 68vw;
+    max-width: 68vw;
+    max-height: 80vh;
   }
 
   .item-details-description {
@@ -43,10 +44,13 @@
 
     .item-details-image {
       width: 80vw;
+      max-width: none;
+      max-height: none;
     }
 
     .item-details-description {
-      width: 77vw;
+      width: 80vw;
+      padding: 15px 5px;
     }
   }
 }

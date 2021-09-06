@@ -44,6 +44,7 @@
 
   &.back-button {
     border-radius: 0;
+    margin-bottom: 15px;
     @include colorIconButton($color-white, $color-black);
   }
 }

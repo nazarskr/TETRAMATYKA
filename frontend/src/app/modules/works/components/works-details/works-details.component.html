@@ -67,30 +67,32 @@
 
   <ng-container *ngIf="participants.length">
     <ng-container *ngFor="let participant of participants">
-      <div fxLayout="row" class="buttons-wrapper mb-15"
-           *userPermission="['ADMIN']">
-        <button
-          class="orange-button"
-          type="button"
-          mat-button
-          (click)="editParticipant(participant)">
-          <mat-icon>edit</mat-icon>
-          <span>
+      <ng-container *userPermission="['ADMIN']">
+        <mat-divider class="mv-10"></mat-divider>
+        <div fxLayout="row" class="buttons-wrapper mb-15">
+          <button
+            class="orange-button"
+            type="button"
+            mat-button
+            (click)="editParticipant(participant)">
+            <mat-icon>edit</mat-icon>
+            <span>
           {{'ACTIONS.EDIT' | translate}}
         </span>
-        </button>
+          </button>
 
-        <button
-          class="red-button"
-          type="button"
-          mat-button
-          (click)="openDeleteParticipantDialog(participant)">
-          <mat-icon>delete</mat-icon>
-          <span>
+          <button
+            class="red-button"
+            type="button"
+            mat-button
+            (click)="openDeleteParticipantDialog(participant)">
+            <mat-icon>delete</mat-icon>
+            <span>
           {{'ACTIONS.DELETE' | translate}}
         </span>
-        </button>
-      </div>
+          </button>
+        </div>
+      </ng-container>
       <app-item-details-secondary
         [item]="participant"
         [titleProp]="'fullName'"

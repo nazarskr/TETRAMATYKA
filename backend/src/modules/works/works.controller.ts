@@ -11,6 +11,7 @@ import {IMulterRequest} from '../../common/interfaces/multer-custom';
 import {WorksItemDto} from './dto/works-item.dto';
 import {WorksItemParticipantsDto} from './dto/works-Item-participants.dto';
 import {ParticipantDocument} from '../participants/schemas/participant.schema';
+import {UpdateWriteOpResult} from "mongoose";
 
 @Controller('works')
 export class WorksController {
@@ -89,7 +90,7 @@ export class WorksController {
 
 
     @Delete(':id')
-    async deleteWorksItem(@Param('id') id: string): Promise<WorksItem> {
+    async deleteWorksItem(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const worksItemForDelete = await this.worksService.getWorksItemImageUrl(id);
         await storageUtil.removeFile(worksItemForDelete.imageUrl);
         return this.worksService.deleteWorksItem(id);

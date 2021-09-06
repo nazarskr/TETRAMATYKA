@@ -91,7 +91,10 @@ export class AddEditWorksItemComponent extends UnsubscribeOnDestroy implements O
         ua: formValue.description_UA
       },
       imageUrl: this.worksItem ? this.worksItem.imageUrl : '',
-      participants: this.worksItem && this.worksItem.participants.length ? this.worksItem.participants : null
+    }
+
+    if (this.worksItem && this.worksItem.participants) {
+      body.participants = this.worksItem.participants;
     }
 
     const formData = new FormData();
