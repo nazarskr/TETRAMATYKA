@@ -14,6 +14,7 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
   @Input() titleProp: string;
   public transformedItems = [];
   public movingInterval = null;
+  public blackBackground = false;
 
   private shuffleInstance: Shuffle;
 
@@ -67,14 +68,11 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   dynamicallyUpdateItems(): void {
-    this.shuffleInstance.sort({
-      randomize: true
-    });
     this.movingInterval = setInterval(() => {
       this.shuffleInstance.sort({
         randomize: true
       });
-    }, 6000);
+    }, 5000);
   }
 
   getTranslateValue(): string {
@@ -90,10 +88,12 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   onMouseEnter(): void {
+    this.blackBackground = true;
     clearInterval(this.movingInterval);
   }
 
   onMouseLeave(): void {
+    this.blackBackground = false;
     this.dynamicallyUpdateItems();
   }
 

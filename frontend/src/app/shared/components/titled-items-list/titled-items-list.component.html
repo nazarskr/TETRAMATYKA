@@ -1,4 +1,8 @@
-<div class="titled-items-list-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<div
+  class="titled-items-list-wrapper"
+  [class.black-background]="blackBackground"
+  fxLayout="row"
+  fxLayoutAlign="center center">
   <div class="titled-items-list"
        (window:resize)="onResize()"
        #shuffleContainer>
