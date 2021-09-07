@@ -10,6 +10,7 @@ export class ItemDetailsSecondaryComponent implements OnInit {
   @Input() item: any;
   @Input() titleProp: string;
   @Input() descriptionProp: string;
+  @Input() greyImage: boolean = false;
 
   get lang(): string {
     return this._translateService.currentLang;

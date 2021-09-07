@@ -66,7 +66,7 @@
   </ng-container>
 
   <ng-container *ngIf="participants.length">
-    <ng-container *ngFor="let participant of participants">
+    <div *ngFor="let participant of participants" class="secondary-item-wrapper">
       <ng-container *userPermission="['ADMIN']">
         <mat-divider class="mv-10"></mat-divider>
         <div fxLayout="row" class="buttons-wrapper mb-15">
@@ -94,10 +94,11 @@
         </div>
       </ng-container>
       <app-item-details-secondary
+        [greyImage]="true"
         [item]="participant"
         [titleProp]="'fullName'"
         [descriptionProp]="'bio'">
       </app-item-details-secondary>
-    </ng-container>
+    </div>
   </ng-container>
 </div>

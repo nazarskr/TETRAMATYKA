@@ -2,7 +2,12 @@
   <mat-divider class="mv-10" *userPermission="['GUEST']"></mat-divider>
   <h3 class="item-title">{{item[titleProp][lang]}}</h3>
   <div class="image-with-description">
-    <img src="{{item.imageUrl}}" alt="" class="item-image">
+    <img
+      [src]="item.imageUrl"
+      *ngIf="item.imageUrl"
+      [class.grey-image]="greyImage"
+      alt=""
+      class="item-image">
     <p [innerHTML]="item[descriptionProp][lang]" class="item-description"></p>
   </div>
 </div>

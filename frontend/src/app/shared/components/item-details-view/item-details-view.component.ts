@@ -12,6 +12,7 @@ export class ItemDetailsViewComponent implements OnInit {
   @Input() imageUrl: SafeUrl;
   @Input() titleProp: string = 'title';
   @Input() descriptionProp: string = 'description';
+  @Input() greyImage: boolean = false;
 
   get lang(): string {
     return this._translateService.currentLang;

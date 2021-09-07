@@ -3,6 +3,7 @@
 .secondary-item-container {
   width: 68vw;
   margin: auto;
+  clear: both;
 
   .image-with-description {
     margin-top: 10px;
@@ -17,6 +18,11 @@
 
   .item-description {
     text-align: justify;
+
+    ::ng-deep a {
+      color: $color-main-green;
+      text-decoration: underline;
+    }
   }
 }
 

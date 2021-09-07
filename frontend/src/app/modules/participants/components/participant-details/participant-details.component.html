@@ -11,17 +11,18 @@
   </button>
   <ng-container *ngIf="participant">
     <app-item-details-view [item]="participant"
+                           [greyImage]="true"
                            [imageUrl]="imageUrl"
                            [titleProp]="'fullName'"
                            [descriptionProp]="'bio'">
     </app-item-details-view>
 
-    <ng-container *ngFor="let worksItem of works">
+    <div *ngFor="let worksItem of works" class="secondary-item-wrapper">
       <app-item-details-secondary
         [item]="worksItem"
         [titleProp]="'title'"
         [descriptionProp]="'description'">
       </app-item-details-secondary>
-    </ng-container>
+    </div>
   </ng-container>
 </div>

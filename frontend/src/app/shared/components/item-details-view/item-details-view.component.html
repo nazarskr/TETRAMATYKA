@@ -6,7 +6,12 @@
   <p class="item-details-date" *ngIf="item.eventDate">
     {{item.eventDate | date : 'dd/MM/yyyy HH:mm'}}
   </p>
-  <img *ngIf="imageUrl" [src]="imageUrl" alt="item image" class="item-details-image">
+  <img
+    *ngIf="imageUrl"
+    [src]="imageUrl"
+    [class.grey-image]="greyImage"
+    alt="item image"
+    class="item-details-image">
   <div class="item-details-description"
        [innerHTML]="item[descriptionProp][lang]">
   </div>
