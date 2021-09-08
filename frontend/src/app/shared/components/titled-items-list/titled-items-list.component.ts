@@ -72,7 +72,7 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
       this.shuffleInstance.sort({
         randomize: true
       });
-    }, 6000);
+    }, 11000);
   }
 
   getTranslateValue(): string {
