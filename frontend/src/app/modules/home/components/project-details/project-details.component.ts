@@ -131,9 +131,9 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
   createProject(formData: FormData): void {
     this._projectsService.createProject(formData)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Project) => {
+      .subscribe(() => {
         this._toaster.showMessage('Project created successfully');
-        this.openCreatedProject(res._id);
+        this.goToHome();
       });
   }
 
@@ -146,8 +146,8 @@ export class ProjectDetailsComponent extends UnsubscribeOnDestroy implements OnI
       });
   }
 
-  openCreatedProject(id: string): void {
-    this._router.navigate([`projects/${id}`]);
+  goToHome(): void {
+    this._router.navigate(['/home']);
   }
 
   cancelEditing(): void {

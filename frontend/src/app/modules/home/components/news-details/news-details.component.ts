@@ -134,9 +134,9 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
   createNewsItem(formData: FormData): void {
     this._newsService.createNewsItem(formData)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: NewsItem) => {
+      .subscribe(() => {
         this._toaster.showMessage('News item created successfully');
-        this.openCreatedNewsItem(res._id);
+        this.goToHome();
       });
   }
 
@@ -147,10 +147,6 @@ export class NewsDetailsComponent extends UnsubscribeOnDestroy implements OnInit
         this._toaster.showMessage('News item updated successfully');
         this.getNewsItemById();
       });
-  }
-
-  openCreatedNewsItem(id: string): void {
-    this._router.navigate([`home/news/${id}`]);
   }
 
   cancelEditing(): void {
