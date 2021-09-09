@@ -41,6 +41,12 @@
   &.red-button {
     @include colorIconButton($color-red, $color-light-red);
   }
+
+  &.back-button {
+    border-radius: 0;
+    margin-bottom: 15px;
+    @include colorIconButton($color-white, $color-black);
+  }
 }
 
 // action buttons
@@ -106,4 +112,10 @@
   &.wide-form-field {
     min-width: 400px;
   }
+}
+
+// dialog
+.actions-row {
+  width: 100%;
+  padding: 10px 0;
 }

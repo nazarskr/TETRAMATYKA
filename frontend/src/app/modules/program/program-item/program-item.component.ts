@@ -8,7 +8,8 @@ import { filter, takeUntil } from "rxjs/operators";
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from "@angular/forms";
 import { SimpleDialogComponent } from "@shared/components/simple-dialog/simple-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
-import {simpleQuillConfig} from "@shared/constants/quill-config";
+import * as moment from 'moment';
+import {DataService} from '@shared/services/data/data.service';
 
 @Component({
   selector: 'app-program-item',
@@ -21,7 +22,6 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
   @Output() cancelCreate: EventEmitter<void> = new EventEmitter();
   @Output() programListUpdated: EventEmitter<void> = new EventEmitter();
   public programItemForm: FormGroup;
-  public quillConfig = {...simpleQuillConfig};
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -32,7 +32,8 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
     private _toaster: ToasterService,
     private _translateService: TranslateService,
     private _formBuilder: FormBuilder,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _dataService: DataService
   ) {
     super();
   }
@@ -43,24 +44,29 @@ export class ProgramItemComponent extends UnsubscribeOnDestroy implements OnInit
 
   initForm(): void {
     this.programItemForm = this._formBuilder.group({
-      eventStartDate: [this.programItem.eventStartDate, Validators.required],
-      eventEndDate: [this.programItem.eventEndDate],
-      title_UA: [this.programItem.title.ua, Validators.required],
-      title_EN: [this.programItem.title.en, Validators.required],
-      info_UA: [this.programItem.info.ua, Validators.required],
-      info_EN: [this.programItem.info.en, Validators.required]
+      eventStartDate: [null, Validators.required],
+      eventEndDate: [null],
+      title_UA: ['', Validators.required],
+      title_EN: ['', Validators.required],
+      info_UA: ['', Validators.required],
+      info_EN: ['', Validators.required]
     });
   }
 
-  convertDateToLocale(dateIsoString: string): string {
-    if (!dateIsoString) {
-      return null;
-    }
-    return new Date(dateIsoString).toLocaleString();
+  formPatchValue(): void {
+    this.programItemForm.patchValue({
+      eventStartDate: this.programItem.eventStartDate ? this._dataService.convertDateToLocale(this.programItem.eventStartDate) : null,
+      eventEndDate: this.programItem.eventEndDate ? this._dataService.convertDateToLocale(this.programItem.eventEndDate) : null,
+      title_UA: this.programItem.title.ua,
+      title_EN: this.programItem.title.en,
+      info_UA: this.programItem.info.ua,
+      info_EN: this.programItem.info.en,
+    })
   }
 
   editProgramItem(): void {
     this.programItem.editable = true;
+    this.formPatchValue();
   }
 
   cancelEditing(): void {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Contact } from '@shared/interfaces/contact';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +11,23 @@ export class ContactsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllContacts() {
-    return this.http.get(this.contactsUri);
+  getAllContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(this.contactsUri);
   }
 
-  updatePositionIndexes(body: Contact[]) {
-    return this.http.patch(this.contactsUri, body);
+  updatePositionIndexes(body: Contact[]): Observable<Contact[]> {
+    return this.http.patch<Contact[]>(this.contactsUri, body);
   }
 
-  createContact(body: Contact) {
-    return this.http.post(this.contactsUri, body);
+  createContact(body: Contact): Observable<Contact> {
+    return this.http.post<Contact>(this.contactsUri, body);
   }
 
-  updateContact(id: string, body: Contact) {
-    return this.http.put(`${this.contactsUri}/${id}`, body);
+  updateContact(id: string, body: Contact): Observable<Contact> {
+    return this.http.put<Contact>(`${this.contactsUri}/${id}`, body);
   }
 
-  deleteContact(id: string) {
-    return this.http.delete(`${this.contactsUri}/${id}`);
+  deleteContact(id: string): Observable<Contact> {
+    return this.http.delete<Contact>(`${this.contactsUri}/${id}`);
   }
 }

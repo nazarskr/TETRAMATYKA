@@ -1,4 +1,6 @@
-<div class="home-container">
+<div class="home-container"
+     [ngStyle]="{'transform': 'scaleY(' + posterScale + ')'}"
+     (window:scroll)="onScrollChange()">
   <div
     class="home-poster"
     fxLayout="column"
@@ -18,3 +20,6 @@
     <span class="ucf-logo"></span>
   </div>
 </div>
+<mat-card class="news-and-projects">
+  <app-news></app-news>
+</mat-card>

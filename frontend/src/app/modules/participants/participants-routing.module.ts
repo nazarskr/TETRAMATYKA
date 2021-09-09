@@ -6,7 +6,7 @@ import { AdminGuard } from '@core/guards/admin.guard';
 
 const routes: Routes = [
   {path: '', component: ParticipantsComponent},
-  {path: 'new', component: ParticipantDetailsComponent, canActivate: [AdminGuard]},
+  {path: 'create', component: ParticipantDetailsComponent, canActivate: [AdminGuard]},
   {path: ':id', component: ParticipantDetailsComponent},
 ];
 

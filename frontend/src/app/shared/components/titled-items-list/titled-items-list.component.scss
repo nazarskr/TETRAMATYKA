@@ -1,0 +1,115 @@
+@import 'variables';
+
+.titled-items-list-wrapper {
+  width: 100vw;
+  height: 100%;
+}
+
+.titled-items-list {
+  width: 100%;
+  max-width: 1000px;
+  padding: 10px;
+  overflow: visible;
+
+  .sizer-element {
+    width: 200px;
+  }
+
+  .titled-item-wrapper {
+    min-width: 200px;
+    padding: 30px 10px;
+
+    &.empty {
+      width: 60px;
+      height: 40px;
+    }
+  }
+
+  .titled-item {
+    width: 100%;
+    height: 34px;
+    line-height: 32px;
+    padding: 0 10px;
+    background-color: $color-black;
+    color: $color-white;
+    border: 1px solid $color-white;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: $box-shadow-grey;
+    position: relative;
+    z-index: 1;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      height: 100%;
+      background-color: $color-black;
+      z-index: 2;
+    }
+
+    &:hover {
+      animation-name: list-item-hover;
+      animation-duration: .9s;
+      animation-fill-mode: forwards;
+
+      &:after {
+        animation-name: list-item-after;
+        animation-duration: .6s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .titled-items-list {
+    justify-content: center;
+
+    .titled-item-wrapper {
+      width: 200px;
+      padding: 5px;
+
+      .titled-item {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@keyframes list-item-hover {
+  25% {
+    background-color: $color-black;
+    color: $color-white;
+    border: 1px solid $color-white;
+  }
+
+  100% {
+    background-color: $color-light-grey;
+    color: $color-main-green;
+    border: 1px dashed $color-main-green;
+  }
+}
+
+@keyframes list-item-after {
+  30% {
+    opacity: 0;
+  }
+
+  50% {
+    width: 100%;
+  }
+
+  60% {
+    background-color: $color-black;
+  }
+
+  100% {
+    opacity: 1;
+    width: 0;
+    background-color: $color-main-green;
+  }
+}

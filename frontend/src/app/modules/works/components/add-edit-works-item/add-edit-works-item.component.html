@@ -1,0 +1,105 @@
+<h2 mat-dialog-title class="border-bottom-grey">{{data.title}}</h2>
+<div mat-dialog-content>
+  <form
+    class="p-25 page"
+    #form="ngForm"
+    id="works-form"
+    [formGroup]="worksItemForm"
+    (ngSubmit)="saveWorksItem()">
+
+    <div class="mt-25">
+      <div class="editor-label m-0">Назва твору (UA):</div>
+      <mat-form-field floatLabel="never">
+        <input matInput
+               formControlName="title_UA"
+               autocomplete="chrome-off"
+               placeholder="Назва твору">
+        <mat-error *ngIf="worksItemForm.controls['title_UA'].hasError('required') &&
+                  worksItemForm.controls['title_UA'].touched || form.submitted">
+          Це поле обов'язкове
+        </mat-error>
+      </mat-form-field>
+      <div class="quill-editor-wrapper">
+        <div class="editor-label">Опис твору (UA):</div>
+        <quill-editor
+          formControlName="description_UA"
+          [placeholder]="'Опис твору'"></quill-editor>
+        <mat-hint class="mat-error" *ngIf="worksItemForm.controls['description_UA'].hasError('required') &&
+                  worksItemForm.controls['description_UA'].touched || form.submitted">
+          Це поле обов'язкове
+        </mat-hint>
+      </div>
+      <div class="editor-label m-0">Work's title (EN):</div>
+      <mat-form-field floatLabel="never">
+        <input matInput
+               formControlName="title_EN"
+               autocomplete="chrome-off"
+               placeholder="Work's title">
+        <mat-error *ngIf="worksItemForm.controls['title_EN'].hasError('required') &&
+                  worksItemForm.controls['title_EN'].touched || form.submitted">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <div class="quill-editor-wrapper">
+        <div class="editor-label">Work's description (EN):</div>
+        <quill-editor
+          formControlName="description_EN"
+          [placeholder]="'Work\'s description'"></quill-editor>
+        <mat-hint class="mat-error" *ngIf="worksItemForm.controls['description_EN'].hasError('required') &&
+                  worksItemForm.controls['description_UA'].touched || form.submitted">
+          This field is required
+        </mat-hint>
+      </div>
+
+      <ng-container *ngIf="imageUrl; else uploadField">
+        <div class="editor-label">Image:</div>
+        <div class="edit-image-container">
+          <button
+            class="clear-button"
+            mat-mini-fab
+            type="button"
+            color="warn"
+            matTooltip="Clear image"
+            (click)="openClearImageDialog()"
+            *ngIf="imageUrl">
+            <mat-icon>clear</mat-icon>
+          </button>
+          <img [src]="imageUrl" alt="No image" *ngIf="imageUrl" width="500">
+        </div>
+      </ng-container>
+      <ng-template #uploadField>
+        <div class="editor-label">Upload image (landscape format will be better): </div>
+        <app-drag-n-drop-upload
+          [acceptMimetype]="'image/*'"
+          [multiple]="false"
+          (fileUploaded)="changeImage($event)"
+        ></app-drag-n-drop-upload>
+      </ng-template>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="border-top-grey">
+  <div class="actions-row"
+       fxLayout="row" fxLayoutAlign="flex-end center">
+    <button
+      class="red-button"
+      type="button"
+      mat-button
+      mat-dialog-close>
+        <mat-icon>close</mat-icon>
+        <span>
+          {{'ACTIONS.CANCEL' | translate}}
+        </span>
+    </button>
+    <button
+      class="green-button"
+      type="submit"
+      form="works-form"
+      mat-button>
+        <mat-icon>done</mat-icon>
+        <span>
+          {{'ACTIONS.SAVE' | translate}}
+        </span>
+    </button>
+  </div>
+</div>

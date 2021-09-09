@@ -45,7 +45,6 @@
           <div class="editor-label">Текст (UA):</div>
           <quill-editor
             formControlName="text_UA"
-            [modules]="quillConfig"
             [placeholder]="'Напишіть щось про фестиваль...'">
           </quill-editor>
           <mat-hint class="mat-error" *ngIf="aboutForm.controls['text_UA'].hasError('required') &&
@@ -57,7 +56,6 @@
           <div class="editor-label">Text (EN):</div>
           <quill-editor
             formControlName="text_EN"
-            [modules]="quillConfig"
             [placeholder]="'Type about the festival...'">
           </quill-editor>
           <mat-hint class="mat-error" *ngIf="aboutForm.controls['text_EN'].hasError('required') &&
@@ -71,7 +69,9 @@
           <div class="edit-image-container">
             <button
               class="clear-button"
-              mat-mini-fab color="warn"
+              type="button"
+              mat-mini-fab
+              color="warn"
               matTooltip="Clear image"
               (click)="openClearImageDialog()"
               *ngIf="imageUrl">
@@ -92,17 +92,19 @@
       <ng-template #viewMode>
         <ng-container *ngIf="aboutInfo; else willBeSoon">
           <img
+            [ngStyle]="{'transform': 'scaleY(' + posterScale + ')'}"
+            (window:scroll)="onScrollChange()"
             src="../../../assets/images/poster-tetramatyka.jpg"
             alt="No image"
             class="about-view-image">
           <img
+            [ngStyle]="{'transform': 'scaleY(' + posterScale + ')'}"
+            (window:scroll)="onScrollChange()"
             src="../../../assets/images/poster-tetramatyka-mobile.jpg"
             alt="No image"
             class="about-view-image-mobile">
           <div class="view-text-container">
-<!--            <div class="page-title-wrapper">-->
-              <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
-<!--            </div>-->
+            <h2 class="page-title">{{'MENU.ABOUT' | translate}}</h2>
             <div [innerHTML]="aboutInfo.text[lang]"
                  class="about-view-text f-18">
             </div>

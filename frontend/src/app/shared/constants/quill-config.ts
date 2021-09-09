@@ -15,5 +15,6 @@ export const simpleQuillConfig = {
     [{color: [...quillColors]}, {background: [...quillColors]}],
     [{ align: '' }, { align: 'center' }, { align: 'right' }],
     [{ list: 'ordered'}, { list: 'bullet' }],
+    ['link']
   ]
 };

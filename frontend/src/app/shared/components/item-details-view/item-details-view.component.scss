@@ -1,0 +1,56 @@
+@import "variables";
+
+.item-details-container {
+  width: 100%;
+  margin: auto;
+
+  .item-details-title {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    width: fit-content;
+    text-align: center;
+    color: $color-white;
+    background: $color-black;
+  }
+
+  .item-details-date {
+    border-top: 1px solid $color-medium-grey;
+    color: $color-main-grey;
+    padding: 2px;
+  }
+
+  .item-details-image {
+    margin-top: 15px;
+    max-width: 68vw;
+    max-height: 80vh;
+  }
+
+  .item-details-description {
+    width: 66vw;
+    margin-top: 15px;
+    padding: 15px;
+    text-align: justify;
+    border-top: 1px solid $color-main-grey;
+
+    ::ng-deep a {
+      color: $color-main-green;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .item-details-container {
+
+    .item-details-image {
+      width: 80vw;
+      max-width: none;
+      max-height: none;
+    }
+
+    .item-details-description {
+      width: 80vw;
+      padding: 15px 5px;
+    }
+  }
+}

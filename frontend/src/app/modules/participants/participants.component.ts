@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ParticipantShort } from '@shared/interfaces/participants';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
-import { Router } from '@angular/router';
 import { ParticipantsService } from './services/participants/participants.service';
-import { TranslateService } from '@ngx-translate/core';
-import {takeUntil} from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-participants',
@@ -14,27 +12,37 @@ import {takeUntil} from 'rxjs/operators';
 export class ParticipantsComponent extends UnsubscribeOnDestroy implements OnInit {
   public participants: ParticipantShort[] = [];
 
-  get lang(): string {
-    return this._translateService.currentLang;
-  }
-
-  constructor(
-    private _router: Router,
-    private _participantsService: ParticipantsService,
-    private _translateService: TranslateService
-  ) {
+  constructor(private _participantsService: ParticipantsService) {
     super();
   }
 
   ngOnInit(): void {
-    this.getAllParticipants();
+    this.getAllParticipantsShort();
   }
 
-  getAllParticipants(): void {
-    this._participantsService.getAllParticipants()
+  getAllParticipantsShort(): void {
+    this._participantsService.getAllParticipantsShort()
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: ParticipantShort[]) => {
         this.participants = res;
+        // this.participants = [
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
+        // ];
       })
   }
 }

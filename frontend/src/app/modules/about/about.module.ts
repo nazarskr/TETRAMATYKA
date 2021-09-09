@@ -4,7 +4,7 @@ import { SharedModule } from '@shared/shared.module';
 
 import { AboutRoutingModule } from './about-routing.module';
 import { AboutComponent } from './about.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -14,7 +14,6 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     AboutRoutingModule,
     SharedModule,
-    FormsModule,
     TranslateModule,
     ReactiveFormsModule
   ]

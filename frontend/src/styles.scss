@@ -41,6 +41,7 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  // font-weight: 350;
 }
 
 * {
@@ -80,7 +81,6 @@ a {
 }
 
 .buttons-wrapper {
-  margin: 25px;
   button {
     margin-right: 10px;
   }
@@ -103,6 +103,7 @@ a {
 }
 
 .edit-image-container {
+  max-width: 600px;
   position: relative;
 
   .clear-button {
@@ -122,4 +123,16 @@ a {
 
 .grey-text {
   color: $color-main-grey;
+}
+
+.item-title {
+  width: fit-content;
+  margin: auto;
+  padding: 5px 10px;
+  background-color: black;
+  color: white;
+}
+
+.grey-image {
+  filter: grayscale(1);
 }

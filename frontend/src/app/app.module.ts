@@ -10,12 +10,13 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '@shared/shared.module';
-import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
-import { ngxUiLoaderConfig } from '@shared/constants/loader-config';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+import { loaderExclude, ngxUiLoaderConfig } from '@shared/constants/loader-config';
 import { AppInitService } from '@core/services/app-init/app-init.service';
 import { CurrentYearInterceptor } from '@core/interceptors/current-year.interceptor';
 import { AdminGuard } from '@core/guards/admin.guard';
 import { ArchiveYear } from "@shared/interfaces/admin";
+import {TokenInterceptor} from "@core/interceptors/token.interceptor";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -42,11 +43,11 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
     }),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,
-    // NgxUiLoaderHttpModule.forRoot({
-    //   exclude: [...loaderExclude],
-    //   minTime: 100,
-    //   showForeground: true
-    // }),
+    NgxUiLoaderHttpModule.forRoot({
+      exclude: [...loaderExclude],
+      minTime: 200,
+      showForeground: true
+    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule
@@ -61,6 +62,11 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CurrentYearInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
       multi: true
     },
     AdminGuard

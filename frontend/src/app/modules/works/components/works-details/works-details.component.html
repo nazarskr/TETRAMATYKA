@@ -1,0 +1,104 @@
+<div class="page p-25" *ngIf="worksItem">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <button
+      class="back-button"
+      type="button"
+      mat-button
+      (click)="goToWorksList()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>
+      {{'ACTIONS.BACK' | translate}}
+    </span>
+    </button>
+    <div fxLayout="row" class="buttons-wrapper"
+         *userPermission="['ADMIN']">
+      <button
+        class="orange-button"
+        type="button"
+        mat-button
+        (click)="editWorksItem()">
+        <mat-icon>edit</mat-icon>
+        <span>
+          {{'ACTIONS.EDIT' | translate}}
+        </span>
+      </button>
+
+      <button
+        class="red-button"
+        type="button"
+        mat-button
+        (click)="openDeleteWorksItemDialog()">
+        <mat-icon>delete</mat-icon>
+        <span>
+          {{'ACTIONS.DELETE' | translate}}
+        </span>
+      </button>
+    </div>
+  </div>
+  <app-item-details-view [item]="worksItem"
+                         [imageUrl]="imageUrl"
+                         [titleProp]="'title'"
+                         [descriptionProp]="'description'">
+  </app-item-details-view>
+  <ng-container *userPermission="['ADMIN']">
+    <mat-divider class="mv-10"></mat-divider>
+    <div class="buttons-wrapper mb-15"
+         fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+      <h4>{{'MENU.PARTICIPANTS' | translate}}</h4>
+      <button
+        [matMenuTriggerFor]="menu"
+        class="green-button"
+        mat-button>
+        <mat-icon>add</mat-icon>
+        <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="addParticipant()">
+          {{'COMMON.ADD_NEW' | translate}}
+        </button>
+        <button mat-menu-item (click)="selectParticipantFromList()">
+          {{'COMMON.SELECT_EXISTING' | translate}}
+        </button>
+      </mat-menu>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="participants.length">
+    <div *ngFor="let participant of participants" class="secondary-item-wrapper">
+      <ng-container *userPermission="['ADMIN']">
+        <mat-divider class="mv-10"></mat-divider>
+        <div fxLayout="row" class="buttons-wrapper mb-15">
+          <button
+            class="orange-button"
+            type="button"
+            mat-button
+            (click)="editParticipant(participant)">
+            <mat-icon>edit</mat-icon>
+            <span>
+          {{'ACTIONS.EDIT' | translate}}
+        </span>
+          </button>
+
+          <button
+            class="red-button"
+            type="button"
+            mat-button
+            (click)="openDeleteParticipantDialog(participant)">
+            <mat-icon>delete</mat-icon>
+            <span>
+          {{'ACTIONS.DELETE' | translate}}
+        </span>
+          </button>
+        </div>
+      </ng-container>
+      <app-item-details-secondary
+        [greyImage]="true"
+        [item]="participant"
+        [titleProp]="'fullName'"
+        [descriptionProp]="'bio'">
+      </app-item-details-secondary>
+    </div>
+  </ng-container>
+</div>

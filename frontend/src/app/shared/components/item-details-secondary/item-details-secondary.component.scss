@@ -1,0 +1,44 @@
+@import "variables";
+
+.secondary-item-container {
+  width: 68vw;
+  margin: auto;
+  clear: both;
+
+  .image-with-description {
+    margin-top: 10px;
+  }
+
+  .item-image {
+    width: 300px;
+    height: auto;
+    float: left;
+    margin: 3px 10px 5px 0;
+  }
+
+  .item-description {
+    text-align: justify;
+
+    ::ng-deep a {
+      color: $color-main-green;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .secondary-item-container {
+    width: 80vw;
+
+    .item-image {
+      width: 80vw;
+      float: none;
+    }
+
+    .item-description {
+      border-top: 1px solid $color-main-grey;
+      padding: 10px 5px;
+      margin: auto;
+    }
+  }
+}

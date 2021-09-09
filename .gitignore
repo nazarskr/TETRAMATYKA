@@ -50,6 +50,7 @@ frontend/Thumbs.db
 backend/dist
 backend/node_modules
 backend/.env
+backend/google-credentials.json
 
 # Logs
 backend/logs

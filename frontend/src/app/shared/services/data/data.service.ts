@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,13 @@ export class DataService {
       return true;
     }
     return false;
+  }
+
+  convertDateToLocale(date: Date): string {
+    if (!date) {
+      return null;
+    }
+    const localDate = moment(date).format('YYYY-MM-DDTHH:mm');
+    return localDate;
   }
 }

@@ -1,0 +1,144 @@
+<form
+  class="p-25 page"
+  #form="ngForm"
+  [formGroup]="projectForm"
+  (ngSubmit)="saveProject()">
+  <div fxLayout="row" fxLayoutGap="30px" class="buttons-wrapper">
+    <button
+      class="back-button"
+      mat-button
+      type="button"
+      (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>
+        {{'ACTIONS.BACK' | translate}}
+      </span>
+    </button>
+
+    <div fxLayout="row" *userPermission="['ADMIN']">
+      <ng-container *ngIf="!editMode; else editModeBlock">
+        <button
+          class="orange-button"
+          type="button"
+          mat-button
+          (click)="editProject()">
+          <mat-icon>edit</mat-icon>
+          <span>
+            {{'ACTIONS.EDIT' | translate}}
+          </span>
+        </button>
+
+        <button
+          class="red-button"
+          type="button"
+          mat-button
+          (click)="openDeleteProjectDialog()">
+          <mat-icon>delete</mat-icon>
+          <span>
+            {{'ACTIONS.DELETE' | translate}}
+          </span>
+        </button>
+      </ng-container>
+
+      <ng-template #editModeBlock>
+        <button
+          class="green-button"
+          type="submit"
+          mat-button>
+          <mat-icon>done</mat-icon>
+          <span>
+            {{'ACTIONS.SAVE' | translate}}
+          </span>
+        </button>
+
+        <button
+          class="red-button"
+          type="button"
+          mat-button
+          (click)="cancelEditing()">
+          <mat-icon>close</mat-icon>
+          <span>
+            {{'ACTIONS.CANCEL' | translate}}
+          </span>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="mt-25">
+    <ng-container *ngIf="editMode; else viewMode">
+      <div class="editor-label m-0">Назва проєкта (UA):</div>
+      <mat-form-field floatLabel="never">
+        <input matInput
+               formControlName="title_UA"
+               autocomplete="chrome-off"
+               placeholder="Назва проекта">
+        <mat-error *ngIf="projectForm.controls['title_UA'].hasError('required') &&
+                    projectForm.controls['title_UA'].touched || form.submitted">
+          Це поле обов'язкове
+        </mat-error>
+      </mat-form-field>
+      <div class="quill-editor-wrapper">
+        <div class="editor-label">Опис проєкта (UA):</div>
+        <quill-editor
+          formControlName="description_UA"
+          [placeholder]="'Опис проєкта'"></quill-editor>
+        <mat-hint class="mat-error" *ngIf="projectForm.controls['description_UA'].hasError('required') &&
+                    projectForm.controls['description_UA'].touched || form.submitted">
+          Це поле обов'язкове
+        </mat-hint>
+      </div>
+      <div class="editor-label m-0">Project's title (EN):</div>
+      <mat-form-field floatLabel="never">
+        <input matInput
+               formControlName="title_EN"
+               autocomplete="chrome-off"
+               placeholder="Project's title">
+        <mat-error *ngIf="projectForm.controls['title_EN'].hasError('required') &&
+                    projectForm.controls['title_EN'].touched || form.submitted">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <div class="quill-editor-wrapper">
+        <div class="editor-label">Project's description (EN):</div>
+        <quill-editor
+          formControlName="description_EN"
+          [placeholder]="'The project\'s description'"></quill-editor>
+        <mat-hint class="mat-error" *ngIf="projectForm.controls['description_EN'].hasError('required') &&
+                    projectForm.controls['description_UA'].touched || form.submitted">
+          This field is required
+        </mat-hint>
+      </div>
+
+      <ng-container *ngIf="imageUrl; else uploadField">
+        <div class="editor-label">Image:</div>
+        <div class="edit-image-container">
+          <button
+            class="clear-button"
+            type="button"
+            mat-mini-fab
+            color="warn"
+            matTooltip="Clear image"
+            (click)="openClearImageDialog()"
+            *ngIf="imageUrl">
+            <mat-icon>clear</mat-icon>
+          </button>
+          <img [src]="imageUrl" alt="No image" *ngIf="imageUrl" width="500">
+        </div>
+      </ng-container>
+      <ng-template #uploadField>
+        <div class="editor-label">Upload image (landscape format will be better): </div>
+        <app-drag-n-drop-upload
+          [acceptMimetype]="'image/*'"
+          [multiple]="false"
+          (fileUploaded)="changeImage($event)"
+        ></app-drag-n-drop-upload>
+      </ng-template>
+    </ng-container>
+    <ng-template #viewMode>
+      <ng-container *ngIf="project">
+        <app-item-details-view [item]="project" [imageUrl]="imageUrl"></app-item-details-view>
+      </ng-container>
+    </ng-template>
+  </div>
+</form>

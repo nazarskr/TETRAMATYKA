@@ -1,4 +1,160 @@
-<div class="p-25">
-  <p>news-details works!</p>
-  <button mat-button (click)="goBack()">{{'COMMON.BACK' | translate}}</button>
-</div>
+<form
+  class="p-25 page"
+  #form="ngForm"
+  [formGroup]="newsItemForm"
+  (ngSubmit)="saveNewsItem()">
+  <div fxLayout="row" fxLayoutGap="30px" class="buttons-wrapper">
+    <button
+      class="back-button"
+      type="button"
+      mat-button
+      (click)="goToHome()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>
+        {{'ACTIONS.BACK' | translate}}
+      </span>
+    </button>
+
+    <div fxLayout="row" *userPermission="['ADMIN']">
+      <ng-container *ngIf="!editMode; else editModeBlock">
+        <button
+          class="orange-button"
+          type="button"
+          mat-button
+          (click)="editNewsItem()">
+          <mat-icon>edit</mat-icon>
+          <span>
+            {{'ACTIONS.EDIT' | translate}}
+          </span>
+        </button>
+
+        <button
+          class="red-button"
+          type="button"
+          mat-button
+          (click)="openDeleteNewsItemDialog()">
+          <mat-icon>delete</mat-icon>
+          <span>
+            {{'ACTIONS.DELETE' | translate}}
+          </span>
+        </button>
+      </ng-container>
+
+      <ng-template #editModeBlock>
+        <button
+          class="green-button"
+          type="submit"
+          mat-button>
+          <mat-icon>done</mat-icon>
+          <span>
+            {{'ACTIONS.SAVE' | translate}}
+          </span>
+        </button>
+
+        <button
+          class="red-button"
+          type="button"
+          mat-button
+          (click)="cancelEditing()">
+          <mat-icon>close</mat-icon>
+          <span>
+            {{'ACTIONS.CANCEL' | translate}}
+          </span>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="mt-25">
+    <ng-container *ngIf="editMode; else viewMode">
+      <div class="editor-label m-0">Час і дата початку події:</div>
+      <mat-form-field floatLabel="never">
+        <input matInput
+               formControlName="eventDate"
+               autocomplete="chrome-off"
+               type="datetime-local"
+               placeholder="dd/mm/yyyy hh:mm">
+        <mat-error *ngIf="newsItemForm.controls['eventDate'].hasError('required') &&
+                      (newsItemForm.controls['eventDate'].touched || form.submitted)">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <div class="editor-label m-0">Заголовок (UA):</div>
+      <mat-form-field floatLabel="never">
+        <input matInput
+               formControlName="title_UA"
+               autocomplete="chrome-off"
+               placeholder="Заголовок">
+        <mat-error *ngIf="newsItemForm.controls['title_UA'].hasError('required') &&
+                    newsItemForm.controls['title_UA'].touched || form.submitted">
+          Це поле обов'язкове
+        </mat-error>
+      </mat-form-field>
+      <div class="quill-editor-wrapper">
+        <div class="editor-label">Опис (UA):</div>
+        <quill-editor
+          formControlName="description_UA"
+          [placeholder]="'Опис'"></quill-editor>
+        <mat-hint class="mat-error" *ngIf="newsItemForm.controls['description_UA'].hasError('required') &&
+                    newsItemForm.controls['description_UA'].touched || form.submitted">
+          Це поле обов'язкове
+        </mat-hint>
+      </div>
+      <div class="editor-label m-0">Project's title (EN):</div>
+      <mat-form-field floatLabel="never">
+        <input matInput
+               formControlName="title_EN"
+               autocomplete="chrome-off"
+               placeholder="Title">
+        <mat-error *ngIf="newsItemForm.controls['title_EN'].hasError('required') &&
+                    newsItemForm.controls['title_EN'].touched || form.submitted">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+      <div class="quill-editor-wrapper">
+        <div class="editor-label">Description (EN):</div>
+        <quill-editor
+          formControlName="description_EN"
+          [placeholder]="'Description'"></quill-editor>
+        <mat-hint class="mat-error" *ngIf="newsItemForm.controls['description_EN'].hasError('required') &&
+                    newsItemForm.controls['description_UA'].touched || form.submitted">
+          This field is required
+        </mat-hint>
+      </div>
+
+      <ng-container *ngIf="imageUrl; else uploadField">
+        <div class="editor-label">Image:</div>
+        <div class="edit-image-container">
+          <button
+            class="clear-button"
+            type="button"
+            mat-mini-fab
+            color="warn"
+            matTooltip="Clear image"
+            (click)="openClearImageDialog()"
+            *ngIf="imageUrl">
+            <mat-icon>clear</mat-icon>
+          </button>
+          <img [src]="imageUrl" alt="No image" *ngIf="imageUrl" width="500">
+        </div>
+      </ng-container>
+      <ng-template #uploadField>
+        <div class="editor-label">Upload image (landscape format will be better): </div>
+        <app-drag-n-drop-upload
+          [acceptMimetype]="'image/*'"
+          [multiple]="false"
+          (fileUploaded)="changeImage($event)"
+        ></app-drag-n-drop-upload>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #viewMode>
+      <ng-container *ngIf="newsItem">
+        <app-item-details-view
+          [item]="newsItem"
+          [imageUrl]="imageUrl">
+        </app-item-details-view>
+      </ng-container>
+    </ng-template>
+  </div>
+</form>

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DialogData } from '@shared/interfaces/dialog';
 
 @Component({
@@ -8,9 +8,18 @@ import { DialogData } from '@shared/interfaces/dialog';
   styleUrls: ['./simple-dialog.component.scss']
 })
 export class SimpleDialogComponent implements OnInit {
+  public checkboxValue = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(
+    public dialogRef: MatDialogRef<SimpleDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  confirmDialog(): void {
+    const closeResult = this.data.checkboxText ? {checkboxValue: this.checkboxValue} : true;
+    this.dialogRef.close(closeResult);
   }
 }

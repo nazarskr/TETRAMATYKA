@@ -9,13 +9,16 @@
     "NOT_AVAILABLE": "Недоступно",
     "WILL_BE_AVAILABLE_SOON": "Буде доступно незабаром",
     "SUPPORTED_BY": "За підтримки",
-    "POSSIBLE_CHANGES": "У програмі можливі зміни"
+    "POSSIBLE_CHANGES": "У програмі можливі зміни",
+    "ADD_NEW": "Додати нового",
+    "SELECT_EXISTING": "Вибрати існуючого"
   },
   "MENU": {
     "MAIN": "Головна",
     "ABOUT": "Про фестиваль",
     "PROGRAM": "Програма",
     "PROJECTS": "Проєкти",
+    "WORKS": "Твори",
     "PARTICIPANTS": "Учасники",
     "CONTACTS": "Контакти",
     "ARCHIVE": "Архів",
@@ -38,6 +41,12 @@
   "HOME": {
     "FESTIVAL_AUDIOVISUAL_ART": "Фестиваль аудіовізуального мистецтва",
     "LATEST_NEWS": "Останні новини"
+  },
+  "PROJECTS": {
+    "CATEGORY": {
+      "EDUCATION": "Освіта",
+      "NO_CATEGORY": "Без категорії"
+    }
   },
   "ARCHIVE": {
     "ARCHIVE_MANAGER": "Менеджер архівів"

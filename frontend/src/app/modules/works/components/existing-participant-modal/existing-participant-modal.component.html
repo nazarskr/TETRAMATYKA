@@ -1,0 +1,36 @@
+<h2 mat-dialog-title class="border-bottom-grey">{{data.title}}</h2>
+<div mat-dialog-content>
+  <mat-form-field class="w-100" *ngIf="participants.length">
+    <mat-label>{{'COMMON.SELECT_EXISTING' | translate}}</mat-label>
+    <mat-select [(ngModel)]="selectedParticipant">
+      <mat-option *ngFor="let participant of participants"
+                  [value]="participant">
+        {{participant.fullName[lang]}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="border-top-grey">
+  <div class="actions-row"
+       fxLayout="row" fxLayoutAlign="flex-end center">
+    <button
+      class="red-button"
+      type="button"
+      mat-button
+      mat-dialog-close>
+      <mat-icon>close</mat-icon>
+      <span>
+          {{'ACTIONS.CANCEL' | translate}}
+        </span>
+    </button>
+    <button
+      class="green-button"
+      (click)="saveSelectedParticipant()"
+      mat-button>
+      <mat-icon>done</mat-icon>
+      <span>
+          {{'ACTIONS.SAVE' | translate}}
+        </span>
+    </button>
+  </div>
+</div>

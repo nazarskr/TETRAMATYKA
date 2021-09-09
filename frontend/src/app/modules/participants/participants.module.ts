@@ -6,7 +6,7 @@ import { ParticipantsComponent } from './participants.component';
 import { ParticipantDetailsComponent } from './components/participant-details/participant-details.component';
 import { SharedModule } from '@shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +15,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     SharedModule,
     TranslateModule,
-    FormsModule,
     ParticipantsRoutingModule,
     ReactiveFormsModule
   ]

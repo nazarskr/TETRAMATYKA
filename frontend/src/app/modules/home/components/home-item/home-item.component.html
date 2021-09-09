@@ -1,0 +1,8 @@
+<div class="news-item" *ngIf="item" routerLink="{{type + '/' + item._id}}">
+  <div class="item-image-wrapper">
+    <div class="item-image"
+         [style.background-image]="'url(' + item.imageUrl + ')'">
+    </div>
+  </div>
+  <h4 class="item-title">{{item.title[lang]}}</h4>
+</div>

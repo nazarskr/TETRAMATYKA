@@ -9,13 +9,16 @@
     "NOT_AVAILABLE": "Not available",
     "WILL_BE_AVAILABLE_SOON": "Will be available soon",
     "SUPPORTED_BY": "Supported by ",
-    "POSSIBLE_CHANGES": "There might be changes in the program"
+    "POSSIBLE_CHANGES": "There might be changes in the program",
+    "ADD_NEW": "Add new",
+    "SELECT_EXISTING": "Select existing"
   },
   "MENU": {
     "MAIN": "Home",
     "ABOUT": "About",
     "PROGRAM": "Program",
     "PROJECTS": "Projects",
+    "WORKS": "Works",
     "PARTICIPANTS": "Participants",
     "CONTACTS": "Contacts",
     "ARCHIVE": "Archive",
@@ -38,6 +41,12 @@
   "HOME": {
     "FESTIVAL_AUDIOVISUAL_ART": "Festival of the audiovisual art",
     "LATEST_NEWS": "Latest news"
+  },
+  "PROJECTS": {
+    "CATEGORY": {
+      "EDUCATION": "Education",
+      "NO_CATEGORY": "No category"
+    }
   },
   "ARCHIVE": {
     "ARCHIVE_MANAGER": "Archive manager"
