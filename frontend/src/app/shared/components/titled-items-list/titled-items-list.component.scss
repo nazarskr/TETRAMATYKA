@@ -75,6 +75,9 @@
 
       .titled-item {
         font-size: 12px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
