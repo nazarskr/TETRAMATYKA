@@ -16,11 +16,14 @@ import { NewsModule } from './modules/news/news.module';
 import { WorksModule } from './modules/works/works.module';
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { TokenInterceptor } from "./common/interceptors/token.interceptor";
+import { UsersModule } from './modules/users/users.module';
+import { MailModule } from './modules/mail/mail.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       cache: true,
+      isGlobal: true,
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, 'client'),
@@ -41,6 +44,8 @@ import { TokenInterceptor } from "./common/interceptors/token.interceptor";
     ProjectsModule,
     NewsModule,
     WorksModule,
+    UsersModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [

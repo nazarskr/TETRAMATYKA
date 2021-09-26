@@ -1,14 +1,19 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { User, UserSchema } from './schemas/user.schema';
-import { MongooseModule } from '@nestjs/mongoose';
+import { PassportModule } from "@nestjs/passport";
+import { LocalStrategy } from "./local-strategy";
+import { MailService } from "../mail/mail.service";
+import { UsersService } from "../users/users.service";
+import { MongooseModule } from "@nestjs/mongoose";
+import { User, UserSchema } from "../users/schemas/user.schema";
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }], 'master'),
+      PassportModule,
+      MongooseModule.forFeature([{ name: User.name, schema: UserSchema }], 'master'),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, UsersService, LocalStrategy, MailService],
 })
 export class AuthModule {}
