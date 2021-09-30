@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { Contact } from '@shared/interfaces/contact';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { UserService } from '@core/services/user/user.service';
+import { UserService } from '@core/services/user.service';
 import { ContactsService } from './services/contacts.service';
 import { takeUntil } from 'rxjs/operators';
 import { ToasterService } from '@shared/services/toaster/toaster.service';

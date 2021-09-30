@@ -1,0 +1,32 @@
+@import 'variables';
+
+::ng-deep {
+  .auth-container {
+    width: 100vw;
+    height: calc(100vh - #{$header-height});
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .form-title {
+      width: fit-content;
+      margin-bottom: 15px;
+      padding: 3px 7px;
+      background: $color-black;
+      color: $color-white;
+    }
+
+    .form-bottom-text {
+      font-size: 12px;
+      text-align: center;
+      margin-top: 15px;
+      color: $color-main-grey;
+    }
+
+    .input-icon {
+      cursor: pointer;
+    }
+  }
+}

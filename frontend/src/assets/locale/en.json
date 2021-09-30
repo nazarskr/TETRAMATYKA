@@ -31,7 +31,9 @@
     "DELETE": "Delete",
     "ADD": "Add",
     "BACK": "Back",
-    "VIEW": "View"
+    "VIEW": "View",
+    "LOGIN": "Login",
+    "SEND": "Send"
   },
   "TABLE_COLUMNS": {
     "YEAR": "Year",

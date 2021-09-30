@@ -40,6 +40,11 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
+    path: 'auth',
+    loadChildren: () => import('./core/auth/auth.module')
+      .then(m => m.AuthModule)
+  },
+  {
     path: 'page-not-found',
     loadChildren: () => import('./modules/page-not-found/page-not-found.module')
       .then(m => m.PageNotFoundModule)

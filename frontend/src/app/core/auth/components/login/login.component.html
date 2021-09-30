@@ -1,1 +1,61 @@
-<p>login works!</p>
+<div class="auth-container">
+  <h4 class="form-title">Login</h4>
+  <form
+    (ngSubmit)="login()"
+    [formGroup]="loginForm"
+    #form="ngForm">
+    <div class="editor-label m-0">Email:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             email
+             type="email"
+             formControlName="email"
+             autocomplete="chrome-off"
+             placeholder="email">
+      <mat-icon matSuffix></mat-icon>
+      <mat-error *ngIf="loginForm.controls['email'].hasError('required') &&
+                  loginForm.controls['email'].touched || form.submitted">
+        This field is required
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['email'].hasError('email')
+                  && loginForm.controls['email'].touched || form.submitted">
+        Write correct email
+      </mat-error>
+    </mat-form-field>
+    <div class="editor-label m-0">Password:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             type="{{showPassword ? 'text' : 'password'}}"
+             formControlName="password"
+             autocomplete="chrome-off"
+             placeholder="password">
+      <mat-icon matSuffix (click)="toggleShowPassword()" class="input-icon">
+        {{showPassword ? 'visibility' : 'visibility_off'}}
+      </mat-icon>
+      <mat-error *ngIf="loginForm.controls['password'].hasError('required') &&
+                  loginForm.controls['password'].touched || form.submitted">
+        This field is required
+      </mat-error>
+      <mat-error *ngIf="!loginForm.controls['password'].hasError('required')
+                  && loginForm.controls['password'].hasError('minlength')
+                  && loginForm.controls['password'].touched || form.submitted">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="center center" class="mt-15">
+      <button
+        class="green-button"
+        type="submit"
+        mat-button>
+        <mat-icon>done</mat-icon>
+        <span>
+          {{'ACTIONS.LOGIN' | translate}}
+      </span>
+      </button>
+    </div>
+  </form>
+  <p class="form-bottom-text">
+    Forgot password? Click
+    <a routerLink="/auth/forgot-password">here</a>
+  </p>
+</div>

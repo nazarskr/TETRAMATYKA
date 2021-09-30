@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { mainRoutes } from '../../constants/menu';
-import { UserService } from '@core/services/user/user.service';
+import { UserService } from '@core/services/user.service';
 import { RoleEnum } from '../../enums/role';
 import { takeUntil } from 'rxjs/operators';
 import { ArchiveYear } from '@shared/interfaces/admin';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { ArchiveService } from '@shared/services/archive/archive.service';
-import { AppInitService } from '@core/services/app-init/app-init.service';
+import { AppInitService } from '@core/services/app-init.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
 
