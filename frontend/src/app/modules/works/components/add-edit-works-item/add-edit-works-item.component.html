@@ -23,6 +23,7 @@
         <div class="editor-label">Опис твору (UA):</div>
         <quill-editor
           formControlName="description_UA"
+          ngDefaultControl
           [placeholder]="'Опис твору'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="worksItemForm.controls['description_UA'].hasError('required') &&
                   worksItemForm.controls['description_UA'].touched || form.submitted">
@@ -43,6 +44,7 @@
       <div class="quill-editor-wrapper">
         <div class="editor-label">Work's description (EN):</div>
         <quill-editor
+          ngDefaultControl
           formControlName="description_EN"
           [placeholder]="'Work\'s description'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="worksItemForm.controls['description_EN'].hasError('required') &&

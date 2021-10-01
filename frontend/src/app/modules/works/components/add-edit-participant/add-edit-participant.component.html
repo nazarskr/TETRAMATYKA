@@ -22,6 +22,7 @@
       <div class="quill-editor-wrapper">
         <div class="editor-label">Текст (UA):</div>
         <quill-editor
+          ngDefaultControl
           formControlName="bio_UA"
           [placeholder]="'Біо учасника фестивалю'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="participantForm.controls['bio_UA'].hasError('required') &&
@@ -43,6 +44,7 @@
       <div class="quill-editor-wrapper">
         <div class="editor-label">Text (EN):</div>
         <quill-editor
+          ngDefaultControl
           formControlName="bio_EN"
           [placeholder]="'The participant\'s bio'"></quill-editor>
         <mat-hint class="mat-error" *ngIf="participantForm.controls['bio_EN'].hasError('required') &&

@@ -9,9 +9,9 @@ import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ParticipantsService } from '../../../participants/services/participants/participants.service';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import {DialogData} from '@shared/interfaces/dialog';
+import { DialogData } from '@shared/interfaces/dialog';
 
 @Component({
   selector: 'app-add-edit-participant',

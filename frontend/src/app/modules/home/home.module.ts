@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '@shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -26,6 +26,7 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
       SharedModule,
       HomeRoutingModule,
       TranslateModule,
+      FormsModule,
       ReactiveFormsModule
   ],
 })

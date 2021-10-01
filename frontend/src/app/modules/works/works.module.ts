@@ -23,6 +23,7 @@ import { ExistingParticipantModalComponent } from './components/existing-partici
     imports: [
         CommonModule,
         TranslateModule,
+        FormsModule,
         ReactiveFormsModule,
         WorksRoutingModule,
         SharedModule,

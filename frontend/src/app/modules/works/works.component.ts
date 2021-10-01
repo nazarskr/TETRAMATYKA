@@ -32,24 +32,6 @@ export class WorksComponent extends UnsubscribeOnDestroy implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: WorksItemShort[]) => {
         this.works = res;
-        // this.works = [
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        //   {title: {ua: 'Тестовий твір', en: 'Test piece'}, _id: '6123a214c388a9224478c042'},
-        // ];
       })
   }
 

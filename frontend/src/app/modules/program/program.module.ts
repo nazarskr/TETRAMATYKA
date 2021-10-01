@@ -6,7 +6,7 @@ import { ProgramComponent } from './program.component';
 import { SharedModule } from '@shared/shared.module';
 import { ProgramItemComponent } from './program-item/program-item.component';
 import { TranslateModule } from "@ngx-translate/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     CommonModule,
     SharedModule,
     TranslateModule,
+    FormsModule,
     ReactiveFormsModule,
     ProgramRoutingModule
   ]
