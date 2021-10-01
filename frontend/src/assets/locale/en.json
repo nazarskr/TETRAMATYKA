@@ -11,7 +11,8 @@
     "SUPPORTED_BY": "Supported by ",
     "POSSIBLE_CHANGES": "There might be changes in the program",
     "ADD_NEW": "Add new",
-    "SELECT_EXISTING": "Select existing"
+    "SELECT_EXISTING": "Select existing",
+    "TYPE_NAME": "Type a name"
   },
   "MENU": {
     "MAIN": "Home",

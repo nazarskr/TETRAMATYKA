@@ -12,6 +12,7 @@ import {WorksItemDto} from './dto/works-item.dto';
 import {WorksItemParticipantsDto} from './dto/works-Item-participants.dto';
 import {ParticipantDocument} from '../participants/schemas/participant.schema';
 import {UpdateWriteOpResult} from "mongoose";
+import {Observable} from "rxjs";
 
 @Controller('works')
 export class WorksController {
@@ -80,11 +81,11 @@ export class WorksController {
     }
 
     @Patch(':id/:participantId')
-    async updateWorksItemParticipants(
+    updateWorksItemParticipants(
         @Param('id') id: string,
         @Param('participantId') participantId: string,
         @Body() worksItemParticipants: WorksItemParticipantsDto
-    ): Promise<ParticipantDocument> {
+    ): Observable<ParticipantDocument> {
         return this.worksService.updateWorksItemParticipants(id, participantId, worksItemParticipants);
     }
 
@@ -93,6 +94,6 @@ export class WorksController {
     async deleteWorksItem(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const worksItemForDelete = await this.worksService.getWorksItemImageUrl(id);
         await storageUtil.removeFile(worksItemForDelete.imageUrl);
-        return this.worksService.deleteWorksItem(id);
+        return this.worksService.deleteWorksItem(id).toPromise();
     }
 }

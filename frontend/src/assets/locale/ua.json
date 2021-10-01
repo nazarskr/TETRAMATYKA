@@ -11,7 +11,8 @@
     "SUPPORTED_BY": "За підтримки",
     "POSSIBLE_CHANGES": "У програмі можливі зміни",
     "ADD_NEW": "Додати нового",
-    "SELECT_EXISTING": "Вибрати існуючого"
+    "SELECT_EXISTING": "Вибрати існуючого",
+    "TYPE_NAME": "Введіть ім'я"
   },
   "MENU": {
     "MAIN": "Головна",

@@ -3,6 +3,14 @@
 .program-item {
   padding: 10px 0;
   position: relative;
+
+  &.editable {
+    border: 1px dashed $color-main-grey;
+  }
+}
+
+.program-item-edit {
+  padding: 20px;
 }
 
 .action-buttons {

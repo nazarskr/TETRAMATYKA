@@ -1,13 +1,17 @@
-<h2 mat-dialog-title class="border-bottom-grey">{{data.title}}</h2>
+<h2 mat-dialog-title class="border-bottom-grey">{{'COMMON.SELECT_EXISTING' | translate}}</h2>
 <div mat-dialog-content>
-  <mat-form-field class="w-100" *ngIf="participants.length">
-    <mat-label>{{'COMMON.SELECT_EXISTING' | translate}}</mat-label>
-    <mat-select [(ngModel)]="selectedParticipant">
-      <mat-option *ngFor="let participant of participants"
-                  [value]="participant">
+  <mat-form-field class="w-100">
+    <mat-label>{{'COMMON.TYPE_NAME' | translate}}</mat-label>
+    <input matInput
+           [formControl]="participantControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selectParticipant()">
+      <mat-option *ngFor="let participant of filteredParticipants | async" [value]="participant">
         {{participant.fullName[lang]}}
       </mat-option>
-    </mat-select>
+    </mat-autocomplete>
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="border-top-grey">

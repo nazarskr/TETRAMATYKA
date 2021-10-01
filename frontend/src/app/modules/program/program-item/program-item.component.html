@@ -1,8 +1,9 @@
-<div class="program-item">
+<div class="program-item" [class.editable]="programItem.editable">
   <form #form="ngForm"
         [formGroup]="programItemForm"
         (ngSubmit)="saveProgramItem()">
-    <ng-container *ngIf="programItem.editable; else programItemView">
+    <div class="program-item-edit"
+      *ngIf="programItem.editable; else programItemView">
       <div class="editor-label m-0">Час і дата початку події:</div>
       <mat-form-field floatLabel="never" class="wide-form-field">
         <input matInput
@@ -63,7 +64,7 @@
           [placeholder]="'Event\'s description'">
         </quill-editor>
       </div>
-    </ng-container>
+    </div>
     <ng-template #programItemView>
       <div class="program-date f-18">
         <span class="program-day">
@@ -85,7 +86,7 @@
       </div>
       <div class="program-body f-18" [innerHTML]="programItem.info[lang]"></div>
     </ng-template>
-    <div class="program-actions" *userPermission="['ADMIN']">
+    <div class="action-buttons" *userPermission="['ADMIN']">
       <ng-container *ngIf="this.programItem.editable; else viewActions">
         <mat-icon class="action-button green"
                   (click)="submitForm()">done</mat-icon>

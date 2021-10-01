@@ -1,39 +1,36 @@
 <div class="page p-25" *ngIf="worksItem">
-  <div fxLayout="row" fxLayoutGap="10px">
+  <button
+    class="back-button"
+    type="button"
+    mat-button
+    (click)="goToWorksList()">
+    <mat-icon>arrow_back</mat-icon>
+    <span>
+        {{'ACTIONS.BACK' | translate}}
+      </span>
+  </button>
+  <div fxLayout="row" class="buttons-wrapper" *userPermission="['ADMIN']">
     <button
-      class="back-button"
+      class="orange-button"
       type="button"
       mat-button
-      (click)="goToWorksList()">
-      <mat-icon>arrow_back</mat-icon>
+      (click)="editWorksItem()">
+      <mat-icon>edit</mat-icon>
       <span>
-      {{'ACTIONS.BACK' | translate}}
-    </span>
-    </button>
-    <div fxLayout="row" class="buttons-wrapper"
-         *userPermission="['ADMIN']">
-      <button
-        class="orange-button"
-        type="button"
-        mat-button
-        (click)="editWorksItem()">
-        <mat-icon>edit</mat-icon>
-        <span>
           {{'ACTIONS.EDIT' | translate}}
         </span>
-      </button>
+    </button>
 
-      <button
-        class="red-button"
-        type="button"
-        mat-button
-        (click)="openDeleteWorksItemDialog()">
-        <mat-icon>delete</mat-icon>
-        <span>
+    <button
+      class="red-button"
+      type="button"
+      mat-button
+      (click)="openDeleteWorksItemDialog()">
+      <mat-icon>delete</mat-icon>
+      <span>
           {{'ACTIONS.DELETE' | translate}}
         </span>
-      </button>
-    </div>
+    </button>
   </div>
   <app-item-details-view [item]="worksItem"
                          [imageUrl]="imageUrl"

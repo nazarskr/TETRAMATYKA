@@ -6,6 +6,9 @@ import { ParticipantsService } from "../../../participants/services/participants
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { TranslateService } from "@ngx-translate/core";
+import { FormControl } from "@angular/forms";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
 
 @Component({
   selector: 'app-existing-participant-modal',
@@ -15,6 +18,8 @@ import { TranslateService } from "@ngx-translate/core";
 export class ExistingParticipantModalComponent extends UnsubscribeOnDestroy implements OnInit {
   public participants: ParticipantShort[] = [];
   public selectedParticipant: ParticipantShort;
+  public participantControl = new FormControl();
+  public filteredParticipants: Observable<ParticipantShort[]>;
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -32,6 +37,32 @@ export class ExistingParticipantModalComponent extends UnsubscribeOnDestroy impl
 
   ngOnInit(): void {
     this.participants = this.data.participants;
+    this.initAutocomplete();
+  }
+
+  initAutocomplete(): void {
+    this.filteredParticipants = this.participantControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
+
+  private _filter (value: string | ParticipantShort): ParticipantShort[] {
+    let filterValue;
+    if (this.isParticipant(value)) {
+      filterValue = value.fullName[this.lang].toLowerCase();
+    } else {
+      filterValue = value.toLowerCase();
+    }
+
+    return this.participants.filter((participant: ParticipantShort) => {
+      return participant.fullName['en'].toLowerCase().includes(filterValue)
+              || participant.fullName['ua'].toLowerCase().includes(filterValue);
+    });
+  }
+
+  isParticipant(value: string | ParticipantShort): value is ParticipantShort {
+    return !!(value as ParticipantShort).fullName;
   }
 
   saveSelectedParticipant(): void {
@@ -41,6 +72,11 @@ export class ExistingParticipantModalComponent extends UnsubscribeOnDestroy impl
     }
 
     this.dialogRef.close(this.selectedParticipant._id);
+  }
+
+  selectParticipant(): void {
+    this.selectedParticipant = {...this.participantControl.value};
+    this.participantControl.setValue(this.selectedParticipant.fullName[this.lang]);
   }
 
 }

@@ -37,7 +37,7 @@ export class ProgramComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   addProgramItem(): void {
-    this.programList.push({
+    this.programList.unshift({
       title: {
         ua: '',
         en: ''

@@ -93,6 +93,6 @@ export class ParticipantsController {
     async deleteParticipant(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const participantForDelete = await this.participantsService.getParticipantImageUrl(id);
         await storageUtil.removeFile(participantForDelete.imageUrl);
-        return this.participantsService.deleteParticipant(id);
+        return this.participantsService.deleteParticipant(id).toPromise();
     }
 }

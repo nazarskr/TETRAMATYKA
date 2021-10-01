@@ -27,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // pipes
 import { LocalDatePipe } from './pipes/local-date.pipe';
@@ -62,7 +63,8 @@ const materialModules = [
   MatInputModule,
   DragDropModule,
   MatCardModule,
-  OverlayModule
+  OverlayModule,
+  MatAutocompleteModule
 ];
 
 

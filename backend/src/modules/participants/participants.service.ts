@@ -4,6 +4,8 @@ import {Model, UpdateWriteOpResult} from 'mongoose';
 import { Participant, ParticipantDocument } from './schemas/participant.schema';
 import { ParticipantDto } from './dto/participant.dto';
 import { WorksItem, WorksItemDocument } from '../works/schemas/work.schema';
+import {from, Observable} from "rxjs";
+import {switchMap} from "rxjs/operators";
 
 @Injectable()
 export class ParticipantsService {
@@ -40,9 +42,13 @@ export class ParticipantsService {
         return this.participantModel.findByIdAndUpdate(id, participantDto, {new: false});
     }
 
-    async deleteParticipant(id: string): Promise<UpdateWriteOpResult> {
-        await this.participantModel.findByIdAndRemove(id);
-        return this.worksModel.updateMany({}, {$pull: {participants: id}});
+    deleteParticipant(id: string): Observable<UpdateWriteOpResult> {
+        return from(this.participantModel.findByIdAndRemove(id))
+            .pipe(
+                switchMap(() => {
+                    return this.worksModel.updateMany({}, {$pull: {participants: id}});
+                })
+            );
     }
 
     async getParticipantImageUrl(id: string): Promise<Participant> {
