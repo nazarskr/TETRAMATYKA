@@ -19,10 +19,10 @@ export class AuthService {
     return this.http.post('/auth/login', body);
   }
 
-  async logout() {
+  logout() {
     localStorage.removeItem('token');
     this.userService.setInitialUser();
-    await this.router.navigate(['/home']);
+    this.router.navigate(['/home']);
   }
 
   register(body: UserCredential) {
