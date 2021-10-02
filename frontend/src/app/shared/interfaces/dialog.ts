@@ -1,4 +1,5 @@
 import { ParticipantShort } from '@shared/interfaces/participants';
+import { UserProfile } from "@shared/interfaces/user";
 
 export interface DialogData {
   title: string;
@@ -7,6 +8,11 @@ export interface DialogData {
   checkboxText?: string;
   parentId?: string;
   participants?: ParticipantShort[]
+}
+
+export interface UserNameDialogData {
+  title: string;
+  profile: UserProfile;
 }
 
 export interface DialogResult {

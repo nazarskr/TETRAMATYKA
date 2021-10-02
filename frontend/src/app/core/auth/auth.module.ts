@@ -6,16 +6,21 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ChangePasswordDialogComponent } from './components/change-password-dialog/change-password-dialog.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SharedModule } from "@shared/shared.module";
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
 
 
 @NgModule({
-  declarations: [AuthComponent, LoginComponent, RegisterComponent, ForgotPasswordComponent, ChangePasswordDialogComponent],
+  declarations: [
+    AuthComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForgotPasswordComponent
+  ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     SharedModule,
     TranslateModule,

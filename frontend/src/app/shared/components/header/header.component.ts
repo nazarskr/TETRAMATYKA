@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { mainRoutes } from '../../constants/menu';
 import { UserService } from '@core/services/user.service';
-import { RoleEnum } from '../../enums/role';
 import { takeUntil } from 'rxjs/operators';
 import { ArchiveYear } from '@shared/interfaces/admin';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
@@ -37,15 +36,10 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
   public archiveYears: ArchiveYear[] = [];
   public isMenuOpened = false;
   public showYearsListNarrow = false;
-  // TODO remove mock
-  public userRole = RoleEnum.GUEST;
-  get roles(): string[] {
-    return Object.keys(RoleEnum);
-  }
+
   get currentYear(): number {
     return this._appInitService.currentYear && this._appInitService.currentYear.year;
   }
-  // TODO remove mock
 
   constructor(
     private _userService: UserService,
@@ -64,11 +58,6 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
   toggleOpenMenu(): void {
     this.isMenuOpened = !this.isMenuOpened;
     this.showYearsListNarrow = false;
-  }
-
-  changeUserRole(): void {
-    this._userService.currentUserRole.next(this.userRole);
-    this._userService.userInfo.role = this.userRole;
   }
 
   getAllArchiveYears(): void {

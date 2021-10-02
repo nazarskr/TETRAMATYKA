@@ -12,7 +12,10 @@
     "POSSIBLE_CHANGES": "У програмі можливі зміни",
     "ADD_NEW": "Додати нового",
     "SELECT_EXISTING": "Вибрати існуючого",
-    "TYPE_NAME": "Введіть ім'я"
+    "TYPE_NAME": "Введіть ім'я",
+    "CHANGE_NAME": "Змінити ім'я",
+    "CHANGE_PASSWORD": "Змінити пароль",
+    "LOGOUT": "Вийти"
   },
   "MENU": {
     "MAIN": "Головна",

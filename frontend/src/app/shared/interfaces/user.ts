@@ -2,8 +2,14 @@ import { RoleEnum } from '../enums/role';
 
 export interface UserInfo {
   email: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   role: RoleEnum;
+}
+
+export interface UserProfile {
+  firstName: string;
+  lastName: string;
 }
 
 export interface UserCredential {
@@ -12,7 +18,6 @@ export interface UserCredential {
 }
 
 export interface UserChangePassword {
-  email: string;
   oldPassword: string;
   newPassword: string;
   confirmPassword: string;

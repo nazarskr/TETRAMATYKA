@@ -1,19 +1,36 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UserInfo } from '@shared/interfaces/user';
+import { UserInfo, UserProfile } from '@shared/interfaces/user';
 import { RoleEnum } from '@shared/enums/role';
+import { HttpClient } from "@angular/common/http";
+import { initialUser } from "@shared/constants/utils";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserService {
+  // TODO remove mock
   public userInfo: UserInfo = {
-    email: '',
-    fullName: '',
-    role: RoleEnum.GUEST
+    email: 'new.user@mail.com',
+    firstName: 'New',
+    lastName: 'User',
+    role: RoleEnum.ADMIN
   };
-  public currentUserRole: BehaviorSubject<string> = new BehaviorSubject('GUEST');
+  // remove above and uncomment below
+  // public userInfo: UserInfo = {...initialUser};
+  public currentUserRole: BehaviorSubject<string> = new BehaviorSubject(this.userInfo.role);
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  changeUserProfile(body: UserProfile) {
+    return this.http.post('/api/user/change-profile', body);
+  }
+
+  setInitialUser() {
+    this.userInfo = {...initialUser};
+    this.currentUserRole.next(this.userInfo.role);
+  }
 }

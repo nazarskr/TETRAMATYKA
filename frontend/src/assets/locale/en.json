@@ -12,7 +12,10 @@
     "POSSIBLE_CHANGES": "There might be changes in the program",
     "ADD_NEW": "Add new",
     "SELECT_EXISTING": "Select existing",
-    "TYPE_NAME": "Type a name"
+    "TYPE_NAME": "Type a name",
+    "CHANGE_NAME": "Change name",
+    "CHANGE_PASSWORD": "Change password",
+    "LOGOUT": "Logout"
   },
   "MENU": {
     "MAIN": "Home",

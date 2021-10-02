@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+  <form
+    id="user-form"
+    #form="ngForm"
+    (ngSubmit)="saveUserName()"
+    [formGroup]="userNameForm">
+    <div class="editor-label m-0">First name:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             formControlName="firstName"
+             autocomplete="chrome-off">
+      <mat-error *ngIf="userNameForm.controls['firstName'].hasError('required') &&
+                  userNameForm.controls['firstName'].touched || form.submitted">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+    <div class="editor-label m-0">Last name:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             formControlName="lastName"
+             autocomplete="chrome-off">
+      <mat-error *ngIf="userNameForm.controls['lastName'].hasError('required') &&
+                  userNameForm.controls['lastName'].touched || form.submitted">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <div class="actions-row"
+       fxLayout="row" fxLayoutAlign="flex-end center">
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+    <button mat-button type="submit" form="user-form">Change</button>
+  </div>
+</div>
+

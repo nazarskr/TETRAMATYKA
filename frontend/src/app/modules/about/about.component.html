@@ -3,7 +3,7 @@
     #form="ngForm"
     [formGroup]="aboutForm"
     (ngSubmit)="saveAboutInfo()">
-    <div class="buttons-wrapper" *userPermission="['ADMIN']">
+    <div class="buttons-wrapper p-25" *userPermission="['ADMIN']">
       <ng-container *ngIf="editMode; else viewButtons">
         <button
           type="submit"
