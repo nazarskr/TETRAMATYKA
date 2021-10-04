@@ -1,1 +1,138 @@
-<p>users works!</p>
+<div class="buttons-wrapper p-25"
+     *userPermission="['ADMIN']">
+  <button
+    class="green-button"
+    (click)="addUser()"
+    [disabled]="isCurrentlyEditable()"
+    mat-button>
+    <mat-icon>add</mat-icon>
+    <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+  </button>
+</div>
+
+<form [formGroup]="userForm"
+      (ngSubmit)="saveUser()">
+  <table mat-table
+         matSort
+         [dataSource]="dataSource">
+    <ng-container matColumnDef="email">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>
+        {{'TABLE_COLUMNS.EMAIL' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let user">
+        <ng-container *ngIf="user.editable; else viewEmail">
+          <mat-form-field floatLabel="never">
+            <input matInput
+                   email
+                   placeholder="Email"
+                   formControlName="email"
+                   autocomplete="chrome-off">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #viewEmail>
+          {{user.email}}
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>
+        {{'TABLE_COLUMNS.FIRST_NAME' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let user">
+        <ng-container *ngIf="user.editable; else viewFirstName">
+          <mat-form-field floatLabel="never">
+            <input matInput
+                   email
+                   placeholder="First name"
+                   formControlName="firstName"
+                   autocomplete="chrome-off">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #viewFirstName>
+          {{user.email}}
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>
+        {{'TABLE_COLUMNS.LAST_NAME' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let user">
+        <ng-container *ngIf="user.editable; else viewLastName">
+          <mat-form-field floatLabel="never">
+            <input matInput
+                   placeholder="Last Name"
+                   formControlName="lastName"
+                   autocomplete="chrome-off">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #viewLastName>
+          {{user.email}}
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>
+        {{'TABLE_COLUMNS.ROLE' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let user">
+        <ng-container *ngIf="user.editable; else viewRole">
+          <mat-select
+            formControlName="role"
+            placeholder="{{'COMMON.CHOOSE' | translate}}">
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{role}}
+            </mat-option>
+          </mat-select>
+        </ng-container>
+        <ng-template #viewRole>
+          {{user.role}}
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="action-buttons-cell"></th>
+      <td mat-cell *matCellDef="let user" class="action-buttons-cell">
+        <div *ngIf="user.editable; else viewModeButtons"
+             fxLayout="row" fxLayoutAlign="flex-start center">
+          <app-table-action-button
+            [tooltipText]="'ACTIONS.SAVE' | translate"
+            [icon]="'done'"
+            [cssClass]="'save-icon-button'"
+            [type]="'submit'"
+          ></app-table-action-button>
+          <app-table-action-button
+            [tooltipText]="'ACTIONS.CANCEL' | translate"
+            [icon]="'close'"
+            [cssClass]="'red-icon-button'"
+            (click)="cancelEditing()"
+          ></app-table-action-button>
+        </div>
+        <ng-template #viewModeButtons>
+          <app-table-action-button
+            [tooltipText]="'ACTIONS.EDIT' | translate"
+            [icon]="'edit'"
+            [cssClass]="'grey-icon-button'"
+            (click)="editUser(user)"
+          ></app-table-action-button>
+          <app-table-action-button
+            [tooltipText]="'ACTIONS.DELETE' | translate"
+            [icon]="'delete'"
+            [cssClass]="'red-icon-button'"
+            (click)="openDeleteUserDialog(user)"
+          ></app-table-action-button>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="users.length === 0">{{'COMMON.NO_DATA' | translate}}</div>
+</form>

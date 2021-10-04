@@ -43,7 +43,7 @@ export class ProfileComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   changeUserName(profile: UserProfile): void {
-    this._userService.changeUserProfile(profile)
+    this._userService.changeProfileInfo(profile)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('User saved successfully');

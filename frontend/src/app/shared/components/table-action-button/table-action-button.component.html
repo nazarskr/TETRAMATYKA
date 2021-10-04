@@ -1,7 +1,5 @@
-<mat-icon (click)="emitClickAction()"
-          class="{{cssClass}}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-          matTooltip="{{tooltipText}}">
-  {{icon}}
-</mat-icon>
+<button mat-icon-button
+        type="{{type}}"
+        matTooltip="{{tooltipText}}">
+  <mat-icon class="{{cssClass}}">{{icon}}</mat-icon>
+</button>

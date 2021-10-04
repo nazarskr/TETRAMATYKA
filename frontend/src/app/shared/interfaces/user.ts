@@ -5,6 +5,8 @@ export interface UserInfo {
   firstName: string;
   lastName: string;
   role: RoleEnum;
+  _id?: string;
+  editable?: boolean;
 }
 
 export interface UserProfile {

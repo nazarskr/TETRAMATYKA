@@ -15,7 +15,8 @@
     "TYPE_NAME": "Введіть ім'я",
     "CHANGE_NAME": "Змінити ім'я",
     "CHANGE_PASSWORD": "Змінити пароль",
-    "LOGOUT": "Вийти"
+    "LOGOUT": "Вийти",
+    "NO_DATA": "Немає даних"
   },
   "MENU": {
     "MAIN": "Головна",
@@ -42,7 +43,11 @@
   "TABLE_COLUMNS": {
     "YEAR": "Рік",
     "CURRENT": "Поточний",
-    "AVAILABLE": "Доступний"
+    "AVAILABLE": "Доступний",
+    "FIRST_NAME": "Прізвище",
+    "LAST_NAME": "Ім'я",
+    "EMAIL": "Email",
+    "ROLE": "Роль"
   },
   "HOME": {
     "FESTIVAL_AUDIOVISUAL_ART": "Фестиваль аудіовізуального мистецтва",

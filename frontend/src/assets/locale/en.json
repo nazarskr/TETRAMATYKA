@@ -15,7 +15,8 @@
     "TYPE_NAME": "Type a name",
     "CHANGE_NAME": "Change name",
     "CHANGE_PASSWORD": "Change password",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "NO_DATA": "No data"
   },
   "MENU": {
     "MAIN": "Home",
@@ -42,7 +43,11 @@
   "TABLE_COLUMNS": {
     "YEAR": "Year",
     "CURRENT": "Current",
-    "AVAILABLE": "Available"
+    "AVAILABLE": "Available",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "EMAIL": "Email",
+    "ROLE": "Role"
   },
   "HOME": {
     "FESTIVAL_AUDIOVISUAL_ART": "Festival of the audiovisual art",

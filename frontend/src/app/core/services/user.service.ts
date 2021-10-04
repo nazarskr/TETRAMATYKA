@@ -25,7 +25,11 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  changeUserProfile(body: UserProfile) {
+  getUser() {
+    return this.http.get('/api/user');
+  }
+
+  changeProfileInfo(body: UserProfile) {
     return this.http.post('/api/user/change-profile', body);
   }
 

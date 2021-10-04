@@ -12,5 +12,6 @@ export const initialUser: UserInfo = {
   email: '',
   firstName: '',
   lastName: '',
-  role: RoleEnum.GUEST
+  role: RoleEnum.GUEST,
+  _id: ''
 }

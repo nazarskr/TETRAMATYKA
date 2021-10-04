@@ -11,17 +11,19 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ChangeNameComponent } from './components/change-name/change-name.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { UsersComponent } from './components/users/users.component';
+import {MatSortModule} from "@angular/material/sort";
 
 
 @NgModule({
   declarations: [AdminComponent, ArchiveManagerComponent, ProfileComponent, ChangeNameComponent, ChangePasswordComponent, UsersComponent],
-    imports: [
-        CommonModule,
-        AdminRoutingModule,
-        SharedModule,
-        TranslateModule,
-        FormsModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    SharedModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSortModule
+  ]
 })
 export class AdminModule { }

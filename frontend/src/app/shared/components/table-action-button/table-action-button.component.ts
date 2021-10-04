@@ -6,6 +6,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./table-action-button.component.scss']
 })
 export class TableActionButtonComponent implements OnInit {
+  @Input() type: string = 'button';
   @Input() tooltipText: string;
   @Input() icon: string;
   @Input() cssClass: string = '';
@@ -16,9 +17,4 @@ export class TableActionButtonComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  emitClickAction(): void {
-    this.clickAction.emit();
-  }
-
 }
