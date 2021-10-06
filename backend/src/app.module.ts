@@ -18,12 +18,17 @@ import { APP_INTERCEPTOR } from "@nestjs/core";
 import { TokenInterceptor } from "./common/interceptors/token.interceptor";
 import { UsersModule } from './modules/users/users.module';
 import { MailModule } from './modules/mail/mail.module';
+import * as Joi from 'joi';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       cache: true,
       isGlobal: true,
+      validationSchema: Joi.object({
+        JWT_VERIFICATION_TOKEN_SECRET: Joi.string().required(),
+        JWT_VERIFICATION_TOKEN_EXPIRATION_TIME: Joi.string().required()
+      })
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, 'client'),

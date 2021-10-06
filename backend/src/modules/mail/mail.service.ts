@@ -1,21 +1,52 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
-import {User} from "../users/schemas/user.schema";
+import { User } from '../users/schemas/user.schema';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import {VerificationTokenPayload} from "../../common/interfaces/verification-token-payload";
 
 @Injectable()
 export class MailService {
-    constructor(private mailerService: MailerService) {}
+    constructor(
+        private mailerService: MailerService,
+        private jwtService: JwtService,
+        private configService: ConfigService,
+    ) {}
 
-    // TODO specify user type
-    async sendUserRegistration(user: User, token: string) {
-        const url = `http://tetramatyka.org.ua/auth/register?token=${token}`;
+    async sendRegistrationEmail(user: User) {
+        const {email, firstName, lastName} = user;
+        const payload: VerificationTokenPayload = { email };
+        const token = this.jwtService.sign(payload, {
+            secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
+            expiresIn: `${this.configService.get('JWT_VERIFICATION_TOKEN_EXPIRATION_TIME')}s`
+        });
+        const url = `${process.env.HOST}/auth/register/${token}`;
 
         await this.mailerService.sendMail({
-            to: user.email,
+            to: email,
             subject: 'Tetramatyka registration',
-            template: './register.mail',
+            template: './register.mail.hbs',
             context: {
-                name: user.fullName,
+                name: `${firstName} ${lastName}`,
+                url,
+            },
+        });
+    }
+
+    async sendResetPasswordEmail(email: string) {
+        const payload: VerificationTokenPayload = { email };
+        const token = this.jwtService.sign(payload, {
+            secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
+            expiresIn: `${this.configService.get('JWT_VERIFICATION_TOKEN_EXPIRATION_TIME')}s`
+        });
+        const url = `${process.env.HOST}/auth/reset-password/${token}`;
+
+        await this.mailerService.sendMail({
+            to: email,
+            subject: 'Tetramatyka reset password',
+            template: './reset-password.mail.hbs',
+            context: {
+                name: `dear User`,
                 url,
             },
         });

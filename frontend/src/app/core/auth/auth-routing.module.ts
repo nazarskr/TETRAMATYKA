@@ -8,7 +8,7 @@ import { ForgotPasswordComponent } from "@core/auth/components/forgot-password/f
 const routes: Routes = [
   {path: '', component: AuthComponent, children: [
       {path: 'login', component: LoginComponent},
-      {path: 'register/:hash', component: RegisterComponent},
+      {path: 'register/:token', component: RegisterComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent}
     ]}
 ];

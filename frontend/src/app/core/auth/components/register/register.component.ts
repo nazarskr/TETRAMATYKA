@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
-import {ConfirmPasswordValidator} from "@shared/validators/confirm-password.validator";
+import { ConfirmPasswordValidator } from "@shared/validators/confirm-password.validator";
 
 @Component({
   selector: 'app-register',

@@ -103,8 +103,13 @@ export class UsersComponent extends UnsubscribeOnDestroy implements OnInit {
     }
 
     const user: UserInfo = {...this.userForm.value};
-    user._id ? this.updateUser(user) : this.createUser(user);
 
+    if (user._id) {
+      this.updateUser(user)
+    } else {
+      delete user._id;
+      this.createUser(user);
+    }
   }
 
   createUser(user: UserInfo): void {

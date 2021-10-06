@@ -12,6 +12,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {dbData, mockProviders} from "@shared/tests/constants";
 import {TranslateModule} from "@ngx-translate/core";
 import {UserPermissionDirective} from "@shared/directives/user-permission.directive";
+import {MatMenuModule} from "@angular/material/menu";
 
 describe('WorksDetailsComponent', () => {
   let component: WorksDetailsComponent;
@@ -39,7 +40,7 @@ describe('WorksDetailsComponent', () => {
         {provide: WorksService, useValue: worksServiceStub},
         {provide: ParticipantsService, useValue: participantsServiceStub},
       ],
-      imports: [TranslateModule.forRoot()]
+      imports: [TranslateModule.forRoot(), MatMenuModule]
     })
     .compileComponents();
   });

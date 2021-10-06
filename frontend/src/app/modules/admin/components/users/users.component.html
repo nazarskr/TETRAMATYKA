@@ -45,14 +45,13 @@
         <ng-container *ngIf="user.editable; else viewFirstName">
           <mat-form-field floatLabel="never">
             <input matInput
-                   email
                    placeholder="First name"
                    formControlName="firstName"
                    autocomplete="chrome-off">
           </mat-form-field>
         </ng-container>
         <ng-template #viewFirstName>
-          {{user.email}}
+          {{user.firstName}}
         </ng-template>
       </td>
     </ng-container>
@@ -71,7 +70,7 @@
           </mat-form-field>
         </ng-container>
         <ng-template #viewLastName>
-          {{user.email}}
+          {{user.lastName}}
         </ng-template>
       </td>
     </ng-container>
@@ -134,5 +133,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div *ngIf="users.length === 0">{{'COMMON.NO_DATA' | translate}}</div>
+  <div *ngIf="users.length === 0" class="p-10">{{'COMMON.NO_DATA' | translate}}</div>
 </form>
