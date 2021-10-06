@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from '../users/schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import {VerificationTokenPayload} from "../../common/interfaces/verification-token-payload";
+import { VerificationTokenPayload } from "../../common/interfaces/verification-token-payload";
 
 @Injectable()
 export class MailService {
@@ -16,10 +16,7 @@ export class MailService {
     async sendRegistrationEmail(user: User) {
         const {email, firstName, lastName} = user;
         const payload: VerificationTokenPayload = { email };
-        const token = this.jwtService.sign(payload, {
-            secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
-            expiresIn: `${this.configService.get('JWT_VERIFICATION_TOKEN_EXPIRATION_TIME')}s`
-        });
+        const token = this.signTokenForEmail(payload);
         const url = `${process.env.HOST}/auth/register/${token}`;
 
         await this.mailerService.sendMail({
@@ -35,10 +32,7 @@ export class MailService {
 
     async sendResetPasswordEmail(email: string) {
         const payload: VerificationTokenPayload = { email };
-        const token = this.jwtService.sign(payload, {
-            secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
-            expiresIn: `${this.configService.get('JWT_VERIFICATION_TOKEN_EXPIRATION_TIME')}s`
-        });
+        const token = this.signTokenForEmail(payload);
         const url = `${process.env.HOST}/auth/reset-password/${token}`;
 
         await this.mailerService.sendMail({
@@ -49,6 +43,13 @@ export class MailService {
                 name: `dear User`,
                 url,
             },
+        });
+    }
+
+    signTokenForEmail(payload: VerificationTokenPayload): string {
+        return this.jwtService.sign(payload, {
+            secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
+            expiresIn: `${this.configService.get('JWT_VERIFICATION_TOKEN_EXPIRATION_TIME')}s`
         });
     }
 }
