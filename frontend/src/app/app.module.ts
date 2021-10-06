@@ -17,6 +17,8 @@ import { CurrentYearInterceptor } from '@core/interceptors/current-year.intercep
 import { AdminGuard } from '@core/guards/admin.guard';
 import { ArchiveYear } from "@shared/interfaces/admin";
 import {TokenInterceptor} from "@core/interceptors/token.interceptor";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -50,7 +52,13 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
     }),
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     {
