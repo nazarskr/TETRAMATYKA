@@ -1,14 +1,17 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {UserService} from "@core/services/user.service";
-import {Observable} from "rxjs";
-import {AppInitService} from "@core/services/app-init.service";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { UserService } from "@core/services/user.service";
+import { Observable, throwError } from "rxjs";
+import { AppInitService } from "@core/services/app-init.service";
+import { catchError } from 'rxjs/operators';
+import { ToasterService } from '@shared/services/toaster/toaster.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
-    readonly userService: UserService,
-    readonly appInitService: AppInitService
+    private userService: UserService,
+    private appInitService: AppInitService,
+    private toaster: ToasterService
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -22,6 +25,16 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       });
     }
-    return next.handle(request);
+    return next.handle(request)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            this.toaster.showErrorMessage('You are not an admin');
+          } else {
+            this.toaster.showErrorMessage('Something going wrond. Please ask software developer');
+          }
+          return throwError(error.message);
+        })
+      );
   }
 }
