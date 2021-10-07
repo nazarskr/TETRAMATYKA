@@ -25,6 +25,11 @@ export class AuthService {
     this.router.navigate(['/home']);
   }
 
+  createPassword(url: string) {
+    const apiUrl = '/api' + url;
+    return this.http.post(apiUrl, {});
+  }
+
   register(body: UserCredential) {
     return this.http.post('/auth/register', body);
   }

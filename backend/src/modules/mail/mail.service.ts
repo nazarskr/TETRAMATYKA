@@ -17,7 +17,7 @@ export class MailService {
         const {email, firstName, lastName} = user;
         const payload: VerificationTokenPayload = { email };
         const token = this.signTokenForEmail(payload);
-        const url = `${process.env.HOST}/auth/register/${token}`;
+        const url = `${process.env.HOST}/auth/create-password/${token}`;
 
         await this.mailerService.sendMail({
             to: email,
