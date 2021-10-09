@@ -45,6 +45,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ItemDetailsViewComponent } from './components/item-details-view/item-details-view.component';
 import { TitledItemsListComponent } from './components/titled-items-list/titled-items-list.component';
 import { ItemDetailsSecondaryComponent } from './components/item-details-secondary/item-details-secondary.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserSignInComponent } from './components/user-sign-in/user-sign-in.component';
 
 const materialModules = [
   MatButtonModule,
@@ -82,7 +84,9 @@ const materialModules = [
     LocalDatePipe,
     ItemDetailsViewComponent,
     TitledItemsListComponent,
-    ItemDetailsSecondaryComponent
+    ItemDetailsSecondaryComponent,
+    UserProfileComponent,
+    UserSignInComponent
   ],
   imports: [
     ...materialModules,

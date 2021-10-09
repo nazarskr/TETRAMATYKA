@@ -16,9 +16,10 @@ import { AppInitService } from '@core/services/app-init.service';
 import { CurrentYearInterceptor } from '@core/interceptors/current-year.interceptor';
 import { AdminGuard } from '@core/guards/admin.guard';
 import { ArchiveYear } from "@shared/interfaces/admin";
-import {TokenInterceptor} from "@core/interceptors/token.interceptor";
+import { TokenInterceptor } from "@core/interceptors/token.interceptor";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {UserGuard} from '@core/guards/user.guard';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -77,7 +78,8 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
       useClass: TokenInterceptor,
       multi: true
     },
-    AdminGuard
+    AdminGuard,
+    UserGuard
   ],
   bootstrap: [AppComponent]
 })

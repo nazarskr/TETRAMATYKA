@@ -40,6 +40,12 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./modules/profile/profile.module')
+      .then(m => m.ProfileModule),
+    canActivate: [AdminGuard]
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./core/auth/auth.module')
       .then(m => m.AuthModule)

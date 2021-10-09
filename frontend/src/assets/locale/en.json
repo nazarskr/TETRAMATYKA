@@ -27,7 +27,8 @@
     "PARTICIPANTS": "Participants",
     "CONTACTS": "Contacts",
     "ARCHIVE": "Archive",
-    "ADMIN": "Admin"
+    "ADMIN": "Admin",
+    "PROFILE": "Profile"
   },
   "ACTIONS": {
     "EDIT": "Edit",
