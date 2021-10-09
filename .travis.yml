@@ -11,8 +11,20 @@ addons:
       - google-chrome-stable
 
 install:
-  backend/npm install
-  frontend/npm install
+  cd backend && npm install
+  cd ../frontend && npm install
 
 script:
-  frontend/npm run test-single
+  cd frontend && npm run test-single
+
+notifications:
+  email: false
+
+#branches:
+#  only:
+#    - master
+
+cache:
+  directories:
+    - backend/node_modules
+    - frontend/node_modules
