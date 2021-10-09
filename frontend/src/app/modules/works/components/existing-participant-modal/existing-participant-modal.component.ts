@@ -50,7 +50,7 @@ export class ExistingParticipantModalComponent extends UnsubscribeOnDestroy impl
   private _filter (value: string | ParticipantShort): ParticipantShort[] {
     let filterValue;
     if (this.isParticipant(value)) {
-      filterValue = value.fullName[this.lang].toLowerCase();
+      filterValue = value.fullName[this.lang] ? value.fullName[this.lang].toLowerCase() : '';
     } else {
       filterValue = value.toLowerCase();
     }
