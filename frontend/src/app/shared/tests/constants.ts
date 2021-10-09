@@ -1,4 +1,4 @@
-import { of } from "rxjs";
+import {of} from "rxjs";
 
 export const dbData = {
   participantsShort: [
@@ -46,5 +46,9 @@ export const mockProviders = {
     showMessage: (message: string) => message,
     showWarningMessage: (message: string) => message,
     showErrorMessage: (message: string) => message,
+  },
+  mockDialog: {
+    open: () => {},
+    close: (result?: any) => {}
   }
 }

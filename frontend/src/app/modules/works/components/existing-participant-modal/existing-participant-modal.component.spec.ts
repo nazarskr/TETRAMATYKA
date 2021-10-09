@@ -20,7 +20,7 @@ describe('ExistingParticipantModalComponent', () => {
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       declarations: [ ExistingParticipantModalComponent ],
       providers: [
-        {provide: MatDialogRef, useValue: {close: () => {}}},
+        {provide: MatDialogRef, useValue: mockProviders.mockDialog},
         {provide: MAT_DIALOG_DATA, useValue: {
           participants: dbData.participantsShort
         }},
@@ -56,7 +56,7 @@ describe('ExistingParticipantModalComponent', () => {
     expect(dialogSpy).not.toHaveBeenCalled();
   });
 
-  it('should close dialog', () => {
+  it('should close dialog and don\'t show error message if participant selected', () => {
     const dialogSpy = spyOn(component.dialogRef, 'close');
     const toasterSpy = spyOn(component['_toaster'], 'showErrorMessage');
     component.selectedParticipant = JSON.parse(JSON.stringify(mockParticipant));
