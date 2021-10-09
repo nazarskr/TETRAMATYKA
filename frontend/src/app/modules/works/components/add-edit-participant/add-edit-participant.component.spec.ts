@@ -19,8 +19,8 @@ describe('AddEditParticipantComponent', () => {
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       declarations: [ AddEditParticipantComponent ],
       providers: [
-        {provide: MatDialogRef, useValue: {}},
-        {provide: MatDialog, useValue: {}},
+        {provide: MatDialogRef, useValue: mockProviders.mockDialog},
+        {provide: MatDialog, useValue: mockProviders.mockDialog},
         {provide: Router, useValue: {}},
         {provide: MAT_DIALOG_DATA, useValue: {}},
         {provide: HttpClient, useValue: {}},

@@ -8,6 +8,8 @@ npm run build-prod
 cd ../frontend
 echo "Installing frontend dependencies..."
 npm install
+echo "Run tests..."
+npm run test-single
 echo "Building frontend..."
 npm run build-prod
 

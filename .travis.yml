@@ -13,9 +13,6 @@ addons:
 before_install:
   sh build.sh
 
-script:
-  cd frontend && npm run test-single
-
 notifications:
   email: false
 

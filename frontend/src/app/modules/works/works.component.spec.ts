@@ -62,6 +62,4 @@ describe('WorksComponent', () => {
     const emptyStateEl = fixture.nativeElement.querySelector('.will-be-soon-message');
     expect(emptyStateEl).toBeTruthy();
   });
-
-  // TODO add test for dialog
 });

@@ -33,7 +33,7 @@ describe('WorksDetailsComponent', () => {
       declarations: [ WorksDetailsComponent, UserPermissionDirective ],
       providers: [
         {provide: Router, useValue: {}},
-        {provide: MatDialog, useValue: {}},
+        {provide: MatDialog, useValue: mockProviders.mockDialog},
         {provide: HttpClient, useValue: {}},
         {provide: ToasterService, useValue: mockProviders.mockToasterService},
         {provide: ActivatedRoute, useValue: mockProviders.mockRouteWithId},
