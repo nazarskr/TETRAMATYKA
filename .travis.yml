@@ -10,12 +10,11 @@ branches:
 addons:
   chrome: stable
 
-install:
-  cd backend && npm install
-  cd ../frontend && npm install
+before_install:
+  sh build.sh
 
 script:
-  cd frontend npm run test-single
+  cd frontand && npm run test-single
 
 notifications:
   email: false
