@@ -14,12 +14,10 @@ addons:
     packages:
       - google-chrome-stable
 
-install:
+script:
   cd backend && npm install
   cd ../frontend && npm install
-
-script:
-  cd frontend && npm run test-single
+  npm run test-single
 
 notifications:
   email: false
