@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ChangeNameComponent } from "./components/change-name/change-name.component";
+import { filter, takeUntil } from "rxjs/operators";
+import { UserChangePassword, UserProfile } from "@shared/interfaces/user";
+import { ChangePasswordComponent } from "./components/change-password/change-password.component";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { MatDialog } from "@angular/material/dialog";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
-import { filter, takeUntil } from "rxjs/operators";
-import { ChangeNameComponent } from "../change-name/change-name.component";
-import { UserChangePassword, UserProfile } from "@shared/interfaces/user";
-import { ChangePasswordComponent } from "../change-password/change-password.component";
 import { UserService } from "@core/services/user.service";
-import {AuthService} from "@core/services/auth.service";
+import { AuthService } from "@core/services/auth.service";
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +15,7 @@ import {AuthService} from "@core/services/auth.service";
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent extends UnsubscribeOnDestroy implements OnInit {
+  public user = this._userService.userInfo;
 
   constructor(
     private _dialog: MatDialog,
@@ -31,7 +32,11 @@ export class ProfileComponent extends UnsubscribeOnDestroy implements OnInit {
   openChangeNameDialog(): void {
     const dialogRef = this._dialog.open(ChangeNameComponent, {
       data: {
-        title: 'Change name',
+        title: 'COMMON.CHANGE_NAME',
+        profile: {
+          firstName: this.user.firstName,
+          lastName: this.user.lastName
+        }
       }
     });
 
@@ -53,7 +58,7 @@ export class ProfileComponent extends UnsubscribeOnDestroy implements OnInit {
   openChangePasswordDialog(): void {
     const dialogRef = this._dialog.open(ChangePasswordComponent, {
       data: {
-        title: 'Change password',
+        title: 'COMMON.CHANGE_NAME'
       }
     });
 

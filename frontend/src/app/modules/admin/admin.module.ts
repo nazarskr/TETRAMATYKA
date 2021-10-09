@@ -6,24 +6,23 @@ import { AdminComponent } from './admin.component';
 import { SharedModule } from '@shared/shared.module';
 import { ArchiveManagerComponent } from './components/archive-manager/archive-manager.component';
 import { TranslateModule } from '@ngx-translate/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ProfileComponent } from './components/profile/profile.component';
-import { ChangeNameComponent } from './components/change-name/change-name.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './components/users/users.component';
-import {MatSortModule} from "@angular/material/sort";
 
 
 @NgModule({
-  declarations: [AdminComponent, ArchiveManagerComponent, ProfileComponent, ChangeNameComponent, ChangePasswordComponent, UsersComponent],
+  declarations: [
+    AdminComponent,
+    ArchiveManagerComponent,
+    UsersComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule,
-    MatSortModule
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

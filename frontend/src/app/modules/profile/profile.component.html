@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutAlign="center center"
+  class="profile-container p-25">
+  <mat-card class="profile-wrapper" fxLayout="column" fxLayoutAlign="center center">
+    <mat-icon class="user-icon">person</mat-icon>
+    <h2 class="mb-15">{{user.firstName + ' ' + user.lastName}}</h2>
+    <div class="page-title" (click)="openChangeNameDialog()">
+      {{'COMMON.CHANGE_NAME' | translate}}
+    </div>
+    <div class="page-title" (click)="openChangePasswordDialog()">
+      {{'COMMON.CHANGE_PASSWORD' | translate}}
+    </div>
+    <div class="page-title" (click)="logout()">
+      {{'COMMON.LOGOUT' | translate}}
+    </div>
+  </mat-card>
+</div>

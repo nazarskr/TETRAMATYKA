@@ -16,7 +16,9 @@
     "CHANGE_NAME": "Change name",
     "CHANGE_PASSWORD": "Change password",
     "LOGOUT": "Logout",
-    "NO_DATA": "No data"
+    "NO_DATA": "No data",
+    "SIGN_IN": "Sign in",
+    "SIGN_UP": "Sign up"
   },
   "MENU": {
     "MAIN": "Home",
