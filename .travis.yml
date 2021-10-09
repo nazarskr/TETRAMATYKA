@@ -24,10 +24,6 @@ script:
 notifications:
   email: false
 
-#branches:
-#  only:
-#    - master
-
 cache:
   directories:
     - backend/node_modules
