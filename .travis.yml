@@ -10,7 +10,7 @@ branches:
 addons:
   chrome: stable
 
-before_install:
+script:
   sh build.sh
 
 notifications:
