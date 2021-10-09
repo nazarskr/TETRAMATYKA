@@ -15,7 +15,7 @@ install:
   cd ../frontend && npm install
 
 script:
-  npm run test-single
+  cd frontend npm run test-single
 
 notifications:
   email: false
