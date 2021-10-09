@@ -3,6 +3,10 @@ language: node_js
 node_js:
   - '12.14.1'
 
+branches:
+  only:
+    - development
+
 addons:
   apt:
     sources:
