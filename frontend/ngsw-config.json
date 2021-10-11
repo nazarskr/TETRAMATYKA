@@ -3,7 +3,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "tetramatyka",
       "installMode": "prefetch",
       "resources": {
         "files": [
@@ -30,7 +30,7 @@
   "dataGroups": [
     {
       "name": "tetramatykaApi",
-      "urls": ["http://127.0.0.1:8000/**"],
+      "urls": ["http://127.0.0.1:3000/**"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxAge": "1h",
