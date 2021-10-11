@@ -2,7 +2,6 @@
 
 .contact-item {
   margin: auto;
-  position: relative;
 
   p {
     margin: 5px 0;
@@ -19,8 +18,6 @@
   }
 
   .action-buttons {
-    position: absolute;
-    top: 0;
-    right: 0;
+    width: 100%;
   }
 }

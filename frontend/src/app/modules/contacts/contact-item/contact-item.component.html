@@ -2,6 +2,20 @@
   <form #form="ngForm"
         [formGroup]="contactForm"
         (ngSubmit)="saveContact()">
+    <div class="action-buttons" fxLayout="row" fxLayoutAlign="flex-end center" *userPermission="['ADMIN']">
+      <ng-container *ngIf="this.contact.editable; else viewActions">
+        <mat-icon class="action-button green"
+                  (click)="submitForm()">done</mat-icon>
+        <mat-icon class="action-button red"
+                  (click)="cancelEditing()">close</mat-icon>
+      </ng-container>
+      <ng-template #viewActions>
+        <mat-icon class="action-button orange"
+                  (click)="editContact()">edit</mat-icon>
+        <mat-icon class="action-button red"
+                  (click)="openDeleteContactDialog()">delete</mat-icon>
+      </ng-template>
+    </div>
     <ng-container *ngIf="contact.editable; else contactView">
       <div class="editor-label m-0">Обов'язки та ім'я (UA):</div>
       <mat-form-field floatLabel="never" class="wide-form-field">
@@ -56,20 +70,5 @@
         {{contact.phone}}
       </p>
     </ng-template>
-
-    <div class="action-buttons" fxLayout="row" *userPermission="['ADMIN']">
-      <ng-container *ngIf="this.contact.editable; else viewActions">
-        <mat-icon class="action-button green"
-                  (click)="submitForm()">done</mat-icon>
-        <mat-icon class="action-button red"
-                  (click)="cancelEditing()">close</mat-icon>
-      </ng-container>
-      <ng-template #viewActions>
-        <mat-icon class="action-button orange"
-                  (click)="editContact()">edit</mat-icon>
-        <mat-icon class="action-button red"
-                  (click)="openDeleteContactDialog()">delete</mat-icon>
-      </ng-template>
-    </div>
   </form>
 </div>
