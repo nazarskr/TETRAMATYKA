@@ -33,10 +33,7 @@ describe('AddEditParticipantComponent', () => {
       ]
     })
     .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AddEditParticipantComponent);
+    fixture = await TestBed.createComponent(AddEditParticipantComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

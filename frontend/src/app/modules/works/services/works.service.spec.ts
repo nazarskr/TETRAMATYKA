@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
 import { WorksService } from './works.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 describe('WorksService', () => {
   let service: WorksService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       providers: [],
       imports: [HttpClientTestingModule]
     });

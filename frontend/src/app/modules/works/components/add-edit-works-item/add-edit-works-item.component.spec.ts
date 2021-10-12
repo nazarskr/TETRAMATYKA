@@ -33,10 +33,7 @@ describe('AddEditWorksItemComponent', () => {
       ]
     })
     .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AddEditWorksItemComponent);
+    fixture = await TestBed.createComponent(AddEditWorksItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

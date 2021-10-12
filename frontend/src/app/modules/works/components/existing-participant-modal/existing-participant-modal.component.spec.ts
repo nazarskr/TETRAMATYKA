@@ -34,10 +34,7 @@ describe('ExistingParticipantModalComponent', () => {
       ]
     })
     .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ExistingParticipantModalComponent);
+    fixture = await TestBed.createComponent(ExistingParticipantModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

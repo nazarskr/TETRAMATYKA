@@ -35,10 +35,7 @@ describe('WorksComponent', () => {
       imports: [TranslateModule.forRoot()]
     })
     .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(WorksComponent);
+    fixture = await TestBed.createComponent(WorksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
