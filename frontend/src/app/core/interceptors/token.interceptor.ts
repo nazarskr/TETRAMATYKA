@@ -1,27 +1,24 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { UserService } from "@core/services/user.service";
 import { Observable, throwError } from "rxjs";
-import { AppInitService } from "@core/services/app-init.service";
 import { catchError } from 'rxjs/operators';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
+import { AuthService } from "@core/services/auth.service";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
-    private userService: UserService,
-    private appInitService: AppInitService,
-    private toaster: ToasterService
+    private _authService: AuthService,
+    private _toaster: ToasterService
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const userInfo = this.userService.userInfo;
-    const currentYear = this.appInitService.currentYear;
+    const token = localStorage.getItem('token');
     const method = request.method;
-    if (userInfo && currentYear && method !== 'GET') {
+    if (method !== 'GET') {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${userInfo.role + currentYear.year}`
+          Authorization: token
         }
       });
     }
@@ -29,9 +26,12 @@ export class TokenInterceptor implements HttpInterceptor {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401) {
-            this.toaster.showErrorMessage('You are not an admin');
+            this._toaster.showErrorMessage('You are unauthorized. Please login again');
+            this._authService.logout();
+          } else if (error.status === 0) {
+            // TODO navigate to offline
           } else {
-            this.toaster.showErrorMessage('Something going wrond. Please ask software developer');
+            // TODO error handler for post/put/patch/delete requests
           }
           return throwError(error.message);
         })

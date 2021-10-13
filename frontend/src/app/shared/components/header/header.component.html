@@ -64,10 +64,10 @@
     </a>
     <span class="border-line"> | </span>
     <ng-container *userPermission="['GUEST']">
-      <button mat-button>
+      <button mat-button routerLink="/auth/login">
         {{'COMMON.SIGN_IN' | translate}}
       </button>
-      <button mat-button>
+      <button mat-button routerLink="/auth/register">
         {{'COMMON.SIGN_UP' | translate}}
       </button>
     </ng-container>

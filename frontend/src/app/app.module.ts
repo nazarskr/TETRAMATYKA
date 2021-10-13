@@ -19,7 +19,8 @@ import { ArchiveYear } from "@shared/interfaces/admin";
 import { TokenInterceptor } from "@core/interceptors/token.interceptor";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import {UserGuard} from '@core/guards/user.guard';
+import { UserGuard } from '@core/guards/user.guard';
+import { NonAuthGuard } from "@core/guards/non-auth.guard";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -79,7 +80,8 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
       multi: true
     },
     AdminGuard,
-    UserGuard
+    UserGuard,
+    NonAuthGuard
   ],
   bootstrap: [AppComponent]
 })

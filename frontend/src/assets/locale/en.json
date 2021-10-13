@@ -18,7 +18,13 @@
     "LOGOUT": "Logout",
     "NO_DATA": "No data",
     "SIGN_IN": "Sign in",
-    "SIGN_UP": "Sign up"
+    "SIGN_UP": "Sign up",
+    "FORGOT_PASSWORD?": "Forgot password?",
+    "DONT_HAVE_ACCOUNT?": "Don't have an account?",
+    "CLICK": "Click",
+    "WITH": "with",
+    "OR": "or",
+    "HERE": "here"
   },
   "MENU": {
     "MAIN": "Home",
@@ -41,7 +47,8 @@
     "BACK": "Back",
     "VIEW": "View",
     "LOGIN": "Login",
-    "SEND": "Send"
+    "SEND": "Send",
+    "REGISTER": "Register"
   },
   "TABLE_COLUMNS": {
     "YEAR": "Year",

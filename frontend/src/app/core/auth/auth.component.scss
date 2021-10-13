@@ -3,7 +3,7 @@
 ::ng-deep {
   .auth-container {
     width: 100vw;
-    height: calc(100vh - #{$header-height});
+    min-height: calc(100vh - #{$header-height});
     padding: 25px;
     display: flex;
     flex-direction: column;

@@ -1,1 +1,107 @@
+<div class="auth-container">
+  <h4 class="form-title">Register</h4>
+  <form
+    (ngSubmit)="registerUser()"
+    [formGroup]="registerForm"
+    #form="ngForm">
+    <div class="editor-label m-0">First name:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             formControlName="firstName"
+             autocomplete="chrome-off">
+      <mat-icon matSuffix></mat-icon>
+      <mat-error *ngIf="registerForm.controls['firstName'].hasError('required') &&
+                  registerForm.controls['firstName'].touched || form.submitted">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+    <div class="editor-label m-0">Last name:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             formControlName="lastName"
+             autocomplete="chrome-off">
+      <mat-icon matSuffix></mat-icon>
+      <mat-error *ngIf="registerForm.controls['lastName'].hasError('required') &&
+                  registerForm.controls['lastName'].touched || form.submitted">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+    <div class="editor-label m-0">Email:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             email
+             type="email"
+             formControlName="email"
+             autocomplete="chrome-off"
+             placeholder="email">
+      <mat-icon matSuffix></mat-icon>
+      <mat-error *ngIf="registerForm.controls['email'].hasError('required') &&
+                  registerForm.controls['email'].touched || form.submitted">
+        This field is required
+      </mat-error>
+      <mat-error *ngIf="registerForm.controls['email'].hasError('email')
+                  && registerForm.controls['email'].touched || form.submitted">
+        Write correct email
+      </mat-error>
+    </mat-form-field>
+    <div class="editor-label m-0">Password:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             type="{{showPassword ? 'text' : 'password'}}"
+             formControlName="password"
+             autocomplete="chrome-off"
+             placeholder="password">
+      <mat-icon matSuffix (click)="toggleShowPassword()" class="input-icon">
+        {{showPassword ? 'visibility' : 'visibility_off'}}
+      </mat-icon>
+      <mat-error *ngIf="registerForm.controls['password'].hasError('required') &&
+                  registerForm.controls['password'].touched || form.submitted">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+    <div class="editor-label m-0">Confirm Password:</div>
+    <mat-form-field floatLabel="never">
+      <input matInput
+             type="{{showPassword ? 'text' : 'password'}}"
+             formControlName="confirmPassword"
+             autocomplete="chrome-off"
+             placeholder="password">
+      <mat-icon matSuffix (click)="toggleShowPassword()" class="input-icon">
+        {{showPassword ? 'visibility' : 'visibility_off'}}
+      </mat-icon>
+      <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('required') &&
+                  registerForm.controls['confirmPassword'].touched || form.submitted">
+        This field is required
+      </mat-error>
+      <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('confirmPasswordValidator') &&
+                  registerForm.controls['confirmPassword'].touched || form.submitted">
+        Password is not the same
+      </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="mt-15">
+      <button
+        class="green-button"
+        type="submit"
+        mat-button>
+        <mat-icon>done</mat-icon>
+        <span>
+          {{'ACTIONS.REGISTER' | translate}}
+        </span>
+      </button>
+    </div>
+    <p class="form-bottom-text">
+      <a routerLink="/auth/login">
+        {{'COMMON.SIGN_IN' | translate}}
+      </a>
+    </p>
+    <p class="form-bottom-text">
+      {{'COMMON.FORGOT_PASSWORD?' | translate}}
+      {{'COMMON.CLICK' | translate}}
+      <a routerLink="/auth/forgot-password">
+        {{'COMMON.HERE' | translate}}
+      </a>
+    </p>
+  </form>
+</div>
 

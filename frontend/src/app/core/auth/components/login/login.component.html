@@ -50,12 +50,30 @@
         <mat-icon>done</mat-icon>
         <span>
           {{'ACTIONS.LOGIN' | translate}}
-      </span>
+        </span>
       </button>
     </div>
   </form>
   <p class="form-bottom-text">
-    Forgot password? Click
-    <a routerLink="/auth/forgot-password">here</a>
+    {{'COMMON.FORGOT_PASSWORD?' | translate}}
+    {{'COMMON.CLICK' | translate}}
+    <a routerLink="/auth/forgot-password">
+      {{'COMMON.HERE' | translate}}
+    </a>
   </p>
+  <p class="form-bottom-text">
+    {{'COMMON.DONT_HAVE_ACCOUNT?' | translate}}
+    {{'COMMON.CLICK' | translate}}
+    <a routerLink="/auth/register">
+      {{'COMMON.HERE' | translate}}
+    </a>
+  </p>
+  <p class="form-bottom-text">
+    {{'COMMON.OR' | translate}}
+  </p>
+  <button mat-button>
+    {{'COMMON.SIGN_IN' | translate}}
+    {{'COMMON.WITH' | translate}}
+    Google
+  </button>
 </div>

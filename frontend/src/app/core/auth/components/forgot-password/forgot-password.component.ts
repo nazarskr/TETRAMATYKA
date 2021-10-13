@@ -4,6 +4,7 @@ import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { AuthService } from "@core/services/auth.service";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { takeUntil } from "rxjs/operators";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,7 +17,8 @@ export class ForgotPasswordComponent extends UnsubscribeOnDestroy implements OnI
   constructor(
     private _formBuilder: FormBuilder,
     private _toaster: ToasterService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _router: Router
   ) {
     super();
   }
@@ -43,6 +45,7 @@ export class ForgotPasswordComponent extends UnsubscribeOnDestroy implements OnI
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Please, check your email');
+        this._router.navigate(['/login']);
       });
   }
 

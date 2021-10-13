@@ -50,6 +50,7 @@ export class CreatePasswordComponent extends UnsubscribeOnDestroy implements OnI
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage(`Password successfully ${isCreatePassword ? 'created' : 'updated'}`);
+        this._router.navigate(['/login']);
       });
   }
 

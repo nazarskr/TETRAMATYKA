@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { UserInfo, UserProfile } from '@shared/interfaces/user';
-import { RoleEnum } from '@shared/enums/role';
 import { HttpClient } from "@angular/common/http";
 import { initialUser } from "@shared/constants/utils";
 
@@ -10,15 +9,7 @@ import { initialUser } from "@shared/constants/utils";
 })
 
 export class UserService {
-  // TODO remove mock
-  public userInfo: UserInfo = {
-    email: 'new.user@mail.com',
-    firstName: 'New',
-    lastName: 'User',
-    role: RoleEnum.ADMIN
-  };
-  // remove above and uncomment below
-  // public userInfo: UserInfo = {...initialUser};
+  public userInfo: UserInfo = {...initialUser};
   public currentUserRole: BehaviorSubject<string> = new BehaviorSubject(this.userInfo.role);
 
   constructor(

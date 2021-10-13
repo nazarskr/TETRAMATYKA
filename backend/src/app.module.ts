@@ -27,7 +27,9 @@ import * as Joi from 'joi';
       isGlobal: true,
       validationSchema: Joi.object({
         JWT_VERIFICATION_TOKEN_SECRET: Joi.string().required(),
-        JWT_VERIFICATION_TOKEN_EXPIRATION_TIME: Joi.string().required()
+        JWT_VERIFICATION_TOKEN_EXPIRATION_TIME: Joi.string().required(),
+        GOOGLE_AUTH_CLIENT_ID: Joi.string().required(),
+        GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required(),
       })
     }),
     ServeStaticModule.forRoot({

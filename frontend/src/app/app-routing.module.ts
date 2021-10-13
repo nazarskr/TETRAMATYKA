@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from '@core/guards/admin.guard';
+import { UserGuard } from "@core/guards/user.guard";
+import {NonAuthGuard} from "@core/guards/non-auth.guard";
 
 const routes: Routes = [
   {
@@ -43,12 +45,13 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./modules/profile/profile.module')
       .then(m => m.ProfileModule),
-    canActivate: [AdminGuard]
+    canActivate: [UserGuard]
   },
   {
     path: 'auth',
     loadChildren: () => import('./core/auth/auth.module')
-      .then(m => m.AuthModule)
+      .then(m => m.AuthModule),
+    canActivate: [NonAuthGuard]
   },
   {
     path: 'page-not-found',
