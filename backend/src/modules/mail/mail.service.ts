@@ -17,7 +17,7 @@ export class MailService {
         const {email, firstName, lastName} = user;
         const payload: VerificationTokenPayload = { email };
         const token = this.signTokenForEmail(payload);
-        const url = `${process.env.HOST}/auth/create-password/${token}`;
+        const url = `${process.env.HOST}/auth/new-password/${token}`;
 
         await this.mailerService.sendMail({
             to: email,
@@ -33,7 +33,7 @@ export class MailService {
     async sendResetPasswordEmail(email: string) {
         const payload: VerificationTokenPayload = { email };
         const token = this.signTokenForEmail(payload);
-        const url = `${process.env.HOST}/auth/reset-password/${token}`;
+        const url = `${process.env.HOST}/auth/new-password/${token}`;
 
         await this.mailerService.sendMail({
             to: email,

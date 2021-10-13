@@ -9,10 +9,10 @@ import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-create-password',
-  templateUrl: './create-password.component.html',
-  styleUrls: ['./create-password.component.scss']
+  templateUrl: './new-password.component.html',
+  styleUrls: ['./new-password.component.scss']
 })
-export class CreatePasswordComponent extends UnsubscribeOnDestroy implements OnInit {
+export class NewPasswordComponent extends UnsubscribeOnDestroy implements OnInit {
   public createPasswordForm: FormGroup;
   public showPassword = false;
 
@@ -45,11 +45,10 @@ export class CreatePasswordComponent extends UnsubscribeOnDestroy implements OnI
     }
 
     const url = this._router.url;
-    const isCreatePassword = url.startsWith('/auth/create-password');
-    this._authService.createPassword(url)
+    this._authService.saveNewPassword(url)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this._toaster.showMessage(`Password successfully ${isCreatePassword ? 'created' : 'updated'}`);
+        this._toaster.showMessage(`Password successfully saved`);
         this._router.navigate(['/login']);
       });
   }

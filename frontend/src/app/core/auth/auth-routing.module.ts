@@ -3,15 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from "@core/auth/auth.component";
 import { LoginComponent } from "@core/auth/components/login/login.component";
 import { ForgotPasswordComponent } from "@core/auth/components/forgot-password/forgot-password.component";
-import { CreatePasswordComponent } from "@core/auth/components/create-password/create-password.component";
 import { RegisterComponent } from "@core/auth/components/register/register.component";
+import { NewPasswordComponent } from "@core/auth/components/new-password/new-password.component";
 
 const routes: Routes = [
   {path: '', component: AuthComponent, children: [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'create-password/:token', component: CreatePasswordComponent},
-      {path: 'reset-password/:token', component: CreatePasswordComponent},
+      {path: 'new-password/:token', component: NewPasswordComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent}
     ]}
 ];

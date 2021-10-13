@@ -6,10 +6,10 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "@shared/shared.module";
 import { TranslateModule } from "@ngx-translate/core";
-import { CreatePasswordComponent } from './components/create-password/create-password.component';
+import { NewPasswordComponent } from "@core/auth/components/new-password/new-password.component";
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { CreatePasswordComponent } from './components/create-password/create-pas
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    CreatePasswordComponent
+    NewPasswordComponent
   ],
   imports: [
     CommonModule,

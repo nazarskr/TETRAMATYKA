@@ -20,8 +20,11 @@ export class UsersService {
     }
 
     async createUser(userInfoDto: UserInfoDto): Promise<User> {
+        const userCredential = {email: userInfoDto.email, password: ''};
         const newUser = await new this.userModel(userInfoDto);
+        const newUserCredential = await new this.userCredentialModel(userCredential);
         await newUser.save();
+        await newUserCredential.save();
         await this.mailService.sendRegistrationEmail(userInfoDto);
         return newUser;
     }

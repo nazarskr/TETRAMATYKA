@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { PassportModule } from "@nestjs/passport";
-import { LocalStrategy } from "./local-strategy";
+import { LocalStrategy } from "./strategies/local-strategy";
 import { MailService } from "../mail/mail.service";
 import { UsersService } from "../users/users.service";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -15,7 +15,7 @@ import { JwtModule } from "@nestjs/jwt";
       PassportModule,
       JwtModule.register({
           secret: process.env.JWT_VERIFICATION_TOKEN_SECRET,
-          signOptions: { expiresIn: `${process.env.JWT_VERIFICATION_TOKEN_EXPIRATION_TIME}s` },
+          signOptions: { expiresIn: `${process.env.JWT_AUTH_TOKEN_EXPIRATION_TIME}s` },
       }),
       MongooseModule.forFeature([
           { name: User.name, schema: UserSchema },
