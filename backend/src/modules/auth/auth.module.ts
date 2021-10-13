@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { PassportModule } from "@nestjs/passport";
-import { LocalStrategy } from "./strategies/local-strategy";
 import { MailService } from "../mail/mail.service";
 import { UsersService } from "../users/users.service";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -22,6 +21,6 @@ import { JwtModule } from "@nestjs/jwt";
           { name: UserCredential.name, schema: UserCredentialSchema }], 'master'),
   ],
   controllers: [AuthController],
-  providers: [ AuthService, UsersService, LocalStrategy, MailService ],
+  providers: [ AuthService, UsersService, MailService ],
 })
 export class AuthModule {}
