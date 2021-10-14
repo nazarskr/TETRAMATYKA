@@ -8,10 +8,12 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { UserCredential, UserCredentialSchema } from "../users/schemas/user-credential.schema";
 import { User, UserSchema } from "../users/schemas/user.schema";
 import { JwtModule } from "@nestjs/jwt";
+import { CommonModule } from "../../common/common.module";
 
 @Module({
   imports: [
       PassportModule,
+      CommonModule,
       JwtModule.register({
           secret: process.env.JWT_VERIFICATION_TOKEN_SECRET,
           signOptions: { expiresIn: `${process.env.JWT_AUTH_TOKEN_EXPIRATION_TIME}s` },
@@ -21,6 +23,10 @@ import { JwtModule } from "@nestjs/jwt";
           { name: UserCredential.name, schema: UserCredentialSchema }], 'master'),
   ],
   controllers: [AuthController],
-  providers: [ AuthService, UsersService, MailService ],
+  providers: [
+      AuthService,
+      UsersService,
+      MailService
+  ],
 })
 export class AuthModule {}

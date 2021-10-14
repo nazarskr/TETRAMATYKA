@@ -4,9 +4,11 @@ import { ParticipantsService } from './participants.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Participant, ParticipantSchema } from './schemas/participant.schema';
 import { WorksItem, WorksItemSchema } from '../works/schemas/work.schema';
+import { CommonModule } from "../../common/common.module";
 
 @Module({
   imports: [
+    CommonModule,
     MongooseModule.forFeature([{name: Participant.name, schema: ParticipantSchema},
         {name: WorksItem.name, schema: WorksItemSchema}], 'master')
   ],

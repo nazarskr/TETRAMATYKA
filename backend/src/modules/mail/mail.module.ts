@@ -5,10 +5,12 @@ import { MailService } from './mail.service';
 import { join } from 'path';
 import { ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
+import { CommonModule } from "../../common/common.module";
 
 @Global()
 @Module({
   imports: [
+      CommonModule,
       MailerModule.forRootAsync({
         useFactory: async (config: ConfigService) => ({
           transport: {

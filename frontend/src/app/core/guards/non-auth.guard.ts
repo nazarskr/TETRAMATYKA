@@ -14,6 +14,6 @@ export class NonAuthGuard implements CanActivate {
       this.router.navigateByUrl('/profile');
     }
 
-    return isToken;
+    return !isToken;
   }
 }

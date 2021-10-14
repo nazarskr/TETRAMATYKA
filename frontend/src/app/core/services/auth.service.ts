@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
   providedIn: 'root'
 })
 export class AuthService {
+  public authUri = '/api/auth';
 
   constructor(
     private http: HttpClient,
@@ -16,7 +17,7 @@ export class AuthService {
   ) { }
 
   login(body: UserCredential) {
-    return this.http.post('/auth/login', body);
+    return this.http.post(`${this.authUri}/login`, body);
   }
 
   logout() {
@@ -31,14 +32,14 @@ export class AuthService {
   }
 
   register(body: UserRegister) {
-    return this.http.post('/auth/register', body);
+    return this.http.post(`${this.authUri}/register`, body);
   }
 
   forgotPassword(email: string) {
-    return this.http.post('/auth/forgot-password/', email);
+    return this.http.post(`${this.authUri}/forgot-password`, email);
   }
 
   changeUserPassword(body: UserChangePassword) {
-    return this.http.post('/api/user/change-profile', body);
+    return this.http.post(`${this.authUri}/change-profile`, body);
   }
 }

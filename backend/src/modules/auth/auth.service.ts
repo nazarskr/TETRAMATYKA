@@ -26,13 +26,13 @@ export class AuthService {
     ) {}
 
     async login(userLoginDto: UserLoginDto) {
-        const user = await this.usersService.getUser(userLoginDto.email);
+        const user = await this.usersService.getUserCredentialByEmail(userLoginDto.email);
 
         if (!user) {
             throw new HttpException({
-                status: HttpStatus.UNAUTHORIZED,
-                error: 'Wrong email',
-            }, HttpStatus.UNAUTHORIZED);
+                status: HttpStatus.FORBIDDEN,
+                message: 'Wrong email',
+            }, HttpStatus.FORBIDDEN);
         }
 
         const isPasswordTheSame = await this.comparePasswords(userLoginDto.email, user.password);
@@ -41,18 +41,18 @@ export class AuthService {
             return of(token);
         } else {
             throw new HttpException({
-                status: HttpStatus.UNAUTHORIZED,
-                error: 'Wrong password',
-            }, HttpStatus.UNAUTHORIZED);
+                status: HttpStatus.FORBIDDEN,
+                message: 'Wrong password',
+            }, HttpStatus.FORBIDDEN);
         }
     }
 
     async register(userRegisterDto: UserRegisterDto) {
-        const user = await this.usersService.getUser(userRegisterDto.email);
+        const user = await this.usersService.getUserCredentialByEmail(userRegisterDto.email);
         if (user) {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,
-                error: 'This email registered yet',
+                message: 'This email registered yet',
             }, HttpStatus.FORBIDDEN);
         }
 
@@ -78,7 +78,7 @@ export class AuthService {
     }
 
     async updatePassword(token: string, updatePasswordDto: UpdatePasswordDto) {
-        const email = this.jwtService.decode(token);
+        const email: string = await this.jwtService.decode(token)['email'];
         const user = await this.userCredentialModel.find({email});
         const newPassword = await this.hashPassword(updatePasswordDto.password);
         return this.userCredentialModel.findByIdAndUpdate(user['_id'], {password: newPassword}, {new: true});

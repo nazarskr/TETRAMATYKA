@@ -45,14 +45,13 @@ export class LoginComponent extends UnsubscribeOnDestroy implements OnInit {
     }
 
     const body: UserCredential = {...this.loginForm.value};
+    console.log('login');
     this._authService.login(body)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: string) => {
         localStorage.setItem('token', res);
         this.getUser();
-      }, (err) => {
-        this._toaster.showErrorMessage(err.error.message);
-      })
+      });
 
   }
 

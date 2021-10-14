@@ -9,7 +9,7 @@ export class CurrentYearInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentYear = this.appInitService.currentYear;
-    if (currentYear) {
+    if (currentYear && !request.url.includes('/api/auth')) {
       request = request.clone({
         setParams: {
           year: `${currentYear.year}`

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseInterceptors } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards, UseInterceptors} from '@nestjs/common';
 import { NewsService } from "./news.service";
 import { NewsItem } from './schemas/news-item.schema';
 import { ICommonQuery } from '../../common/interfaces/common-query';
@@ -9,6 +9,9 @@ import { IMulterRequest } from "../../common/interfaces/multer-custom";
 import { storageUtil } from "../../common/utils/storage.util";
 import {MultipleImageUrlsInterceptor} from '../../common/interceptors/multiple-image-urls.interceptor';
 import {ImageUrlInterceptor} from '../../common/interceptors/image-url.interceptor';
+import {hasRoles} from "../../common/decorators/roles.decorator";
+import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
+import {RolesGuard} from "../../common/guards/roles.guard";
 
 @Controller('news')
 export class NewsController {
@@ -27,6 +30,8 @@ export class NewsController {
         return this.newsService.getNewsItemById(id);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('news'))
@@ -42,6 +47,8 @@ export class NewsController {
        return this.newsService.createNewsItem(newsItem);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('news'))
@@ -65,6 +72,8 @@ export class NewsController {
         return this.newsService.updateNewsItem(id, newsItem);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteNewsItem(@Param('id') id: string): Promise<NewsItem> {
         const newsItemForDelete = await this.newsService.getNewsItemImageUrl(id);

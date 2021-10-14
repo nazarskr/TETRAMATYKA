@@ -1,4 +1,17 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, Req, UseInterceptors} from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Patch,
+    Post,
+    Put,
+    Query,
+    Req,
+    UseGuards,
+    UseInterceptors
+} from '@nestjs/common';
 import {WorksService} from './works.service';
 import {MultipleImageUrlsInterceptor} from '../../common/interceptors/multiple-image-urls.interceptor';
 import {ICommonQuery} from '../../common/interfaces/common-query';
@@ -13,6 +26,9 @@ import {WorksItemParticipantsDto} from './dto/works-Item-participants.dto';
 import {ParticipantDocument} from '../participants/schemas/participant.schema';
 import {UpdateWriteOpResult} from "mongoose";
 import {Observable} from "rxjs";
+import {hasRoles} from "../../common/decorators/roles.decorator";
+import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
+import {RolesGuard} from "../../common/guards/roles.guard";
 
 @Controller('works')
 export class WorksController {
@@ -42,6 +58,8 @@ export class WorksController {
         return this.worksService.getWorksItemById(id);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('works'))
@@ -57,6 +75,8 @@ export class WorksController {
         return this.worksService.createWorksItem(worksItem);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('works'))
@@ -80,6 +100,8 @@ export class WorksController {
         return this.worksService.updateWorksItem(id, worksItem);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Patch(':id/:participantId')
     updateWorksItemParticipants(
         @Param('id') id: string,
@@ -89,7 +111,8 @@ export class WorksController {
         return this.worksService.updateWorksItemParticipants(id, participantId, worksItemParticipants);
     }
 
-
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteWorksItem(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const worksItemForDelete = await this.worksService.getWorksItemImageUrl(id);

@@ -15,7 +15,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
     const method = request.method;
-    if (method !== 'GET') {
+    if (token && method !== 'GET') {
       request = request.clone({
         setHeaders: {
           Authorization: token
@@ -24,16 +24,19 @@ export class TokenInterceptor implements HttpInterceptor {
     }
     return next.handle(request)
       .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 401) {
-            this._toaster.showErrorMessage('You are unauthorized. Please login again');
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 401) {
             this._authService.logout();
-          } else if (error.status === 0) {
+          } else if (err.status === 0) {
             // TODO navigate to offline
           } else {
             // TODO error handler for post/put/patch/delete requests
           }
-          return throwError(error.message);
+
+          if(request.url.includes('/api/auth')) {
+            this._toaster.showErrorMessage(err.error.message);
+          }
+          return throwError(err.error.message);
         })
       );
   }

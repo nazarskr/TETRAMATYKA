@@ -7,7 +7,7 @@ import {
     Post,
     Put,
     Query,
-    Req,
+    Req, UseGuards,
     UseInterceptors
 } from '@nestjs/common';
 import { ParticipantsService } from './participants.service';
@@ -22,6 +22,9 @@ import { ImageUrlInterceptor } from '../../common/interceptors/image-url.interce
 import { MultipleImageUrlsInterceptor } from '../../common/interceptors/multiple-image-urls.interceptor';
 import {WorksItemDocument} from '../works/schemas/work.schema';
 import {UpdateWriteOpResult} from 'mongoose';
+import {hasRoles} from "../../common/decorators/roles.decorator";
+import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
+import {RolesGuard} from "../../common/guards/roles.guard";
 
 @Controller('participants')
 export class ParticipantsController {
@@ -51,6 +54,8 @@ export class ParticipantsController {
         return this.participantsService.getParticipantById(id);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
@@ -66,6 +71,8 @@ export class ParticipantsController {
         return this.participantsService.createParticipant(participant);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
@@ -89,6 +96,8 @@ export class ParticipantsController {
         return this.participantsService.updateParticipant(id, participant);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteParticipant(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const participantForDelete = await this.participantsService.getParticipantImageUrl(id);

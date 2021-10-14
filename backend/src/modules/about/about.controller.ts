@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseInterceptors, Req} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, UseInterceptors, Req, UseGuards} from '@nestjs/common';
 import { AboutService } from './about.service';
 import { AboutInfo } from './schemas/about-info.schema';
 import { FilesInterceptor } from '@nestjs/platform-express';
@@ -7,6 +7,9 @@ import { IMulterRequest } from '../../common/interfaces/multer-custom';
 import { AboutInfoDto } from './dto/about-info.dto';
 import * as multerGoogleStorage from 'multer-google-storage';
 import { storageUtil } from '../../common/utils/storage.util';
+import {hasRoles} from "../../common/decorators/roles.decorator";
+import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
+import {RolesGuard} from "../../common/guards/roles.guard";
 
 @Controller('about')
 export class AboutController {
@@ -19,6 +22,8 @@ export class AboutController {
         return this.aboutService.getAboutInfo(+query.year);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('about'))
@@ -34,6 +39,8 @@ export class AboutController {
         return this.aboutService.addAboutInfo(aboutInfo);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('about'))
@@ -57,6 +64,8 @@ export class AboutController {
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteAboutInfo(@Param('id') id: string): Promise<AboutInfo> {
         const aboutInfoForDelete = await this.aboutService.getAboutImageUrl(id);

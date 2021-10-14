@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { InjectModel } from "@nestjs/mongoose";
 import { User, UserDocument } from './schemas/user.schema';
 import { Model } from "mongoose";
@@ -20,6 +20,13 @@ export class UsersService {
     }
 
     async createUser(userInfoDto: UserInfoDto): Promise<User> {
+        const userExists = await this.getUserInfoByEmail(userInfoDto.email);
+        if (userExists) {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                message: 'This email registered yet',
+            }, HttpStatus.FORBIDDEN);
+        }
         const userCredential = {email: userInfoDto.email, password: ''};
         const newUser = await new this.userModel(userInfoDto);
         const newUserCredential = await new this.userCredentialModel(userCredential);
@@ -41,7 +48,11 @@ export class UsersService {
         // TODO resend registration mail
     }
 
-    async getUser(email: string): Promise<UserCredential> {
+    async getUserCredentialByEmail(email: string): Promise<UserCredential> {
         return this.userCredentialModel.findOne({email});
+    }
+
+    async getUserInfoByEmail(email: string): Promise<User> {
+        return this.userModel.findOne({email});
     }
 }

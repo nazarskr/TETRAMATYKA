@@ -1,7 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, UseGuards} from '@nestjs/common';
 import { ArchiveManagerService } from './archive-manager.service';
 import { ArchiveYear } from "./schemas/archive-year.schema";
 import { ArchiveYearDto } from "./dto/archive-year.dto";
+import { hasRoles } from "../../common/decorators/roles.decorator";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { RolesGuard } from "../../common/guards/roles.guard";
+
 
 @Controller("archive-manager")
 export class ArchiveManagerController {
@@ -23,11 +27,15 @@ export class ArchiveManagerController {
         return this.archiveManagerService.getArchiveYearById(id);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Patch()
     update(@Body() archiveYears: ArchiveYearDto[]) {
         return this.archiveManagerService.updateArchiveYears(archiveYears);
     }
 
+    @hasRoles('ADMIN')
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     delete(@Param('id') id: string): Promise<ArchiveYear> {
         return this.archiveManagerService.removeArchiveYear(id);
