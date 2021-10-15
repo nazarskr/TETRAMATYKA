@@ -1,6 +1,7 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from "./auth.service";
 import { UpdatePasswordDto, UserLoginDto, UserRegisterDto } from "./dto/user.dtos";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('auth')
 export class AuthController {
@@ -25,5 +26,22 @@ export class AuthController {
     @Post('/forgot-password')
     forgotPassword(@Body() email: string): Promise<void> {
         return this.authService.sendResetPassword(email);
+    }
+
+    @Get('google/login')
+    @UseGuards(AuthGuard('google'))
+    googleLogin() {
+        // initiates the Google OAuth2 login flow
+    }
+
+    @Get('google/callback')
+    @UseGuards(AuthGuard('google'))
+    googleLoginCallback(@Req() req, @Res() res) {
+        const jwt: string = req.user.jwt;
+        if (jwt) {
+            res.redirect('http://localhost:4200/login/success/' + jwt);
+        } else {
+            res.redirect('http://localhost:4200/login/failure');
+        }
     }
 }

@@ -71,9 +71,14 @@
   <p class="form-bottom-text">
     {{'COMMON.OR' | translate}}
   </p>
-  <button mat-button>
-    {{'COMMON.SIGN_IN' | translate}}
-    {{'COMMON.WITH' | translate}}
-    Google
-  </button>
+  <mat-card (click)="loginWithGoogle()" class="google-button"
+            fxLayout="row" fxLayoutAlign="space-between center">
+    <img src="../../../assets/images/social/google_logo.png" alt="google logo"
+         width="20" height="20">
+    <span>
+      {{'COMMON.SIGN_IN' | translate}}
+      {{'COMMON.WITH' | translate}}
+      Google
+    </span>
+  </mat-card>
 </div>

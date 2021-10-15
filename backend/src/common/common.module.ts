@@ -7,7 +7,7 @@ import { UsersService } from "../modules/users/users.service";
 import { MongooseModule } from "@nestjs/mongoose";
 import { User, UserSchema } from "../modules/users/schemas/user.schema";
 import { UserCredential, UserCredentialSchema } from "../modules/users/schemas/user-credential.schema";
-import {JwtModule} from "@nestjs/jwt";
+import { JwtModule } from "@nestjs/jwt";
 
 @Module({
     imports: [

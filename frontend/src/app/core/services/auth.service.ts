@@ -42,4 +42,8 @@ export class AuthService {
   changeUserPassword(body: UserChangePassword) {
     return this.http.post(`${this.authUri}/change-profile`, body);
   }
+
+  loginWithGoogle() {
+    return this.http.get(`${this.authUri}/google/login`);
+  }
 }

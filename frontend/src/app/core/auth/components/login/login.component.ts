@@ -45,7 +45,6 @@ export class LoginComponent extends UnsubscribeOnDestroy implements OnInit {
     }
 
     const body: UserCredential = {...this.loginForm.value};
-    console.log('login');
     this._authService.login(body)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: string) => {
@@ -65,6 +64,15 @@ export class LoginComponent extends UnsubscribeOnDestroy implements OnInit {
       .subscribe((res: UserInfo) => {
         this._userService.userInfo = res;
         this._router.navigate(['/profile']);
+      })
+  }
+
+  loginWithGoogle(): void {
+    this._authService.loginWithGoogle()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: string) => {
+        localStorage.setItem('token', res);
+        this.getUser();
       })
   }
 }

@@ -1,0 +1,17 @@
+@import "variables";
+
+.google-button {
+  cursor: pointer;
+  padding: 10px;
+
+  img {
+    display: inline-block;
+  }
+
+  span {
+    margin-left: 10px;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

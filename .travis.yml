@@ -4,7 +4,7 @@ node_js:
 
 branches:
   only:
-    - master
+    - development
 
 addons:
   chrome: stable
@@ -15,11 +15,11 @@ install:
 script:
   sh scripts/build.sh
 
-deploy:
-  provider: script
-  script: deploy.sh
-  on:
-    branch: development
+#deploy:
+#  provider: script
+#  script: deploy.sh
+#  on:
+#    branch: development
 
 notifications:
   email: false

@@ -110,4 +110,52 @@ export class AuthService {
     comparePasswords(password: string, storedPasswordHash: string): Promise<any> {
         return bcrypt.compare(password, storedPasswordHash);
     }
+
+    async validateOAuthLogin(email: string): Promise<string> {
+        try {
+            const user = await this.usersService.getUserCredentialByEmail(email);
+            if (!user) {
+
+            }
+
+            const userRegister: any = {
+                email,
+                firstName: '',
+                lastName: ''
+            };
+
+            const userInfo = {
+                email: userRegister.email,
+                firstName: userRegister.firstName,
+                lastName: userRegister.lastName,
+                role: Role.USER
+            };
+
+            const userCredential = {
+                email: userRegister.email,
+                password: ''
+            }
+
+            const newUser = await new this.userModel(userInfo);
+            const newUserCredential = await new this.userCredentialModel(userCredential);
+            await newUser.save();
+            await newUserCredential.save();
+
+            const payload = {
+                email //extract email
+            }
+
+            const token: string = this.jwtService.sign(payload, {
+                secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
+                expiresIn: `${this.configService.get('JWT_VERIFICATION_TOKEN_EXPIRATION_TIME')}s`
+            });
+            return token;
+        }
+        catch (err) {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                error: 'Invalid credentials',
+            }, HttpStatus.FORBIDDEN);
+        }
+    }
 }
