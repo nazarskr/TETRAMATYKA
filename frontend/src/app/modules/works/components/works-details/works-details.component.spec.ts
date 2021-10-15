@@ -14,19 +14,26 @@ import { TranslateModule } from "@ngx-translate/core";
 import { UserPermissionDirective } from "@shared/directives/user-permission.directive";
 import { MatMenuModule } from "@angular/material/menu";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import {AddEditWorksItemComponent} from "../add-edit-works-item/add-edit-works-item.component";
+import { AddEditWorksItemComponent } from "../add-edit-works-item/add-edit-works-item.component";
+import { AddEditParticipantComponent } from "../add-edit-participant/add-edit-participant.component";
+import { DialogData } from "@shared/interfaces/dialog";
+import { SimpleDialogComponent } from "@shared/components/simple-dialog/simple-dialog.component";
+import { WorksItemParticipants } from "@shared/interfaces/works";
 
-fdescribe('WorksDetailsComponent', () => {
+describe('WorksDetailsComponent', () => {
   let component: WorksDetailsComponent;
   let fixture: ComponentFixture<WorksDetailsComponent>;
 
   let worksServiceStub: Partial<WorksService> = {
-    getWorksItemsById: () => of(dbData.worksItem)
+    getWorksItemsById: () => of(dbData.worksItem),
+    deleteWorksItem: (id: string) => of(dbData.worksItem),
+    updateWorksItemParticipants: (id: string, participantId: string, worksItemParticipants: WorksItemParticipants) => of()
   }
 
   let participantsServiceStub: Partial<ParticipantsService> = {
     getParticipantsForWorksItem: () => of(dbData.participants),
-    getAllParticipantsShort: () => of(dbData.participantsShort)
+    getAllParticipantsShort: () => of(dbData.participantsShort),
+    deleteParticipant: (id: string) => of(dbData.participants[0]),
   }
 
   let mockRouter = {
@@ -62,13 +69,26 @@ fdescribe('WorksDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should open Add participant dialog', () => {
+  it('should open Add participant dialog and don\'t call getWorksItem method if modal just closed', () => {
     const dialogSpy = spyOn(component['_dialog'], 'open').and
       .returnValue({
         afterClosed: () => of(false)
       } as MatDialogRef<typeof component>);
+    const getWorksItemSpy = spyOn(component, 'getWorksItemById');
     component.addParticipant();
     expect(dialogSpy).toHaveBeenCalled();
+    expect(getWorksItemSpy).not.toHaveBeenCalled();
+  });
+
+  it('should open Add participant dialog and call getWorksItem method', () => {
+    const dialogSpy = spyOn(component['_dialog'], 'open').and
+      .returnValue({
+        afterClosed: () => of(true)
+      } as MatDialogRef<typeof component>);
+    const getWorksItemSpy = spyOn(component, 'getWorksItemById');
+    component.addParticipant();
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(getWorksItemSpy).toHaveBeenCalled();
   });
 
   it('should call goBack method', () => {
@@ -86,13 +106,6 @@ fdescribe('WorksDetailsComponent', () => {
   it('add participant menu should be closed by default', () => {
     const menu = fixture.nativeElement.parentNode.querySelector('.mat-menu-panel');
     expect(menu).toBeFalsy();
-  });
-
-  it('should open add participant menu', () => {
-    const button = fixture.nativeElement.querySelector('.mat-menu-trigger');
-    button.click();
-    const menu = fixture.nativeElement.parentNode.querySelector('.mat-menu-panel');
-    expect(menu).toBeTruthy();
   });
 
   it('should open existing participants dialog if there is available participants', () => {
@@ -115,16 +128,102 @@ fdescribe('WorksDetailsComponent', () => {
   it('should open select participant dialog', () => {
     const dialogSpy = spyOn(component['_dialog'], 'open').and
       .returnValue({
-        afterClosed: () => of(false)
+        afterClosed: () => of('someid')
       } as MatDialogRef<typeof component>);
     component.openSelectParticipantDialog();
     expect(dialogSpy).toHaveBeenCalled();
   });
 
-  it('should run openEditItemDialog and open dialog', () => {
+  it('should run openEditItemDialog with args', () => {
     const openEditItemSpy = spyOn(component, 'openEditItemDialog');
     const title = 'Edit works item';
     component.editWorksItem();
     expect(openEditItemSpy).toHaveBeenCalledWith(title, component.worksItem, AddEditWorksItemComponent);
+  });
+
+  it('should run openEditItemDialog with args', () => {
+    const openEditItemSpy = spyOn(component, 'openEditItemDialog');
+    const title = 'Edit participant';
+    const participant = JSON.parse(JSON.stringify(dbData.participants[0]));
+    component.editParticipant(participant);
+    expect(openEditItemSpy).toHaveBeenCalledWith(title, participant, AddEditParticipantComponent);
+  });
+
+  it('should open Delete works item dialog and cancel deletion if dialog just closed', () => {
+    const dialogSpy = spyOn(component['_dialog'], 'open').and
+      .returnValue({
+        afterClosed: () => of(false)
+      } as MatDialogRef<typeof component>);
+    const deleteItemSpy = spyOn(component, 'deleteWorksItem');
+    component.openDeleteWorksItemDialog();
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(deleteItemSpy).not.toHaveBeenCalled();
+  });
+
+  it('should open Delete works item dialog and run deleteWorksItem after confirm', () => {
+    const dialogSpy = spyOn(component['_dialog'], 'open').and
+      .returnValue({
+        afterClosed: () => of(true)
+      } as MatDialogRef<typeof component>);
+    const deleteItemSpy = spyOn(component, 'deleteWorksItem');
+    component.openDeleteWorksItemDialog();
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(deleteItemSpy).toHaveBeenCalled();
+  });
+
+  it('should display message after successful works item deletion', () => {
+    const toasterSpy = spyOn(component['_toaster'], 'showMessage');
+    const message = 'Works item deleted successfully';
+    component.deleteWorksItem();
+    expect(toasterSpy).toHaveBeenCalledWith(message);
+  });
+
+  it('should open Delete participant item dialog and cancel deletion if dialog just closed', () => {
+    const dialogSpy = spyOn(component['_dialog'], 'open').and
+      .returnValue({
+        afterClosed: () => of(false)
+      } as MatDialogRef<typeof component>);
+    const deleteParticipantSpy = spyOn(component, 'deleteParticipant');
+    const participant = JSON.parse(JSON.stringify(dbData.participants[0]));
+    component.openDeleteParticipantDialog(participant);
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(deleteParticipantSpy).not.toHaveBeenCalled();
+  });
+
+  it('should open Delete participant item dialog and call deleteParticipant method after confirm', () => {
+    const dialogSpy = spyOn(component['_dialog'], 'open').and
+      .returnValue({
+        afterClosed: () => of(true)
+      } as MatDialogRef<typeof component>);
+    const deleteParticipantSpy = spyOn(component, 'deleteParticipant');
+    const participant = JSON.parse(JSON.stringify(dbData.participants[0]));
+    component.openDeleteParticipantDialog(participant);
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(deleteParticipantSpy).toHaveBeenCalled();
+  });
+
+  it('should display message and getWorksItem after successful participant deletion', () => {
+    const toasterSpy = spyOn(component['_toaster'], 'showMessage');
+    const getWorksItemSpy = spyOn(component, 'getWorksItemById');
+    const message = 'Participant deleted successfully';
+    component.deleteParticipant('someid');
+    expect(toasterSpy).toHaveBeenCalledWith(message);
+    expect(getWorksItemSpy).toHaveBeenCalled();
+  });
+
+  it('should add checkbox message for dialog', () => {
+    const dialogSpy = spyOn(component['_dialog'], 'open').and
+      .returnValue({
+        afterClosed: () => of(false)
+      } as MatDialogRef<typeof component>);
+    const data: DialogData = {
+      title: 'Delete participant',
+      message: 'Are you sure you want to delete this participant?',
+      checkboxText: 'For all works items'
+    };
+    const participant = JSON.parse(JSON.stringify(dbData.participants[0]));
+    participant.works.push('secondid');
+    component.openDeleteParticipantDialog(participant);
+    expect(dialogSpy).toHaveBeenCalledWith(SimpleDialogComponent, {data});
   });
 });
