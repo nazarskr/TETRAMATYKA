@@ -12,7 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ParticipantsService } from "../../../participants/services/participants/participants.service";
 import { of } from "rxjs";
 
-fdescribe('AddEditParticipantComponent', () => {
+describe('AddEditParticipantComponent', () => {
   let component: AddEditParticipantComponent;
   let fixture: ComponentFixture<AddEditParticipantComponent>;
 
