@@ -1,6 +1,6 @@
 import { ArchiveYear } from "@shared/interfaces/admin";
 import { UserInfo } from "@shared/interfaces/user";
-import {RoleEnum} from "@shared/enums/role";
+import { RoleEnum } from "@shared/enums/role";
 
 export const initialYear: ArchiveYear = {
   year: 2021,
