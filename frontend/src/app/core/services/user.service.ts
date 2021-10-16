@@ -16,8 +16,8 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  getUser() {
-    return this.http.get('/api/user');
+  getUser(token: string) {
+    return this.http.get(`/api/users/current/${token}`);
   }
 
   changeProfileInfo(body: UserProfile) {
@@ -26,6 +26,11 @@ export class UserService {
 
   setInitialUser() {
     this.userInfo = {...initialUser};
+    this.currentUserRole.next(this.userInfo.role);
+  }
+
+  changeUser(user: UserInfo) {
+    this.userInfo = {...user};
     this.currentUserRole.next(this.userInfo.role);
   }
 }

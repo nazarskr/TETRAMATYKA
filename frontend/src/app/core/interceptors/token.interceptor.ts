@@ -25,6 +25,7 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((err: HttpErrorResponse) => {
+          console.log('catch error', err);
           if (err.status === 401) {
             this._authService.logout();
           } else if (err.status === 0) {
@@ -36,7 +37,7 @@ export class TokenInterceptor implements HttpInterceptor {
           if(request.url.includes('/api/auth')) {
             this._toaster.showErrorMessage(err.error.message);
           }
-          return throwError(err.error.message);
+          return throwError(err.error);
         })
       );
   }

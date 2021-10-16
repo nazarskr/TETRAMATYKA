@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { UserChangePassword, UserCredential, UserRegister } from "@shared/interfaces/user";
+import {UserChangePassword, UserCredential, UserRegister, UserRegisterGoogle} from "@shared/interfaces/user";
 import { UserService } from "@core/services/user.service";
 import { Router } from "@angular/router";
 
@@ -43,7 +43,7 @@ export class AuthService {
     return this.http.post(`${this.authUri}/change-profile`, body);
   }
 
-  loginWithGoogle() {
-    return this.http.get(`${this.authUri}/google/login`);
+  saveGoogleUser(userRegister: UserRegisterGoogle) {
+    return this.http.post(`${this.authUri}/google-register`, userRegister);
   }
 }

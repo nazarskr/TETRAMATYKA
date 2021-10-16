@@ -5,12 +5,13 @@ import { InjectModel } from "@nestjs/mongoose";
 import { UserCredential, UserCredentialDocument } from "../users/schemas/user-credential.schema";
 import { Model } from "mongoose";
 import { of } from "rxjs";
-import { UserLoginDto, UpdatePasswordDto, UserRegisterDto } from "./dto/user.dtos";
+import {UserLoginDto, UpdatePasswordDto, UserRegisterDto, UserRegisterGoogleDto} from "./dto/user.dtos";
 import { JwtService } from "@nestjs/jwt";
 import { Role } from "../../common/enums/role.enum";
 import { VerificationTokenPayload } from "../../common/interfaces/verification-token-payload";
 import { ConfigService } from "@nestjs/config";
 import { User, UserDocument } from "../users/schemas/user.schema";
+import {TokenRes} from "../../common/interfaces/token-res";
 
 const bcrypt = require ('bcrypt');
 
@@ -25,7 +26,7 @@ export class AuthService {
         private configService: ConfigService
     ) {}
 
-    async login(userLoginDto: UserLoginDto) {
+    async login(userLoginDto: UserLoginDto): Promise<TokenRes> {
         const user = await this.usersService.getUserCredentialByEmail(userLoginDto.email);
 
         if (!user) {
@@ -37,8 +38,9 @@ export class AuthService {
 
         const isPasswordTheSame = await this.comparePasswords(userLoginDto.email, user.password);
         if (isPasswordTheSame) {
-            const token = this.generateJwt({email: userLoginDto.email});
-            return of(token);
+            return {
+                token: this.generateJwt({email: userLoginDto.email})
+            };
         } else {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,
@@ -96,6 +98,36 @@ export class AuthService {
         }
     }
 
+    async registerGoogleUser(userRegisterGoogleDto: UserRegisterGoogleDto): Promise<TokenRes> {
+        const user = await this.usersService.getUserCredentialByEmail(userRegisterGoogleDto.email);
+        if (user) {
+            return {
+                token: this.generateJwt({email: user.email})
+            };
+        } else {
+            const userInfo = {
+                email: userRegisterGoogleDto.email,
+                firstName: userRegisterGoogleDto.firstName,
+                lastName: userRegisterGoogleDto.lastName,
+                role: Role.USER
+            };
+
+            const userCredential = {
+                email: userRegisterGoogleDto.email,
+                password: ''
+            }
+
+            const newUser = await new this.userModel(userInfo);
+            const newUserCredential = await new this.userCredentialModel(userCredential);
+            await newUser.save();
+            await newUserCredential.save();
+            const payload = {email: userRegisterGoogleDto.email};
+            return {
+                token: this.generateJwt(payload)
+            }
+        }
+    }
+
     generateJwt(payload: VerificationTokenPayload): string {
         return this.jwtService.sign(payload, {
             secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
@@ -111,51 +143,52 @@ export class AuthService {
         return bcrypt.compare(password, storedPasswordHash);
     }
 
-    async validateOAuthLogin(email: string): Promise<string> {
-        try {
-            const user = await this.usersService.getUserCredentialByEmail(email);
-            if (!user) {
-
-            }
-
-            const userRegister: any = {
-                email,
-                firstName: '',
-                lastName: ''
-            };
-
-            const userInfo = {
-                email: userRegister.email,
-                firstName: userRegister.firstName,
-                lastName: userRegister.lastName,
-                role: Role.USER
-            };
-
-            const userCredential = {
-                email: userRegister.email,
-                password: ''
-            }
-
-            const newUser = await new this.userModel(userInfo);
-            const newUserCredential = await new this.userCredentialModel(userCredential);
-            await newUser.save();
-            await newUserCredential.save();
-
-            const payload = {
-                email //extract email
-            }
-
-            const token: string = this.jwtService.sign(payload, {
-                secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
-                expiresIn: `${this.configService.get('JWT_VERIFICATION_TOKEN_EXPIRATION_TIME')}s`
-            });
-            return token;
-        }
-        catch (err) {
-            throw new HttpException({
-                status: HttpStatus.FORBIDDEN,
-                error: 'Invalid credentials',
-            }, HttpStatus.FORBIDDEN);
-        }
-    }
+    // TODO login via BE
+    // async validateOAuthLogin(email: string): Promise<string> {
+    //     try {
+    //         const user = await this.usersService.getUserCredentialByEmail(email);
+    //         if (!user) {
+    //
+    //         }
+    //
+    //         const userRegister: any = {
+    //             email,
+    //             firstName: '',
+    //             lastName: ''
+    //         };
+    //
+    //         const userInfo = {
+    //             email: userRegister.email,
+    //             firstName: userRegister.firstName,
+    //             lastName: userRegister.lastName,
+    //             role: Role.USER
+    //         };
+    //
+    //         const userCredential = {
+    //             email: userRegister.email,
+    //             password: ''
+    //         }
+    //
+    //         const newUser = await new this.userModel(userInfo);
+    //         const newUserCredential = await new this.userCredentialModel(userCredential);
+    //         await newUser.save();
+    //         await newUserCredential.save();
+    //
+    //         const payload = {
+    //             email //extract email
+    //         }
+    //
+    //         const token: string = this.jwtService.sign(payload, {
+    //             secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET'),
+    //             expiresIn: `${this.configService.get('JWT_VERIFICATION_TOKEN_EXPIRATION_TIME')}s`
+    //         });
+    //         return token;
+    //     }
+    //     catch (err) {
+    //         throw new HttpException({
+    //             status: HttpStatus.FORBIDDEN,
+    //             error: 'Invalid credentials',
+    //         }, HttpStatus.FORBIDDEN);
+    //     }
+    // }
 }

@@ -21,6 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { UserGuard } from '@core/guards/user.guard';
 import { NonAuthGuard } from "@core/guards/non-auth.guard";
+import {SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider} from 'angularx-social-login';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -55,12 +56,13 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
   ],
   providers: [
     {
@@ -81,7 +83,21 @@ export function appInit(appInitService: AppInitService): () => Promise<ArchiveYe
     },
     AdminGuard,
     UserGuard,
-    NonAuthGuard
+    NonAuthGuard,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '1073970841718-shfmcinq2b1gc6smeebatdt9deolnm6h.apps.googleusercontent.com'
+            )
+          },
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

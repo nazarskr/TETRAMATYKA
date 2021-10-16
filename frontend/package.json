@@ -28,6 +28,7 @@
     "@angular/service-worker": "~11.1.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "angularx-social-login": "3.5.7",
     "moment": "^2.29.1",
     "ngx-quill": "^14.1.2",
     "ngx-ui-loader": "^11.0.0",

@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "@shared/shared.module";
 import { TranslateModule } from "@ngx-translate/core";
 import { NewPasswordComponent } from "@core/auth/components/new-password/new-password.component";
-import { GoogleLoginResultComponent } from './components/google-login-result/google-login-result.component';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { GoogleLoginResultComponent } from './components/google-login-result/goo
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    NewPasswordComponent,
-    GoogleLoginResultComponent
+    NewPasswordComponent
   ],
   imports: [
     CommonModule,

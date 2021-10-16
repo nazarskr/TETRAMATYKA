@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
-import {UserCredential, UserInfo} from "@shared/interfaces/user";
+import { UserCredential, UserInfo, UserRegisterGoogle } from "@shared/interfaces/user";
 import { AuthService } from "@core/services/auth.service";
 import { UserService } from "@core/services/user.service";
-import {UnsubscribeOnDestroy} from "@shared/directives/unsubscribe-on-destroy";
-import {takeUntil} from "rxjs/operators";
-import {Router} from "@angular/router";
+import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
+import { takeUntil } from "rxjs/operators";
+import { Router } from "@angular/router";
+import { GoogleLoginProvider, SocialAuthService } from "angularx-social-login";
+import {Token} from "@angular/compiler";
+import {TokenRes} from "@shared/interfaces/common";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +25,8 @@ export class LoginComponent extends UnsubscribeOnDestroy implements OnInit {
     private _toaster: ToasterService,
     private _authService: AuthService,
     private _userService: UserService,
-    private _router: Router
+    private _router: Router,
+    private _socialAuthService: SocialAuthService,
   ) {
     super();
   }
@@ -47,9 +51,9 @@ export class LoginComponent extends UnsubscribeOnDestroy implements OnInit {
     const body: UserCredential = {...this.loginForm.value};
     this._authService.login(body)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: string) => {
-        localStorage.setItem('token', res);
-        this.getUser();
+      .subscribe((res: TokenRes) => {
+        localStorage.setItem('token', res.token);
+        this.getUser(res.token);
       });
 
   }
@@ -58,21 +62,30 @@ export class LoginComponent extends UnsubscribeOnDestroy implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  getUser(): void {
-    this._userService.getUser()
+  loginWithGoogle(): void {
+    this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then(res => {
+        const {firstName, lastName, email} = res;
+        const userRegister = {firstName, lastName, email};
+        this.registerGoogleUser(userRegister);
+      });
+  }
+
+  registerGoogleUser(userRegister: UserRegisterGoogle): void {
+    this._authService.saveGoogleUser(userRegister)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: UserInfo) => {
-        this._userService.userInfo = res;
-        this._router.navigate(['/profile']);
+      .subscribe((res: TokenRes) => {
+        localStorage.setItem('token', res.token);
+        this.getUser(res.token);
       })
   }
 
-  loginWithGoogle(): void {
-    this._authService.loginWithGoogle()
+  getUser(token: string): void {
+    this._userService.getUser(token)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: string) => {
-        localStorage.setItem('token', res);
-        this.getUser();
+      .subscribe((res: UserInfo) => {
+        this._userService.changeUser(res);
+        this._router.navigate(['/profile']);
       })
   }
 }

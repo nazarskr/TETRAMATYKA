@@ -33,3 +33,9 @@ export interface UserRegister {
   confirmPassword: string;
 }
 
+export interface UserRegisterGoogle {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+

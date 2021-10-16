@@ -53,7 +53,7 @@ export class RegisterComponent extends UnsubscribeOnDestroy implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('User registered successfully');
-        this._router.navigate(['/login']);
+        this._router.navigate(['/auth/login']);
       }, err => {
         this._toaster.showErrorMessage(err.error.message);
       });

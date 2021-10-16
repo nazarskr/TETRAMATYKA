@@ -11,6 +11,12 @@ export interface UserRegisterDto {
     confirmPassword: string;
 }
 
+export interface UserRegisterGoogleDto {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
 export interface UpdatePasswordDto {
     password: string;
     confirmPassword: string;

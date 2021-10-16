@@ -1,15 +1,17 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Headers } from '@nestjs/common';
 import { UsersService } from "./users.service";
 import { User } from "./schemas/user.schema";
 import { UserInfoDto } from "./dto/user-info.dto";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 import { hasRoles } from "../../common/decorators/roles.decorator";
 import { RolesGuard } from "../../common/guards/roles.guard";
+import { JWTUtil } from "../../common/utils/jwtUtil";
 
 @Controller('users')
 export class UsersController {
     constructor(
-        private readonly usersService: UsersService
+        private readonly usersService: UsersService,
+        private readonly jwtUtil: JWTUtil
     ) {}
 
     @hasRoles('ADMIN')
@@ -37,6 +39,12 @@ export class UsersController {
     @Delete(':id')
     deleteUser(@Param('id') id: string): Promise<User> {
         return this.usersService.deleteUser(id);
+    }
+
+    @Get('/current/:token')
+    async getCurrentUser(@Param('token') token: string): Promise<User> {
+        const email: string = this.jwtUtil.decode(token)['email'];
+        return this.usersService.getUserInfoByEmail(email);
     }
 
 }
