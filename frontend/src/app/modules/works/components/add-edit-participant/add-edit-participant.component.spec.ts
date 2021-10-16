@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dial
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
-import { dbData, mockProviders } from "@shared/tests/constants";
+import { dbData, mockFile, mockProviders } from "@shared/tests/constants";
 import { TranslateModule } from "@ngx-translate/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
@@ -116,9 +116,7 @@ describe('AddEditParticipantComponent', () => {
     component.participant = JSON.parse(JSON.stringify(dbData.participants[0]));
     component.formPatchValue();
     component.imageUrl = 'http://someurl';
-    const dataTransfer = new DataTransfer()
-    dataTransfer.items.add(new File([''], 'test-file.pdf'));
-    component.multipartFile = dataTransfer.files[0];
+    component.multipartFile = mockFile();
     component.saveParticipant();
     expect(updateParticipantSpy).toHaveBeenCalled();
   });
@@ -145,8 +143,7 @@ describe('AddEditParticipantComponent', () => {
   });
 
   it('should change imageUrl and multipartFile', () => {
-    const dataTransfer = new DataTransfer()
-    const newFile = dataTransfer.items.add(new File([''], 'test-file.pdf'));
+    const newFile = mockFile();
     const url = 'http://someurl';
     component.imageUrl = url;
     component.multipartFile = null;
@@ -168,20 +165,19 @@ describe('AddEditParticipantComponent', () => {
     const clearImageSpy = spyOn(component, 'clearImage');
     component.openClearImageDialog();
     expect(dialogSpy).toHaveBeenCalled();
+    expect(dialogSpy).toHaveBeenCalled();
     expect(clearImageSpy).not.toHaveBeenCalled();
   });
 
   it('should clear image', () => {
     component.imageUrl = 'http://someurl';
-    const dataTransfer = new DataTransfer()
-    dataTransfer.items.add(new File([''], 'test-file.pdf'));
-    component.multipartFile = dataTransfer.files[0];
+    component.multipartFile = mockFile();
     component.clearImage();
     expect(component.imageUrl).toBeNull();
     expect(component.multipartFile).toBeNull();
   });
 
-  it('should close dialog image', () => {
+  it('should close dialog', () => {
     const dialogSpy = spyOn(component.dialogRef, 'close');
     const res = true;
     component.closeModal(res);

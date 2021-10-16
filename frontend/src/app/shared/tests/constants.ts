@@ -1,4 +1,4 @@
-import {of} from "rxjs";
+import { of } from "rxjs";
 
 export const dbData = {
   participantsShort: [
@@ -26,7 +26,8 @@ export const dbData = {
       ua: 'опис',
       en: 'description'
     },
-    participants: ['someid']
+    participants: ['someid'],
+    imageUrl: 'http://someurl'
   },
   worksItemsShort: [
     {_id: 'qwerty', title: {en: 'qwerty', ua: 'йцукен'}},
@@ -51,4 +52,10 @@ export const mockProviders = {
     open: () => {},
     close: (result?: any) => {}
   }
+}
+
+export const mockFile = (): File => {
+  const dataTransfer = new DataTransfer()
+  dataTransfer.items.add(new File([''], 'test-file.jpg'));
+  return dataTransfer.files[0];
 }
