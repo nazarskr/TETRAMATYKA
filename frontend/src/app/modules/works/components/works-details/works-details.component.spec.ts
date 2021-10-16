@@ -27,7 +27,7 @@ describe('WorksDetailsComponent', () => {
   let worksServiceStub: Partial<WorksService> = {
     getWorksItemsById: () => of(dbData.worksItem),
     deleteWorksItem: (id: string) => of(dbData.worksItem),
-    updateWorksItemParticipants: (id: string, participantId: string, worksItemParticipants: WorksItemParticipants) => of()
+    updateWorksItemParticipants: (id: string, participantId: string, worksItemParticipants: WorksItemParticipants) => of(dbData.worksItem)
   }
 
   let participantsServiceStub: Partial<ParticipantsService> = {
@@ -38,6 +38,13 @@ describe('WorksDetailsComponent', () => {
 
   let mockRouter = {
     navigate: jasmine.createSpy('navigate')
+  }
+
+  const createDialogSpy = (res: boolean | string) => {
+    return spyOn(component['_dialog'], 'open').and
+      .returnValue({
+        afterClosed: () => of(res)
+      } as MatDialogRef<typeof component>);
   }
 
   beforeEach(async () => {
@@ -70,10 +77,7 @@ describe('WorksDetailsComponent', () => {
   });
 
   it('should open Add participant dialog and don\'t call getWorksItem method if modal just closed', () => {
-    const dialogSpy = spyOn(component['_dialog'], 'open').and
-      .returnValue({
-        afterClosed: () => of(false)
-      } as MatDialogRef<typeof component>);
+    const dialogSpy = createDialogSpy(false);
     const getWorksItemSpy = spyOn(component, 'getWorksItemById');
     component.addParticipant();
     expect(dialogSpy).toHaveBeenCalled();
@@ -81,10 +85,7 @@ describe('WorksDetailsComponent', () => {
   });
 
   it('should open Add participant dialog and call getWorksItem method', () => {
-    const dialogSpy = spyOn(component['_dialog'], 'open').and
-      .returnValue({
-        afterClosed: () => of(true)
-      } as MatDialogRef<typeof component>);
+    const dialogSpy = createDialogSpy(true);
     const getWorksItemSpy = spyOn(component, 'getWorksItemById');
     component.addParticipant();
     expect(dialogSpy).toHaveBeenCalled();
@@ -126,10 +127,7 @@ describe('WorksDetailsComponent', () => {
   });
 
   it('should open select participant dialog', () => {
-    const dialogSpy = spyOn(component['_dialog'], 'open').and
-      .returnValue({
-        afterClosed: () => of('someid')
-      } as MatDialogRef<typeof component>);
+    const dialogSpy = createDialogSpy('someid');
     component.openSelectParticipantDialog();
     expect(dialogSpy).toHaveBeenCalled();
   });
@@ -150,10 +148,7 @@ describe('WorksDetailsComponent', () => {
   });
 
   it('should open Delete works item dialog and cancel deletion if dialog just closed', () => {
-    const dialogSpy = spyOn(component['_dialog'], 'open').and
-      .returnValue({
-        afterClosed: () => of(false)
-      } as MatDialogRef<typeof component>);
+    const dialogSpy = createDialogSpy(false);
     const deleteItemSpy = spyOn(component, 'deleteWorksItem');
     component.openDeleteWorksItemDialog();
     expect(dialogSpy).toHaveBeenCalled();
@@ -161,10 +156,7 @@ describe('WorksDetailsComponent', () => {
   });
 
   it('should open Delete works item dialog and run deleteWorksItem after confirm', () => {
-    const dialogSpy = spyOn(component['_dialog'], 'open').and
-      .returnValue({
-        afterClosed: () => of(true)
-      } as MatDialogRef<typeof component>);
+    const dialogSpy = createDialogSpy(true);
     const deleteItemSpy = spyOn(component, 'deleteWorksItem');
     component.openDeleteWorksItemDialog();
     expect(dialogSpy).toHaveBeenCalled();
@@ -179,10 +171,7 @@ describe('WorksDetailsComponent', () => {
   });
 
   it('should open Delete participant item dialog and cancel deletion if dialog just closed', () => {
-    const dialogSpy = spyOn(component['_dialog'], 'open').and
-      .returnValue({
-        afterClosed: () => of(false)
-      } as MatDialogRef<typeof component>);
+    const dialogSpy = createDialogSpy(false);
     const deleteParticipantSpy = spyOn(component, 'deleteParticipant');
     const participant = JSON.parse(JSON.stringify(dbData.participants[0]));
     component.openDeleteParticipantDialog(participant);
@@ -191,10 +180,7 @@ describe('WorksDetailsComponent', () => {
   });
 
   it('should open Delete participant item dialog and call deleteParticipant method after confirm', () => {
-    const dialogSpy = spyOn(component['_dialog'], 'open').and
-      .returnValue({
-        afterClosed: () => of(true)
-      } as MatDialogRef<typeof component>);
+    const dialogSpy = createDialogSpy(true);
     const deleteParticipantSpy = spyOn(component, 'deleteParticipant');
     const participant = JSON.parse(JSON.stringify(dbData.participants[0]));
     component.openDeleteParticipantDialog(participant);
@@ -212,10 +198,7 @@ describe('WorksDetailsComponent', () => {
   });
 
   it('should add checkbox message for dialog', () => {
-    const dialogSpy = spyOn(component['_dialog'], 'open').and
-      .returnValue({
-        afterClosed: () => of(false)
-      } as MatDialogRef<typeof component>);
+    const dialogSpy = createDialogSpy(false);
     const data: DialogData = {
       title: 'Delete participant',
       message: 'Are you sure you want to delete this participant?',
@@ -225,5 +208,23 @@ describe('WorksDetailsComponent', () => {
     participant.works.push('secondid');
     component.openDeleteParticipantDialog(participant);
     expect(dialogSpy).toHaveBeenCalledWith(SimpleDialogComponent, {data});
+  });
+
+  it('should open dialog and don\'t call getWorksItem if dialog just closed', () => {
+    const dialogSpy = createDialogSpy(false);
+    const getWorksItemSpy = spyOn(component, 'getWorksItemById');
+    const title = 'Edit works item';
+    component.openEditItemDialog(title, component.worksItem, AddEditWorksItemComponent);
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(getWorksItemSpy).not.toHaveBeenCalled();
+  });
+
+  it('should open dialog and call getWorksItem if dialog confirmed', () => {
+    const dialogSpy = createDialogSpy(true);
+    const getWorksItemSpy = spyOn(component, 'getWorksItemById');
+    const title = 'Edit works item';
+    component.openEditItemDialog(title, component.worksItem, AddEditWorksItemComponent);
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(getWorksItemSpy).toHaveBeenCalled();
   });
 });
