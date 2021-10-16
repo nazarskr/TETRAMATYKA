@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Participant } from '@shared/interfaces/participants';
@@ -103,7 +103,7 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
   createParticipant(formData: FormData): void {
     this._participantsService.createParticipant(formData)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: Participant) => {
+      .subscribe(() => {
         this._toaster.showMessage('Participant created successfully');
         this.closeModal(true);
       });
@@ -140,6 +140,6 @@ export class AddEditParticipantComponent extends UnsubscribeOnDestroy implements
   }
 
   closeModal(res: boolean) {
-    this.dialogRef.close();
+    this.dialogRef.close(res);
   }
 }
