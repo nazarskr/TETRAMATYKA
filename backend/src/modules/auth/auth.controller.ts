@@ -39,9 +39,9 @@ export class AuthController {
     googleLoginCallback(@Req() req, @Res() res) {
         const jwt: string = req.user.jwt;
         if (jwt) {
-            res.redirect('http://localhost:4200/login/success/' + jwt);
+            res.redirect(process.env.HOST + '/google-login/success/' + jwt);
         } else {
-            res.redirect('http://localhost:4200/login/failure');
+            res.redirect(process.env.HOST + '/google-login/failure');
         }
     }
 }
