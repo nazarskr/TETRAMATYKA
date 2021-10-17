@@ -1,7 +1,16 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import {Body, Controller, Param, Post, UseGuards} from '@nestjs/common';
 import { AuthService } from "./auth.service";
-import { UpdatePasswordDto, UserLoginDto, UserRegisterDto, UserRegisterGoogleDto } from "./dto/user.dtos";
+import {
+    UpdatePasswordDto,
+    UserChangePasswordDto,
+    UserLoginDto,
+    UserRegisterDto,
+    UserRegisterGoogleDto
+} from "./dto/user.dtos";
 import { TokenRes } from "../../common/interfaces/token-res";
+import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
+import {Prop} from "@nestjs/mongoose";
+import {UserCredential} from "../users/schemas/user-credential.schema";
 
 @Controller('auth')
 export class AuthController {
@@ -31,6 +40,12 @@ export class AuthController {
     @Post('/google-register')
     registerGoogleUser(@Body() userRegisterGoogleDto: UserRegisterGoogleDto): Promise<TokenRes> {
         return this.authService.registerGoogleUser(userRegisterGoogleDto);
+    }
+
+    @Post('/change-password/:id')
+    @UseGuards(JwtAuthGuard)
+    changeUserPassword(@Param('id') id: string, @Body() body: UserChangePasswordDto): Promise<UserCredential> {
+        return this.authService.changeUserPassword(id, body);
     }
 
     // TODO login via BE

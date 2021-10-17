@@ -6,6 +6,7 @@ import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 import { hasRoles } from "../../common/decorators/roles.decorator";
 import { RolesGuard } from "../../common/guards/roles.guard";
 import { JWTUtil } from "../../common/utils/jwtUtil";
+import { UserProfileDto } from "./dto/user-profile.dto";
 
 @Controller('users')
 export class UsersController {
@@ -45,6 +46,11 @@ export class UsersController {
     async getCurrentUser(@Param('token') token: string): Promise<User> {
         const email: string = this.jwtUtil.decode(token)['email'];
         return this.usersService.getUserInfoByEmail(email);
+    }
+
+    @Post('/change-profile/:id')
+    async changeProfile(@Param('id') id, @Body() userProfileDto: UserProfileDto): Promise<User> {
+        return this.usersService.changeProfile(id, userProfileDto);
     }
 
 }

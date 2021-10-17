@@ -5,6 +5,7 @@ import { Model } from "mongoose";
 import { UserInfoDto } from "./dto/user-info.dto";
 import { MailService } from "../mail/mail.service";
 import { UserCredential, UserCredentialDocument } from "./schemas/user-credential.schema";
+import {UserProfileDto} from "./dto/user-profile.dto";
 
 @Injectable()
 export class UsersService {
@@ -42,6 +43,10 @@ export class UsersService {
 
     async deleteUser(id: string): Promise<User> {
         return this.userModel.findByIdAndRemove(id);
+    }
+
+    async changeProfile(id: string, userProfileDto: UserProfileDto): Promise<User> {
+        return this.userModel.findByIdAndUpdate(id, userProfileDto);
     }
 
     async resendMail() {

@@ -4,8 +4,13 @@ import { MailService } from "../mail/mail.service";
 import { InjectModel } from "@nestjs/mongoose";
 import { UserCredential, UserCredentialDocument } from "../users/schemas/user-credential.schema";
 import { Model } from "mongoose";
-import { of } from "rxjs";
-import {UserLoginDto, UpdatePasswordDto, UserRegisterDto, UserRegisterGoogleDto} from "./dto/user.dtos";
+import {
+    UserLoginDto,
+    UpdatePasswordDto,
+    UserRegisterDto,
+    UserRegisterGoogleDto,
+    UserChangePasswordDto
+} from "./dto/user.dtos";
 import { JwtService } from "@nestjs/jwt";
 import { Role } from "../../common/enums/role.enum";
 import { VerificationTokenPayload } from "../../common/interfaces/verification-token-payload";
@@ -126,6 +131,11 @@ export class AuthService {
                 token: this.generateJwt(payload)
             }
         }
+    }
+
+    async changeUserPassword(id: string, body: UserChangePasswordDto): Promise<UserCredential> {
+        const password = await this.hashPassword(body.newPassword);
+        return this.userCredentialModel.findByIdAndUpdate(id, {password},{new: false})
     }
 
     generateJwt(payload: VerificationTokenPayload): string {

@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   changeUserPassword(body: UserChangePassword) {
-    return this.http.post(`${this.authUri}/change-profile`, body);
+    return this.http.post(`${this.authUri}/change-password`, body);
   }
 
   saveGoogleUser(userRegister: UserRegisterGoogle) {

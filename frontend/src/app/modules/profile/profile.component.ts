@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeNameComponent } from "./components/change-name/change-name.component";
-import { filter, takeUntil } from "rxjs/operators";
-import { UserChangePassword, UserProfile } from "@shared/interfaces/user";
+import {filter, take, takeUntil} from "rxjs/operators";
+import {UserChangePassword, UserInfo, UserProfile} from "@shared/interfaces/user";
 import { ChangePasswordComponent } from "./components/change-password/change-password.component";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { MatDialog } from "@angular/material/dialog";
@@ -48,11 +48,23 @@ export class ProfileComponent extends UnsubscribeOnDestroy implements OnInit {
   }
 
   changeUserName(profile: UserProfile): void {
-    this._userService.changeProfileInfo(profile)
+    const id = this._userService.userInfo._id;
+    this._userService.changeProfileInfo(id, profile)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
+        this.getUser();
         this._toaster.showMessage('User saved successfully');
       })
+  }
+
+  getUser(): void {
+    const token = localStorage.getItem('token');
+    this._userService.getUser(token)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: UserInfo) => {
+        this._userService.changeUser(res);
+        this.user = this._userService.userInfo;
+      });
   }
 
   openChangePasswordDialog(): void {

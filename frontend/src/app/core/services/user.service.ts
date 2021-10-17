@@ -11,17 +11,18 @@ import { initialUser } from "@shared/constants/utils";
 export class UserService {
   public userInfo: UserInfo = {...initialUser};
   public currentUserRole: BehaviorSubject<string> = new BehaviorSubject(this.userInfo.role);
+  public usersUri = '/api/users';
 
   constructor(
     private http: HttpClient
   ) { }
 
   getUser(token: string) {
-    return this.http.get(`/api/users/current/${token}`);
+    return this.http.get(`${this.usersUri}/current/${token}`);
   }
 
-  changeProfileInfo(body: UserProfile) {
-    return this.http.post('/api/user/change-profile', body);
+  changeProfileInfo(id: string, body: UserProfile) {
+    return this.http.post(`${this.usersUri}/change-profile/${id}`, body);
   }
 
   setInitialUser() {
