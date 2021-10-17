@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from '@core/guards/admin.guard';
 import { UserGuard } from "@core/guards/user.guard";
-import {NonAuthGuard} from "@core/guards/non-auth.guard";
+import { NonAuthGuard } from "@core/guards/non-auth.guard";
 
 const routes: Routes = [
   {
@@ -57,6 +57,11 @@ const routes: Routes = [
     path: 'page-not-found',
     loadChildren: () => import('./modules/page-not-found/page-not-found.module')
       .then(m => m.PageNotFoundModule)
+  },
+  {
+    path: 'offline',
+    loadChildren: () => import('./modules/offline/offline.module')
+      .then(m => m.OfflineModule)
   },
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', redirectTo: '/page-not-found', pathMatch: 'full'}

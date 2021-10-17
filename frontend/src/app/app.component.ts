@@ -5,9 +5,8 @@ import { registerLocaleData } from '@angular/common';
 import localeUk from '@angular/common/locales/uk';
 import { SwUpdate } from "@angular/service-worker";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
-import {UserService} from "@core/services/user.service";
-import {takeUntil} from "rxjs/operators";
-import {UserInfo} from "@shared/interfaces/user";
+import { UserService } from "@core/services/user.service";
+import { UserInfo } from "@shared/interfaces/user";
 
 @Component({
   selector: 'app-root',
@@ -18,17 +17,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private _translateService: TranslateService,
-    private _swUpdate: SwUpdate,
     private _toaster: ToasterService,
     private _userService: UserService
-  ) {
-    this._swUpdate.available.subscribe(() => {
-      this._toaster.showMessage('Updates!');
-      this._swUpdate.activateUpdate().then(() => {
-        document.location.reload();
-      })
-    })
-  }
+  ) {}
 
   ngOnInit(): void {
     registerLocaleData(localeUk, 'ua');

@@ -30,12 +30,12 @@
   "dataGroups": [
     {
       "name": "tetramatykaApi",
-      "urls": ["http://127.0.0.1:3000/**"],
+      "urls": ["http://127.0.0.1:8000/**"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxAge": "1h",
         "timeout": "5s",
-        "maxSize": 30
+        "maxSize": 40
       }
     }
   ]
