@@ -4,10 +4,10 @@ echo "Run frontend tests..."
 cd frontend
 npm run test-single
 echo "Building backend..."
-cd ../backend
+cd ..
 npm run build-prod
 echo "Building frontend..."
-cd ../frontend
+cd frontend
 npm run build-prod
 
 

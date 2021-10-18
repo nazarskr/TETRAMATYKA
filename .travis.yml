@@ -19,7 +19,7 @@ script:
 #  provider: script
 #  script: deploy.sh
 #  on:
-#    branch: development
+#    branch: test
 
 notifications:
   email: false
