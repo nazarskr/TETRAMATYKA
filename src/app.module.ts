@@ -24,12 +24,12 @@ import * as Joi from 'joi';
     ConfigModule.forRoot({
       cache: true,
       isGlobal: true,
-      // validationSchema: Joi.object({
-      //   JWT_VERIFICATION_TOKEN_SECRET: Joi.string().required(),
-      //   JWT_VERIFICATION_TOKEN_EXPIRATION_TIME: Joi.string().required(),
-      //   GOOGLE_AUTH_CLIENT_ID: Joi.string().required(),
-      //   GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required(),
-      // })
+      validationSchema: Joi.object({
+        JWT_VERIFICATION_TOKEN_SECRET: Joi.string().required(),
+        JWT_VERIFICATION_TOKEN_EXPIRATION_TIME: Joi.string().required(),
+        GOOGLE_AUTH_CLIENT_ID: Joi.string().required(),
+        GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required(),
+      })
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, 'client'),
