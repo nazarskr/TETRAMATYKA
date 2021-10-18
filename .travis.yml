@@ -13,8 +13,7 @@ deploy:
   skip_cleanup: true
   keep-history: true
   app: tetramatyka-website
-  on:
-    branch: test
+  on: test
   keyfile:
     - openssl aes-256-cbc -K $encrypted_14b576b848c0_key -iv $encrypted_14b576b848c0_iv
       -in google-credentials.json.enc -out google-credentials.json -d
