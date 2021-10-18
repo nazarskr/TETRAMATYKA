@@ -21,6 +21,6 @@ export class CurrentYearInterceptor implements HttpInterceptor {
   }
 
   checkRoutes(url: string): boolean {
-    return currentYearUrls.some(item => url.includes(item));
+    return currentYearUrls.some(item => url.includes('/api/' + item));
   }
 }
