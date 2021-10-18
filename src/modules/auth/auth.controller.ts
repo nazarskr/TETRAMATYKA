@@ -8,9 +8,8 @@ import {
     UserRegisterGoogleDto
 } from "./dto/user.dtos";
 import { TokenRes } from "../../common/interfaces/token-res";
-import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
-import {Prop} from "@nestjs/mongoose";
-import {UserCredential} from "../users/schemas/user-credential.schema";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { UserCredential } from "../users/schemas/user-credential.schema";
 
 @Controller('auth')
 export class AuthController {
