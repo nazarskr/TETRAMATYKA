@@ -1,30 +1,28 @@
 language: node_js
 node_js:
-  - '12.14.1'
-
+- 12.14.1
 branches:
   only:
-    - development
-
+  - test
 addons:
   chrome: stable
-
-install:
-  sh scripts/install.sh
-
-script:
-  sh scripts/build.sh
-
-#deploy:
-#  provider: script
-#  script: deploy.sh
-#  on:
-#    branch: test
-
+install: sh scripts/install.sh
+script: sh scripts/build.sh
+deploy:
+  provider: heroku
+  skip_cleanup: true
+  keep-history: true
+  app: tetramatyka-website
+  on:
+    branch: test
+  keyfile:
+    - openssl aes-256-cbc -K $encrypted_14b576b848c0_key -iv $encrypted_14b576b848c0_iv
+      -in google-credentials.json.enc -out google-credentials.json -d
+  api_key:
+    secure: DRLE/4D3ulI5FCqfFPTY/Mlgs8bqmzW/v+BrlcgziEEMwnB++lZhic85LM4seZN4rd9O+ogw3+XKhSz9sy0K2t6bme43VQHN+mDMwuOZ8OrHStMay3tfUlCtP3l04inwhB+3RQHAVTrZWXmWWFB8Ps8tPCLR4F4GTqcZzAjHiIYC7Vjy8htiWYLb+jh4vAW89aBHoyrgkNY9qJqlBiMra8uYrWXSnilDolFVXdyNi7YkdR0SRODAT3orU46VVyiGXdhTXuaw7KlTnbXVB6/VaNNQtTPHhgRdnUUtqcXWaaoduTWvxtG1SKliMFY+LUHX8RFkSi306jnsxXtpt/WQbqZMY1qD4f5357vQCGSs/OoJcI4T1gIRk/PGcpzXTpYaDQmLbcQ368ESYrgIb4rg0txPezraB1zRBzJaYLt2VPalYAUwwAaWX4xyUlooOBCDfq/I24Bw1yGppIGo8qX/tK4Rze9345OF70ryN9wP5gikg8hHPcaIHGuomkCvSroy0DRqm70PR/61AkRBfxVjiiWP/CbdZvAHsyJCA4UKUW3ZydZAo/CxRvDYdi0l4kOgXfIpOIKZ/nLBxkmPtUSfIjPoOLVNU2mCk/ea/Sx68FleXqBr1TxDFFQ8unqSNh9IUltPQVMRfNkHf2zBHysnfVlpvqKGE1dvXsAMfZUbfdQ=
 notifications:
   email: false
-
 cache:
   directories:
-    - backend/node_modules
-    - frontend/node_modules
+  - node_modules
+  - frontend/node_modules
