@@ -47,9 +47,10 @@ frontend/Thumbs.db
 
 # BE
 # compiled output
-dist
 node_modules
 .env
+
+# credentials
 google-credentials.json
 
 # Logs
