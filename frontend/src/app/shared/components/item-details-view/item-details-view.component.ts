@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { WorksItem } from "@shared/interfaces/works";
-import { Participant } from "@shared/interfaces/participants";
 
 @Component({
   selector: 'app-item-details-view',
@@ -10,7 +8,7 @@ import { Participant } from "@shared/interfaces/participants";
   styleUrls: ['./item-details-view.component.scss']
 })
 export class ItemDetailsViewComponent implements OnInit {
-  @Input() item: WorksItem | Participant;
+  @Input() item;
   @Input() imageUrl: SafeUrl;
   @Input() titleProp: string = 'title';
   @Input() descriptionProp: string = 'description';
