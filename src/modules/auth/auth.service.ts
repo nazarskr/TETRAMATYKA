@@ -16,9 +16,9 @@ import { Role } from "../../common/enums/role.enum";
 import { VerificationTokenPayload } from "../../common/interfaces/verification-token-payload";
 import { ConfigService } from "@nestjs/config";
 import { User, UserDocument } from "../users/schemas/user.schema";
-import {TokenRes} from "../../common/interfaces/token-res";
-
-const bcrypt = require ('bcrypt');
+import { TokenRes } from "../../common/interfaces/token-res";
+import * as bcrypt from 'bcrypt';
+import {JWTUtil} from "../../common/utils/jwtUtil";
 
 @Injectable()
 export class AuthService {
@@ -28,7 +28,8 @@ export class AuthService {
         private usersService: UsersService,
         private mailService: MailService,
         private jwtService: JwtService,
-        private configService: ConfigService
+        private configService: ConfigService,
+        private jwtUtil: JWTUtil
     ) {}
 
     async login(userLoginDto: UserLoginDto): Promise<TokenRes> {
@@ -41,7 +42,7 @@ export class AuthService {
             }, HttpStatus.FORBIDDEN);
         }
 
-        const isPasswordTheSame = await this.comparePasswords(userLoginDto.email, user.password);
+        const isPasswordTheSame = await this.comparePasswords(userLoginDto.password, user.password);
         if (isPasswordTheSame) {
             return {
                 token: this.generateJwt({email: userLoginDto.email})
@@ -86,7 +87,7 @@ export class AuthService {
 
     async updatePassword(token: string, updatePasswordDto: UpdatePasswordDto) {
         const email: string = await this.jwtService.decode(token)['email'];
-        const user = await this.userCredentialModel.find({email});
+        const user = await this.userCredentialModel.findOne({email});
         const newPassword = await this.hashPassword(updatePasswordDto.password);
         return this.userCredentialModel.findByIdAndUpdate(user['_id'], {password: newPassword}, {new: true});
     }
@@ -98,7 +99,7 @@ export class AuthService {
         } else {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,
-                error: 'This email is not registered yet',
+                message: 'This email is not registered yet',
             }, HttpStatus.FORBIDDEN);
         }
     }
@@ -124,6 +125,7 @@ export class AuthService {
 
             const newUser = await new this.userModel(userInfo);
             const newUserCredential = await new this.userCredentialModel(userCredential);
+            await this.mailService.sendRegistrationEmail(userInfo);
             await newUser.save();
             await newUserCredential.save();
             const payload = {email: userRegisterGoogleDto.email};
@@ -133,9 +135,19 @@ export class AuthService {
         }
     }
 
-    async changeUserPassword(id: string, body: UserChangePasswordDto): Promise<UserCredential> {
-        const password = await this.hashPassword(body.newPassword);
-        return this.userCredentialModel.findByIdAndUpdate(id, {password},{new: false})
+    async changeUserPassword(token: string, body: UserChangePasswordDto): Promise<UserCredential> {
+        const payload = this.jwtUtil.decode(token);
+        const user = await this.userCredentialModel.findOne({email: payload.email});
+        const isPasswordTheSame = await this.comparePasswords(body.oldPassword, user.password);
+        if (isPasswordTheSame) {
+            const password = await this.hashPassword(body.newPassword);
+            return this.userCredentialModel.findByIdAndUpdate(user['_id'], {password},{new: false})
+        } else {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                message: 'Old password is incorrect',
+            }, HttpStatus.FORBIDDEN);
+        }
     }
 
     generateJwt(payload: VerificationTokenPayload): string {
@@ -149,8 +161,8 @@ export class AuthService {
         return bcrypt.hash(password, 12);
     }
 
-    comparePasswords(password: string, storedPasswordHash: string): Promise<any> {
-        return bcrypt.compare(password, storedPasswordHash);
+    async comparePasswords(password: string, storedPasswordHash: string): Promise<boolean> {
+        return await bcrypt.compare(password, storedPasswordHash);
     }
 
     // TODO login via BE

@@ -8,8 +8,7 @@ import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy"
 import { takeUntil } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { GoogleLoginProvider, SocialAuthService } from "angularx-social-login";
-import {Token} from "@angular/compiler";
-import {TokenRes} from "@shared/interfaces/common";
+import { TokenRes } from "@shared/interfaces/common";
 
 @Component({
   selector: 'app-login',

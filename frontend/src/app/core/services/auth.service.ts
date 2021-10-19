@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import {UserChangePassword, UserCredential, UserRegister, UserRegisterGoogle} from "@shared/interfaces/user";
+import {
+  UserChangePassword,
+  UserCredential,
+  UserRegister,
+  UserRegisterGoogle,
+  UserUpdatePassword
+} from "@shared/interfaces/user";
 import { UserService } from "@core/services/user.service";
 import { Router } from "@angular/router";
 
@@ -26,9 +32,9 @@ export class AuthService {
     this.router.navigate(['/home']);
   }
 
-  saveNewPassword(url: string) {
+  saveNewPassword(url: string, body: UserUpdatePassword) {
     const apiUrl = '/api' + url;
-    return this.http.post(apiUrl, {});
+    return this.http.post(apiUrl, body);
   }
 
   register(body: UserRegister) {
@@ -36,7 +42,7 @@ export class AuthService {
   }
 
   forgotPassword(email: string) {
-    return this.http.post(`${this.authUri}/forgot-password`, email);
+    return this.http.post(`${this.authUri}/forgot-password`, {email});
   }
 
   changeUserPassword(body: UserChangePassword) {

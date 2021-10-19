@@ -70,7 +70,7 @@ export class ProfileComponent extends UnsubscribeOnDestroy implements OnInit {
   openChangePasswordDialog(): void {
     const dialogRef = this._dialog.open(ChangePasswordComponent, {
       data: {
-        title: 'COMMON.CHANGE_NAME'
+        title: 'COMMON.CHANGE_PASSWORD'
       }
     });
 
@@ -81,8 +81,8 @@ export class ProfileComponent extends UnsubscribeOnDestroy implements OnInit {
       });
   }
 
-  changePassword(res: UserChangePassword): void {
-    this._authService.changeUserPassword(res)
+  changePassword(body: UserChangePassword): void {
+    this._authService.changeUserPassword(body)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Password changed successfully');

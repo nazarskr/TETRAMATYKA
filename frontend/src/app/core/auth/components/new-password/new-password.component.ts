@@ -4,8 +4,8 @@ import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { ConfirmPasswordValidator } from "@shared/validators/confirm-password.validator";
 import { Router } from "@angular/router";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
-import {AuthService} from "@core/services/auth.service";
-import {takeUntil} from "rxjs/operators";
+import { AuthService } from "@core/services/auth.service";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: 'app-create-password',
@@ -44,12 +44,13 @@ export class NewPasswordComponent extends UnsubscribeOnDestroy implements OnInit
       return;
     }
 
+    const body = {...this.createPasswordForm.value};
     const url = this._router.url;
-    this._authService.saveNewPassword(url)
+    this._authService.saveNewPassword(url, body)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage(`Password successfully saved`);
-        this._router.navigate(['/login']);
+        this._router.navigate(['/auth/login']);
       });
   }
 

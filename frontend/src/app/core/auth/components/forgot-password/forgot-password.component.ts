@@ -39,13 +39,13 @@ export class ForgotPasswordComponent extends UnsubscribeOnDestroy implements OnI
       return;
     }
 
-    const {email} = this.forgotPasswordForm.value;
+    const email = this.forgotPasswordForm.value.email;
 
     this._authService.forgotPassword(email)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Please, check your email');
-        this._router.navigate(['/login']);
+        this._router.navigate(['/auth/login']);
       });
   }
 

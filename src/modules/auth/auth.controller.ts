@@ -1,4 +1,4 @@
-import {Body, Controller, Param, Post, UseGuards} from '@nestjs/common';
+import { Body, Controller, Param, Post, Headers } from '@nestjs/common';
 import { AuthService } from "./auth.service";
 import {
     UpdatePasswordDto,
@@ -8,7 +8,6 @@ import {
     UserRegisterGoogleDto
 } from "./dto/user.dtos";
 import { TokenRes } from "../../common/interfaces/token-res";
-import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 import { UserCredential } from "../users/schemas/user-credential.schema";
 
 @Controller('auth')
@@ -27,13 +26,13 @@ export class AuthController {
 
     @Post('/new-password/:token')
     updatePassword(@Param('token') token: string,
-                   @Body() createPasswordDto: UpdatePasswordDto) {
-        return this.authService.updatePassword(token, createPasswordDto);
+                   @Body() updatePasswordDto: UpdatePasswordDto) {
+        return this.authService.updatePassword(token, updatePasswordDto);
     }
 
     @Post('/forgot-password')
-    forgotPassword(@Body() email: string): Promise<void> {
-        return this.authService.sendResetPassword(email);
+    async forgotPassword(@Body() body: {email: string}): Promise<void> {
+        return this.authService.sendResetPassword(body.email);
     }
 
     @Post('/google-register')
@@ -41,10 +40,11 @@ export class AuthController {
         return this.authService.registerGoogleUser(userRegisterGoogleDto);
     }
 
-    @Post('/change-password/:id')
-    @UseGuards(JwtAuthGuard)
-    changeUserPassword(@Param('id') id: string, @Body() body: UserChangePasswordDto): Promise<UserCredential> {
-        return this.authService.changeUserPassword(id, body);
+    @Post('/change-password')
+    // @UseGuards(JwtAuthGuard)
+    changeUserPassword(@Body() body: UserChangePasswordDto, @Headers() headers): Promise<UserCredential> {
+        const token = headers.authorization;
+        return this.authService.changeUserPassword(token, body);
     }
 
     // TODO login via BE

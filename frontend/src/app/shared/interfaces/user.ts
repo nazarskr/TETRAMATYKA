@@ -19,6 +19,11 @@ export interface UserCredential {
   password: string;
 }
 
+export interface UserUpdatePassword {
+  password: string;
+  confirmPassword: string;
+}
+
 export interface UserChangePassword {
   oldPassword: string;
   newPassword: string;
