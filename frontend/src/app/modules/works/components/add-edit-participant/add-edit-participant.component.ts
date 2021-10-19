@@ -7,7 +7,7 @@ import { modalConfig } from '@shared/constants/modal-config';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ParticipantsService } from '../../../participants/services/participants/participants.service';
+import { ParticipantsService } from '../../../participants/services/participants.service';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AboutInfo } from '@shared/interfaces/about';
-import { AboutService } from './services/about/about.service';
+import { AboutService } from './services/about.service';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { filter, takeUntil } from 'rxjs/operators';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
@@ -126,7 +126,7 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
       });
   }
 
-  changeImage(data: any): void {
+  changeImage(data): void {
     this.multipartFile = data.file;
     this.imageUrl = this._sanitizer.bypassSecurityTrustUrl(data.url);
   }

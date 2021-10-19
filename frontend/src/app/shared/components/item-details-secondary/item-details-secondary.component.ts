@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
+import { Participant } from "@shared/interfaces/participants";
+import { WorksItem } from "@shared/interfaces/works";
 
 @Component({
   selector: 'app-item-details-secondary',
@@ -7,7 +9,7 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ['./item-details-secondary.component.scss']
 })
 export class ItemDetailsSecondaryComponent implements OnInit {
-  @Input() item: any;
+  @Input() item: WorksItem | Participant;
   @Input() titleProp: string;
   @Input() descriptionProp: string;
   @Input() greyImage: boolean = false;

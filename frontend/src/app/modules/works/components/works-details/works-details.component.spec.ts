@@ -7,7 +7,7 @@ import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { HttpClient } from "@angular/common/http";
 import { WorksService } from "../../services/works.service";
 import { of } from "rxjs";
-import { ParticipantsService } from "../../../participants/services/participants/participants.service";
+import { ParticipantsService } from "../../../participants/services/participants.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { dbData, mockProviders } from "@shared/tests/constants";
 import { TranslateModule } from "@ngx-translate/core";

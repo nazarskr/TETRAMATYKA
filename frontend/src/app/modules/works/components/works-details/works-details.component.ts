@@ -6,7 +6,7 @@ import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-d
 import { filter, takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { WorksService } from '../../services/works.service';
-import { ParticipantsService } from '../../../participants/services/participants/participants.service';
+import { ParticipantsService } from '../../../participants/services/participants.service';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
 import { AddEditWorksItemComponent } from '../add-edit-works-item/add-edit-works-item.component';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { DialogData } from "@shared/interfaces/dialog";
 import { ParticipantShort } from "@shared/interfaces/participants";
-import { ParticipantsService } from "../../../participants/services/participants/participants.service";
+import { ParticipantsService } from "../../../participants/services/participants.service";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { TranslateService } from "@ngx-translate/core";

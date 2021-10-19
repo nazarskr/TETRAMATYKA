@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParticipantShort } from '@shared/interfaces/participants';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
-import { ParticipantsService } from './services/participants/participants.service';
+import { ParticipantsService } from './services/participants.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -25,24 +25,6 @@ export class ParticipantsComponent extends UnsubscribeOnDestroy implements OnIni
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: ParticipantShort[]) => {
         this.participants = res;
-        // this.participants = [
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        //   {fullName: {ua: 'Тестовий учасник', en: 'Test participant'}, _id: '6123a214c388a9224478c042'},
-        // ];
       })
   }
 }

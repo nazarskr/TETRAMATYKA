@@ -8,8 +8,7 @@ import { filter, takeUntil } from "rxjs/operators";
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from "@angular/forms";
 import { SimpleDialogComponent } from "@shared/components/simple-dialog/simple-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
-import * as moment from 'moment';
-import {DataService} from '@shared/services/data/data.service';
+import { DataService } from '@shared/services/data/data.service';
 
 @Component({
   selector: 'app-program-item',

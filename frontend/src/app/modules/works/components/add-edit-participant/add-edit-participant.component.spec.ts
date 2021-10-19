@@ -9,7 +9,7 @@ import { dbData, mockFile, mockProviders } from "@shared/tests/constants";
 import { TranslateModule } from "@ngx-translate/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { ParticipantsService } from "../../../participants/services/participants/participants.service";
+import { ParticipantsService } from "../../../participants/services/participants.service";
 import { of } from "rxjs";
 
 describe('AddEditParticipantComponent', () => {

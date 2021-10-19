@@ -1,18 +1,18 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ParticipantsService} from '../../../participants/services/participants/participants.service';
-import {ToasterService} from '@shared/services/toaster/toaster.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {TranslateService} from '@ngx-translate/core';
-import {filter, takeUntil} from 'rxjs/operators';
-import {SimpleDialogComponent} from '@shared/components/simple-dialog/simple-dialog.component';
-import {modalConfig} from '@shared/constants/modal-config';
-import {WorksItem} from '@shared/interfaces/works';
-import {WorksService} from '../../services/works.service';
-import {UnsubscribeOnDestroy} from '@shared/directives/unsubscribe-on-destroy';
-import {DialogData} from '@shared/interfaces/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ParticipantsService } from '../../../participants/services/participants.service';
+import { ToasterService } from '@shared/services/toaster/toaster.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+import { filter, takeUntil } from 'rxjs/operators';
+import { SimpleDialogComponent } from '@shared/components/simple-dialog/simple-dialog.component';
+import { modalConfig } from '@shared/constants/modal-config';
+import { WorksItem } from '@shared/interfaces/works';
+import { WorksService } from '../../services/works.service';
+import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
+import { DialogData } from '@shared/interfaces/dialog';
 
 @Component({
   selector: 'app-add-edit-works-item',

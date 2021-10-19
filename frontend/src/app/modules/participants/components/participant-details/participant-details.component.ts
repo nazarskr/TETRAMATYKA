@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UnsubscribeOnDestroy } from '@shared/directives/unsubscribe-on-destroy';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ParticipantsService } from '../../services/participants/participants.service';
+import { ParticipantsService } from '../../services/participants.service';
 import { takeUntil } from 'rxjs/operators';
 import { Participant } from '@shared/interfaces/participants';
 import { WorksService } from '../../../works/services/works.service';

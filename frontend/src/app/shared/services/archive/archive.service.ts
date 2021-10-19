@@ -16,10 +16,6 @@ export class ArchiveService {
     return this.http.get(this.archiveManagerUri);
   }
 
-  createArchiveYear(body: ArchiveYear): Observable<any> {
-    return this.http.post(this.archiveManagerUri, body);
-  }
-
   updateArchiveYears(body: ArchiveYear[]): Observable<any> {
     return this.http.patch(this.archiveManagerUri, body);
   }

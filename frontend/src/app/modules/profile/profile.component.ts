@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeNameComponent } from "./components/change-name/change-name.component";
-import {filter, take, takeUntil} from "rxjs/operators";
-import {UserChangePassword, UserInfo, UserProfile} from "@shared/interfaces/user";
+import { filter, takeUntil } from "rxjs/operators";
+import { UserChangePassword, UserInfo, UserProfile } from "@shared/interfaces/user";
 import { ChangePasswordComponent } from "./components/change-password/change-password.component";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { MatDialog } from "@angular/material/dialog";
