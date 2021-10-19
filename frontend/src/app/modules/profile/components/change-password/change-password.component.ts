@@ -5,6 +5,7 @@ import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { DialogData } from "@shared/interfaces/dialog";
 import { UserChangePassword } from "@shared/interfaces/user";
+import {patterns} from "@shared/constants/patterns";
 
 @Component({
   selector: 'app-change-password',
@@ -28,9 +29,9 @@ export class ChangePasswordComponent implements OnInit {
 
   initForm(): void {
     this.changePasswordForm = this._formBuilder.group({
-      oldPassword: ['', [Validators.required, Validators.minLength(8)]],
-      newPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+      oldPassword: ['', [Validators.required, Validators.pattern(patterns.password)]],
+      newPassword: ['', [Validators.required, Validators.pattern(patterns.password)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(patterns.password)]],
     }, {
       validators: ConfirmPasswordValidator('newPassword', 'confirmPassword')
     });

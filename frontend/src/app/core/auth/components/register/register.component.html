@@ -12,7 +12,7 @@
              autocomplete="chrome-off">
       <mat-icon matSuffix></mat-icon>
       <mat-error *ngIf="registerForm.controls['firstName'].hasError('required') &&
-                  registerForm.controls['firstName'].touched || form.submitted">
+                  (registerForm.controls['firstName'].touched || form.submitted)">
         {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
@@ -24,7 +24,7 @@
              autocomplete="chrome-off">
       <mat-icon matSuffix></mat-icon>
       <mat-error *ngIf="registerForm.controls['lastName'].hasError('required') &&
-                  registerForm.controls['lastName'].touched || form.submitted">
+                  (registerForm.controls['lastName'].touched || form.submitted)">
         {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
@@ -38,11 +38,11 @@
              placeholder="{{'FORM_INPUTS.EMAIL' | translate}}">
       <mat-icon matSuffix></mat-icon>
       <mat-error *ngIf="registerForm.controls['email'].hasError('required') &&
-                  registerForm.controls['email'].touched || form.submitted">
+                  (registerForm.controls['email'].touched || form.submitted)">
         {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
       <mat-error *ngIf="registerForm.controls['email'].hasError('email')
-                  && registerForm.controls['email'].touched || form.submitted">
+                  && (registerForm.controls['email'].touched || form.submitted)">
         {{'FORM_ERRORS.EMAIL_INCORRECT' | translate}}
       </mat-error>
     </mat-form-field>
@@ -57,8 +57,12 @@
         {{showPassword ? 'visibility' : 'visibility_off'}}
       </mat-icon>
       <mat-error *ngIf="registerForm.controls['password'].hasError('required') &&
-                  registerForm.controls['password'].touched || form.submitted">
+                  (registerForm.controls['password'].touched || form.submitted)">
         {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
+      </mat-error>
+      <mat-error *ngIf="registerForm.controls['password'].hasError('pattern') &&
+                  (registerForm.controls['password'].touched || form.submitted)">
+        {{'FORM_ERRORS.PASSWORD_INCORRECT' | translate}}
       </mat-error>
     </mat-form-field>
     <div class="editor-label m-0">{{'FORM_INPUTS.CONFIRM_PASSWORD' | translate}}</div>
@@ -72,11 +76,15 @@
         {{showPassword ? 'visibility' : 'visibility_off'}}
       </mat-icon>
       <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('required') &&
-                  registerForm.controls['confirmPassword'].touched || form.submitted">
+                  (registerForm.controls['confirmPassword'].touched || form.submitted)">
         {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
+      <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('pattern') &&
+                  (registerForm.controls['confirmPassword'].touched || form.submitted)">
+        {{'FORM_ERRORS.PASSWORD_INCORRECT' | translate}}
+      </mat-error>
       <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('confirmPasswordValidator') &&
-                  registerForm.controls['confirmPassword'].touched || form.submitted">
+                  (registerForm.controls['confirmPassword'].touched || form.submitted)">
         {{'FORM_ERRORS.PASSWORD_NOT_SAME' | translate}}
       </mat-error>
     </mat-form-field>

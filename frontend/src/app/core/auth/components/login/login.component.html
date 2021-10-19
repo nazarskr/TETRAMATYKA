@@ -33,12 +33,12 @@
         {{showPassword ? 'visibility' : 'visibility_off'}}
       </mat-icon>
       <mat-error *ngIf="loginForm.controls['password'].hasError('required') &&
-                  loginForm.controls['password'].touched || form.submitted">
+                  (loginForm.controls['password'].touched || form.submitted)">
         {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
       <mat-error *ngIf="!loginForm.controls['password'].hasError('required')
-                  && loginForm.controls['password'].hasError('minlength')
-                  && loginForm.controls['password'].touched || form.submitted">
+                  && loginForm.controls['password'].hasError('pattern')
+                  && (loginForm.controls['password'].touched || form.submitted)">
         {{'FORM_ERRORS.PASSWORD_INCORRECT' | translate}}
       </mat-error>
     </mat-form-field>

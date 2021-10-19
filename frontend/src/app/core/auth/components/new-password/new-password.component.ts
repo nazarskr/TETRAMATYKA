@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { UnsubscribeOnDestroy } from "@shared/directives/unsubscribe-on-destroy";
 import { AuthService } from "@core/services/auth.service";
 import { takeUntil } from "rxjs/operators";
+import {patterns} from "@shared/constants/patterns";
 
 @Component({
   selector: 'app-create-password',
@@ -31,8 +32,8 @@ export class NewPasswordComponent extends UnsubscribeOnDestroy implements OnInit
 
   initForm(): void {
     this.createPasswordForm = this._formBuilder.group({
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.pattern(patterns.password)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(patterns.password)]],
     }, {
       validators: ConfirmPasswordValidator('password', 'confirmPassword')
     });

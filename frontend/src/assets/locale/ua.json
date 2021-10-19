@@ -56,7 +56,7 @@
   "FORM_ERRORS":{
     "FIELD_REQUIRED": "Це поле обов'язкове",
     "EMAIL_INCORRECT": "Введіть коректний email",
-    "PASSWORD_INCORRECT": "Пароль має містити як мінімум 8 символів",
+    "PASSWORD_INCORRECT": "Пароль має містити мінімум 8 символів, великі і малі літери та цифри",
     "PASSWORD_NOT_SAME": "Паролі не співпадають"
   },
   "ACTIONS": {

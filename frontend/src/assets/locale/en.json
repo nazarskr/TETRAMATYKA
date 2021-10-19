@@ -56,7 +56,7 @@
   "FORM_ERRORS":{
     "FIELD_REQUIRED": "This field is required",
     "EMAIL_INCORRECT": "Enter correct email",
-    "PASSWORD_INCORRECT": "Password must contain at least 8 symbols",
+    "PASSWORD_INCORRECT": "Password must contain minimum 8 symbols, at least one uppercase and lowercase letter and number",
     "PASSWORD_NOT_SAME": "Passwords are not the same"
   },
   "ACTIONS": {

@@ -9,6 +9,7 @@ import { takeUntil } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { GoogleLoginProvider, SocialAuthService } from "angularx-social-login";
 import { TokenRes } from "@shared/interfaces/common";
+import {patterns} from "@shared/constants/patterns";
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,7 @@ export class LoginComponent extends UnsubscribeOnDestroy implements OnInit {
   initForm(): void {
     this.loginForm = this._formBuilder.group({
       email: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.pattern(patterns.password)]]
     })
   }
 

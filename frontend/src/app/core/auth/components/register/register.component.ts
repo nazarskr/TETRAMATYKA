@@ -7,6 +7,7 @@ import { UserRegister } from "@shared/interfaces/user";
 import { AuthService } from "@core/services/auth.service";
 import { takeUntil } from "rxjs/operators";
 import { Router } from "@angular/router";
+import {patterns} from "@shared/constants/patterns";
 
 @Component({
   selector: 'app-register',
@@ -35,8 +36,8 @@ export class RegisterComponent extends UnsubscribeOnDestroy implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.pattern(patterns.password)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(patterns.password)]],
     }, {
       validators: ConfirmPasswordValidator('password', 'confirmPassword')
     })
