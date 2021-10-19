@@ -9,7 +9,7 @@ describe('Login page', () => {
   });
 
   it('should display login title', async () => {
-    expect(await page.getTitleText()).toBe('Login');
+    expect(await page.getTitleText()).toBe('Увійти');
   });
 
 });
