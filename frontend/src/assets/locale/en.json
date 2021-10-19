@@ -38,6 +38,27 @@
     "ADMIN": "Admin",
     "PROFILE": "Profile"
   },
+  "FORM_INPUTS": {
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "OLD_PASSWORD": "Old password",
+    "NEW_PASSWORD": "New password",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name"
+  },
+  "FORM_TITLES": {
+    "LOGIN": "Login",
+    "REGISTER": "Register",
+    "FORGOT_PASSWORD": "Forgot password",
+    "CREATE_PASSWORD": "Create password"
+  },
+  "FORM_ERRORS":{
+    "FIELD_REQUIRED": "This field is required",
+    "EMAIL_INCORRECT": "Enter correct email",
+    "PASSWORD_INCORRECT": "Password must contain at least 8 symbols",
+    "PASSWORD_NOT_SAME": "Passwords are not the same"
+  },
   "ACTIONS": {
     "EDIT": "Edit",
     "SAVE": "Save",
@@ -48,7 +69,8 @@
     "VIEW": "View",
     "LOGIN": "Login",
     "SEND": "Send",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "CHANGE": "Change"
   },
   "TABLE_COLUMNS": {
     "YEAR": "Year",

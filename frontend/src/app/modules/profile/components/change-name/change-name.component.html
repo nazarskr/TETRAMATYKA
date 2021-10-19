@@ -5,24 +5,26 @@
     #form="ngForm"
     (ngSubmit)="saveUserName()"
     [formGroup]="userNameForm">
-    <div class="editor-label m-0">First name:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.FIRST_NAME' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
+             placeholder="{{'FORM_INPUTS.FIRST_NAME' | translate}}"
              formControlName="firstName"
              autocomplete="chrome-off">
       <mat-error *ngIf="userNameForm.controls['firstName'].hasError('required') &&
                   userNameForm.controls['firstName'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
-    <div class="editor-label m-0">Last name:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.LAST_NAME' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
+             placeholder="{{'FORM_INPUTS.LAST_NAME' | translate}}"
              formControlName="lastName"
              autocomplete="chrome-off">
       <mat-error *ngIf="userNameForm.controls['lastName'].hasError('required') &&
                   userNameForm.controls['lastName'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
   </form>
@@ -30,8 +32,8 @@
 <div mat-dialog-actions>
   <div class="actions-row"
        fxLayout="row" fxLayoutAlign="flex-end center">
-    <button mat-button mat-dialog-close type="button">Cancel</button>
-    <button mat-button type="submit" form="user-form">Change</button>
+    <button mat-button mat-dialog-close type="button">{{'ACTIONS.CANCEL' | translate}}</button>
+    <button mat-button type="submit" form="user-form">{{'ACTIONS.CHANGE' | translate}}</button>
   </div>
 </div>
 

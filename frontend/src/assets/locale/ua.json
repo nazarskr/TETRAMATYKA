@@ -38,6 +38,27 @@
     "ADMIN": "Адмін",
     "PROFILE": "Профіль"
   },
+  "FORM_INPUTS": {
+    "EMAIL": "Email",
+    "PASSWORD": "Пароль",
+    "OLD_PASSWORD": "Старий пароль",
+    "NEW_PASSWORD": "Новий пароль",
+    "CONFIRM_PASSWORD": "Підтвердити пароль",
+    "FIRST_NAME": "Прізвище",
+    "LAST_NAME": "Ім'я"
+  },
+  "FORM_TITLES": {
+    "LOGIN": "Увійти",
+    "REGISTER": "Зареєструватись",
+    "FORGOT_PASSWORD": "Забули пароль",
+    "CREATE_PASSWORD": "Новий пароль"
+  },
+  "FORM_ERRORS":{
+    "FIELD_REQUIRED": "Це поле обов'язкове",
+    "EMAIL_INCORRECT": "Введіть коректний email",
+    "PASSWORD_INCORRECT": "Пароль має містити як мінімум 8 символів",
+    "PASSWORD_NOT_SAME": "Паролі не співпадають"
+  },
   "ACTIONS": {
     "EDIT": "Редагувати",
     "SAVE": "Зберегти",
@@ -48,7 +69,8 @@
     "VIEW": "Перегляд",
     "LOGIN": "Увійти",
     "SEND": "Відправити",
-    "REGISTER": "Зареєструватися"
+    "REGISTER": "Зареєструватися",
+    "CHANGE": "Змінити"
   },
   "TABLE_COLUMNS": {
     "YEAR": "Рік",

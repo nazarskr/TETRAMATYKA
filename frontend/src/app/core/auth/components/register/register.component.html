@@ -1,81 +1,83 @@
 <div class="auth-container">
-  <h4 class="form-title">Register</h4>
+  <h4 class="form-title">{{'FORM_TITLES.REGISTER' | translate}}</h4>
   <form
     (ngSubmit)="registerUser()"
     [formGroup]="registerForm"
     #form="ngForm">
-    <div class="editor-label m-0">First name:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.FIRST_NAME' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
+             placeholder="{{'FORM_INPUTS.FIRST_NAME' | translate}}"
              formControlName="firstName"
              autocomplete="chrome-off">
       <mat-icon matSuffix></mat-icon>
       <mat-error *ngIf="registerForm.controls['firstName'].hasError('required') &&
                   registerForm.controls['firstName'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
-    <div class="editor-label m-0">Last name:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.LAST_NAME' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
+             placeholder="{{'FORM_INPUTS.LAST_NAME' | translate}}"
              formControlName="lastName"
              autocomplete="chrome-off">
       <mat-icon matSuffix></mat-icon>
       <mat-error *ngIf="registerForm.controls['lastName'].hasError('required') &&
                   registerForm.controls['lastName'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
-    <div class="editor-label m-0">Email:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.EMAIL' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
              email
              type="email"
              formControlName="email"
              autocomplete="chrome-off"
-             placeholder="email">
+             placeholder="{{'FORM_INPUTS.EMAIL' | translate}}">
       <mat-icon matSuffix></mat-icon>
       <mat-error *ngIf="registerForm.controls['email'].hasError('required') &&
                   registerForm.controls['email'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
       <mat-error *ngIf="registerForm.controls['email'].hasError('email')
                   && registerForm.controls['email'].touched || form.submitted">
-        Write correct email
+        {{'FORM_ERRORS.EMAIL_INCORRECT' | translate}}
       </mat-error>
     </mat-form-field>
-    <div class="editor-label m-0">Password:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.PASSWORD' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
              type="{{showPassword ? 'text' : 'password'}}"
              formControlName="password"
              autocomplete="chrome-off"
-             placeholder="password">
+             placeholder="{{'FORM_INPUTS.PASSWORD' | translate}}">
       <mat-icon matSuffix (click)="toggleShowPassword()" class="input-icon">
         {{showPassword ? 'visibility' : 'visibility_off'}}
       </mat-icon>
       <mat-error *ngIf="registerForm.controls['password'].hasError('required') &&
                   registerForm.controls['password'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
-    <div class="editor-label m-0">Confirm Password:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.CONFIRM_PASSWORD' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
              type="{{showPassword ? 'text' : 'password'}}"
              formControlName="confirmPassword"
              autocomplete="chrome-off"
-             placeholder="password">
+             placeholder="{{'FORM_INPUTS.CONFIRM_PASSWORD' | translate}}">
       <mat-icon matSuffix (click)="toggleShowPassword()" class="input-icon">
         {{showPassword ? 'visibility' : 'visibility_off'}}
       </mat-icon>
       <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('required') &&
                   registerForm.controls['confirmPassword'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
       <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('confirmPasswordValidator') &&
                   registerForm.controls['confirmPassword'].touched || form.submitted">
-        Password is not the same
+        {{'FORM_ERRORS.PASSWORD_NOT_SAME' | translate}}
       </mat-error>
     </mat-form-field>
 

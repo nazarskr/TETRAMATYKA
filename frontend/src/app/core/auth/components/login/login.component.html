@@ -1,45 +1,45 @@
 <div class="auth-container">
-  <h4 class="form-title">Login</h4>
+  <h4 class="form-title">{{'FORM_TITLES.LOGIN' | translate}}</h4>
   <form
     (ngSubmit)="login()"
     [formGroup]="loginForm"
     #form="ngForm">
-    <div class="editor-label m-0">Email:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.EMAIL' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
              email
              type="email"
              formControlName="email"
              autocomplete="chrome-off"
-             placeholder="email">
+             placeholder="{{'FORM_INPUTS.EMAIL' | translate}}">
       <mat-icon matSuffix></mat-icon>
       <mat-error *ngIf="loginForm.controls['email'].hasError('required') &&
                   loginForm.controls['email'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
       <mat-error *ngIf="loginForm.controls['email'].hasError('email')
                   && loginForm.controls['email'].touched || form.submitted">
-        Write correct email
+        {{'FORM_ERRORS.EMAIL_INCORRECT' | translate}}
       </mat-error>
     </mat-form-field>
-    <div class="editor-label m-0">Password:</div>
+    <div class="editor-label m-0">{{'FORM_INPUTS.PASSWORD' | translate}}</div>
     <mat-form-field floatLabel="never">
       <input matInput
              type="{{showPassword ? 'text' : 'password'}}"
              formControlName="password"
              autocomplete="chrome-off"
-             placeholder="password">
+             placeholder="{{'FORM_INPUTS.PASSWORD' | translate}}">
       <mat-icon matSuffix (click)="toggleShowPassword()" class="input-icon">
         {{showPassword ? 'visibility' : 'visibility_off'}}
       </mat-icon>
       <mat-error *ngIf="loginForm.controls['password'].hasError('required') &&
                   loginForm.controls['password'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
       <mat-error *ngIf="!loginForm.controls['password'].hasError('required')
                   && loginForm.controls['password'].hasError('minlength')
                   && loginForm.controls['password'].touched || form.submitted">
-        This field is required
+        {{'FORM_ERRORS.PASSWORD_INCORRECT' | translate}}
       </mat-error>
     </mat-form-field>
     <div fxLayout="row" fxLayoutAlign="center center" class="mt-15">
