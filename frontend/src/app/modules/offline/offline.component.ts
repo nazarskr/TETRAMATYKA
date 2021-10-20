@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-offline',
@@ -8,12 +8,12 @@ import { Router } from '@angular/router';
 })
 export class OfflineComponent implements OnInit {
 
-  constructor(readonly _router: Router) { }
+  constructor(readonly _location: Location) { }
 
   ngOnInit(): void {
   }
 
-  goHome(): void {
-    this._router.navigate(['/home']);
+  goBack(): void {
+    this._location.back();
   }
 }

@@ -100,6 +100,6 @@
   },
   "OFFLINE": {
     "SOMETHING_WRONG": "Looks like you are offline",
-    "GO_TO_MAIN": "To main page"
+    "GO_BACK": "Go back"
   }
 }
