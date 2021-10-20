@@ -54,8 +54,8 @@ export class ParticipantsController {
         return this.participantsService.getParticipantById(id);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
@@ -71,8 +71,8 @@ export class ParticipantsController {
         return this.participantsService.createParticipant(participant);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
@@ -96,8 +96,8 @@ export class ParticipantsController {
         return this.participantsService.updateParticipant(id, participant);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteParticipant(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const participantForDelete = await this.participantsService.getParticipantImageUrl(id);

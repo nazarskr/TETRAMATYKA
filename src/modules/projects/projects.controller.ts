@@ -35,8 +35,8 @@ export class ProjectsController {
         return this.projectsService.getProjectById(id);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('projects'))
@@ -52,8 +52,8 @@ export class ProjectsController {
         return this.projectsService.createProject(project);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('projects'))
@@ -77,8 +77,8 @@ export class ProjectsController {
         return this.projectsService.updateProject(id, project);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteProject(@Param('id') id: string): Promise<Project> {
         const projectForDelete = await this.projectsService.getProjectImageUrl(id);

@@ -58,8 +58,8 @@ export class WorksController {
         return this.worksService.getWorksItemById(id);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('works'))
@@ -75,8 +75,8 @@ export class WorksController {
         return this.worksService.createWorksItem(worksItem);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('works'))
@@ -100,8 +100,8 @@ export class WorksController {
         return this.worksService.updateWorksItem(id, worksItem);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Patch(':id/:participantId')
     updateWorksItemParticipants(
         @Param('id') id: string,
@@ -111,8 +111,8 @@ export class WorksController {
         return this.worksService.updateWorksItemParticipants(id, participantId, worksItemParticipants);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteWorksItem(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const worksItemForDelete = await this.worksService.getWorksItemImageUrl(id);

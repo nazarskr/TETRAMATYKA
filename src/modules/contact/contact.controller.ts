@@ -16,29 +16,29 @@ export class ContactController {
         return this.contactService.getAllContactItems();
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     addContactItem(@Body() contactItemDto: ContactItemDto): Promise<ContactItem> {
         return this.contactService.addContactItem(contactItemDto);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     updateContactItem(@Param('id') id: string, @Body() contactItemDto: ContactItemDto): Promise<ContactItem> {
         return this.contactService.updateContactItem(id, contactItemDto);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Patch()
     updatePositionIndexes(@Body() contactItemDtos: ContactItemDto[]): void {
         return this.contactService.updatePositionIndexes(contactItemDtos);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     removeContactItem(@Param('id') id: string): Promise<ContactItem> {
         return this.contactService.removeContactItem(id);

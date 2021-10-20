@@ -15,28 +15,28 @@ export class UsersController {
         private readonly jwtUtil: JWTUtil
     ) {}
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Get()
     getAllUsers(): Promise<User[]> {
         return this.usersService.getAllUsers();
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     createUser(@Body() userInfoDto: UserInfoDto): Promise<User> {
         return this.usersService.createUser(userInfoDto);
     }
 
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Put(':id')
     updateUser(@Param('id') id: string, @Body() userInfoDto: UserInfoDto): Promise<User> {
         return this.usersService.updateUser(id, userInfoDto);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     deleteUser(@Param('id') id: string): Promise<User> {
         return this.usersService.deleteUser(id);

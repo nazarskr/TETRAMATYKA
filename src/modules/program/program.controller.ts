@@ -17,23 +17,23 @@ export class ProgramController {
         return this.programService.getAllProgramItems(+query.year);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     addProgramItem(@Query() query: ICommonQuery, @Body() programItemDto: ProgramItemDto): Promise<ProgramItem> {
         programItemDto.archiveYear = +query.year;
         return this.programService.addProgramItem(programItemDto);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     updateProgramItem(@Param('id') id: string, @Body() programItemDto: ProgramItemDto): Promise<ProgramItem> {
         return this.programService.updateProgramItem(id, programItemDto);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     removeProgramItem(@Param('id') id: string): Promise<ProgramItem> {
         return this.programService.removeProgramItem(id);

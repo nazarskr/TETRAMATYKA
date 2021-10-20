@@ -30,8 +30,8 @@ export class NewsController {
         return this.newsService.getNewsItemById(id);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('news'))
@@ -47,8 +47,8 @@ export class NewsController {
        return this.newsService.createNewsItem(newsItem);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('news'))
@@ -72,8 +72,8 @@ export class NewsController {
         return this.newsService.updateNewsItem(id, newsItem);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteNewsItem(@Param('id') id: string): Promise<NewsItem> {
         const newsItemForDelete = await this.newsService.getNewsItemImageUrl(id);

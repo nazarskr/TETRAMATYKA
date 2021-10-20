@@ -22,8 +22,8 @@ export class AboutController {
         return this.aboutService.getAboutInfo(+query.year);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('about'))
@@ -39,8 +39,8 @@ export class AboutController {
         return this.aboutService.addAboutInfo(aboutInfo);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('about'))
@@ -64,8 +64,8 @@ export class AboutController {
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }
 
-    @hasRoles('ADMIN')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    // @hasRoles('ADMIN')
+    // @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteAboutInfo(@Param('id') id: string): Promise<AboutInfo> {
         const aboutInfoForDelete = await this.aboutService.getAboutImageUrl(id);
