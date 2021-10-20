@@ -27,13 +27,10 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          console.log('catch error', err);
           if (err.status === 401) {
             this._authService.logout();
           } else if (err.status === 0 || err.status === 504) {
             this._router.navigate(['/offline'])
-          } else {
-            // TODO error handler for post/put/patch/delete requests
           }
 
           if(request.url.includes('/api/auth')) {
