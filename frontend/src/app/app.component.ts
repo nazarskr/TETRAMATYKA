@@ -46,13 +46,15 @@ export class AppComponent implements OnInit {
   detectConnectionStatus(): void {
     this._connectionService.monitor().subscribe(isConnected => {
       if (!this.isOnline && isConnected) {
-        this._toaster.showWarningMessage('You are online how');
-        const url = this._router.url;
-        if (url.includes('/offline') || url.includes('/page-not-found')) {
-          this._router.navigate(['/']);
-        } else {
-          window.location.reload();
-        }
+        this._toaster.showWarningMessage('You are online how. Page will be reloaded in 2 seconds');
+        setTimeout(() => {
+          const url = this._router.url;
+          if (url.includes('/offline') || url.includes('/page-not-found')) {
+            this._router.navigate(['/']);
+          } else {
+            window.location.reload();
+          }
+        }, 2000);
       } else {
         this._toaster.showWarningMessage('You are offline now');
       }
