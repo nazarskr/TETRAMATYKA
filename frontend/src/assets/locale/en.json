@@ -97,5 +97,9 @@
   "PAGE_NOT_FOUND": {
     "SOMETHING_WRONG": "Something was going wrong",
     "GO_TO_MAIN": "To main page"
+  },
+  "OFFLINE": {
+    "SOMETHING_WRONG": "Looks like you are offline",
+    "GO_TO_MAIN": "To main page"
   }
 }
