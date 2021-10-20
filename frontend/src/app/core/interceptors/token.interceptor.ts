@@ -4,12 +4,14 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from 'rxjs/operators';
 import { ToasterService } from '@shared/services/toaster/toaster.service';
 import { AuthService } from "@core/services/auth.service";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
     private _authService: AuthService,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _router: Router
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -28,8 +30,8 @@ export class TokenInterceptor implements HttpInterceptor {
           console.log('catch error', err);
           if (err.status === 401) {
             this._authService.logout();
-          } else if (err.status === 0) {
-            // TODO navigate to offline
+          } else if (err.status === 0 || err.status === 504) {
+            this._router.navigate(['/offline'])
           } else {
             // TODO error handler for post/put/patch/delete requests
           }

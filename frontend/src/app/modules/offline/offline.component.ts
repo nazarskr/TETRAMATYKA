@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-offline',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OfflineComponent implements OnInit {
 
-  constructor() { }
+  constructor(readonly _router: Router) { }
 
   ngOnInit(): void {
   }
 
+  goHome(): void {
+    this._router.navigate(['/home']);
+  }
 }

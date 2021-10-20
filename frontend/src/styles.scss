@@ -136,3 +136,21 @@ a {
 .grey-image {
   filter: grayscale(1);
 }
+
+.error-page-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 99999;
+
+  .go-to-home {
+    margin: 10px;
+    padding: 5px;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+  }
+}
