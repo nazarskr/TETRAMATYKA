@@ -65,14 +65,14 @@ export class LoginComponent extends UnsubscribeOnDestroy implements OnInit {
   loginWithGoogle(): void {
     this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(res => {
-        const {firstName, lastName, email} = res;
+        const {authToken, firstName, lastName, email} = res;
         const userRegister = {firstName, lastName, email};
-        this.registerGoogleUser(userRegister);
+        this.registerGoogleUser(authToken, userRegister);
       });
   }
 
-  registerGoogleUser(userRegister: UserRegisterGoogle): void {
-    this._authService.saveGoogleUser(userRegister)
+  registerGoogleUser(token: string, userRegister: UserRegisterGoogle): void {
+    this._authService.saveGoogleUser(token, userRegister)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: TokenRes) => {
         localStorage.setItem('token', res.token);

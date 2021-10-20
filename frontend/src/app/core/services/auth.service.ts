@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {
   UserChangePassword,
   UserCredential,
@@ -49,7 +49,9 @@ export class AuthService {
     return this.http.post(`${this.authUri}/change-password`, body);
   }
 
-  saveGoogleUser(userRegister: UserRegisterGoogle) {
+  saveGoogleUser(googleToken: string, userRegister: UserRegisterGoogle) {
+    const headers = new HttpHeaders();
+    headers.set('Authorization',  googleToken)
     return this.http.post(`${this.authUri}/google-register`, userRegister);
   }
 }

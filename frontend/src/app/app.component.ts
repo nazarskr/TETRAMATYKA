@@ -7,7 +7,8 @@ import { ToasterService } from "@shared/services/toaster/toaster.service";
 import { UserService } from "@core/services/user.service";
 import { UserInfo } from "@shared/interfaces/user";
 import { ConnectionService } from 'ng-connection-service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+// import { SwUpdate } from "@angular/service-worker";
 
 @Component({
   selector: 'app-root',
