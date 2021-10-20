@@ -11,7 +11,7 @@ export class LoginPage {
   }
 
   getTitleText() {
-    return element(by.css('app-login .form-title')).getText();
+    return element(by.css('.auth-container .form-title')).getText();
   }
 
   getForm() {
