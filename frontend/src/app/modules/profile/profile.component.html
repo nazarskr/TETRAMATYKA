@@ -2,7 +2,7 @@
   class="profile-container p-25">
   <mat-card class="profile-wrapper" fxLayout="column" fxLayoutAlign="center center">
     <mat-icon class="user-icon">person</mat-icon>
-    <h2 class="mb-15">{{user.firstName + ' ' + user.lastName}}</h2>
+    <h2 class="mb-15 text-center">{{user.firstName + ' ' + user.lastName}}</h2>
     <div class="page-title" (click)="openChangeNameDialog()">
       {{'COMMON.CHANGE_NAME' | translate}}
     </div>
