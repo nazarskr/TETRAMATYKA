@@ -1,9 +1,9 @@
 import { browser, by, element } from 'protractor';
 
 export class LoginPage {
-  private credentials = {
-    username: 'someemail@mail.com',
-    password: 'somepassword',
+  public credentials = {
+    email: 'someemail@mail.com',
+    password: 'Somepass1234',
   };
 
   navigateTo() {
@@ -19,14 +19,34 @@ export class LoginPage {
   }
 
   getEmailInput() {
-    return element(by.name('email'));
+    return element(by.css('input[formcontrolname="email"]'));
   }
 
   getPasswordInput() {
-    return element(by.name('password'));
+    return element(by.css('input[formcontrolname="password"]'));
   }
 
-  getInputErrorText() {
-    return element(by.css('mat-error')).getText();
+  getFormError(className) {
+    return element(by.css(className));
+  }
+
+  getSubmitButton() {
+    return element(by.css('.green-button'));
+  }
+
+  getRegisterButton() {
+    return element(by.css('[href="/auth/register"]'));
+  }
+
+  getForgotPasswordButton() {
+    return element(by.css('[href="/auth/forgot-password"]'));
+  }
+
+  getActiveLanguageSelector() {
+    return element(by.css('.language-selector.active'));
+  }
+
+  getInactiveLanguageSelector() {
+    return element(by.css('.language-selector:not(.active)'));
   }
 }

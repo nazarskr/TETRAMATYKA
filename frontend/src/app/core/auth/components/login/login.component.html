@@ -13,11 +13,11 @@
              autocomplete="chrome-off"
              placeholder="{{'FORM_INPUTS.EMAIL' | translate}}">
       <mat-icon matSuffix></mat-icon>
-      <mat-error *ngIf="loginForm.controls['email'].hasError('required') &&
+      <mat-error class="email-required" *ngIf="loginForm.controls['email'].hasError('required') &&
                   loginForm.controls['email'].touched || form.submitted">
         {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
-      <mat-error *ngIf="loginForm.controls['email'].hasError('email')
+      <mat-error class="email-incorrect" *ngIf="loginForm.controls['email'].hasError('email')
                   && loginForm.controls['email'].touched || form.submitted">
         {{'FORM_ERRORS.EMAIL_INCORRECT' | translate}}
       </mat-error>
@@ -32,11 +32,11 @@
       <mat-icon matSuffix (click)="toggleShowPassword()" class="input-icon">
         {{showPassword ? 'visibility' : 'visibility_off'}}
       </mat-icon>
-      <mat-error *ngIf="loginForm.controls['password'].hasError('required') &&
+      <mat-error class="password-required" *ngIf="loginForm.controls['password'].hasError('required') &&
                   (loginForm.controls['password'].touched || form.submitted)">
         {{'FORM_ERRORS.FIELD_REQUIRED' | translate}}
       </mat-error>
-      <mat-error *ngIf="!loginForm.controls['password'].hasError('required')
+      <mat-error class="password-incorrect" *ngIf="!loginForm.controls['password'].hasError('required')
                   && loginForm.controls['password'].hasError('pattern')
                   && (loginForm.controls['password'].touched || form.submitted)">
         {{'FORM_ERRORS.PASSWORD_INCORRECT' | translate}}
@@ -57,14 +57,14 @@
   <p class="form-bottom-text">
     {{'COMMON.FORGOT_PASSWORD?' | translate}}
     {{'COMMON.CLICK' | translate}}
-    <a routerLink="/auth/forgot-password">
+    <a routerLink="/auth/forgot-password" class="forgot-password-link">
       {{'COMMON.HERE' | translate}}
     </a>
   </p>
   <p class="form-bottom-text">
     {{'COMMON.DONT_HAVE_ACCOUNT?' | translate}}
     {{'COMMON.CLICK' | translate}}
-    <a routerLink="/auth/register">
+    <a routerLink="/auth/register" class="register-link">
       {{'COMMON.HERE' | translate}}
     </a>
   </p>

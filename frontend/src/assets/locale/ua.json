@@ -50,7 +50,7 @@
   "FORM_TITLES": {
     "LOGIN": "Увійти",
     "REGISTER": "Зареєструватись",
-    "FORGOT_PASSWORD": "Забули пароль",
+    "RESET_PASSWORD": "Відновити пароль",
     "CREATE_PASSWORD": "Новий пароль"
   },
   "FORM_ERRORS":{

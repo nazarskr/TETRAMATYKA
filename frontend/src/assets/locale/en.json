@@ -50,7 +50,7 @@
   "FORM_TITLES": {
     "LOGIN": "Login",
     "REGISTER": "Register",
-    "FORGOT_PASSWORD": "Forgot password",
+    "RESET_PASSWORD": "Reset password",
     "CREATE_PASSWORD": "Create password"
   },
   "FORM_ERRORS":{
