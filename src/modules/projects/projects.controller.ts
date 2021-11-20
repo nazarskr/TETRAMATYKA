@@ -9,9 +9,9 @@ import { IMulterRequest } from "../../common/interfaces/multer-custom";
 import { storageUtil } from "../../common/utils/storage.util";
 import { ImageUrlInterceptor } from '../../common/interceptors/image-url.interceptor';
 import { MultipleImageUrlsInterceptor } from '../../common/interceptors/multiple-image-urls.interceptor';
-import {hasRoles} from "../../common/decorators/roles.decorator";
-import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
-import {RolesGuard} from "../../common/guards/roles.guard";
+import { hasRoles } from "../../common/decorators/roles.decorator";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { RolesGuard } from "../../common/guards/roles.guard";
 
 @Controller('projects')
 export class ProjectsController {
@@ -35,8 +35,8 @@ export class ProjectsController {
         return this.projectsService.getProjectById(id);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('projects'))
@@ -52,8 +52,8 @@ export class ProjectsController {
         return this.projectsService.createProject(project);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('projects'))
@@ -77,8 +77,8 @@ export class ProjectsController {
         return this.projectsService.updateProject(id, project);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Delete(':id')
     async deleteProject(@Param('id') id: string): Promise<Project> {
         const projectForDelete = await this.projectsService.getProjectImageUrl(id);

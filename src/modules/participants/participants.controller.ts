@@ -20,11 +20,11 @@ import * as multerGoogleStorage from "multer-google-storage";
 import { storageUtil } from "../../common/utils/storage.util";
 import { ImageUrlInterceptor } from '../../common/interceptors/image-url.interceptor';
 import { MultipleImageUrlsInterceptor } from '../../common/interceptors/multiple-image-urls.interceptor';
-import {WorksItemDocument} from '../works/schemas/work.schema';
-import {UpdateWriteOpResult} from 'mongoose';
-import {hasRoles} from "../../common/decorators/roles.decorator";
-import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
-import {RolesGuard} from "../../common/guards/roles.guard";
+import { WorksItemDocument } from '../works/schemas/work.schema';
+import { UpdateWriteOpResult } from 'mongoose';
+import { hasRoles } from "../../common/decorators/roles.decorator";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { RolesGuard } from "../../common/guards/roles.guard";
 
 @Controller('participants')
 export class ParticipantsController {
@@ -54,8 +54,8 @@ export class ParticipantsController {
         return this.participantsService.getParticipantById(id);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
@@ -71,8 +71,8 @@ export class ParticipantsController {
         return this.participantsService.createParticipant(participant);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('participants'))
@@ -96,8 +96,8 @@ export class ParticipantsController {
         return this.participantsService.updateParticipant(id, participant);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Delete(':id')
     async deleteParticipant(@Param('id') id: string): Promise<UpdateWriteOpResult> {
         const participantForDelete = await this.participantsService.getParticipantImageUrl(id);

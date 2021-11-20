@@ -29,7 +29,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.userService.setInitialUser();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/auth/login']);
   }
 
   saveNewPassword(url: string, body: UserUpdatePassword) {

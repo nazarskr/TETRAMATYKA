@@ -7,9 +7,10 @@ import { IMulterRequest } from '../../common/interfaces/multer-custom';
 import { AboutInfoDto } from './dto/about-info.dto';
 import * as multerGoogleStorage from 'multer-google-storage';
 import { storageUtil } from '../../common/utils/storage.util';
-import {hasRoles} from "../../common/decorators/roles.decorator";
-import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
-import {RolesGuard} from "../../common/guards/roles.guard";
+import { hasRoles } from "../../common/decorators/roles.decorator";
+import { RolesGuard } from "../../common/guards/roles.guard";
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { ImageUrlInterceptor } from '../../common/interceptors/image-url.interceptor';
 
 @Controller('about')
 export class AboutController {
@@ -18,12 +19,13 @@ export class AboutController {
     }
 
     @Get()
+    @UseInterceptors(new ImageUrlInterceptor())
     getAboutInfo(@Query() query: ICommonQuery): Promise<AboutInfo[]> {
         return this.aboutService.getAboutInfo(+query.year);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('about'))
@@ -39,8 +41,8 @@ export class AboutController {
         return this.aboutService.addAboutInfo(aboutInfo);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Put(':id')
     @UseInterceptors(FilesInterceptor('image', null, {
         storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('about'))
@@ -64,8 +66,8 @@ export class AboutController {
         return this.aboutService.updateAboutInfo(id, aboutInfo);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Delete(':id')
     async deleteAboutInfo(@Param('id') id: string): Promise<AboutInfo> {
         const aboutInfoForDelete = await this.aboutService.getAboutImageUrl(id);

@@ -27,15 +27,15 @@ export class ArchiveManagerController {
         return this.archiveManagerService.getArchiveYearById(id);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Patch()
     update(@Body() archiveYears: ArchiveYearDto[]) {
         return this.archiveManagerService.updateArchiveYears(archiveYears);
     }
 
-    // @hasRoles('ADMIN')
-    // @UseGuards(JwtAuthGuard, RolesGuard)
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
     @Delete(':id')
     delete(@Param('id') id: string): Promise<ArchiveYear> {
         return this.archiveManagerService.removeArchiveYear(id);

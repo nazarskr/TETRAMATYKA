@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { VerificationTokenPayload } from "../interfaces/verification-token-payload";
 
@@ -6,8 +6,11 @@ import { VerificationTokenPayload } from "../interfaces/verification-token-paylo
 export class JWTUtil {
     constructor(private readonly jwtService: JwtService) {}
 
-    decode(auth: string): VerificationTokenPayload {
-        const jwt = auth.replace('Bearer ', '');
-        return this.jwtService.decode(jwt, { json: true }) as VerificationTokenPayload;
+    decode(jwt: string): VerificationTokenPayload {
+        if (jwt) {
+            return this.jwtService.decode(jwt, { json: true }) as VerificationTokenPayload;
+        } else {
+            throw new UnauthorizedException();
+        }
     }
 }

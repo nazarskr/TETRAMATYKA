@@ -15,7 +15,7 @@ export class UserGuard implements CanActivate {
     const isUser = this._userService.userInfo &&
       (this._userService.userInfo.role === RoleEnum.ADMIN || this._userService.userInfo.role === RoleEnum.USER);
     if (!isUser) {
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/auth/login');
     }
     return isUser;
   }
