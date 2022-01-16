@@ -48,6 +48,11 @@ const routes: Routes = [
     canActivate: [UserGuard]
   },
   {
+    path: 'gallery',
+    loadChildren: () => import('./modules/gallery/gallery.module')
+      .then(m => m.GalleryModule),
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./core/auth/auth.module')
       .then(m => m.AuthModule),

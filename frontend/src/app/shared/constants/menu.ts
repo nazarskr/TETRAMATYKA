@@ -4,6 +4,7 @@ export const mainRoutes = [
   {text: 'MENU.PROGRAM', link: 'program', permissions: ['ALL']},
   {text: 'MENU.WORKS', link: 'works', permissions: ['ALL']},
   {text: 'MENU.PARTICIPANTS', link: 'participants', permissions: ['ALL']},
+  {text: 'MENU.GALLERY', link: 'gallery', permissions: ['ALL']},
   {text: 'MENU.CONTACTS', link: 'contacts', permissions: ['ALL']},
   {text: 'MENU.ADMIN', link: 'admin', permissions: ['ADMIN']},
   {text: 'MENU.PROFILE', link: 'profile', permissions: ['ADMIN', 'USER']},
