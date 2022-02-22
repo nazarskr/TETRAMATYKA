@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>
+  {{data.galleryHeader[lang]}}
+  <span class="item-title">{{data.galleryChapter.title[lang]}}</span>
+</h2>
+<div mat-dialog-content>
+  <div class="upload-image-body">
+    <div class="uploading-overlay" fxLayout="column" fxLayoutAlign="center center" *ngIf="uploadingProgress > 0">
+      <h4 class="item-title">{{'Uploading...' + uploadingProgress + '%'}}</h4>
+      <mat-progress-bar mode="determinate" [value]="uploadingProgress" class="mv-10"></mat-progress-bar>
+    </div>
+    <app-drag-n-drop-upload
+      [acceptMimetype]="'image/*'"
+      [multiple]="true"
+      (fileUploaded)="onFilesUpload($event)"
+    ></app-drag-n-drop-upload>
+
+    <div fxLayout="row wrap" class="images-preview">
+      <div *ngFor="let image of imagesForUpload; let i = index" [style.background-image]="'url(' + image.url + ')'"
+           class="image-preview">
+        <mat-icon (click)="removeImage(i)">clear</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="border-top-grey">
+  <div class="actions-row"
+       fxLayout="row" fxLayoutAlign="flex-end center">
+    <button
+      class="red-button"
+      type="button"
+      mat-button
+      mat-dialog-close>
+      <mat-icon>close</mat-icon>
+      <span>
+          {{'ACTIONS.CANCEL' | translate}}
+        </span>
+    </button>
+
+    <button
+      class="green-button"
+      type="button"
+      (click)="uploadImages()"
+      mat-button>
+      <mat-icon>done</mat-icon>
+      <span>
+          {{'ACTIONS.SAVE' | translate}}
+        </span>
+    </button>
+  </div>
+</div>

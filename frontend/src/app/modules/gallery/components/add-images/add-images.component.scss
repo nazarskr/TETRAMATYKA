@@ -1,0 +1,24 @@
+@import 'variables';
+
+.images-preview {
+  .image-preview {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border: 1px solid $color-black;
+
+    mat-icon {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      width: 10px;
+      height: 10px;
+      cursor: pointer;
+      color: $color-red;
+      font-weight: bold;
+    }
+  }
+}

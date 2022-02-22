@@ -1,0 +1,54 @@
+<div class="p-25">
+  <button
+    class="back-button"
+    type="button"
+    mat-button
+    (click)="goToGallery()">
+    <mat-icon>arrow_back</mat-icon>
+    <span>
+      {{'ACTIONS.BACK' | translate}}
+    </span>
+  </button>
+
+  <div class="mv-10" fxLayout="row" fxLayoutAlign="start center">
+    <button
+      class="orange-button"
+      type="button"
+      *userPermission="['ADMIN']"
+      mat-button
+      (click)="openAddGalleryImageDialog()">
+      <mat-icon>add</mat-icon>
+      <span>
+        {{'ACTIONS.ADD' | translate}}
+      </span>
+    </button>
+    <mat-slide-toggle [(ngModel)]="isDeleteConfirm" class="ml-10">
+      Confirm Deleting
+    </mat-slide-toggle>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="center center">
+    <ng-container *ngFor="let image of images | slice : 0 : 30; let i = index">
+      <div class="gallery-image-preview"
+           [style.background-image]="'url(' + image.imageUrl + ')'"
+           (click)="openGallery(i)"
+           alt="gallery image">
+        <button
+          class="clear-button"
+          mat-mini-fab
+          type="button"
+          color="warn"
+          matTooltip="Remove image"
+          *userPermission="['ADMIN']"
+          (click)="onRemoveImage(image, $event)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ngx-image-gallery
+  [images]="images"
+  [conf]="galleryConfig">
+</ngx-image-gallery>

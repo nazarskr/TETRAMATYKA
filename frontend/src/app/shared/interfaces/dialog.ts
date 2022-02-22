@@ -1,5 +1,7 @@
 import { ParticipantShort } from '@shared/interfaces/participants';
 import { UserProfile } from "@shared/interfaces/user";
+import { GalleryChapter } from '@shared/interfaces/gallery';
+import { MultiLanguage } from '@shared/interfaces/common';
 
 export interface DialogData {
   title: string;
@@ -7,7 +9,9 @@ export interface DialogData {
   item?: any;
   checkboxText?: string;
   parentId?: string;
-  participants?: ParticipantShort[]
+  participants?: ParticipantShort[];
+  galleryHeader?: MultiLanguage;
+  galleryChapter?: GalleryChapter;
 }
 
 export interface UserNameDialogData {

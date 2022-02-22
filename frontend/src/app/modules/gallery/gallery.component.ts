@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { NgxImageGalleryComponent, GALLERY_CONF } from 'ngx-image-gallery';
-import {galleryConfig} from "@shared/constants/gallery-config";
-import {GalleryImage} from "@shared/interfaces/gallery";
-import {galleryMock} from "./gallery-mock";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {GalleryChapter} from '@shared/interfaces/gallery';
+import {tetramatykaGallery} from '@shared/constants/gallery';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-gallery',
@@ -10,26 +10,27 @@ import {galleryMock} from "./gallery-mock";
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
-  @ViewChild(NgxImageGalleryComponent, {static: false}) ngxImageGallery: NgxImageGalleryComponent;
-  public galleryConfig: GALLERY_CONF = galleryConfig;
-  public images: GalleryImage[] = [];
+  public galleryChapters: GalleryChapter[] = tetramatykaGallery.galleryChapters;
 
-  constructor() { }
+  get routeChildren(): any[] {
+    return this._route.children;
+  }
+
+  get lang(): string {
+    return this._translateService.currentLang;
+  }
+
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _translateService: TranslateService
+  ) { }
 
   ngOnInit(): void {
-    this.getGallery();
   }
 
-  getGallery(): void {
-    this.images = galleryMock();
-  }
-
-  openGallery(index: number) {
-    this.ngxImageGallery.open(index);
-  }
-
-  closeGallery() {
-    this.ngxImageGallery.close();
+  openGalleryChapter(chapter: GalleryChapter): void {
+    this._router.navigate([`gallery/${chapter.route}`]).then();
   }
 
 }

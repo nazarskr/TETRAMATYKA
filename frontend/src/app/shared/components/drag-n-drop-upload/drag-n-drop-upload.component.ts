@@ -32,17 +32,46 @@ export class DragNDropUploadComponent implements OnInit {
     if (!areFilesValid) {
       return;
     }
+
     if (!this.multiple) {
+      const promise = this.readFile(files[0]);
+      promise.then((res) => {
+          res && this.fileUploaded.emit(res);
+        }, () => {
+          this._toaster.showErrorMessage('Something wrong happened. Please contact admin');
+        });
+    } else {
+      const promises = [];
+      Array.from(files).forEach((file: File) => {
+        promises.push(this.readFile(file));
+      });
+
+      Promise.all(promises).then((res: any[]) => {
+        const files = res.filter(item => !!item);
+        this.fileUploaded.emit(files);
+      }, () => {
+        this._toaster.showErrorMessage('Something wrong happened. Please contact admin');
+      })
+    }
+  }
+
+  readFile(file: File): Promise<any> {
+    return new Promise((resolve) => {
       const reader = new FileReader();
-      reader.onload =  (e) => {
+      reader.onload = (e) => {
         const url = e.target.result as string;
-        this.fileUploaded.emit({
-          file: files[0],
+        resolve({
+          file: file,
           url
         });
       };
-      reader.readAsDataURL(files[0]);
-    }
+
+      reader.onerror = function(){
+        resolve(null);
+      };
+
+      reader.readAsDataURL(file);
+    })
   }
 
   validateFiles(files: File[]): boolean {

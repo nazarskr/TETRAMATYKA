@@ -28,6 +28,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // pipes
 import { LocalDatePipe } from './pipes/local-date.pipe';
@@ -64,7 +66,9 @@ const materialModules = [
   DragDropModule,
   MatCardModule,
   OverlayModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatProgressBarModule,
+  MatSlideToggleModule
 ];
 
 

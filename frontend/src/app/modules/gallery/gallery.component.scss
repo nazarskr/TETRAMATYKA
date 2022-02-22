@@ -1,0 +1,24 @@
+.gallery-chapter {
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  border-radius: 50%;
+  margin: 15px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 1s;
+  cursor: pointer;
+
+  &__title {
+    width: 130px;
+    padding: 10px 15px;
+    background-color: black;
+    color: white;
+    font-size: 12px;
+  }
+
+  &.active {
+    width: 250px;
+    height: 250px;
+  }
+}

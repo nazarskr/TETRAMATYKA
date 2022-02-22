@@ -17,6 +17,7 @@ import { WorksModule } from './modules/works/works.module';
 import { UsersModule } from './modules/users/users.module';
 import { MailModule } from './modules/mail/mail.module';
 import { CommonModule } from './common/common.module';
+import { GalleryModule } from './modules/gallery/gallery.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -53,6 +54,7 @@ import * as Joi from 'joi';
     UsersModule,
     MailModule,
     CommonModule,
+    GalleryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
