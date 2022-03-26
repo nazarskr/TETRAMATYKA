@@ -20,6 +20,7 @@
     <div fxLayout="row" fxLayoutAlign="center center" class="gallery__chapters-list">
       <ng-container *ngFor="let chapter of galleryChapters">
         <app-card-item
+          (clicked)="onChapterClicked(chapter._id)"
           [item]="chapter"
           [type]="isAdmin ? 'chapter' : null"
         ></app-card-item>

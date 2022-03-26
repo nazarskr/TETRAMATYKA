@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { NewsItemShort } from '@shared/interfaces/news';
 import { ProjectShort } from '@shared/interfaces/projects';
 import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { GalleryChapter } from "@shared/interfaces/gallery";
 
 @Component({
@@ -21,7 +21,8 @@ export class CardItemComponent implements OnInit {
 
   constructor(
     private _translateService: TranslateService,
-    private _router: Router
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -29,10 +30,9 @@ export class CardItemComponent implements OnInit {
 
   onItemClick(): void {
     if (this.type) {
-      this._router.navigate([])
+      this._router.navigate([`${this.type}/${this.item._id}`], {relativeTo: this._activatedRoute});
     } else {
       this.clicked.emit();
     }
-    // routerLink="{{type ? type + '/' + item._id : null}}"
   }
 }

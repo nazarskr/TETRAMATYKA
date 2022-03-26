@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GalleryChapter, GalleryImage} from '@shared/interfaces/gallery';
 import {TranslateService} from '@ngx-translate/core';
-import {GALLERY_CONF} from "ngx-image-gallery";
+import {GALLERY_CONF, NgxImageGalleryComponent} from "ngx-image-gallery";
 import {tetramatykaGallery} from "@shared/constants/gallery";
 import {filter, takeUntil} from "rxjs/operators";
 import {GalleryService} from "./services/gallery.service";
@@ -11,6 +11,7 @@ import {UserService} from "@core/services/user.service";
 import {RoleEnum} from "@shared/enums/role";
 import {MatDialog} from "@angular/material/dialog";
 import {AddEditChapterComponent} from "./components/add-edit-chapter/add-edit-chapter.component";
+import {ToasterService} from "@shared/services/toaster/toaster.service";
 
 @Component({
   selector: 'app-gallery',
@@ -18,9 +19,14 @@ import {AddEditChapterComponent} from "./components/add-edit-chapter/add-edit-ch
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent extends UnsubscribeOnDestroy implements OnInit {
+  @ViewChild(NgxImageGalleryComponent, {static: false}) ngxImageGallery: NgxImageGalleryComponent;
   public galleryChapters: GalleryChapter[] = [];
   public galleryConfig: GALLERY_CONF = tetramatykaGallery.galleryConfig;
   public images: any[] = [];
+  public noImagesMessage = {
+    ua: 'У цьому розділі ще немає зображень',
+    en: 'There are no images in this chapter yet'
+  }
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -40,17 +46,14 @@ export class GalleryComponent extends UnsubscribeOnDestroy implements OnInit {
     private _translateService: TranslateService,
     private _galleryService: GalleryService,
     private _userService: UserService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _toaster: ToasterService
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.getGalleryChapters();
-  }
-
-  openGalleryChapter(chapter: GalleryChapter): void {
-    this.getGallery(chapter._id);
   }
 
   getGalleryChapters(): void {
@@ -67,6 +70,11 @@ export class GalleryComponent extends UnsubscribeOnDestroy implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: GalleryImage[]) => {
         this.images = res;
+        if (this.images.length > 0) {
+          this.openGallery();
+        } else {
+          this._toaster.showWarningMessage(this.noImagesMessage[this.lang]);
+        }
       })
   }
 
@@ -105,6 +113,14 @@ export class GalleryComponent extends UnsubscribeOnDestroy implements OnInit {
       ).subscribe(() => {
       this.getGalleryChapters();
     })
+  }
+
+  onChapterClicked(id: string): void {
+    this.getGallery(id);
+  }
+
+  openGallery() {
+    this.ngxImageGallery.open(0);
   }
 
 }
