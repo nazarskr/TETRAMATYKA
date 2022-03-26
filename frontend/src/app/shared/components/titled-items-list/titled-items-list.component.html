@@ -1,8 +1,16 @@
+<mat-slide-toggle
+  (change)="toggleAnimationState()"
+  *userPermission="['ADMIN']"
+  [(ngModel)]="stopAnimation" class="ml-10 mv-10">
+  {{'COMMON.DISABLE_ANIMATION' | translate}}
+</mat-slide-toggle>
+
 <div
   class="titled-items-list-wrapper"
   fxLayout="row"
   fxLayoutAlign="center center">
   <div class="titled-items-list"
+       [hidden]="stopAnimation"
        (window:resize)="onResize()"
        #shuffleContainer>
     <div class="titled-item-wrapper"
@@ -20,6 +28,24 @@
       <ng-template #emptyItem>
         <div></div>
       </ng-template>
+    </div>
+    <div #shuffleSizer class="sizer-element"></div>
+  </div>
+  <div class="titled-items-list stopped"
+       *ngIf="stopAnimation"
+       (window:resize)="onResize()">
+    <div class="titled-item-wrapper"
+         [class.empty]="!item"
+         *ngFor="let item of transformedItems">
+      <ng-container *ngIf="item">
+        <div [routerLink]="item._id"
+             (mouseenter)="onMouseEnter(item)"
+             (mouseleave)="onMouseLeave(item)"
+             [style.transform]="item.transform"
+             class="titled-item">
+          {{item[titleProp][lang]}}
+        </div>
+      </ng-container>
     </div>
     <div #shuffleSizer class="sizer-element"></div>
   </div>

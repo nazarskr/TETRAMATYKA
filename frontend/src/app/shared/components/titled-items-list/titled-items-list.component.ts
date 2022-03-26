@@ -16,6 +16,7 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
   public movingInterval = null;
 
   private shuffleInstance: Shuffle;
+  public stopAnimation = false;
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -32,7 +33,8 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   fillListByEmptyItems(): void {
-    if (window.innerWidth > 600) {
+    this.transformedItems = [];
+    if (window.innerWidth > 600 && !this.stopAnimation) {
       const maxEmptyItems = this.items.length * 2;
       let randomIndexes = [];
       for (let i = 0; i < maxEmptyItems; i++) {
@@ -87,13 +89,23 @@ export class TitledItemsListComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   onMouseEnter(item): void {
-    clearInterval(this.movingInterval);
+    !this.stopAnimation && clearInterval(this.movingInterval);
     item.hovered = true;
   }
 
   onMouseLeave(item): void {
-    this.dynamicallyUpdateItems();
+    !this.stopAnimation && this.dynamicallyUpdateItems();
     item.hovered = false;
+  }
+
+  addRemoveAnimation(): void {
+    this.stopAnimation ? clearInterval(this.movingInterval) : this.dynamicallyUpdateItems();
+  }
+
+  toggleAnimationState(): void {
+    this.addRemoveAnimation();
+    this.items = this.items.sort((a: any, b: any) => a[this.titleProp][this.lang].localeCompare(b[this.titleProp][this.lang]));
+    this.fillListByEmptyItems();
   }
 
   ngOnDestroy(): void {

@@ -63,6 +63,12 @@
       }
     }
   }
+
+  &.stopped {
+    .titled-item-wrapper {
+      padding: 10px;
+    }
+  }
 }
 
 @media (max-width: 600px) {

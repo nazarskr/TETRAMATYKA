@@ -26,7 +26,8 @@
     "OR": "або",
     "HERE": "тут",
     "USERS": "Користувачі",
-    "CONFIRM_DELETING": "Підтвердити видалення"
+    "CONFIRM_DELETING": "Підтвердити видалення",
+    "DISABLE_ANIMATION": "Вимкнути анімацію"
   },
   "MENU": {
     "MAIN": "Головна",

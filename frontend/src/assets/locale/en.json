@@ -26,7 +26,8 @@
     "OR": "or",
     "HERE": "here",
     "USERS": "Users",
-    "CONFIRM_DELETING": "Confirm deleting"
+    "CONFIRM_DELETING": "Confirm deleting",
+    "DISABLE_ANIMATION": "Disable animation"
   },
   "MENU": {
     "MAIN": "Home",
