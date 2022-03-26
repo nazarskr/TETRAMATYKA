@@ -1,7 +1,7 @@
 @import 'variables';
 
 .home-container {
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - #{$header-height});
   background-image: url('../../../assets/images/fon.jpg');
   background-size: cover;
@@ -15,7 +15,7 @@
 }
 
 .supported-by {
-  width: 100vw;
+  width: 100%;
   padding: 20px 0 50px;
   margin: auto;
   text-align: center;
@@ -43,7 +43,7 @@
 
 .news-and-projects {
   padding: 25px 0;
-  width: 100vw;
+  width: 100%;
   background-color: white;
 }
 

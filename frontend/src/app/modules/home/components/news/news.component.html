@@ -15,10 +15,10 @@
     </div>
     <div class="news-list" fxLayout="row wrap" fxLayoutAlign="center center">
       <ng-container *ngFor="let newsItem of news">
-        <app-home-item
+        <app-card-item
           [item]="newsItem"
           [type]="'news'"
-        ></app-home-item>
+        ></app-card-item>
       </ng-container>
     </div>
 
@@ -44,10 +44,10 @@
   <div class="page">
     <div class="news-list" fxLayout="row wrap" fxLayoutAlign="center center">
       <ng-container *ngFor="let project of projects">
-        <app-home-item
+        <app-card-item
           [item]="project"
           [type]="'project'"
-        ></app-home-item>
+        ></app-card-item>
       </ng-container>
     </div>
   </div>

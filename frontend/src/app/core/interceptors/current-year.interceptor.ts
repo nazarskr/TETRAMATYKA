@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AppInitService } from '../services/app-init.service';
-import {currentYearUrls} from "@shared/constants/current-year-urls";
+import { currentYearUrls } from "@shared/constants/current-year-urls";
 
 @Injectable()
 export class CurrentYearInterceptor implements HttpInterceptor {

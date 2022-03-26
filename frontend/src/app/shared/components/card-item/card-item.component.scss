@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'src/app/shared/styles/variables';
 
 .news-item {
   width: 300px;
@@ -49,5 +49,9 @@
       background-color: $color-black;
       transition: all .5s;
     }
+  }
+
+  .link-disabled {
+    pointer-events: none;
   }
 }

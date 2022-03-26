@@ -47,6 +47,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ItemDetailsViewComponent } from './components/item-details-view/item-details-view.component';
 import { TitledItemsListComponent } from './components/titled-items-list/titled-items-list.component';
 import { ItemDetailsSecondaryComponent } from './components/item-details-secondary/item-details-secondary.component';
+import { CardItemComponent } from './components/card-item/card-item.component';
 
 const materialModules = [
   MatButtonModule,
@@ -86,7 +87,8 @@ const materialModules = [
     LocalDatePipe,
     ItemDetailsViewComponent,
     TitledItemsListComponent,
-    ItemDetailsSecondaryComponent
+    ItemDetailsSecondaryComponent,
+    CardItemComponent
   ],
   imports: [
     ...materialModules,
@@ -113,7 +115,8 @@ const materialModules = [
     LocalDatePipe,
     ItemDetailsViewComponent,
     TitledItemsListComponent,
-    ItemDetailsSecondaryComponent
+    ItemDetailsSecondaryComponent,
+    CardItemComponent
   ],
   providers: [
     UnsubscribeOnDestroy

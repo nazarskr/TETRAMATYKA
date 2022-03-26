@@ -27,12 +27,13 @@ export const storageUtil = {
         await storage.bucket('tetramatyka').file(shortUrl).delete();
     },
 
-    generateV4ReadSignedUrl: async (fileUrl: string) => {
+    generateV4ReadSignedUrl: async (fileUrl: string, seconds?: number) => {
         const shortUrl = fileUrl.slice(authorizedStorageUrl.length - 1);
+        const timeSec = seconds || 60;
         const options = {
             version: 'v4',
             action: 'read',
-            expires: Date.now() + 60 * 1000, // 1 min
+            expires: Date.now() + timeSec * 1000, // 1 min
         };
         const storage = new Storage(storageOptionsShort);
         const [url] = await storage

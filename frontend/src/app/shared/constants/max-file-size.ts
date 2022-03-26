@@ -1,3 +1,3 @@
 export const maxFileSize = {
-  image: 	3145728, // 3Mb
+  image: 	4194304, // 4Mb
 }

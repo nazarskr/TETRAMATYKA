@@ -6,12 +6,12 @@ export interface GalleryImage {
   title: string;
   archiveYear: number;
   url?: string;
+  chapter?: string;
 }
 
 export interface GalleryChapter {
+  _id?: string;
   title: MultiLanguage;
-  route: string;
   imageUrl: string;
-  chapter: string;
-  isActive?: boolean;
+  archiveYear?: number;
 }

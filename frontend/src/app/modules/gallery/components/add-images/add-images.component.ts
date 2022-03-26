@@ -42,14 +42,19 @@ export class AddImagesComponent extends UnsubscribeOnDestroy implements OnInit {
       return;
     }
 
+    if (this.imagesForUpload.length > 10) {
+      this._toaster.showWarningMessage('You can upload only 10 images at a time');
+      return;
+    }
+
     const formData = new FormData();
     this.imagesForUpload.forEach(item => {
       formData.append('images', item.file);
     });
-    this._galleryService.addGalleryImages(this.data.galleryChapter.route, formData)
+    this._galleryService.addGalleryImages(this.data.galleryChapter._id, formData)
       .pipe(takeUntil(this.destroy$))
       .subscribe((event: HttpEvent<any>) => {
-        if (event.type === HttpEventType.DownloadProgress) {
+        if (event.type === HttpEventType.UploadProgress) {
           this.uploadingProgress = Math.round(event.loaded / event.total * 100);
         }
         if (event.type === HttpEventType.Response) {

@@ -1,6 +1,10 @@
 @import 'variables';
 
 .main-with-footer {
-  width: 100vw;
+  width: 100%;
   min-height: calc(100vh - #{$header-height});
+}
+
+main {
+  width: 100%;
 }

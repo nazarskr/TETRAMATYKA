@@ -25,7 +25,8 @@
     "WITH": "with",
     "OR": "or",
     "HERE": "here",
-    "USERS": "Users"
+    "USERS": "Users",
+    "CONFIRM_DELETING": "Confirm deleting"
   },
   "MENU": {
     "MAIN": "Home",
@@ -103,5 +104,8 @@
   "OFFLINE": {
     "SOMETHING_WRONG": "Looks like you are offline",
     "GO_BACK": "Go back"
+  },
+  "GALLERY": {
+    "CHAPTER": "Chapter"
   }
 }

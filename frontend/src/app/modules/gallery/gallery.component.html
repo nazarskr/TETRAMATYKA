@@ -1,18 +1,39 @@
-<div class="page">
+<div class="page p-25">
   <h2 class="page-title mt-25">{{'MENU.GALLERY' | translate}}</h2>
 
-  <ng-container *ngIf="routeChildren.length === 0">
-    <div fxLayout="row" fxLayoutAlign="center center" class="pv-25">
-      <div *ngFor="let chapter of galleryChapters"
-            (click)="openGalleryChapter(chapter)"
-            class="gallery-chapter" fxLayout="row" fxLayoutAlign="center center">
-        <div class="gallery-chapter__title"
-             [class.active]="chapter.isActive">
-          {{chapter.title[lang] | translate}}
-        </div>
+  <div class="buttons-wrapper"
+       *userPermission="['ADMIN']">
+    <button
+      class="green-button"
+      *ngIf="isParentRoute"
+      (click)="openAddChapterDialog()"
+      mat-button>
+      <mat-icon>add</mat-icon>
+      <span>
+        {{'ACTIONS.ADD' | translate}}
+        {{'GALLERY.CHAPTER' | translate}}
+      </span>
+    </button>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isParentRoute">
+    <div fxLayout="row" fxLayoutAlign="center center" class="gallery__chapters-list">
+      <ng-container *ngFor="let chapter of galleryChapters">
+        <app-card-item
+          [item]="chapter"
+          [type]="isAdmin ? 'chapter' : null"
+        ></app-card-item>
+      </ng-container>
+      <div class="will-be-soon-message" *ngIf="galleryChapters.length === 0">
+        {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
       </div>
     </div>
-  </ng-container>
+
+    <ngx-image-gallery
+      [images]="images"
+      [conf]="galleryConfig">
+    </ngx-image-gallery>
+  </div>
 
   <router-outlet></router-outlet>
 </div>

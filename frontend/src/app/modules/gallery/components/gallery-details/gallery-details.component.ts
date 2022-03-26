@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {GALLERY_CONF, NgxImageGalleryComponent} from 'ngx-image-gallery';
-import {tetramatykaGallery} from "@shared/constants/gallery";
+import {tetramatykaGallery} from '@shared/constants/gallery';
 import {GalleryChapter, GalleryImage} from "@shared/interfaces/gallery";
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {UnsubscribeOnDestroy} from '@shared/directives/unsubscribe-on-destroy';
@@ -20,9 +20,9 @@ import {SimpleDialogComponent} from '@shared/components/simple-dialog/simple-dia
 export class GalleryDetailsComponent extends UnsubscribeOnDestroy implements OnInit {
   @ViewChild(NgxImageGalleryComponent, {static: false}) ngxImageGallery: NgxImageGalleryComponent;
   public galleryConfig: GALLERY_CONF = tetramatykaGallery.galleryConfig;
-  public images: GalleryImage[] = [];
+  public images: any[] = [];
+  public selectedGalleryChapterId: string;
   public selectedGalleryChapter: GalleryChapter;
-  public galleryChapters = tetramatykaGallery.galleryChapters;
   public isDeleteConfirm = true;
 
   constructor(
@@ -41,13 +41,21 @@ export class GalleryDetailsComponent extends UnsubscribeOnDestroy implements OnI
 
   getGallery(): void {
     this._galleryService
-      .getGallery(this.selectedGalleryChapter.route)
+      .getGallery(this.selectedGalleryChapterId)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: GalleryImage[]) => {
         this.images = res.map((item: GalleryImage) => {
           item.url = item.imageUrl;
           return item;
         });
+      })
+  }
+
+  getGalleryChapter(): void {
+    this._galleryService.getGalleryChapterById(this.selectedGalleryChapterId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: GalleryChapter) => {
+        this.selectedGalleryChapter = res;
       })
   }
 
@@ -64,11 +72,10 @@ export class GalleryDetailsComponent extends UnsubscribeOnDestroy implements OnI
       .pipe(takeUntil(this.destroy$))
       .subscribe((params: ParamMap) => {
         const id = params.get('id');
-        this.selectedGalleryChapter = this.galleryChapters.find((item: GalleryChapter) => {
-          return item.route === id;
-        });
+        this.selectedGalleryChapterId = id;
         this.getGallery();
-      })
+        this.getGalleryChapter();
+      });
   }
 
   openAddGalleryImageDialog(): void {

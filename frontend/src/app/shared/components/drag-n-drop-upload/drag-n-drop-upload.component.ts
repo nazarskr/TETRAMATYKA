@@ -83,6 +83,8 @@ export class DragNDropUploadComponent implements OnInit {
 
     for (const file of files) {
       if (this._dataService.fileSizeValidation(file.size, this.maxFileSize)) {
+        const mbSize = this.maxFileSize / 1048576;
+        this._toaster.showErrorMessage(`Max file size - ${mbSize}Mb`);
         areFilesValid = false;
         break;
       }

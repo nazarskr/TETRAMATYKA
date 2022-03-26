@@ -8,18 +8,20 @@ import { GalleryComponent } from './gallery.component';
 import { NgxImageGalleryModule } from "ngx-image-gallery";
 import { GalleryDetailsComponent } from './components/gallery-details/gallery-details.component';
 import { AddImagesComponent } from './components/add-images/add-images.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddEditChapterComponent } from './components/add-edit-chapter/add-edit-chapter.component';
 
 
 @NgModule({
-  declarations: [GalleryComponent, GalleryDetailsComponent, AddImagesComponent],
+  declarations: [GalleryComponent, GalleryDetailsComponent, AddImagesComponent, AddEditChapterComponent],
   imports: [
     CommonModule,
     GalleryRoutingModule,
     TranslateModule,
     SharedModule,
     NgxImageGalleryModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class GalleryModule { }

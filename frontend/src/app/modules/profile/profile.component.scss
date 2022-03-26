@@ -1,7 +1,7 @@
 @import "variables";
 
 .profile-container {
-  width: 100vw;
+  width: 100%;
   min-height: calc(100vh - #{$header-height});
   background: url("../../../assets/images/fon.jpg") no-repeat;
   background-size: cover;

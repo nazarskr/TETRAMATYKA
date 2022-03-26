@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { GalleryChaptersEnum } from './gallery.enum';
 
 export type GalleryImageDocument = GalleryImage & Document;
 
@@ -16,7 +15,7 @@ export class GalleryImage {
     archiveYear: number;
 
     @Prop({required: true})
-    chapter: GalleryChaptersEnum;
+    chapter: string;
 }
 
-export const GallerySchema = SchemaFactory.createForClass(GalleryImage)
+export const GalleryImageSchema = SchemaFactory.createForClass(GalleryImage);

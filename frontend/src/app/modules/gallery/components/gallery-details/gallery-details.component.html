@@ -10,11 +10,13 @@
     </span>
   </button>
 
-  <div class="mv-10" fxLayout="row" fxLayoutAlign="start center">
+  <div class="mv-10"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       *userPermission="['ADMIN']">
     <button
       class="orange-button"
       type="button"
-      *userPermission="['ADMIN']"
       mat-button
       (click)="openAddGalleryImageDialog()">
       <mat-icon>add</mat-icon>
@@ -23,14 +25,14 @@
       </span>
     </button>
     <mat-slide-toggle [(ngModel)]="isDeleteConfirm" class="ml-10">
-      Confirm Deleting
+      {{'COMMON.CONFIRM_DELETING' | translate}}
     </mat-slide-toggle>
   </div>
 
   <div fxLayout="row wrap" fxLayoutAlign="center center">
     <ng-container *ngFor="let image of images | slice : 0 : 30; let i = index">
       <div class="gallery-image-preview"
-           [style.background-image]="'url(' + image.imageUrl + ')'"
+           [style.transform]="image.transform"
            (click)="openGallery(i)"
            alt="gallery image">
         <button
@@ -45,10 +47,10 @@
         </button>
       </div>
     </ng-container>
+    <ng-container *ngIf="images.length === 0">
+      <div class="will-be-soon-message">
+        {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
+      </div>
+    </ng-container>
   </div>
 </div>
-
-<ngx-image-gallery
-  [images]="images"
-  [conf]="galleryConfig">
-</ngx-image-gallery>

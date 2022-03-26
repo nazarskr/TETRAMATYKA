@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: GalleryComponent,
     children: [
-      {path: ':id', component: GalleryDetailsComponent}
+      {path: 'chapter/:id', component: GalleryDetailsComponent}
     ]
   }
 ];
