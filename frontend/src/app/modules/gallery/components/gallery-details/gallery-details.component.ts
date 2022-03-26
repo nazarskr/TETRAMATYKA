@@ -24,6 +24,7 @@ export class GalleryDetailsComponent extends UnsubscribeOnDestroy implements OnI
   public selectedGalleryChapterId: string;
   public selectedGalleryChapter: GalleryChapter;
   public isDeleteConfirm = true;
+  public imagePlaceholder = 'url(../../../../../assets/images/image-placeholder-horizontal.jpeg)';
 
   constructor(
     private _router: Router,
@@ -46,6 +47,7 @@ export class GalleryDetailsComponent extends UnsubscribeOnDestroy implements OnI
       .subscribe((res: GalleryImage[]) => {
         this.images = res.map((item: GalleryImage) => {
           item.url = item.imageUrl;
+          item.backgroundUrl = `url(${item.imageUrl})`
           return item;
         });
       })
@@ -108,6 +110,11 @@ export class GalleryDetailsComponent extends UnsubscribeOnDestroy implements OnI
   onRemoveImage(item: GalleryImage, event: MouseEvent): void {
     event.stopPropagation();
     this.isDeleteConfirm ? this.openDeleteImageDialog(item) : this.deleteGalleryImage(item._id);
+  }
+
+  onChangePreview(item: GalleryImage, event: MouseEvent): void {
+    event.stopPropagation();
+    item.displayPreview = !item.displayPreview;
   }
 
   openDeleteImageDialog(item: GalleryImage): void {

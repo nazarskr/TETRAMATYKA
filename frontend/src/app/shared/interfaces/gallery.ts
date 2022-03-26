@@ -7,6 +7,8 @@ export interface GalleryImage {
   archiveYear: number;
   url?: string;
   chapter?: string;
+  displayPreview?: boolean;
+  backgroundUrl?: string;
 }
 
 export interface GalleryChapter {

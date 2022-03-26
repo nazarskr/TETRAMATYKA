@@ -8,6 +8,6 @@ export const tetramatykaGallery = {
     reactToKeyboard: true,
     closeOnEsc: true,
     backdropColor: 'black',
-    showThumbnails: true
+    showThumbnails: false
   } as GALLERY_CONF,
 }

@@ -35,8 +35,9 @@ export class GalleryController {
         @Query() query: ICommonQuery,
         @Req() req: IMulterRequest): Promise<any> {
         const modifiedDto = req.files.map((item: any) => {
+            const index = 'gallery'.length + 20; // 2 * slash + year.length + timestamp length
             const fileDto: GalleryImageDto = {
-                title: item.filename,
+                title: item.filename.slice(index),
                 archiveYear: +query.year,
                 imageUrl:  item.path,
                 chapter: query.galleryChapter
@@ -80,7 +81,6 @@ export class GalleryController {
         @Req() req: IMulterRequest
     ) {
         const dto = JSON.parse(body.galleryChapter);
-        console.log(dto);
         dto.archiveYear = +query.year;
         dto.imageUrl = req.files[0].path;
         return this.galleryService.addGalleryChapter(dto);

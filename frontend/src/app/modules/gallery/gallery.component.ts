@@ -69,10 +69,16 @@ export class GalleryComponent extends UnsubscribeOnDestroy implements OnInit {
       .getGallery(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: GalleryImage[]) => {
-        this.images = res;
-        if (this.images.length > 0) {
-          this.openGallery();
+        if (res.length > 0) {
+          this.images = res.map((item: GalleryImage) => {
+            item.url = item.imageUrl;
+            return item;
+          });
+          setTimeout(() => {
+            this.openGallery();
+          }, 500);
         } else {
+          this.images = [];
           this._toaster.showWarningMessage(this.noImagesMessage[this.lang]);
         }
       })

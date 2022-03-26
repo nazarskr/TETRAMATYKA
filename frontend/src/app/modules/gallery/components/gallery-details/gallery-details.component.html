@@ -29,12 +29,28 @@
     </mat-slide-toggle>
   </div>
 
+  <div>
+
+  </div>
+
   <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <ng-container *ngFor="let image of images | slice : 0 : 30; let i = index">
+    <div *ngFor="let image of images; let i = index"
+         class="gallery-image-wrapper">
       <div class="gallery-image-preview"
            [style.transform]="image.transform"
+           [style.background-image]="image.displayPreview ? image.backgroundUrl : imagePlaceholder"
            (click)="openGallery(i)"
            alt="gallery image">
+        <button
+          class="preview-button"
+          mat-mini-fab
+          type="button"
+          color="accent"
+          matTooltip="{{image.displayPreview ? 'Hide preview' : 'Show preview'}}"
+          *userPermission="['ADMIN']"
+          (click)="onChangePreview(image, $event)">
+          <mat-icon>{{image.displayPreview ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
         <button
           class="clear-button"
           mat-mini-fab
@@ -46,11 +62,17 @@
           <mat-icon>clear</mat-icon>
         </button>
       </div>
-    </ng-container>
+      <p class="gallery-image-title">{{image.title}}</p>
+    </div>
     <ng-container *ngIf="images.length === 0">
       <div class="will-be-soon-message">
-        {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
+        There are no items here.
       </div>
     </ng-container>
   </div>
 </div>
+
+<ngx-image-gallery
+  [images]="images"
+  [conf]="galleryConfig">
+</ngx-image-gallery>
