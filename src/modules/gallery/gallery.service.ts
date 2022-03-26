@@ -38,7 +38,6 @@ export class GalleryService {
     }
 
     async getGalleryChapterById(id: string): Promise<GalleryChapter> {
-        console.log('service', id);
         return this.galleryChapterModel.findById(id);
     }
 

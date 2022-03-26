@@ -65,7 +65,6 @@ export class GalleryController {
     @Get('chapter/:id')
     @UseInterceptors(new ImageUrlInterceptor(300))
     getGalleryChapterById(@Param('id') id: string): Promise<GalleryChapter> {
-        console.log('controller', id);
         return this.galleryService.getGalleryChapterById(id);
     }
 
