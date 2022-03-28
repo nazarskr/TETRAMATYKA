@@ -94,13 +94,13 @@
           <img
             [ngStyle]="{'transform': 'scaleY(' + posterScale + ')'}"
             (window:scroll)="onScrollChange()"
-            src="../../../assets/images/poster-tetramatyka.jpg"
+            [src]="imageUrl"
             alt="No image"
             class="about-view-image">
           <img
             [ngStyle]="{'transform': 'scaleY(' + posterScale + ')'}"
             (window:scroll)="onScrollChange()"
-            src="../../../assets/images/poster-tetramatyka-mobile.jpg"
+            [src]="imageUrl"
             alt="No image"
             class="about-view-image-mobile">
           <div class="view-text-container">

@@ -64,7 +64,9 @@ export class AboutComponent extends UnsubscribeOnDestroy implements OnInit {
       .subscribe((res: AboutInfo[]) => {
         if (res.length > 0) {
           this.aboutInfo = res[0];
+          console.log(this.aboutInfo);
           this.imageUrl = this.aboutInfo.imageUrl || '';
+          console.log(this.imageUrl);
           this.multipartFile = null;
           this.formPatchValue();
         }

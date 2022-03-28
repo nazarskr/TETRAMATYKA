@@ -10,7 +10,7 @@ import { storageUtil } from '../../common/utils/storage.util';
 import { hasRoles } from "../../common/decorators/roles.decorator";
 import { RolesGuard } from "../../common/guards/roles.guard";
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
-import { ImageUrlInterceptor } from '../../common/interceptors/image-url.interceptor';
+import { MultipleImageUrlsInterceptor } from "../../common/interceptors/multiple-image-urls.interceptor";
 
 @Controller('about')
 export class AboutController {
@@ -19,7 +19,7 @@ export class AboutController {
     }
 
     @Get()
-    @UseInterceptors(new ImageUrlInterceptor())
+    @UseInterceptors(new MultipleImageUrlsInterceptor())
     getAboutInfo(@Query() query: ICommonQuery): Promise<AboutInfo[]> {
         return this.aboutService.getAboutInfo(+query.year);
     }
