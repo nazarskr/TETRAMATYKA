@@ -86,6 +86,7 @@ export class HeaderComponent extends UnsubscribeOnDestroy implements OnInit {
     } else {
       this._appInitService.currentYear = archiveYear;
       this.getAllArchiveYears();
+      this._archiveService.archiveYearChanged$.next();
       this._router.navigate(['/home']);
     }
   }

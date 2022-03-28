@@ -19,6 +19,7 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
   public archiveYears: ArchiveYear[] = [];
   public dataSource: MatTableDataSource<ArchiveYear>;
   public displayedColumns = tableColumns.archiveManager;
+  public invalidMessage = '';
 
   public editMode = false;
   public yearsList: number[] = [];
@@ -74,9 +75,9 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
   }
 
   saveArchiveYears(): void {
-    const formInvalid = this.checkIfInvalid();
+    const formInvalid = this.isFormInvalid();
     if (formInvalid) {
-      this._toaster.showWarningMessage('Select year');
+      this._toaster.showWarningMessage(this.invalidMessage);
       return;
     }
     this._archiveService.updateArchiveYears(this.archiveYears)
@@ -88,8 +89,33 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
       });
   }
 
-  checkIfInvalid(): boolean {
-    return !!this.archiveYears.find(archiveYear => !archiveYear.year);
+  isFormInvalid(): boolean {
+    return this.yearNotSelected() || this.hasDuplicates() || this.currentNotAvailable();
+  }
+
+  yearNotSelected(): boolean {
+    const res = !!this.archiveYears.find(archiveYear => !archiveYear.year);
+    if (res) {
+      this.invalidMessage = 'Please select year';
+    }
+    return res;
+  }
+
+  hasDuplicates(): boolean {
+    const uniqueYears = [...new Set(this.archiveYears.map(el => el.year))];
+    const res = uniqueYears.length !== this.archiveYears.length;
+    if (res) {
+      this.invalidMessage = 'Please remove duplicates';
+    }
+    return res;
+  }
+
+  currentNotAvailable(): boolean {
+    const res = !this.archiveYears.find(item => item.current && item.available);
+    if (res) {
+      this.invalidMessage = 'Current year should be available';
+    }
+    return res;
   }
 
   openDeleteArchiveYearDialog(element: ArchiveYear): void {

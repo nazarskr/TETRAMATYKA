@@ -7,6 +7,7 @@ import { ProjectsService } from '../../services/projects.service';
 import { forkJoin } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import {ArchiveService} from "@shared/services/archive/archive.service";
 
 @Component({
   selector: 'app-news',
@@ -20,13 +21,15 @@ export class NewsComponent extends UnsubscribeOnDestroy implements OnInit {
   constructor(
     private _newsService: NewsService,
     private _projectsService: ProjectsService,
-    private _router: Router
+    private _router: Router,
+    private _archiveService: ArchiveService
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.getNewsAndProjects();
+    this.detectArchiveYearsChange();
   }
 
   getNewsAndProjects(): void {
@@ -37,6 +40,14 @@ export class NewsComponent extends UnsubscribeOnDestroy implements OnInit {
       .subscribe((res: [NewsItemShort[], ProjectShort[]]) => {
         this.news = res[0];
         this.projects = res[1];
+      })
+  }
+
+  detectArchiveYearsChange(): void {
+    this._archiveService.archiveYearChanged$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getNewsAndProjects();
       })
   }
 

@@ -9,6 +9,7 @@ import { ArchiveYear } from '../../interfaces/admin';
 export class ArchiveService {
   public archiveManagerUri = '/api/archive-manager';
   public archiveYearsUpdated$: Subject<void> = new Subject();
+  public archiveYearChanged$: Subject<void> = new Subject();
 
   constructor(private http: HttpClient) { }
 

@@ -48,6 +48,7 @@ import { ItemDetailsViewComponent } from './components/item-details-view/item-de
 import { TitledItemsListComponent } from './components/titled-items-list/titled-items-list.component';
 import { ItemDetailsSecondaryComponent } from './components/item-details-secondary/item-details-secondary.component';
 import { CardItemComponent } from './components/card-item/card-item.component';
+import { CurrentYearComponent } from './components/current-year/current-year.component';
 
 const materialModules = [
   MatButtonModule,
@@ -88,7 +89,8 @@ const materialModules = [
     ItemDetailsViewComponent,
     TitledItemsListComponent,
     ItemDetailsSecondaryComponent,
-    CardItemComponent
+    CardItemComponent,
+    CurrentYearComponent
   ],
   imports: [
     ...materialModules,

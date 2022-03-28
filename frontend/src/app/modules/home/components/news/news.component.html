@@ -49,6 +49,11 @@
           [type]="'project'"
         ></app-card-item>
       </ng-container>
+
+      <div *ngIf="news.length === 0"
+           class="will-be-soon-message">
+        {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,11 @@
+@import 'variables';
+
+.current-year {
+  position: fixed;
+  top: calc(#{$header-height} + 10px);
+  right: 10px;
+
+  &.page-title {
+    padding: 2px 5px;
+  }
+}
