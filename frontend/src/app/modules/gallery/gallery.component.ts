@@ -12,6 +12,7 @@ import {RoleEnum} from "@shared/enums/role";
 import {MatDialog} from "@angular/material/dialog";
 import {AddEditChapterComponent} from "./components/add-edit-chapter/add-edit-chapter.component";
 import {ToasterService} from "@shared/services/toaster/toaster.service";
+import {SimpleDialogComponent} from "@shared/components/simple-dialog/simple-dialog.component";
 
 @Component({
   selector: 'app-gallery',
@@ -127,6 +128,44 @@ export class GalleryComponent extends UnsubscribeOnDestroy implements OnInit {
 
   openGallery() {
     this.ngxImageGallery.open(0);
+  }
+
+  checkChapterDeletion(id: string): void {
+    this._galleryService
+      .getGallery(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: GalleryImage[]) => {
+        if (res.length > 0) {
+          this._toaster.showWarningMessage('You cannot delete this chapter because it contain images. Please delete images before.')
+        } else {
+          this.openDeleteChapterDialog(id);
+        }
+      })
+  }
+
+  openDeleteChapterDialog(id: string): void {
+    const dialogRef = this._dialog.open(SimpleDialogComponent, {
+      data: {
+        title: 'Delete gallery chapter',
+        message: `Are you sure you want to delete this chapter?`
+      }
+    });
+    dialogRef.afterClosed()
+      .pipe(
+        filter(res => !!res),
+        takeUntil(this.destroy$)
+      ).subscribe(() => {
+      this.deleteGalleryChapter(id);
+    })
+  }
+
+  deleteGalleryChapter(id: string): void {
+    this._galleryService.deleteGalleryChapter(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this._toaster.showMessage('Chapter deleted successfully');
+        this.getGalleryChapters();
+      })
   }
 
 }

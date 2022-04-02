@@ -1,6 +1,6 @@
 @import 'src/app/shared/styles/variables';
 
-.news-item {
+.card-item {
   width: 300px;
   min-height: 250px;
   padding: 15px 20px 10px;
@@ -8,6 +8,7 @@
   background: $color-white;
   box-shadow: $box-shadow-grey;
   cursor: pointer;
+  position: relative;
 
   .item-image-wrapper {
     width: 260px;
@@ -53,5 +54,11 @@
 
   .link-disabled {
     pointer-events: none;
+  }
+
+  .clear-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
   }
 }

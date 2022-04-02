@@ -4,6 +4,7 @@
   position: fixed;
   top: calc(#{$header-height} + 10px);
   right: 10px;
+  z-index: 99;
 
   &.page-title {
     padding: 2px 5px;

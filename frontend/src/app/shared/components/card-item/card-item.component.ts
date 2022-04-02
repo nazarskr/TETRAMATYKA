@@ -13,7 +13,9 @@ import { GalleryChapter } from "@shared/interfaces/gallery";
 export class CardItemComponent implements OnInit {
   @Input() item: NewsItemShort | ProjectShort | GalleryChapter;
   @Input() type: string;
+  @Input() deleteButtonText: string;
   @Output() clicked: EventEmitter<void> = new EventEmitter();
+  @Output() onDeleteClicked: EventEmitter<void> = new EventEmitter();
 
   get lang(): string {
     return this._translateService.currentLang;
@@ -34,5 +36,10 @@ export class CardItemComponent implements OnInit {
     } else {
       this.clicked.emit();
     }
+  }
+
+  onDeleteItem(event: any): void {
+    event.stopPropagation();
+    this.onDeleteClicked.emit();
   }
 }

@@ -44,4 +44,8 @@ export class GalleryService {
   updateGalleryChapter(id: string, data: FormData): Observable<GalleryChapter> {
     return this.http.put<GalleryChapter>(`${this.galleryChapterUri}/${id}`, data);
   }
+
+  deleteGalleryChapter(id: string): Observable<GalleryChapter> {
+    return this.http.delete<GalleryChapter>(`${this.galleryChapterUri}/${id}`);
+  }
 }

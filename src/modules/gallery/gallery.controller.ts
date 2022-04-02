@@ -108,4 +108,13 @@ export class GalleryController {
         }
         return this.galleryService.updateGalleryChapter(id, dto);
     }
+
+    @hasRoles('ADMIN')
+    @UseGuards(RolesGuard, JwtAuthGuard)
+    @Delete('chapter/:id')
+    async deleteGalleryChapter(@Param('id') id: string): Promise<GalleryChapter> {
+        const itemForDelete = await this.galleryService.getGalleryChapterImageUrl(id);
+        await storageUtil.removeFile(itemForDelete.imageUrl);
+        return this.galleryService.deleteGalleryChapter(id);
+    }
 }

@@ -53,4 +53,8 @@ export class GalleryService {
     async getGalleryChapterImageUrl(id: string): Promise<GalleryChapter> {
         return this.galleryChapterModel.findById(id).select('imageUrl');
     }
+
+    async deleteGalleryChapter(id: string): Promise<GalleryChapter> {
+        return this.galleryChapterModel.findByIdAndRemove(id);
+    }
 }

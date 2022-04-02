@@ -22,7 +22,9 @@
         <app-card-item
           (clicked)="onChapterClicked(chapter._id)"
           [item]="chapter"
+          [deleteButtonText]="'Delete chapter'"
           [type]="isAdmin ? 'chapter' : null"
+          (onDeleteClicked)="checkChapterDeletion(chapter._id)"
         ></app-card-item>
       </ng-container>
       <div class="will-be-soon-message" *ngIf="galleryChapters.length === 0">

@@ -1,8 +1,18 @@
-<div class="news-item" *ngIf="item" (click)="onItemClick()">
+<div class="card-item" *ngIf="item" (click)="onItemClick()">
   <div class="item-image-wrapper">
     <div class="item-image"
          [style.background-image]="'url(' + item.imageUrl + ')'">
     </div>
   </div>
   <h4 class="item-title">{{item.title[lang]}}</h4>
+  <button
+    class="clear-button"
+    mat-mini-fab
+    type="button"
+    color="warn"
+    matTooltip="Remove chapter"
+    *userPermission="['ADMIN']"
+    (click)="onDeleteItem($event)">
+    <mat-icon>clear</mat-icon>
+  </button>
 </div>
