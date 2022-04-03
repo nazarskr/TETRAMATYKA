@@ -136,7 +136,7 @@ export class GalleryComponent extends UnsubscribeOnDestroy implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: GalleryImage[]) => {
         if (res.length > 0) {
-          this._toaster.showWarningMessage('You cannot delete this chapter because it contain images. Please delete images before.')
+          this._toaster.showWarningMessage('You cannot delete this chapter because it contains images. Please delete images before.')
         } else {
           this.openDeleteChapterDialog(id);
         }

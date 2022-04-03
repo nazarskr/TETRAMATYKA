@@ -23,7 +23,11 @@
     </ng-container>
   </div>
 
-  <div class="will-be-soon-message">
+  <div class="will-be-soon-message" *ngIf="programList.length">
     {{'COMMON.POSSIBLE_CHANGES' | translate}}
+  </div>
+
+  <div class="will-be-soon-message" *ngIf="!programList.length">
+    {{'COMMON.WILL_BE_AVAILABLE_SOON' | translate}}
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="news-container">
   <div>
     <h2 class="page-title">{{'HOME.LATEST_NEWS' | translate}}</h2>
-    <div class="buttons-wrapper"
+    <div class="buttons-wrapper ml-10"
          *userPermission="['ADMIN']">
       <button
         routerLink="news/create"
@@ -29,7 +29,7 @@
   </div>
 
   <h2 class="page-title mt-15">{{'MENU.PROJECTS' | translate}}</h2>
-  <div class="buttons-wrapper"
+  <div class="buttons-wrapper ml-10"
        *userPermission="['ADMIN']">
     <button
       routerLink="project/create"
