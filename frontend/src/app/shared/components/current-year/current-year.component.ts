@@ -22,7 +22,7 @@ export class CurrentYearComponent implements OnInit {
   }
 
   get displayCurrentYear(): boolean {
-    return this.isAdmin || this.isYearActual;
+    return this.isAdmin || !this.isYearActual;
   }
 
   constructor(

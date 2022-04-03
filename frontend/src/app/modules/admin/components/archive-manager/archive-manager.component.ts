@@ -84,8 +84,7 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this._toaster.showMessage('Archive years updated successfully');
-        this.getAllArchiveYears();
-        this.emitArchiveYearsUpdate();
+        window.location.reload();
       });
   }
 
@@ -119,6 +118,10 @@ export class ArchiveManagerComponent extends UnsubscribeOnDestroy implements OnI
   }
 
   openDeleteArchiveYearDialog(element: ArchiveYear): void {
+    if (element.current) {
+      this._toaster.showWarningMessage('You cannot delete current year');
+      return;
+    }
     const dialogRef = this._dialog.open(SimpleDialogComponent, {
       data: {
         title: 'Delete archive year',

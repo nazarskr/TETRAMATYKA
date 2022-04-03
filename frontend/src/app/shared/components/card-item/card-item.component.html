@@ -5,14 +5,16 @@
     </div>
   </div>
   <h4 class="item-title">{{item.title[lang]}}</h4>
-  <button
-    class="clear-button"
-    mat-mini-fab
-    type="button"
-    color="warn"
-    matTooltip="Remove chapter"
-    *userPermission="['ADMIN']"
-    (click)="onDeleteItem($event)">
-    <mat-icon>clear</mat-icon>
-  </button>
+  <ng-container *ngIf="deleteButtonText">
+    <button
+      class="clear-button"
+      mat-mini-fab
+      type="button"
+      color="warn"
+      matTooltip="Remove chapter"
+      *userPermission="['ADMIN']"
+      (click)="onDeleteItem($event)">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </ng-container>
 </div>
