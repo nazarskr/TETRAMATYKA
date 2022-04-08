@@ -14,6 +14,7 @@ import {RolesGuard} from "../../common/guards/roles.guard";
 import {JwtAuthGuard} from "../../common/guards/jwt-auth.guard";
 import {ImageUrlInterceptor} from "../../common/interceptors/image-url.interceptor";
 
+const GALLERY_FOLDER = 'gallery';
 @Controller('gallery')
 export class GalleryController {
     constructor(private readonly galleryService: GalleryService) {
@@ -29,13 +30,13 @@ export class GalleryController {
     @UseGuards(RolesGuard, JwtAuthGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('images', null, {
-        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions('gallery'))
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions(GALLERY_FOLDER))
     }))
     addGalleryImages(
         @Query() query: ICommonQuery,
         @Req() req: IMulterRequest): Promise<any> {
-        const modifiedDto = req.files.map((item: any) => {
-            const index = 'gallery'.length + 20; // 2 * slash + year.length + timestamp length
+        const index = GALLERY_FOLDER.length + 20; // 2 * slash + year.length + timestamp length
+        const modifiedDtos = req.files.map((item: any) => {
             const fileDto: GalleryImageDto = {
                 title: item.filename.slice(index),
                 archiveYear: +query.year,
@@ -44,7 +45,7 @@ export class GalleryController {
             };
             return fileDto;
         });
-        return this.galleryService.addGalleryImages(modifiedDto);
+        return this.galleryService.addGalleryImages(modifiedDtos);
     }
 
     @hasRoles('ADMIN')
