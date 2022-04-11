@@ -7,33 +7,33 @@ import { MultipleImageUrlsInterceptor } from 'src/common/interceptors/multiple-i
 import { ICommonQuery } from 'src/common/interfaces/common-query';
 import { IMulterRequest } from 'src/common/interfaces/multer-custom';
 import { storageUtil } from 'src/common/utils/storage.util';
-import { FooterService } from './footer.service';
+import { PartnersService } from './partners.service';
 import { Partner } from './schemas/partner.schema';
 import * as multerGoogleStorage from 'multer-google-storage';
 import { PartnerDto } from './dto/partner.dto';
 
-const FOOTER_FOLDER = 'footer';
+const PARTNERS = 'partners';
 
-@Controller('footer')
-export class FooterController {
-    constructor(private readonly footerService: FooterService){}
+@Controller(PARTNERS)
+export class PartnersController {
+    constructor(private readonly partnersService: PartnersService){}
 
     @Get()
     @UseInterceptors(new MultipleImageUrlsInterceptor(300))
     getPartners(@Query() query: ICommonQuery): Promise<Partner[]> {
-        return this.footerService.getPartners(+query.year);
+        return this.partnersService.getPartners(+query.year);
     }
 
     @hasRoles('ADMIN')
     @UseGuards(RolesGuard, JwtAuthGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('images', null, {
-        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions(FOOTER_FOLDER))
+        storage: multerGoogleStorage.storageEngine(storageUtil.createMulterOptions(PARTNERS))
     }))
     addPartners(
         @Query() query: ICommonQuery,
         @Req() req: IMulterRequest): Promise<any> {
-        const index = FOOTER_FOLDER.length + 20; // 2 * slash + year.length + timestamp length
+        const index = PARTNERS.length + 20; // 2 * slash + year.length + timestamp length
         const modifiedDtos = req.files.map((item: any) => {
             const fileDto: PartnerDto = {
                 title: item.filename.slice(index),
@@ -44,15 +44,15 @@ export class FooterController {
             return fileDto;
         })
 
-        return this.footerService.addPartners(modifiedDtos);
+        return this.partnersService.addPartners(modifiedDtos);
     }
 
     @hasRoles('ADMIN')
     @UseGuards(RolesGuard, JwtAuthGuard)
     @Delete(':id')
     async deletePartner(@Param('id') id: string): Promise<Partner> {
-        const itemForDelete = await this.footerService.getPartnerImageUrl(id);
+        const itemForDelete = await this.partnersService.getPartnerImageUrl(id);
         await storageUtil.removeFile(itemForDelete.imageUrl);
-        return this.footerService.deletePartner(id);
+        return this.partnersService.deletePartner(id);
     }
 }

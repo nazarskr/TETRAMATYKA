@@ -15,5 +15,12 @@ footer {
     background-repeat: no-repeat;
     filter: brightness(0) invert(.15);
     margin: 0 5px;
+    position: relative;
+  }
+
+  .clear-button {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }

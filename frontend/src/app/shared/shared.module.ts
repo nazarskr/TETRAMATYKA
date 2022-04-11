@@ -49,6 +49,7 @@ import { TitledItemsListComponent } from './components/titled-items-list/titled-
 import { ItemDetailsSecondaryComponent } from './components/item-details-secondary/item-details-secondary.component';
 import { CardItemComponent } from './components/card-item/card-item.component';
 import { CurrentYearComponent } from './components/current-year/current-year.component';
+import { AddPartnersComponent } from './components/footer/add-partners/add-partners.component';
 
 const materialModules = [
   MatButtonModule,
@@ -90,7 +91,8 @@ const materialModules = [
     TitledItemsListComponent,
     ItemDetailsSecondaryComponent,
     CardItemComponent,
-    CurrentYearComponent
+    CurrentYearComponent,
+    AddPartnersComponent
   ],
   imports: [
     ...materialModules,

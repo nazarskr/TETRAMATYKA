@@ -84,7 +84,7 @@ export class GalleryDetailsComponent extends UnsubscribeOnDestroy implements OnI
     const dialogRef = this._dialog.open(AddImagesComponent, {
       width: '600px',
       data: {
-        galleryHeader: {
+        header: {
           en: 'Add images for ',
           ua: 'Додати зображення для '
         },

@@ -5,5 +5,6 @@ export const currentYearUrls = [
   'projects',
   'news',
   'program',
-  'gallery'
+  'gallery',
+  'partners'
 ]

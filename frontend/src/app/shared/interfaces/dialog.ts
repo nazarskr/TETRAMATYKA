@@ -10,7 +10,7 @@ export interface DialogData {
   checkboxText?: string;
   parentId?: string;
   participants?: ParticipantShort[];
-  galleryHeader?: MultiLanguage;
+  header?: MultiLanguage;
   galleryChapter?: GalleryChapter;
 }
 

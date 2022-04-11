@@ -5,7 +5,7 @@ import { PartnerDto } from './dto/partner.dto';
 import { Partner, PartnerDocument } from './schemas/partner.schema';
 
 @Injectable()
-export class FooterService {
+export class PartnersService {
     constructor(@InjectModel(Partner.name) private partnerModel: Model<PartnerDocument>) {
     }
 

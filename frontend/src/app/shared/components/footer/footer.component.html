@@ -1,7 +1,28 @@
 <footer>
+  <button
+    class="orange-button"
+    type="button"
+    mat-button
+    (click)="openAddPartnersDialog()">
+    <mat-icon>add</mat-icon>
+    <span>
+      {{'ACTIONS.ADD' | translate}}
+    </span>
+  </button>
   <div class="images-container" fxLayout="row wrap" fxLayoutAlign="center center">
-    <div *ngFor="let logo of footerLogos"
-         [style.background-image]="'url(../../../assets/images/partners/' + logo + ')'"
-         class="partner-image"></div>
+    <div *ngFor="let partner of partners"
+         [style.background-image]="'url(' + partner.imageUrl + ')'"
+         class="partner-image">
+      <button
+        class="clear-button"
+        mat-mini-fab
+        type="button"
+        color="warn"
+        matTooltip="Remove partner"
+        *userPermission="['ADMIN']"
+        (click)="openDeletePartnerDialog(partner._id)">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
   </div>
 </footer>
