@@ -10,9 +10,10 @@
     </span>
   </button>
   <div class="images-container" fxLayout="row wrap" fxLayoutAlign="center center">
-    <div *ngFor="let partner of partners"
-         [style.background-image]="'url(' + partner.imageUrl + ')'"
-         class="partner-image">
+    <div *ngFor="let partner of partners" class="partner-wrapper">
+      <div [style.background-image]="'url(' + partner.imageUrl + ')'"
+           class="partner-image">
+      </div>
       <button
         class="clear-button"
         mat-mini-fab
