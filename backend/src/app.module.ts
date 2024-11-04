@@ -26,7 +26,7 @@ import { TokenInterceptor } from "./common/interceptors/token.interceptor";
       rootPath: join(__dirname, 'client'),
     }),
     MongooseModule.forRoot(
-        `mongodb+srv://TETRAMATYKA:${process.env.DB_PASS}@tetramatyka.eq8cq.mongodb.net/master?retryWrites=true&w=majority`,
+        `${process.env.DB_PASS}`,
       {
         connectionName: 'master',
         useFindAndModify: false,
