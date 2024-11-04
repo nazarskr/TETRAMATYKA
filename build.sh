@@ -1,4 +1,5 @@
 #!/bin/bash
+fnm use 12
 echo "Build starts..."
 cd backend
 echo "Installing backend dependencies..."
